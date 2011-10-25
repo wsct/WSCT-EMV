@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema targetNamespace="http://xsd.zetoken.net" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:this="http://xsd.zetoken.net" elementFormDefault="qualified">
+  <complexType name="WinSCardType">
+    <sequence>
+      <element name="tlv" type="this:TlvType" />
+    </sequence>
+  </complexType>
+  <element name="WinSCard" type="this:WinSCardType" />
+  <complexType name="TlvType">
+    <sequence>
+      <element name="TagDictionary" type="this:TagDictionaryType" />
+    </sequence>
+  </complexType>
+  <complexType name="TagDictionaryType">
+    <sequence>
+      <element name="tag" type="this:TagType" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+  <complexType name="ValueType">
+    <attribute name="format" type="string" use="optional" />
+    <attribute name="minSize" type="unsignedByte" use="optional" />
+    <attribute name="maxSize" type="unsignedByte" use="optional" />
+    <attribute name="size" type="unsignedByte" use="optional" />
+  </complexType>
+  <complexType name="TagType">
+    <sequence>
+      <element name="value" type="this:ValueType" minOccurs="0" maxOccurs="1" />
+      <element name="className" type="string"/>
+      <element name="dll" type="string" minOccurs="0" maxOccurs="unbounded" />
+      <element name="pathToDll" type="string" minOccurs="0" maxOccurs="unbounded" />
+    </sequence>
+    <attribute name="hexaValue" use="required">
+      <simpleType>
+        <restriction base="string">
+          <pattern value="([0-9A-Fa-f][0-9A-Fa-f])+" />
+        </restriction>
+      </simpleType>
+    </attribute>
+    <attribute name="name" type="string" use="required" />
+    <attribute name="longName" type="string" use="required" />
+    <attribute name="source" use="optional">
+      <simpleType>
+        <restriction base="string">
+          <enumeration value="ICC"/>
+          <enumeration value="Terminal" />
+          <enumeration value="Issuer" />
+        </restriction>
+      </simpleType>
+    </attribute>
+  </complexType>
+</schema>

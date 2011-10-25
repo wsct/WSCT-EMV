@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSCT.EMV</RootNamespace>
+    <AssemblyName>WSCT.EMV</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ZeToken.WinSCard.EMV.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ZeToken.WinSCard.EMV.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\ZeToken.WinSCard.EMV.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\ZeToken.WinSCard.EMV.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\bouncy castle\crypto\bin\Debug\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Card\EMVApplication.cs" />
+    <Compile Include="Card\EMVDefinitionFile.cs" />
+    <Compile Include="Card\PaymentSystemEnvironment.cs" />
+    <Compile Include="Card\CardChannelTerminalTransportLayer.cs" />
+    <Compile Include="Card\PINBlock.cs" />
+    <Compile Include="Card\PlaintextPINBlock.cs" />
+    <Compile Include="Card\VisaContactlessApplication.cs" />
+    <Compile Include="CryptogramType.cs" />
+    <Compile Include="Objects\ApplicationCryptogram.cs" />
+    <Compile Include="Objects\ApplicationFileLocator.cs" />
+    <Compile Include="Objects\ApplicationIdentifier.cs" />
+    <Compile Include="Objects\ApplicationInterchangeProfile.cs" />
+    <Compile Include="Objects\ApplicationLabel.cs" />
+    <Compile Include="Objects\ApplicationTemplate.cs" />
+    <Compile Include="Objects\ApplicationTransactionCounter.cs" />
+    <Compile Include="Objects\ApplicationUsageControl.cs" />
+    <Compile Include="Objects\CardholderVerificationMethodList.cs" />
+    <Compile Include="Objects\CertificationAuthorityPublicKeyIndex.cs" />
+    <Compile Include="Objects\CryptogramInformationData.cs" />
+    <Compile Include="Objects\DataObjectList.cs" />
+    <Compile Include="Objects\DedicatedFileName.cs" />
+    <Compile Include="Objects\FileControlInformationIssuer.cs" />
+    <Compile Include="Objects\FileControlInformationProprietary.cs" />
+    <Compile Include="Objects\FileControlInformationTemplate.cs" />
+    <Compile Include="Objects\LogEntry.cs" />
+    <Compile Include="Objects\TerminalVerificationResult.cs" />
+    <Compile Include="Objects\LanguagePreference.cs" />
+    <Compile Include="Objects\ShortFileIdentifier.cs" />
+    <Compile Include="Security\AbstractDataAuthenticationFormat03.cs" />
+    <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
+    <Compile Include="Security\AbstractPublicKeyCertificate.cs" />
+    <Compile Include="Security\AbstractSignatureContainer.cs" />
+    <Compile Include="Security\HashAlgorithmFactory.cs" />
+    <Compile Include="Security\HashAlgorithmUnknownException.cs" />
+    <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
+    <Compile Include="Security\CombinedDataAuthentication.cs" />
+    <Compile Include="Security\Cryptography.cs" />
+    <Compile Include="Security\DynamicDataAuthentication.cs" />
+    <Compile Include="Security\IccPublicKeyCertificate.cs" />
+    <Compile Include="Security\IHashAlgorithmProvider.cs" />
+    <Compile Include="Security\IssuerPublicKeyCertificate.cs" />
+    <Compile Include="Security\PublicKey.cs" />
+    <Compile Include="Security\CertificationAuthorityRepository.cs" />
+    <Compile Include="Security\EMVBadRecoveredDataException.cs" />
+    <Compile Include="Security\SHA1HashAlgorithmProvider.cs" />
+    <Compile Include="Security\StaticDataAuthentication.cs" />
+    <Compile Include="Tags\DateFormattedTag.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dictionary.EMVTag.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dictionary.EMVTag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Dictionary.EMVTag.xsx">
+      <DependentUpon>Dictionary.EMVTag.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Core\WSCT.Core.csproj">
+      <Project>{764A5311-A573-4774-A198-43A660167FC7}</Project>
+      <Name>WSCT.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
+      <Project>{B95B0E58-9296-4A15-AA69-10A7B6DC2267}</Project>
+      <Name>WSCT.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.ISO7816\WSCT.ISO7816.csproj">
+      <Project>{BDECF2A5-900E-4C5D-BEEE-7903F9145BC1}</Project>
+      <Name>WSCT.ISO7816</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Stack\WSCT.Stack.csproj">
+      <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
+      <Name>WSCT.Stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
+      <Project>{19B66E6E-7E5E-481A-8718-3F9C44212AD6}</Project>
+      <Name>WSCT.Wrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

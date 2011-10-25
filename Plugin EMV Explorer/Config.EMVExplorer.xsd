@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://xsd.zetoken.net" xmlns="http://xsd.zetoken.net" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <xs:element name="pluginEMVExplorer" type="PluginEMVExplorerType" />
+
+  <xs:complexType name="PluginEMVExplorerType">
+    <xs:sequence>
+      <xs:element name="terminal" type="TerminalType"/>
+      <xs:element name="transaction" type="TransactionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Terminal -->
+
+  <xs:complexType name="TerminalType">
+    <xs:sequence>
+      <xs:element name="capabilities" type="CapabilitiesType"/>
+      <xs:element name="certificationAuthorities" type="certificationAuthoritiesType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CapabilitiesType">
+    <xs:sequence>
+      <xs:element name="supportedApplications" type="SupportedApplicationsType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SupportedApplicationsType">
+    <xs:sequence>
+      <xs:element name="application" type="ApplicationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ApplicationType">
+    <xs:attribute name="aid" type="xs:string" use="required"/>
+    <xs:attribute name="label" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="certificationAuthoritiesType">
+    <xs:sequence>
+      <xs:element name="certificationAuthority" type="CertificationAuthorityType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CertificationAuthorityType">
+    <xs:sequence>
+      <xs:element name="publicKey" type="PublicKeyType"/>
+    </xs:sequence>
+    <xs:attribute name="rid" type="xs:string"/>
+    <xs:attribute name="index" type="xs:hexBinary"/>
+  </xs:complexType>
+
+  <xs:complexType name="PublicKeyType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="exponent" type="xs:unsignedLong" use="required"/>
+        <xs:attribute name="size" type="xs:unsignedLong" use="optional"/>
+        <xs:attribute name="expiration" type="xs:date" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Transaction -->
+
+  <xs:complexType name="TransactionType">
+    <xs:sequence>
+      <xs:element name="tagValues" type="TagValuesType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="TagValuesType">
+    <xs:sequence>
+      <xs:element name="tagValue" type="TagValueType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TagValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="tag" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+</xs:schema>

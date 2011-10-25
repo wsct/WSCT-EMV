@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WinSCardGUI xmlns="http://xsd.zetoken.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xsd.zetoken.net WinSCardGUI.xsd ">
+
+	<channelStack>
+
+		<layer name="Interactive Channel">
+			<dll>Layer.Interactive.dll</dll>
+			<className>WSCT.Layers.Interactive.CardChannelLayer</className>
+			<pathToDll></pathToDll>
+		</layer>
+
+		<layer name="WinSCard Core Channel">
+			<dll>WSCT.Stack.dll</dll>
+			<className>WSCT.Stack.Core.CardChannelLayer</className>
+			<pathToDll></pathToDll>
+		</layer>
+
+	</channelStack>
+
+</WinSCardGUI>

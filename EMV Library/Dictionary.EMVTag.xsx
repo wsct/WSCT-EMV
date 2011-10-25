@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Ce fichier est automatiquement généré par le Concepteur de schémas XML. Il contient des informations de disposition pour les composants dans l'aire du concepteur.-->
+<XSDDesignerLayout Style="LeftRight" layoutVersion="2" viewPortLeft="-233" viewPortTop="256" zoom="100">
+    <TlvType_XmlComplexType left="740" top="7064" width="5292" height="1719" selected="0" zOrder="8" index="0" expanded="0" />
+    <WinSCardType_XmlComplexType left="741" top="5132" width="5292" height="1720" selected="0" zOrder="9" index="1" expanded="0" />
+    <WinSCard_XmlElement left="767" top="2275" width="5292" height="1243" selected="0" zOrder="10" index="2" expanded="1">
+        <tlv_XmlElement left="6693" top="1322" width="5292" height="3149" selected="0" zOrder="11" index="0" expanded="1">
+            <TagDictionary_XmlElement left="12619" top="1322" width="5292" height="3149" selected="0" zOrder="13" index="0" expanded="1">
+                <tag_XmlElement left="18545" top="1322" width="5292" height="3149" selected="0" zOrder="15" index="0" expanded="0" />
+            </TagDictionary_XmlElement>
+        </tlv_XmlElement>
+    </WinSCard_XmlElement>
+    <TagDictionaryType_XmlComplexType left="767" top="9021" width="5292" height="1720" selected="0" zOrder="17" index="3" expanded="0" />
+    <TagType_XmlComplexType left="794" top="11059" width="5291" height="4101" selected="0" zOrder="18" index="4" expanded="0" />
+</XSDDesignerLayout>

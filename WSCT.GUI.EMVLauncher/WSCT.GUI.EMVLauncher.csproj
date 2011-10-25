@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81ED588E-1FA0-4A55-BD7B-25A4552FB669}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
+    <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WSCT.GUI.EMVLauncher.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WSCT GUI\Layer Interactive\Layer Interactive.csproj">
+      <Project>{8843A8DE-B802-4049-84CA-7EAB27BCD39F}</Project>
+      <Name>Layer Interactive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT GUI\Plugin Interactive Layer\Plugin Interactive Layer.csproj">
+      <Project>{4BA36CE0-8FFA-401F-B630-A25EAC2AADDF}</Project>
+      <Name>Plugin Interactive Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT GUI\Plugin ISO7816 Tools\Plugin ISO7816 Tools.csproj">
+      <Project>{B2F69421-36D1-40E2-B36C-165A622B810C}</Project>
+      <Name>Plugin ISO7816 Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT GUI\WSCT.GUI\WSCT.GUI.csproj">
+      <Project>{AD3F035D-2806-4F94-8C29-09E5E183C36D}</Project>
+      <Name>WSCT.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT GUI\WSCT.Plugins\WSCT.GUI.Plugins.csproj">
+      <Project>{44D12C6F-7D70-40EC-864A-01202928D159}</Project>
+      <Name>WSCT.GUI.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMV Library\EMV Library.csproj">
+      <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
+      <Name>EMV Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj">
+      <Project>{82E61FBB-4DA3-4048-A94B-80E06E1AF942}</Project>
+      <Name>Plugin EMV Explorer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Core\WSCT.Core.csproj">
+      <Project>{764A5311-A573-4774-A198-43A660167FC7}</Project>
+      <Name>WSCT.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
+      <Project>{B95B0E58-9296-4A15-AA69-10A7B6DC2267}</Project>
+      <Name>WSCT.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.ISO7816\WSCT.ISO7816.csproj">
+      <Project>{BDECF2A5-900E-4C5D-BEEE-7903F9145BC1}</Project>
+      <Name>WSCT.ISO7816</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Stack\WSCT.Stack.csproj">
+      <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
+      <Name>WSCT.Stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
+      <Project>{19B66E6E-7E5E-481A-8718-3F9C44212AD6}</Project>
+      <Name>WSCT.Wrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Stack.Channel.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Stack.Context.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WinSCardGUI xmlns="http://xsd.zetoken.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xsd.zetoken.net WinSCardGUI.xsd ">
+
+  <plugins>
+
+    <plugin name="EMV Explorer">
+      <dll>Plugin.EMVExplorer.dll</dll>
+      <className>WSCT.GUI.Plugins.EMVExplorer.PluginEntry</className>
+      <pathToDll></pathToDll>
+    </plugin>
+
+  </plugins>
+
+</WinSCardGUI>
