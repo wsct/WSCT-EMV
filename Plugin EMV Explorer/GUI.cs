@@ -13,7 +13,6 @@ using WSCT.EMV;
 using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
 
-
 namespace WSCT.GUI.Plugins.EMVExplorer
 {
     public partial class GUI : Form
@@ -24,7 +23,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         List<EMV.Card.EMVApplication> _emvApplications;
 
-        TLVManager _tlvManager;
+        TLVDictionary _tlvManager;
 
         PluginParameters _parameters;
         CertificationAuthorityRepository certificationAuthorityRepository;
@@ -40,8 +39,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             InitializeComponent();
 
-            _tlvManager = new TLVManager();
-            _tlvManager.loadFromXml("Dictionary.EMVTag.xml");
+            _tlvManager = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
 
             _parameters = new PluginParameters();
             _parameters.loadFromXml("Config.EMVExplorer.xml");
@@ -72,7 +70,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             return convertTLVDataToTreeNode(tlv, null);
         }
 
-        private TreeNode convertTLVDataToTreeNode(TLVData tlv, TLVManager tlvManager)
+        private TreeNode convertTLVDataToTreeNode(TLVData tlv, TLVDictionary tlvManager)
         {
             TreeNode tlvNode;
             if (tlvManager != null && tlvManager.get(String.Format("{0:T}", tlv)) != null)

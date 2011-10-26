@@ -36,7 +36,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         /// <summary>
         /// Loads a set of descriptors from an XML file
         /// </summary>
-        /// <param name="fileName">Name of the file to read.</param>
+        /// <param name="xmlFileName">Name of the file to read.</param>
         /// <returns><c>true</c> if successful load, or an exception will be raised.</returns>
         public Boolean loadFromXml(String fileName)
         {

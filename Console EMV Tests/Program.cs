@@ -14,7 +14,7 @@ namespace WSCT.ConsoleEMVTests
 {
     class Program
     {
-        TLVManager tagsManager;
+        TLVDictionary tagsManager;
         List<EMV.Card.EMVApplication> emvApplications;
         System.Xml.XmlDocument xmlDoc;
         System.Xml.XmlElement xmlRoot;
@@ -285,8 +285,7 @@ namespace WSCT.ConsoleEMVTests
 
             #region >> TagsManager
 
-            tagsManager = new TLVManager();
-            tagsManager.loadFromXml("Dictionary.EMVTag.xml");
+            tagsManager = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
 
             #endregion
 
@@ -357,7 +356,7 @@ namespace WSCT.ConsoleEMVTests
         /// <param name="tagId"></param>
         /// <param name="tlv"></param>
         /// <param name="tagsManager"></param>
-        static void WriteTLV(UInt32 tagId, Helpers.BasicEncodingRules.TLVData tlv, TLVManager tagsManager)
+        static void WriteTLV(UInt32 tagId, Helpers.BasicEncodingRules.TLVData tlv, TLVDictionary tagsManager)
         {
             AbstractTLVObject tagObject = null;
             Console.WriteLine("  >> Contains tag {0:X2}: {1} [ {2} ]", tagId, tlv.hasTag(tagId), tlv.getTag(tagId));

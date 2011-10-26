@@ -19,7 +19,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         GUI gui;
 
-        public TLVManager tagsManager;
+        public TLVDictionary tagsManager;
 
         #region >> Constructors
 
@@ -393,7 +393,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         /// <param name="tagId"></param>
         /// <param name="tlv70"></param>
         /// <param name="tagsManager"></param>
-        void WriteTLV(UInt32 tagId, TLVData tlv, TLVManager tagsManager)
+        void WriteTLV(UInt32 tagId, TLVData tlv, TLVDictionary tagsManager)
         {
             AbstractTLVObject tagObject = null;
             gui.guiDetailedLogs.AppendText(String.Format("  >> TLV {0:X2}: [ {1} ]\n", tagId, tlv.getTag(tagId)));
