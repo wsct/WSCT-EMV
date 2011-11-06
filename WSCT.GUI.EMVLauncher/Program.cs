@@ -17,7 +17,7 @@ namespace WSCT.GUI.EMVLauncher
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WSCT.GUI.WinSCardGUI());
 
-            // Force close all other existing Application.Run() 
+            // Force close all other existing ApplicationID.Run() 
             Application.Exit();
         }
     }

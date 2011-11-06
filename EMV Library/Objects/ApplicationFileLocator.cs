@@ -12,6 +12,8 @@ namespace WSCT.EMV.Objects
     /// </summary>
     public class ApplicationFileLocator : BinaryTLVObject
     {
+        #region >> Nested classes
+
         /// <summary>
         /// Represents identification informations for one file in the AFL
         /// </summary>
@@ -60,9 +62,11 @@ namespace WSCT.EMV.Objects
             public override string ToString()
             {
                 return String.Format("sfi:{0} from {1} to {2} (used for offline auth:{3})",
-                    sfi, firstRecord, lastRecord, offlineNumberOfRecords);;
+                    sfi, firstRecord, lastRecord, offlineNumberOfRecords); ;
             }
         }
+
+        #endregion
 
         #region >> Constructors
 

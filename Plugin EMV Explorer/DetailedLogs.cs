@@ -19,7 +19,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         GUI gui;
 
-        public TLVDictionary tagsManager;
+        public TLVDictionary tlvDictionary;
 
         #region >> Constructors
 
@@ -166,7 +166,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 gui.guiDetailedLogs.AppendText("  >> TLV: " + df.tlvFCI + "\n");
                 foreach (Helpers.BasicEncodingRules.TLVData tlv in df.tlvFCI.getTags())
                 {
-                    WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tlvDictionary);
                 }
             }
             else
@@ -188,7 +188,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             {
                 foreach (Helpers.BasicEncodingRules.TLVData tlv in record.getTags())
                 {
-                    WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tlvDictionary);
                 }
             }
 
@@ -197,7 +197,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             foreach (EMV.Card.EMVApplication emvFound in pse.getApplications())
             {
-                gui.guiDetailedLogs.AppendText(String.Format("  >> Application '{0}' [ {1} ] found\n", emvFound.aid, tagsManager.createInstance(emvFound.tlvFromPSE.getTag(0x50))));
+                gui.guiDetailedLogs.AppendText(String.Format("  >> Application '{0}' [ {1} ] found\n", emvFound.aid, tlvDictionary.createInstance(emvFound.tlvFromPSE.getTag(0x50))));
             }
         }
 
@@ -215,7 +215,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 gui.guiDetailedLogs.AppendText(String.Format("  >> TLV: {0}\n", df.tlvFCI));
                 foreach (Helpers.BasicEncodingRules.TLVData tlv in df.tlvFCI.getTags())
                 {
-                    WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tlvDictionary);
                 }
             }
             else
@@ -237,7 +237,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 return;
             foreach (Helpers.BasicEncodingRules.TLVData tlv in emv.tlvProcessingOptions.getTags())
             {
-                WriteTLV(tlv.tag, tlv, tagsManager);
+                WriteTLV(tlv.tag, tlv, tlvDictionary);
             }
 
             gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.aip));
@@ -261,7 +261,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             {
                 foreach (Helpers.BasicEncodingRules.TLVData tlv in record.getTags())
                 {
-                    WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tlvDictionary);
                 }
             }
 
@@ -287,19 +287,19 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.tlvATC != null)
             {
-                WriteTLV(emv.tlvATC.tag, emv.tlvATC, tagsManager);
+                WriteTLV(emv.tlvATC.tag, emv.tlvATC, tlvDictionary);
             }
             if (emv.tlvLastOnlineATCRegister != null)
             {
-                WriteTLV(emv.tlvLastOnlineATCRegister.tag, emv.tlvLastOnlineATCRegister, tagsManager);
+                WriteTLV(emv.tlvLastOnlineATCRegister.tag, emv.tlvLastOnlineATCRegister, tlvDictionary);
             }
             if (emv.tlvPINTryCounter != null)
             {
-                WriteTLV(emv.tlvPINTryCounter.tag, emv.tlvPINTryCounter, tagsManager);
+                WriteTLV(emv.tlvPINTryCounter.tag, emv.tlvPINTryCounter, tlvDictionary);
             }
             if (emv.tlvLogFormat != null)
             {
-                WriteTLV(emv.tlvLogFormat.tag, emv.tlvLogFormat, tagsManager);
+                WriteTLV(emv.tlvLogFormat.tag, emv.tlvLogFormat, tlvDictionary);
             }
         }
 
@@ -336,7 +336,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.tlvSignedDynamicApplicationResponse != null)
             {
-                WriteTLV(emv.tlvSignedDynamicApplicationResponse.tag, emv.tlvSignedDynamicApplicationResponse, tagsManager);
+                WriteTLV(emv.tlvSignedDynamicApplicationResponse.tag, emv.tlvSignedDynamicApplicationResponse, tlvDictionary);
             }
 
             // informations about DDA
@@ -379,7 +379,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.tlvGenerateAC1Response != null)
             {
-                WriteTLV(emv.tlvGenerateAC1Response.tag, emv.tlvGenerateAC1Response, tagsManager);
+                WriteTLV(emv.tlvGenerateAC1Response.tag, emv.tlvGenerateAC1Response, tlvDictionary);
                 gui.guiDetailedLogs.AppendText(String.Format("    >> Cryptogram Information Data: {0}\n", emv.cid1));
                 gui.guiDetailedLogs.AppendText(String.Format("    >> Application Cryptogram Counter: {0}\n", emv.atcFromAC1));
             }
@@ -392,7 +392,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         /// </summary>
         /// <param name="tagId"></param>
         /// <param name="tlv70"></param>
-        /// <param name="tagsManager"></param>
+        /// <param name="tlvDictionary"></param>
         void WriteTLV(UInt32 tagId, TLVData tlv, TLVDictionary tagsManager)
         {
             AbstractTLVObject tagObject = null;

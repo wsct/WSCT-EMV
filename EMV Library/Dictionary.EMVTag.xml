@@ -22,12 +22,12 @@
 	</tlvDesc >
 	<tlvDesc  hexaValue="5F24" name="Expiration" longName="Application Expiration Date" source="ICC">
 		<value format="n" size="6"/>
-		<className>WSCT.EMV.tlvDesc s.DateFormattedtlvDesc </className>
+		<className>WSCT.EMV.Tags.DateFormattedTag</className>
 		<dll>WSCT.EMV.dll</dll>
 	</tlvDesc >
 	<tlvDesc  hexaValue="5F25" name="Effective" longName="Application Effective Date" source="ICC">
 		<value format="n" size="6"/>
-		<className>WSCT.EMV.tlvDesc s.DateFormattedtlvDesc </className>
+		<className>WSCT.EMV.Tags.DateFormattedTag</className>
 		<dll>WSCT.EMV.dll</dll>
 	</tlvDesc >
 	<tlvDesc  hexaValue="5F28" name="Country" longName="Issuer Country Code" source="ICC">
@@ -145,7 +145,7 @@
 	</tlvDesc >
 	<tlvDesc  hexaValue="9A" name="Date" longName="Transaction Date" source="Terminal">
 		<value format="n" size="6"/>
-		<className>WSCT.EMV.tlvDesc s.DateFormattedtlvDesc </className>
+		<className>WSCT.EMV.Tags.DateFormattedTag</className>
 		<dll>WSCT.EMV.dll</dll>
 	</tlvDesc >
 	<tlvDesc  hexaValue="9B" name="TSI" longName="Transaction Status Information" source="Terminal">

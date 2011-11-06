@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<WinSCardGUI xmlns="http://xsd.zetoken.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xsd.zetoken.net WinSCardGUI.xsd ">
+<ContextStack>
 
-	<contextStack>
+	<layer name="Interactive Context">
+		<dll>Layer.Interactive.dll</dll>
+		<className>WSCT.Layers.Interactive.CardContextLayer</className>
+		<pathToDll></pathToDll>
+	</layer>
 
-		<layer name="Interactive Context">
-			<dll>Layer.Interactive.dll</dll>
-			<className>WSCT.Layers.Interactive.CardContextLayer</className>
-			<pathToDll></pathToDll>
-		</layer>
+	<layer name="WinSCard Core Context">
+		<dll>WSCT.Stack.dll</dll>
+		<className>WSCT.Stack.Core.CardContextLayer</className>
+		<pathToDll></pathToDll>
+	</layer>
 
-		<layer name="WinSCard Core Context">
-			<dll>WSCT.Stack.dll</dll>
-			<className>WSCT.Stack.Core.CardContextLayer</className>
-			<pathToDll></pathToDll>
-		</layer>
-
-	</contextStack>
-
-</WinSCardGUI>
+</ContextStack>

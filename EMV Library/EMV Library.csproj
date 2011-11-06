@@ -120,6 +120,7 @@
     <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
     <Compile Include="Security\AbstractPublicKeyCertificate.cs" />
     <Compile Include="Security\AbstractSignatureContainer.cs" />
+    <Compile Include="Security\CertificationAuthority.cs" />
     <Compile Include="Security\HashAlgorithmFactory.cs" />
     <Compile Include="Security\HashAlgorithmUnknownException.cs" />
     <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="Security\StaticDataAuthentication.cs" />
     <Compile Include="Tags\DateFormattedTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terminal\TerminalCapabilities.cs" />
+    <Compile Include="Terminal\TerminalConfiguration.cs" />
+    <Compile Include="Transaction\TransactionContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dictionary.EMVTag.xml">

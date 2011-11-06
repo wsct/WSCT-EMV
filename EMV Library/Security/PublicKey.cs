@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace WSCT.EMV.Security
 {
     /// <summary>
     /// Represents a public key used for cryptographic purposes
     /// </summary>
-    public class PublicKey : WSCT.Helpers.Xml.IXmlSerializable
+    [XmlRoot("publicKey")]
+    public class PublicKey
     {
         #region >> Fields
 
@@ -22,20 +24,36 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Accessor to the modulus of the public key
         /// </summary>
+        [XmlText]
         public String modulus
         {
             get { return _modulus; }
-            set { _modulus = value.Replace(" ", ""); }
+            set { _modulus = value.Replace("\n", "").Replace("\r", "").Replace("\t", "").Replace(" ", ""); }
         }
 
         /// <summary>
         /// Accessor to the exponent of the public key
         /// </summary>
+        [XmlAttribute("exponent")]
         public String exponent
         {
             get { return _exponent; }
             set { _exponent = value.Replace(" ", ""); }
         }
+
+        /// <summary>
+        /// Accessor to the size of the public key
+        /// </summary>
+        [XmlAttribute("size")]
+        public String sizeString
+        { get; set; }
+
+        /// <summary>
+        /// Accessor to the expiration date of the public key
+        /// </summary>
+        [XmlAttribute("expiration")]
+        public String dateString
+        { get; set; }
 
         #endregion
 
@@ -58,40 +76,6 @@ namespace WSCT.EMV.Security
         {
             this.modulus = modulo;
             this.exponent = exponent;
-        }
-
-        #endregion
-
-        #region >> IXmlSerializable Members
-
-        /// <inheritdoc />
-        public void fromXmlNode(System.Xml.XmlNode xmlNode, System.Xml.XmlNamespaceManager xmlNamespace)
-        {
-            foreach (System.Xml.XmlAttribute xmlAttr in xmlNode.Attributes)
-            {
-                switch (xmlAttr.Name)
-                {
-                    case "exponent":
-                        exponent = xmlAttr.Value;
-                        break;
-                    case "size":
-                        // TODO: something with it
-                        break;
-                    case "expiration":
-                        // TODO: something with it
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            modulus = xmlNode.InnerXml.Replace("\n", "").Replace("\r", "").Replace("\t", "");
-        }
-
-        /// <inheritdoc />
-        public System.Xml.XmlNode toXmlNode(System.Xml.XmlDocument xmlDoc)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

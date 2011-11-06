@@ -1,398 +1,406 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pluginEMVExplorer xmlns="http://xsd.zetoken.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xsd.zetoken.net Config.EMVExplorer.xsd ">
+<pluginConfiguration>
 
-  <terminal>
-    <capabilities>
-      <supportedApplications>
-        <application aid="A0 00 00 00 03 10 10" label="VISA DEBIT/CREDIT"/>
-        <application aid="A0 00 00 00 03 20 10" label="VISA ELECTRON"/>
-        <application aid="A0 00 00 00 03 20 20" label="V PAY"/>
-        <application aid="A0 00 00 00 03 30 10" label="VISA INTERLINK"/>
-        <application aid="A0 00 00 00 03 80 10" label="VISA PLUS"/>
+	<terminalConfiguration>
 
-        <application aid="A0 00 00 00 04 10 10" label="MASTERCARD"/>
-        <application aid="A0 00 00 00 04 30 60" label="MAESTRO"/>
+		<capabilities>
 
-        <application aid="A0 00 00 00 25 01" label="AMERICAN EXPRESS AEIPS"/>
+			<supportedApplications>
+				<application aid="A0 00 00 00 03 10 10" label="VISA DEBIT/CREDIT"/>
+				<application aid="A0 00 00 00 03 20 10" label="VISA ELECTRON"/>
+				<application aid="A0 00 00 00 03 20 20" label="V PAY"/>
+				<application aid="A0 00 00 00 03 30 10" label="VISA INTERLINK"/>
+				<application aid="A0 00 00 00 03 80 10" label="VISA PLUS"/>
 
-        <application aid="A0 00 00 00 42 10 10" label="CB"/>
-        <application aid="A0 00 00 00 42 20 10" label="CB 20 10"/>
-        <application aid="A0 00 00 00 42 30 10" label="RETRAIT CB"/>
+				<application aid="A0 00 00 00 04 10 10" label="MASTERCARD"/>
+				<application aid="A0 00 00 00 04 30 60" label="MAESTRO"/>
 
-        <application aid="A0 00 00 00 69" label="MONEO"/>
-      </supportedApplications>
-    </capabilities>
+				<application aid="A0 00 00 00 25 01" label="AMERICAN EXPRESS AEIPS"/>
 
-    <certificationAuthorities >
+				<application aid="A0 00 00 00 42 10 10" label="CB"/>
+				<application aid="A0 00 00 00 42 20 10" label="CB 20 10"/>
+				<application aid="A0 00 00 00 42 30 10" label="RETRAIT CB"/>
 
-      <!-- VISA (https://partnernetwork.visa.com/vpn/global/category.do?categoryId=45&documentId=80&userRegion=1) -->
-      <certificationAuthority rid="A0 00 00 00 03" index="01">
-        <publicKey exponent="3" size="1024" expiration="2009-12-31">
-          C6 96 03 42 13 D7 D8 54 69 84 57 9D 1D 0F 0E A5
-          19 CF F8 DE FF C4 29 35 4C F3 A8 71 A6 F7 18 3F
-          12 28 DA 5C 74 70 C0 55 38 71 00 CB 93 5A 71 2C
-          4E 28 64 DF 5D 64 BA 93 FE 7E 63 E7 1F 25 B1 E5
-          F5 29 85 75 EB E1 C6 3A A6 17 70 69 17 91 1D C2
-          A7 5A C2 8B 25 1C 7E F4 0F 23 65 91 24 90 B9 39
-          BC A2 12 4A 30 A2 8F 54 40 2C 34 AE CA 33 1A B6
-          7E 1E 79 B2 85 DD 57 71 B5 D9 FF 79 EA 63 0B 75
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 03" index="07">
-        <publicKey exponent="3" size="1152" expiration="2013-12-31">
-          A8 9F 25 A5 6F A6 DA 25 8C 8C A8 B4 04 27 D9 27
-          B4 A1 EB 4D 7E A3 26 BB B1 2F 97 DE D7 0A E5 E4
-          48 0F C9 C5 E8 A9 72 17 71 10 A1 CC 31 8D 06 D2
-          F8 F5 C4 84 4A C5 FA 79 A4 DC 47 0B B1 1E D6 35
-          69 9C 17 08 1B 90 F1 B9 84 F1 2E 92 C1 C5 29 27
-          6D 8A F8 EC 7F 28 49 20 97 D8 CD 5B EC EA 16 FE
-          40 88 F6 CF AB 4A 1B 42 32 8A 1B 99 6F 92 78 B0
-          B7 E3 31 1C A5 EF 85 6C 2F 88 84 74 B8 36 12 A8
-          2E 4E 00 D0 CD 40 69 A6 78 31 40 43 3D 50 72 5F
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 03" index="08">
-        <publicKey exponent="3" size="1408" expiration="2019-12-31">
-          D9 FD 6E D7 5D 51 D0 E3 06 64 BD 15 70 23 EA A1
-          FF A8 71 E4 DA 65 67 2B 86 3D 25 5E 81 E1 37 A5
-          1D E4 F7 2B CC 9E 44 AC E1 21 27 F8 7E 26 3D 3A
-          F9 DD 9C F3 5C A4 A7 B0 1E 90 70 00 BA 85 D2 49
-          54 C2 FC A3 07 48 25 DD D4 C0 C8 F1 86 CB 02 0F
-          68 3E 02 F2 DE AD 39 69 13 3F 06 F7 84 51 66 AC
-          EB 57 CA 0F C2 60 34 45 46 98 11 D2 93 BF EF BA
-          FA B5 76 31 B3 DD 91 E7 96 BF 85 0A 25 01 2F 1A
-          E3 8F 05 AA 5C 4D 6D 03 B1 DC 2E 56 86 12 78 59
-          38 BB C9 B3 CD 3A 91 0C 1D A5 5A 5A 92 18 AC E0
-          F7 A2 12 87 75 26 82 F1 58 32 A6 78 D6 E1 ED 0B
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 03" index="09">
-        <publicKey exponent="3" size="1984" expiration="2019-12-31">
-          9D 91 22 48 DE 0A 4E 39 C1 A7 DD E3 F6 D2 58 89
-          92 C1 A4 09 5A FB D1 82 4D 1B A7 48 47 F2 BC 49
-          26 D2 EF D9 04 B4 B5 49 54 CD 18 9A 54 C5 D1 17
-          96 54 F8 F9 B0 D2 AB 5F 03 57 EB 64 2F ED A9 5D
-          39 12 C6 57 69 45 FA B8 97 E7 06 2C AA 44 A4 AA
-          06 B8 FE 6E 3D BA 18 AF 6A E3 73 8E 30 42 9E E9
-          BE 03 42 7C 9D 64 F6 95 FA 8C AB 4B FE 37 68 53
-          EA 34 AD 1D 76 BF CA D1 59 08 C0 77 FF E6 DC 55
-          21 EC EF 5D 27 8A 96 E2 6F 57 35 9F FA ED A1 94
-          34 B9 37 F1 AD 99 9D C5 C4 1E B1 19 35 B4 4C 18
-          10 0E 85 7F 43 1A 4A 5A 6B B6 51 14 F1 74 C2 D7
-          B5 9F DF 23 7D 6B B1 DD 09 16 E6 44 D7 09 DE D5
-          64 81 47 7C 75 D9 5C DD 68 25 46 15 F7 74 0E C0
-          7F 33 0A C5 D6 7B CD 75 BF 23 D2 8A 14 08 26 C0
-          26 DB DE 97 1A 37 CD 3E F9 B8 DF 64 4A C3 85 01
-          05 01 EF C6 50 9D 7A 41
-        </publicKey>
-      </certificationAuthority>
+				<application aid="A0 00 00 00 69" label="MONEO"/>
+			</supportedApplications>
 
-      <!-- MasterCard (http://www.paypass.com/pdf/public_documents/Terminal_Type_Approval/PP%20Terminal%20Testing%20Env%20March%202010.pdf) -->
-      <certificationAuthority rid="A0 00 00 00 04" index="00">
-        <publicKey exponent="3" size="1280" expiration="">
-          9C 6B E5 AD B1 0B 4B E3 DC E2 09 9B 4B 21 06 72
-          B8 96 56 EB A0 91 20 4F 61 3E CC 62 3B ED C9 C6
-          D7 7B 66 0E 8B AE EA 7F 7C E3 0F 1B 15 38 79 A4
-          E3 64 59 34 3D 1F E4 7A CD BD 41 FC D7 10 03 0C
-          2B A1 D9 46 15 97 98 2C 6E 1B DD 08 55 4B 72 6F
-          5E FF 79 13 CE 59 E7 9E 35 72 95 C3 21 E2 6D 0B
-          8B E2 70 A9 44 23 45 C7 53 E2 AA 2A CF C9 D3 08
-          50 60 2F E6 CA C0 0C 6D DF 6B 8D 9D 9B 48 79 B2
-          82 6B 04 2A 07 F0 E5 AE 52 6A 3D 3C 4D 22 C7 2B
-          9E AA 52 EE D8 89 38 66 F8 66 38 7A C0 5A 13 99
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="02">
-        <publicKey exponent="3" size="1536" expiration="">
-          A9 9A 6D 3E 07 18 89 ED 9E 3A 0C 39 1C 69 B0 B8
-          04 FC 16 0B 2B 4B DD 57 0C 92 DD 5A 0F 45 F5 3E
-          86 21 F7 C9 6C 40 22 42 66 73 5E 1E E1 B3 C0 62
-          38 AE 35 04 63 20 FD 8E 81 F8 CE B3 F8 B4 C9 7B
-          94 09 30 A3 AC 5E 79 00 86 DA D4 1A 6A 4F 51 17
-          BA 1C E2 43 8A 51 AC 05 3E B0 02 AE D8 66 D2 C4
-          58 FD 73 35 90 21 A1 20 29 A0 C0 43 04 5C 11 66
-          4F E0 21 9E C6 3C 10 BF 21 55 BB 27 84 60 9A 10
-          64 21 D4 51 63 79 97 38 C1 C3 09 09 BB 6C 6F E5
-          2B BB 76 39 7B 97 40 CE 06 4A 61 3F F8 41 11 85
-          F0 88 42 A4 23 EA D2 0E DF FB FF 1C D6 C3 FE 0C
-          98 21 47 91 99 C2 6D 85 72 CC 8A FF F0 87 A9 C3
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="05">
-        <publicKey exponent="3" size="1024" expiration="">
-          A1 F5 E1 C9 BD 86 50 BD 43 AB 6E E5 6B 89 1E F7
-          45 9C 0A 24 FA 84 F9 12 7D 1A 6C 79 D4 93 0F 6D
-          B1 85 2E 25 10 F1 8B 61 CD 35 4D B8 3A 35 6B D1
-          90 B8 8A B8 DF 04 28 4D 02 A4 20 4A 7B 6C B7 C5
-          55 19 77 A9 B3 63 79 CA 3D E1 A0 8E 69 F3 01 C9
-          5C C1 C2 05 06 95 92 75 F4 17 23 DD 5D 29 25 29
-          05 79 E5 A9 5B 0D F6 32 3F C8 E9 27 3D 6F 84 91
-          98 C4 99 62 09 16 6D 9B FC 97 3C 36 1C C8 26 E1
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="EF">
-        <publicKey exponent="3" size="1984" expiration="">
-          A1 91 CB 87 47 3F 29 34 9B 5D 60 A8 8B 3E AE E0
-          97 3A A6 F1 A0 82 F3 58 D8 49 FD DF F9 C0 91 F8
-          99 ED A9 79 2C AF 09 EF 28 F5 D2 24 04 B8 8A 22
-          93 EE BB C1 94 9C 43 BE A4 D6 0C FD 87 9A 15 39
-          54 4E 09 E0 F0 9F 60 F0 65 B2 BF 2A 13 EC C7 05
-          F3 D4 68 B9 D3 3A E7 7A D9 D3 F1 9C A4 0F 23 DC
-          F5 EB 7C 04 DC 8F 69 EB A5 65 B1 EB CB 46 86 CD
-          27 47 85 53 0F F6 F6 E9 EE 43 AA 43 FD B0 2C E0
-          0D AE C1 5C 7B 8F D6 A9 B3 94 BA BA 41 9D 3F 6D
-          C8 5E 16 56 9B E8 E7 69 89 68 8E FE A2 DF 22 FF
-          7D 35 C0 43 33 8D EA A9 82 A0 2B 86 6D E5 32 85
-          19 EB BC D6 F0 3C DD 68 66 73 84 7F 84 DB 65 1A
-          B8 6C 28 CF 14 62 56 2C 57 7B 85 35 64 A2 90 C8
-          55 6D 81 85 31 26 8D 25 CC 98 A4 CC 6A 0B DF FF
-          DA 2D CC A3 A9 4C 99 85 59 E3 07 FD DF 91 50 06
-          D9 A9 87 B0 7D DA EB 3B
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F1">
-        <publicKey exponent="3" size="1408" expiration="">
-          A0 DC F4 BD E1 9C 35 46 B4 B6 F0 41 4D 17 4D DE
-          29 4A AB BB 82 8C 5A 83 4D 73 AA E2 7C 99 B0 B0
-          53 A9 02 78 00 72 39 B6 45 9F F0 BB CD 7B 4B 9C
-          6C 50 AC 02 CE 91 36 8D A1 BD 21 AA EA DB C6 53
-          47 33 7D 89 B6 8F 5C 99 A0 9D 05 BE 02 DD 1F 8C
-          5B A2 0E 2F 13 FB 2A 27 C4 1D 3F 85 CA D5 CF 66
-          68 E7 58 51 EC 66 ED BF 98 85 1F D4 E4 2C 44 C1
-          D5 9F 59 84 70 3B 27 D5 B9 F2 1B 8F A0 D9 32 79
-          FB BF 69 E0 90 64 29 09 C9 EA 27 F8 98 95 95 41
-          AA 67 57 F5 F6 24 10 4F 6E 1D 3A 95 32 F2 A6 E5
-          15 15 AE AD 1B 43 B3 D7 83 50 88 A2 FA FA 7B E7
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F3">
-        <publicKey exponent="3" size="1152" expiration="">
-          98 F0 C7 70 F2 38 64 C2 E7 66 DF 02 D1 E8 33 DF
-          F4 FF E9 2D 69 6E 16 42 F0 A8 8C 56 94 C6 47 9D
-          16 DB 15 37 BF E2 9E 4F DC 6E 6E 8A FD 1B 0E B7
-          EA 01 24 72 3C 33 31 79 BF 19 E9 3F 10 65 8B 2F
-          77 6E 82 9E 87 DA ED A9 C9 4A 8B 33 82 19 9A 35
-          0C 07 79 77 C9 7A FF 08 FD 11 31 0A C9 50 A7 2C
-          3C A5 00 2E F5 13 FC CC 28 6E 64 6E 3C 53 87 53
-          5D 50 95 14 B3 B3 26 E1 23 4F 9C B4 8C 36 DD D4
-          4B 41 6D 23 65 40 34 A6 6F 40 3B A5 11 C5 EF A3
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F5">
-        <publicKey exponent="65537" size="1984" expiration="">
-          A6 E6 FB 72 17 95 06 F8 60 CC CA 8C 27 F9 9C EC
-          D9 4C 7D 4F 31 91 D3 03 BB EE 37 48 1C 7A A1 5F
-          23 3B A7 55 E9 E4 37 63 45 A9 A6 7E 79 94 BD C1
-          C6 80 BB 35 22 D8 C9 3E B0 CC C9 1A D3 1A D4 50
-          DA 30 D3 37 66 2D 19 AC 03 E2 B4 EF 5F 6E C1 82
-          82 D4 91 E1 97 67 D7 B2 45 42 DF DE FF 6F 62 18
-          55 03 53 20 69 BB B3 69 E3 BB 9F B1 9A C6 F1 C3
-          0B 97 D2 49 EE E7 64 E0 BA C9 7F 25 C8 73 D9 73
-          95 3E 51 53 A4 20 64 BB FA BF D0 6A 4B B4 86 86
-          0B F6 63 74 06 C9 FC 36 81 3A 4A 75 F7 5C 31 CC
-          A9 F6 9F 8D E5 9A DE CE F6 BD E7 E0 78 00 FC BE
-          03 5D 31 76 AF 84 73 E2 3E 9A A3 DF EE 22 11 96
-          D1 14 83 02 67 7C 72 0C FE 25 44 A0 3D B5 53 E7
-          F1 B8 42 7B A1 CC 72 B0 F2 9B 12 DF EF 4C 08 1D
-          07 6D 35 3E 71 88 0A AD FF 38 63 52 AF 0A B7 B2
-          8E D4 9E 1E 67 2D 11 F9
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F6">
-        <publicKey exponent="3" size="1792" expiration="">
-          A2 5A 6B D7 83 A5 EF 6B 8F B6 F8 30 55 C2 60 F5
-          F9 9E A1 66 78 F3 B9 05 3E 0F 64 98 E8 2C 3F 5D
-          1E 8C 38 F1 35 88 01 7E 2B 12 B3 D8 FF 6F 50 16
-          7F 46 44 29 10 72 9E 9E 4D 1B 37 39 E5 06 7C 0A
-          C7 A1 F4 48 7E 35 F6 75 BC 16 E2 33 31 51 65 CB
-          14 2B FD B2 5E 30 1A 63 2A 54 A3 37 1E BA B6 57
-          2D EE BA F3 70 F3 37 F0 57 EE 73 B4 AE 46 D1 A8
-          BC 4D A8 53 EC 3C C1 2C 8C BC 2D A1 83 22 D6 85
-          30 C7 0B 22 BD AC 35 1D D3 60 68 AE 32 1E 11 AB
-          F2 64 F4 D3 56 9B B7 12 14 54 50 05 55 8D E2 60
-          83 C7 35 DB 77 63 68 17 2F E8 C2 F5 C8 5E 8B 5B
-          89 0C C6 82 91 1D 2D E7 1F A6 26 B8 81 7F CC C0
-          89 22 B7 03 86 9F 3B AE AC 14 59 D7 7C D8 53 76
-          BC 36 18 2F 42 38 31 4D 6C 42 12 FB DD 7F 23 D3
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F7">
-        <publicKey exponent="65537" size="1024" expiration="">
-          94 EA 62 F6 D5 83 20 E3 54 C0 22 AD DC F0 55 9D
-          8C F2 06 CD 92 E8 69 56 49 05 CE 21 D7 20 F9 71
-          B7 AE A3 74 83 0E BE 17 57 11 5A 85 E0 88 D4 1C
-          6B 77 CF 5E C8 21 F3 0B 1D 89 04 17 BF 2F A3 1E
-          59 08 DE D5 FA 67 7F 8C 7B 18 4A D0 90 28 FD DE
-          96 B6 A6 10 98 50 AA 80 01 75 EA BC DB BB 68 4A
-          96 C2 EB 63 79 DF EA 08 D3 2F E2 33 1F E1 03 23
-          3A D5 8D CD B1 E6 E0 77 CB 9F 24 EA EC 5C 25 AF
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F8">
-        <publicKey exponent="3" size="1024" expiration="">
-          A1 F5 E1 C9 BD 86 50 BD 43 AB 6E E5 6B 89 1E F7
-          45 9C 0A 24 FA 84 F9 12 7D 1A 6C 79 D4 93 0F 6D
-          B1 85 2E 25 10 F1 8B 61 CD 35 4D B8 3A 35 6B D1
-          90 B8 8A B8 DF 04 28 4D 02 A4 20 4A 7B 6C B7 C5
-          55 19 77 A9 B3 63 79 CA 3D E1 A0 8E 69 F3 01 C9
-          5C C1 C2 05 06 95 92 75 F4 17 23 DD 5D 29 25 29
-          05 79 E5 A9 5B 0D F6 32 3F C8 E9 27 3D 6F 84 91
-          98 C4 99 62 09 16 6D 9B FC 97 3C 36 1C C8 26 E1
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="F9">
-        <publicKey exponent="3" size="1536" expiration="">
-          A9 9A 6D 3E 07 18 89 ED 9E 3A 0C 39 1C 69 B0 B8
-          04 FC 16 0B 2B 4B DD 57 0C 92 DD 5A 0F 45 F5 3E
-          86 21 F7 C9 6C 40 22 42 66 73 5E 1E E1 B3 C0 62
-          38 AE 35 04 63 20 FD 8E 81 F8 CE B3 F8 B4 C9 7B
-          94 09 30 A3 AC 5E 79 00 86 DA D4 1A 6A 4F 51 17
-          BA 1C E2 43 8A 51 AC 05 3E B0 02 AE D8 66 D2 C4
-          58 FD 73 35 90 21 A1 20 29 A0 C0 43 04 5C 11 66
-          4F E0 21 9E C6 3C 10 BF 21 55 BB 27 84 60 9A 10
-          64 21 D4 51 63 79 97 38 C1 C3 09 09 BB 6C 6F E5
-          2B BB 76 39 7B 97 40 CE 06 4A 61 3F F8 41 11 85
-          F0 88 42 A4 23 EA D2 0E DF FB FF 1C D6 C3 FE 0C
-          98 21 47 91 99 C2 6D 85 72 CC 8A FF F0 87 A9 C3
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 04" index="FA">
-        <publicKey exponent="3" size="1152" expiration="">
-          A9 0F CD 55 AA 2D 5D 99 63 E3 5E D0 F4 40 17 76
-          99 83 2F 49 C6 BA B1 5C DA E5 79 4B E9 3F 93 4D
-          44 62 D5 D1 27 62 E4 8C 38 BA 83 D8 44 5D EA A7
-          41 95 A3 01 A1 02 B2 F1 14 EA DA 0D 18 0E E5 E7
-          A5 C7 3E 0C 4E 11 F6 7A 43 DD AB 5D 55 68 3B 14
-          74 CC 06 27 F4 4B 8D 30 88 A4 92 FF AA DA D4 F4
-          24 22 D0 E7 01 35 36 C3 C4 9A D3 D0 FA E9 64 59
-          B0 F6 B1 B6 05 65 38 A3 D6 D4 46 40 F9 44 67 B1
-          08 86 7D EC 40 FA AE CD 74 0C 00 E2 B7 A8 85 2D
-        </publicKey>
-      </certificationAuthority>
+			<supportedPSEs>
+				<pse name="1PAY.SYS.DDF01" label="1PAY.SYS.DDF01"/>
+				<pse name="2PAY.SYS.DDF01" label="2PAY.SYS.DDF01"/>
+			</supportedPSEs>
 
-      <!-- American Express October 2007 (https://www209.americanexpress.com/merchant/singlevoice/pdfs/chipnpin/EMV_Terminal%20Guide.pdf) -->
-      <certificationAuthority rid="A0 00 00 00 25" index="03">
-        <publicKey exponent="3" size="1024" expiration="">
-          B0C2C6E2A6386933CD17C239496BF48C57E389164F2A96BFF133439AE8A77B20498BD4DC6959AB0
-          C2D05D0723AF3668901937B674E5A2FA92DDD5E78EA9D75D79620173CC269B35F463B3D4AAFF27
-          94F92E6C7A3FB95325D8AB95960C3066BE548087BCB6CE12688144A8B4A66228AE4659C634C99E3
-          6011584C095082A3A3E3
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 25" index="0E">
-        <publicKey exponent="03" size="1152" expiration="">
-          AA94A8C6DAD24F9BA56A27C09B01020819568B81A026BE9FD0A3416CA9A71166ED5084ED91CED4
-          7DD457DB7E6CBCD53E560BC5DF48ABC380993B6D549F5196CFA77DFB20A0296188E969A2772E8C4
-          141665F8BB2516BA2C7B5FC91F8DA04E8D512EB0F6411516FB86FC021CE7E969DA94D33937909A53
-          A57F907C40C22009DA7532CB3BE509AE173B39AD6A01BA5BB85
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 25" index="0F">
-        <publicKey exponent="03" size="1408" expiration="">
-          C8D5AC27A5E1FB89978C7C6479AF993AB3800EB243996FBB2AE26B67B23AC482C4B746005A51AFA
-          7D2D83E894F591A2357B30F85B85627FF15DA12290F70F05766552BA11AD34B7109FA49DE29DCB01
-          09670875A17EA95549E92347B948AA1F045756DE56B707E3863E59A6CBE99C1272EF65FB66CBB4CFF
-          070F36029DD76218B21242645B51CA752AF37E70BE1A84FF31079DC0048E928883EC4FADD497A719
-          385C2BBBEBC5A66AA5E5655D18034EC5
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 25" index="10">
-        <publicKey exponent="03" size="1984" expiration="">
-          CF98DFEDB3D3727965EE7797723355E0751C81D2D3DF4D18EBAB9FB9D49F38C8C4A826B99DC9DEA
-          3F01043D4BF22AC3550E2962A59639B1332156422F788B9C16D40135EFD1BA94147750575E636B6EB
-          C618734C91C1D1BF3EDC2A46A43901668E0FFC136774080E888044F6A1E65DC9AAA8928DACBEB0D
-          B55EA3514686C6A732CEF55EE27CF877F110652694A0E3484C855D882AE191674E25C296205BBB599
-          455176FDD7BBC549F27BA5FE35336F7E29E68D783973199436633C67EE5A680F05160ED12D1665EC
-          83D1997F10FD05BBDBF9433E8F797AEE3E9F02A34228ACE927ABE62B8B9281AD08D3DF5C7379685
-          045D7BA5FCDE58637
-        </publicKey>
-      </certificationAuthority>
+		</capabilities>
 
-      <!--  Clé publique de l’Autorité de Certification CB-EMV de test réel (identique à celle de production) -->
-      <certificationAuthority rid="A0 00 00 00 42" index="03">
-        <publicKey exponent="3" size="1024" expiration="2008-12-31">
-          E55DE6E67872F250F9F9EE5775E51A02B841A9AA7820296754EDD71F02C2E4FD311B39D29E8A3AE9349BBBDFD5F437BA734F1AF10CCA211EE2D546F41B7B0
-          90436D281474E08F64DCAD81211FA8B662B2DC2AF5F55AABED8913A7FC12DF71BB46570AA42836EA550C97D2A055E23CDFA04EE17734AE6D9E97438563D5F
-          BB5F3F
-        </publicKey>
-      </certificationAuthority>
-      <!--  Clé publique de l’Autorité de Certification CB-EMV de développement -->
-      <certificationAuthority rid="A0 00 00 00 42" index="82">
-        <publicKey exponent="3" size="1024" expiration="2008-12-31">
-          C3F5D60F215171842D2AD6BAAE183246E9E7954E5C69649A6F5F879A0FB64D31AE46C5257B0DB1852C1D62D48A75595507D476B3BD6618A941C4AB069F4D39
-          4842B78025EA77F3BE6EA1B59A87C21C32E64EA3E21424FC4B90DCDCF0A4044DB6BA02F977B39A2D3E79264D7F8D9E89042B35B1C22AF4F66F00F5C72DA6
-          CA044B
-        </publicKey>
-      </certificationAuthority>
-      <!--  Clé publique de l’Autorité de Certification CB-EMV de développement -->
-      <certificationAuthority rid="A0 00 00 00 42" index="83">
-        <publicKey exponent="3" size="1152" expiration="2010-12-31">
-          D843E04944171C8B217587E103B9273DE0510D5BC91B20E4BCFA096D069934F337A540BDE4D3E369B1526A6D591AEDD416F9E01CE747E668BED0088A2CEF2
-          481B45DAB47648CE3A1E1B8FEAD9EA5A0B111D56466B511CA53DB17399BE3AD7368A7658F870D6B51D7ABFBB5EE92085720F0704EFB7502353048097B0CEE
-          A8B8A850F531EFA9FB3A1E7EB15995682F9ABF
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 42" index="84">
-        <publicKey exponent="3" size="1024" expiration="2008-12-31">
-          CB8A78E954DAF3F2E469B81204CC2D1A1329E8651CE21B11B68E95C60A99575681E98A44DBAAC671853BFCEC7BAA562F
-          E92E5F2D9840291D610FC8126212A1CC04C328B350DD6E492035A14808F4B9CB9107646EA9DF9FFE5361BABEFB34A0BE
-          188C09BE9408FDC44E2F145BCC011901EC1B6B75146260B6909F50DB2E6226A7
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 42" index="85">
-        <publicKey exponent="3" size="1152" expiration="2010-12-31">
-          D5BD27FFD68F05C916C4A113B82965F06BB9BD84D1D04669BAAF2D7040D072FC4A16D167A5D99DB5CA4466F556B46174
-          EF8E65D6CA779BB8557F3E5AD861A725717F7A7D70F41DA53F6A574EDA648762C8637A8602BDA378DDD6DFACDDB15636
-          62B78F1E25F7FC8164081E293D5CBF3F57187033A968AE173BE7D78A46CB70EA68FB65DD5019CD400421CBB703702475
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 42" index="86">
-        <publicKey exponent="3" size="1408" expiration="2014-12-31">
-          D7686F54E4C65DFC162B455D612D918739059BA2445B79A1BD070A448CE062BD0C6E7E5683223490C66AB4B808A4D3A5
-          9E276D8B779925752FCE140BA136C0E05C0BDBAE0A9F751B9340BA88603967F43D40A04CFD652503B78234D188F6B21D
-          5A3AE99BB84B2E50235EF9D7ED7A70A117806778E9F0D1B3DADC1CE9B25C2DDE07B3B6E1DE487E0F7E9FFEDDD4D15255
-          CEC453631EF47E14B498A353844802A4A25A62B9918E9A12A00BF887AAD4799F
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 42" index="87">
-        <publicKey exponent="3" size="1920" expiration="2016-12-31">
-          C2394EB9D0E098BE2C49B638DF7A8B208BD7452C759766346E9D1D89EBA82008B58025F183D425EF5D2DE96CE730E89D
-          27824A7B6D56898A16B42349E07C1884A1343DC9AF16B5EB9FEE3A904EBC8FF25FE8CA92F8BC6BEABAE4F6515E7E406B
-          792615DE861387425F1D89E39FF50CC486AA4A7DD80C0294E65157A18A98C05D5AA6DA34B53945BD5FDCB71F0110F505
-          3868B589AF15710ED859F1589A18E719D236BCA74401701C893B0928E9C40FFD5514C643998F743C86C2197648296939
-          2CD051B605CEA68B869021D5B68AF064929733317CFBE59D2C7503AE271455E6F96386FB6CE667A68C58A0986EE3D7EB
-        </publicKey>
-      </certificationAuthority>
-      <certificationAuthority rid="A0 00 00 00 42" index="88">
-        <publicKey exponent="65537" size="1920" expiration="2016-12-31">
-          B2F149DFFCB3DFE59C6453BB0B7BED72463EB3EA2F1ED64DB20B8D796F55091C0C6B7393F09171F8B42826A79A4DBF27
-          7F5D2FE6412ED6157620655E90FC3B1E0C4D9EA937FA3337169711BC68CB64C86F4827353C139AEB2526C942C72BBE28
-          EAA79134A6DD0C5FFE3B1972A40BF912D767A733A883887E4797DBD62F15040B769D869D9F3D2C9BBCFA14D3725F630A
-          F6D91DA9B58BF653D0A3DC1C540D5E1E0D8C87D72A4C5684A6C1DCD11990906C3A863AE04AB9D52FF01AE3B10848294B
-          E6035471FF9819DEF0680EE2F13BF71549EA08B030B6B2EE12699A480F9B3018CC6F9C3568939753F8A184F411DF5125
-        </publicKey>
-      </certificationAuthority>
+		<certificationAuthorities >
 
-    </certificationAuthorities>
+			<!-- VISA (https://partnernetwork.visa.com/vpn/global/category.do?categoryId=45&documentId=80&userRegion=1) -->
+			<certificationAuthority rid="A0 00 00 00 03" index="01">
+				<publicKey exponent="3" size="1024" expiration="2009-12-31">
+					C6 96 03 42 13 D7 D8 54 69 84 57 9D 1D 0F 0E A5
+					19 CF F8 DE FF C4 29 35 4C F3 A8 71 A6 F7 18 3F
+					12 28 DA 5C 74 70 C0 55 38 71 00 CB 93 5A 71 2C
+					4E 28 64 DF 5D 64 BA 93 FE 7E 63 E7 1F 25 B1 E5
+					F5 29 85 75 EB E1 C6 3A A6 17 70 69 17 91 1D C2
+					A7 5A C2 8B 25 1C 7E F4 0F 23 65 91 24 90 B9 39
+					BC A2 12 4A 30 A2 8F 54 40 2C 34 AE CA 33 1A B6
+					7E 1E 79 B2 85 DD 57 71 B5 D9 FF 79 EA 63 0B 75
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 03" index="07">
+				<publicKey exponent="3" size="1152" expiration="2013-12-31">
+					A8 9F 25 A5 6F A6 DA 25 8C 8C A8 B4 04 27 D9 27
+					B4 A1 EB 4D 7E A3 26 BB B1 2F 97 DE D7 0A E5 E4
+					48 0F C9 C5 E8 A9 72 17 71 10 A1 CC 31 8D 06 D2
+					F8 F5 C4 84 4A C5 FA 79 A4 DC 47 0B B1 1E D6 35
+					69 9C 17 08 1B 90 F1 B9 84 F1 2E 92 C1 C5 29 27
+					6D 8A F8 EC 7F 28 49 20 97 D8 CD 5B EC EA 16 FE
+					40 88 F6 CF AB 4A 1B 42 32 8A 1B 99 6F 92 78 B0
+					B7 E3 31 1C A5 EF 85 6C 2F 88 84 74 B8 36 12 A8
+					2E 4E 00 D0 CD 40 69 A6 78 31 40 43 3D 50 72 5F
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 03" index="08">
+				<publicKey exponent="3" size="1408" expiration="2019-12-31">
+					D9 FD 6E D7 5D 51 D0 E3 06 64 BD 15 70 23 EA A1
+					FF A8 71 E4 DA 65 67 2B 86 3D 25 5E 81 E1 37 A5
+					1D E4 F7 2B CC 9E 44 AC E1 21 27 F8 7E 26 3D 3A
+					F9 DD 9C F3 5C A4 A7 B0 1E 90 70 00 BA 85 D2 49
+					54 C2 FC A3 07 48 25 DD D4 C0 C8 F1 86 CB 02 0F
+					68 3E 02 F2 DE AD 39 69 13 3F 06 F7 84 51 66 AC
+					EB 57 CA 0F C2 60 34 45 46 98 11 D2 93 BF EF BA
+					FA B5 76 31 B3 DD 91 E7 96 BF 85 0A 25 01 2F 1A
+					E3 8F 05 AA 5C 4D 6D 03 B1 DC 2E 56 86 12 78 59
+					38 BB C9 B3 CD 3A 91 0C 1D A5 5A 5A 92 18 AC E0
+					F7 A2 12 87 75 26 82 F1 58 32 A6 78 D6 E1 ED 0B
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 03" index="09">
+				<publicKey exponent="3" size="1984" expiration="2019-12-31">
+					9D 91 22 48 DE 0A 4E 39 C1 A7 DD E3 F6 D2 58 89
+					92 C1 A4 09 5A FB D1 82 4D 1B A7 48 47 F2 BC 49
+					26 D2 EF D9 04 B4 B5 49 54 CD 18 9A 54 C5 D1 17
+					96 54 F8 F9 B0 D2 AB 5F 03 57 EB 64 2F ED A9 5D
+					39 12 C6 57 69 45 FA B8 97 E7 06 2C AA 44 A4 AA
+					06 B8 FE 6E 3D BA 18 AF 6A E3 73 8E 30 42 9E E9
+					BE 03 42 7C 9D 64 F6 95 FA 8C AB 4B FE 37 68 53
+					EA 34 AD 1D 76 BF CA D1 59 08 C0 77 FF E6 DC 55
+					21 EC EF 5D 27 8A 96 E2 6F 57 35 9F FA ED A1 94
+					34 B9 37 F1 AD 99 9D C5 C4 1E B1 19 35 B4 4C 18
+					10 0E 85 7F 43 1A 4A 5A 6B B6 51 14 F1 74 C2 D7
+					B5 9F DF 23 7D 6B B1 DD 09 16 E6 44 D7 09 DE D5
+					64 81 47 7C 75 D9 5C DD 68 25 46 15 F7 74 0E C0
+					7F 33 0A C5 D6 7B CD 75 BF 23 D2 8A 14 08 26 C0
+					26 DB DE 97 1A 37 CD 3E F9 B8 DF 64 4A C3 85 01
+					05 01 EF C6 50 9D 7A 41
+				</publicKey>
+			</certificationAuthority>
 
-  </terminal>
+			<!-- MasterCard (http://www.paypass.com/pdf/public_documents/Terminal_Type_Approval/PP%20Terminal%20Testing%20Env%20March%202010.pdf) -->
+			<certificationAuthority rid="A0 00 00 00 04" index="00">
+				<publicKey exponent="3" size="1280" expiration="">
+					9C 6B E5 AD B1 0B 4B E3 DC E2 09 9B 4B 21 06 72
+					B8 96 56 EB A0 91 20 4F 61 3E CC 62 3B ED C9 C6
+					D7 7B 66 0E 8B AE EA 7F 7C E3 0F 1B 15 38 79 A4
+					E3 64 59 34 3D 1F E4 7A CD BD 41 FC D7 10 03 0C
+					2B A1 D9 46 15 97 98 2C 6E 1B DD 08 55 4B 72 6F
+					5E FF 79 13 CE 59 E7 9E 35 72 95 C3 21 E2 6D 0B
+					8B E2 70 A9 44 23 45 C7 53 E2 AA 2A CF C9 D3 08
+					50 60 2F E6 CA C0 0C 6D DF 6B 8D 9D 9B 48 79 B2
+					82 6B 04 2A 07 F0 E5 AE 52 6A 3D 3C 4D 22 C7 2B
+					9E AA 52 EE D8 89 38 66 F8 66 38 7A C0 5A 13 99
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="02">
+				<publicKey exponent="3" size="1536" expiration="">
+					A9 9A 6D 3E 07 18 89 ED 9E 3A 0C 39 1C 69 B0 B8
+					04 FC 16 0B 2B 4B DD 57 0C 92 DD 5A 0F 45 F5 3E
+					86 21 F7 C9 6C 40 22 42 66 73 5E 1E E1 B3 C0 62
+					38 AE 35 04 63 20 FD 8E 81 F8 CE B3 F8 B4 C9 7B
+					94 09 30 A3 AC 5E 79 00 86 DA D4 1A 6A 4F 51 17
+					BA 1C E2 43 8A 51 AC 05 3E B0 02 AE D8 66 D2 C4
+					58 FD 73 35 90 21 A1 20 29 A0 C0 43 04 5C 11 66
+					4F E0 21 9E C6 3C 10 BF 21 55 BB 27 84 60 9A 10
+					64 21 D4 51 63 79 97 38 C1 C3 09 09 BB 6C 6F E5
+					2B BB 76 39 7B 97 40 CE 06 4A 61 3F F8 41 11 85
+					F0 88 42 A4 23 EA D2 0E DF FB FF 1C D6 C3 FE 0C
+					98 21 47 91 99 C2 6D 85 72 CC 8A FF F0 87 A9 C3
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="05">
+				<publicKey exponent="3" size="1024" expiration="">
+					A1 F5 E1 C9 BD 86 50 BD 43 AB 6E E5 6B 89 1E F7
+					45 9C 0A 24 FA 84 F9 12 7D 1A 6C 79 D4 93 0F 6D
+					B1 85 2E 25 10 F1 8B 61 CD 35 4D B8 3A 35 6B D1
+					90 B8 8A B8 DF 04 28 4D 02 A4 20 4A 7B 6C B7 C5
+					55 19 77 A9 B3 63 79 CA 3D E1 A0 8E 69 F3 01 C9
+					5C C1 C2 05 06 95 92 75 F4 17 23 DD 5D 29 25 29
+					05 79 E5 A9 5B 0D F6 32 3F C8 E9 27 3D 6F 84 91
+					98 C4 99 62 09 16 6D 9B FC 97 3C 36 1C C8 26 E1
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="EF">
+				<publicKey exponent="3" size="1984" expiration="">
+					A1 91 CB 87 47 3F 29 34 9B 5D 60 A8 8B 3E AE E0
+					97 3A A6 F1 A0 82 F3 58 D8 49 FD DF F9 C0 91 F8
+					99 ED A9 79 2C AF 09 EF 28 F5 D2 24 04 B8 8A 22
+					93 EE BB C1 94 9C 43 BE A4 D6 0C FD 87 9A 15 39
+					54 4E 09 E0 F0 9F 60 F0 65 B2 BF 2A 13 EC C7 05
+					F3 D4 68 B9 D3 3A E7 7A D9 D3 F1 9C A4 0F 23 DC
+					F5 EB 7C 04 DC 8F 69 EB A5 65 B1 EB CB 46 86 CD
+					27 47 85 53 0F F6 F6 E9 EE 43 AA 43 FD B0 2C E0
+					0D AE C1 5C 7B 8F D6 A9 B3 94 BA BA 41 9D 3F 6D
+					C8 5E 16 56 9B E8 E7 69 89 68 8E FE A2 DF 22 FF
+					7D 35 C0 43 33 8D EA A9 82 A0 2B 86 6D E5 32 85
+					19 EB BC D6 F0 3C DD 68 66 73 84 7F 84 DB 65 1A
+					B8 6C 28 CF 14 62 56 2C 57 7B 85 35 64 A2 90 C8
+					55 6D 81 85 31 26 8D 25 CC 98 A4 CC 6A 0B DF FF
+					DA 2D CC A3 A9 4C 99 85 59 E3 07 FD DF 91 50 06
+					D9 A9 87 B0 7D DA EB 3B
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F1">
+				<publicKey exponent="3" size="1408" expiration="">
+					A0 DC F4 BD E1 9C 35 46 B4 B6 F0 41 4D 17 4D DE
+					29 4A AB BB 82 8C 5A 83 4D 73 AA E2 7C 99 B0 B0
+					53 A9 02 78 00 72 39 B6 45 9F F0 BB CD 7B 4B 9C
+					6C 50 AC 02 CE 91 36 8D A1 BD 21 AA EA DB C6 53
+					47 33 7D 89 B6 8F 5C 99 A0 9D 05 BE 02 DD 1F 8C
+					5B A2 0E 2F 13 FB 2A 27 C4 1D 3F 85 CA D5 CF 66
+					68 E7 58 51 EC 66 ED BF 98 85 1F D4 E4 2C 44 C1
+					D5 9F 59 84 70 3B 27 D5 B9 F2 1B 8F A0 D9 32 79
+					FB BF 69 E0 90 64 29 09 C9 EA 27 F8 98 95 95 41
+					AA 67 57 F5 F6 24 10 4F 6E 1D 3A 95 32 F2 A6 E5
+					15 15 AE AD 1B 43 B3 D7 83 50 88 A2 FA FA 7B E7
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F3">
+				<publicKey exponent="3" size="1152" expiration="">
+					98 F0 C7 70 F2 38 64 C2 E7 66 DF 02 D1 E8 33 DF
+					F4 FF E9 2D 69 6E 16 42 F0 A8 8C 56 94 C6 47 9D
+					16 DB 15 37 BF E2 9E 4F DC 6E 6E 8A FD 1B 0E B7
+					EA 01 24 72 3C 33 31 79 BF 19 E9 3F 10 65 8B 2F
+					77 6E 82 9E 87 DA ED A9 C9 4A 8B 33 82 19 9A 35
+					0C 07 79 77 C9 7A FF 08 FD 11 31 0A C9 50 A7 2C
+					3C A5 00 2E F5 13 FC CC 28 6E 64 6E 3C 53 87 53
+					5D 50 95 14 B3 B3 26 E1 23 4F 9C B4 8C 36 DD D4
+					4B 41 6D 23 65 40 34 A6 6F 40 3B A5 11 C5 EF A3
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F5">
+				<publicKey exponent="65537" size="1984" expiration="">
+					A6 E6 FB 72 17 95 06 F8 60 CC CA 8C 27 F9 9C EC
+					D9 4C 7D 4F 31 91 D3 03 BB EE 37 48 1C 7A A1 5F
+					23 3B A7 55 E9 E4 37 63 45 A9 A6 7E 79 94 BD C1
+					C6 80 BB 35 22 D8 C9 3E B0 CC C9 1A D3 1A D4 50
+					DA 30 D3 37 66 2D 19 AC 03 E2 B4 EF 5F 6E C1 82
+					82 D4 91 E1 97 67 D7 B2 45 42 DF DE FF 6F 62 18
+					55 03 53 20 69 BB B3 69 E3 BB 9F B1 9A C6 F1 C3
+					0B 97 D2 49 EE E7 64 E0 BA C9 7F 25 C8 73 D9 73
+					95 3E 51 53 A4 20 64 BB FA BF D0 6A 4B B4 86 86
+					0B F6 63 74 06 C9 FC 36 81 3A 4A 75 F7 5C 31 CC
+					A9 F6 9F 8D E5 9A DE CE F6 BD E7 E0 78 00 FC BE
+					03 5D 31 76 AF 84 73 E2 3E 9A A3 DF EE 22 11 96
+					D1 14 83 02 67 7C 72 0C FE 25 44 A0 3D B5 53 E7
+					F1 B8 42 7B A1 CC 72 B0 F2 9B 12 DF EF 4C 08 1D
+					07 6D 35 3E 71 88 0A AD FF 38 63 52 AF 0A B7 B2
+					8E D4 9E 1E 67 2D 11 F9
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F6">
+				<publicKey exponent="3" size="1792" expiration="">
+					A2 5A 6B D7 83 A5 EF 6B 8F B6 F8 30 55 C2 60 F5
+					F9 9E A1 66 78 F3 B9 05 3E 0F 64 98 E8 2C 3F 5D
+					1E 8C 38 F1 35 88 01 7E 2B 12 B3 D8 FF 6F 50 16
+					7F 46 44 29 10 72 9E 9E 4D 1B 37 39 E5 06 7C 0A
+					C7 A1 F4 48 7E 35 F6 75 BC 16 E2 33 31 51 65 CB
+					14 2B FD B2 5E 30 1A 63 2A 54 A3 37 1E BA B6 57
+					2D EE BA F3 70 F3 37 F0 57 EE 73 B4 AE 46 D1 A8
+					BC 4D A8 53 EC 3C C1 2C 8C BC 2D A1 83 22 D6 85
+					30 C7 0B 22 BD AC 35 1D D3 60 68 AE 32 1E 11 AB
+					F2 64 F4 D3 56 9B B7 12 14 54 50 05 55 8D E2 60
+					83 C7 35 DB 77 63 68 17 2F E8 C2 F5 C8 5E 8B 5B
+					89 0C C6 82 91 1D 2D E7 1F A6 26 B8 81 7F CC C0
+					89 22 B7 03 86 9F 3B AE AC 14 59 D7 7C D8 53 76
+					BC 36 18 2F 42 38 31 4D 6C 42 12 FB DD 7F 23 D3
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F7">
+				<publicKey exponent="65537" size="1024" expiration="">
+					94 EA 62 F6 D5 83 20 E3 54 C0 22 AD DC F0 55 9D
+					8C F2 06 CD 92 E8 69 56 49 05 CE 21 D7 20 F9 71
+					B7 AE A3 74 83 0E BE 17 57 11 5A 85 E0 88 D4 1C
+					6B 77 CF 5E C8 21 F3 0B 1D 89 04 17 BF 2F A3 1E
+					59 08 DE D5 FA 67 7F 8C 7B 18 4A D0 90 28 FD DE
+					96 B6 A6 10 98 50 AA 80 01 75 EA BC DB BB 68 4A
+					96 C2 EB 63 79 DF EA 08 D3 2F E2 33 1F E1 03 23
+					3A D5 8D CD B1 E6 E0 77 CB 9F 24 EA EC 5C 25 AF
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F8">
+				<publicKey exponent="3" size="1024" expiration="">
+					A1 F5 E1 C9 BD 86 50 BD 43 AB 6E E5 6B 89 1E F7
+					45 9C 0A 24 FA 84 F9 12 7D 1A 6C 79 D4 93 0F 6D
+					B1 85 2E 25 10 F1 8B 61 CD 35 4D B8 3A 35 6B D1
+					90 B8 8A B8 DF 04 28 4D 02 A4 20 4A 7B 6C B7 C5
+					55 19 77 A9 B3 63 79 CA 3D E1 A0 8E 69 F3 01 C9
+					5C C1 C2 05 06 95 92 75 F4 17 23 DD 5D 29 25 29
+					05 79 E5 A9 5B 0D F6 32 3F C8 E9 27 3D 6F 84 91
+					98 C4 99 62 09 16 6D 9B FC 97 3C 36 1C C8 26 E1
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="F9">
+				<publicKey exponent="3" size="1536" expiration="">
+					A9 9A 6D 3E 07 18 89 ED 9E 3A 0C 39 1C 69 B0 B8
+					04 FC 16 0B 2B 4B DD 57 0C 92 DD 5A 0F 45 F5 3E
+					86 21 F7 C9 6C 40 22 42 66 73 5E 1E E1 B3 C0 62
+					38 AE 35 04 63 20 FD 8E 81 F8 CE B3 F8 B4 C9 7B
+					94 09 30 A3 AC 5E 79 00 86 DA D4 1A 6A 4F 51 17
+					BA 1C E2 43 8A 51 AC 05 3E B0 02 AE D8 66 D2 C4
+					58 FD 73 35 90 21 A1 20 29 A0 C0 43 04 5C 11 66
+					4F E0 21 9E C6 3C 10 BF 21 55 BB 27 84 60 9A 10
+					64 21 D4 51 63 79 97 38 C1 C3 09 09 BB 6C 6F E5
+					2B BB 76 39 7B 97 40 CE 06 4A 61 3F F8 41 11 85
+					F0 88 42 A4 23 EA D2 0E DF FB FF 1C D6 C3 FE 0C
+					98 21 47 91 99 C2 6D 85 72 CC 8A FF F0 87 A9 C3
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 04" index="FA">
+				<publicKey exponent="3" size="1152" expiration="">
+					A9 0F CD 55 AA 2D 5D 99 63 E3 5E D0 F4 40 17 76
+					99 83 2F 49 C6 BA B1 5C DA E5 79 4B E9 3F 93 4D
+					44 62 D5 D1 27 62 E4 8C 38 BA 83 D8 44 5D EA A7
+					41 95 A3 01 A1 02 B2 F1 14 EA DA 0D 18 0E E5 E7
+					A5 C7 3E 0C 4E 11 F6 7A 43 DD AB 5D 55 68 3B 14
+					74 CC 06 27 F4 4B 8D 30 88 A4 92 FF AA DA D4 F4
+					24 22 D0 E7 01 35 36 C3 C4 9A D3 D0 FA E9 64 59
+					B0 F6 B1 B6 05 65 38 A3 D6 D4 46 40 F9 44 67 B1
+					08 86 7D EC 40 FA AE CD 74 0C 00 E2 B7 A8 85 2D
+				</publicKey>
+			</certificationAuthority>
 
-  <transaction id="1" name="default">
-    <tagValues>
-      <!-- Amount, Authorised: Authorised amount of the transaction (excluding adjustments) -->
-      <tagValue tag="9F02">000000001000</tagValue>
-      <!-- Amount, Other: Secondary amount associated with the transaction representing a cashback amount -->
-      <tagValue tag="9F03">000000000000</tagValue>
-      <!-- Terminal Country Code: Indicates the country of the terminal, represented according to ISO 3166 -->
-      <tagValue tag="9F1A">0250</tagValue>
-      <!-- Transaction Currency Code: Indicates the currency code of the transaction according to ISO 4217 -->
-      <tagValue tag="5F2A">0978</tagValue>
-      <!-- Transaction Date: Local date that the transaction was authorised -->
-      <tagValue tag="9A">070430</tagValue>
-      <!-- Transaction Type: Indicates the type of financial transaction, represented by the first two digits of the ISO 8583:1987 Processing Code. The actual values to be used for the Transaction Type data element are defined by the relevant payment system
-      00: Purchase of goods and services - 01: Cash (ATM) - 20: Purchase return -->
-      <tagValue tag="9C">00</tagValue>
-    </tagValues>
-  </transaction>
+			<!-- American Express October 2007 (https://www209.americanexpress.com/merchant/singlevoice/pdfs/chipnpin/EMV_Terminal%20Guide.pdf) -->
+			<certificationAuthority rid="A0 00 00 00 25" index="03">
+				<publicKey exponent="3" size="1024" expiration="">
+					B0C2C6E2A6386933CD17C239496BF48C57E389164F2A96BFF133439AE8A77B20498BD4DC6959AB0
+					C2D05D0723AF3668901937B674E5A2FA92DDD5E78EA9D75D79620173CC269B35F463B3D4AAFF27
+					94F92E6C7A3FB95325D8AB95960C3066BE548087BCB6CE12688144A8B4A66228AE4659C634C99E3
+					6011584C095082A3A3E3
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 25" index="0E">
+				<publicKey exponent="03" size="1152" expiration="">
+					AA94A8C6DAD24F9BA56A27C09B01020819568B81A026BE9FD0A3416CA9A71166ED5084ED91CED4
+					7DD457DB7E6CBCD53E560BC5DF48ABC380993B6D549F5196CFA77DFB20A0296188E969A2772E8C4
+					141665F8BB2516BA2C7B5FC91F8DA04E8D512EB0F6411516FB86FC021CE7E969DA94D33937909A53
+					A57F907C40C22009DA7532CB3BE509AE173B39AD6A01BA5BB85
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 25" index="0F">
+				<publicKey exponent="03" size="1408" expiration="">
+					C8D5AC27A5E1FB89978C7C6479AF993AB3800EB243996FBB2AE26B67B23AC482C4B746005A51AFA
+					7D2D83E894F591A2357B30F85B85627FF15DA12290F70F05766552BA11AD34B7109FA49DE29DCB01
+					09670875A17EA95549E92347B948AA1F045756DE56B707E3863E59A6CBE99C1272EF65FB66CBB4CFF
+					070F36029DD76218B21242645B51CA752AF37E70BE1A84FF31079DC0048E928883EC4FADD497A719
+					385C2BBBEBC5A66AA5E5655D18034EC5
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 25" index="10">
+				<publicKey exponent="03" size="1984" expiration="">
+					CF98DFEDB3D3727965EE7797723355E0751C81D2D3DF4D18EBAB9FB9D49F38C8C4A826B99DC9DEA
+					3F01043D4BF22AC3550E2962A59639B1332156422F788B9C16D40135EFD1BA94147750575E636B6EB
+					C618734C91C1D1BF3EDC2A46A43901668E0FFC136774080E888044F6A1E65DC9AAA8928DACBEB0D
+					B55EA3514686C6A732CEF55EE27CF877F110652694A0E3484C855D882AE191674E25C296205BBB599
+					455176FDD7BBC549F27BA5FE35336F7E29E68D783973199436633C67EE5A680F05160ED12D1665EC
+					83D1997F10FD05BBDBF9433E8F797AEE3E9F02A34228ACE927ABE62B8B9281AD08D3DF5C7379685
+					045D7BA5FCDE58637
+				</publicKey>
+			</certificationAuthority>
 
-</pluginEMVExplorer>
+			<!--  Clé publique de l’Autorité de Certification CB-EMV de test réel (identique à celle de production) -->
+			<certificationAuthority rid="A0 00 00 00 42" index="03">
+				<publicKey exponent="3" size="1024" expiration="2008-12-31">
+					E55DE6E67872F250F9F9EE5775E51A02B841A9AA7820296754EDD71F02C2E4FD311B39D29E8A3AE9349BBBDFD5F437BA734F1AF10CCA211EE2D546F41B7B0
+					90436D281474E08F64DCAD81211FA8B662B2DC2AF5F55AABED8913A7FC12DF71BB46570AA42836EA550C97D2A055E23CDFA04EE17734AE6D9E97438563D5F
+					BB5F3F
+				</publicKey>
+			</certificationAuthority>
+			<!--  Clé publique de l’Autorité de Certification CB-EMV de développement -->
+			<certificationAuthority rid="A0 00 00 00 42" index="82">
+				<publicKey exponent="3" size="1024" expiration="2008-12-31">
+					C3F5D60F215171842D2AD6BAAE183246E9E7954E5C69649A6F5F879A0FB64D31AE46C5257B0DB1852C1D62D48A75595507D476B3BD6618A941C4AB069F4D39
+					4842B78025EA77F3BE6EA1B59A87C21C32E64EA3E21424FC4B90DCDCF0A4044DB6BA02F977B39A2D3E79264D7F8D9E89042B35B1C22AF4F66F00F5C72DA6
+					CA044B
+				</publicKey>
+			</certificationAuthority>
+			<!--  Clé publique de l’Autorité de Certification CB-EMV de développement -->
+			<certificationAuthority rid="A0 00 00 00 42" index="83">
+				<publicKey exponent="3" size="1152" expiration="2010-12-31">
+					D843E04944171C8B217587E103B9273DE0510D5BC91B20E4BCFA096D069934F337A540BDE4D3E369B1526A6D591AEDD416F9E01CE747E668BED0088A2CEF2
+					481B45DAB47648CE3A1E1B8FEAD9EA5A0B111D56466B511CA53DB17399BE3AD7368A7658F870D6B51D7ABFBB5EE92085720F0704EFB7502353048097B0CEE
+					A8B8A850F531EFA9FB3A1E7EB15995682F9ABF
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 42" index="84">
+				<publicKey exponent="3" size="1024" expiration="2008-12-31">
+					CB8A78E954DAF3F2E469B81204CC2D1A1329E8651CE21B11B68E95C60A99575681E98A44DBAAC671853BFCEC7BAA562F
+					E92E5F2D9840291D610FC8126212A1CC04C328B350DD6E492035A14808F4B9CB9107646EA9DF9FFE5361BABEFB34A0BE
+					188C09BE9408FDC44E2F145BCC011901EC1B6B75146260B6909F50DB2E6226A7
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 42" index="85">
+				<publicKey exponent="3" size="1152" expiration="2010-12-31">
+					D5BD27FFD68F05C916C4A113B82965F06BB9BD84D1D04669BAAF2D7040D072FC4A16D167A5D99DB5CA4466F556B46174
+					EF8E65D6CA779BB8557F3E5AD861A725717F7A7D70F41DA53F6A574EDA648762C8637A8602BDA378DDD6DFACDDB15636
+					62B78F1E25F7FC8164081E293D5CBF3F57187033A968AE173BE7D78A46CB70EA68FB65DD5019CD400421CBB703702475
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 42" index="86">
+				<publicKey exponent="3" size="1408" expiration="2014-12-31">
+					D7686F54E4C65DFC162B455D612D918739059BA2445B79A1BD070A448CE062BD0C6E7E5683223490C66AB4B808A4D3A5
+					9E276D8B779925752FCE140BA136C0E05C0BDBAE0A9F751B9340BA88603967F43D40A04CFD652503B78234D188F6B21D
+					5A3AE99BB84B2E50235EF9D7ED7A70A117806778E9F0D1B3DADC1CE9B25C2DDE07B3B6E1DE487E0F7E9FFEDDD4D15255
+					CEC453631EF47E14B498A353844802A4A25A62B9918E9A12A00BF887AAD4799F
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 42" index="87">
+				<publicKey exponent="3" size="1920" expiration="2016-12-31">
+					C2394EB9D0E098BE2C49B638DF7A8B208BD7452C759766346E9D1D89EBA82008B58025F183D425EF5D2DE96CE730E89D
+					27824A7B6D56898A16B42349E07C1884A1343DC9AF16B5EB9FEE3A904EBC8FF25FE8CA92F8BC6BEABAE4F6515E7E406B
+					792615DE861387425F1D89E39FF50CC486AA4A7DD80C0294E65157A18A98C05D5AA6DA34B53945BD5FDCB71F0110F505
+					3868B589AF15710ED859F1589A18E719D236BCA74401701C893B0928E9C40FFD5514C643998F743C86C2197648296939
+					2CD051B605CEA68B869021D5B68AF064929733317CFBE59D2C7503AE271455E6F96386FB6CE667A68C58A0986EE3D7EB
+				</publicKey>
+			</certificationAuthority>
+			<certificationAuthority rid="A0 00 00 00 42" index="88">
+				<publicKey exponent="65537" size="1920" expiration="2016-12-31">
+					B2F149DFFCB3DFE59C6453BB0B7BED72463EB3EA2F1ED64DB20B8D796F55091C0C6B7393F09171F8B42826A79A4DBF27
+					7F5D2FE6412ED6157620655E90FC3B1E0C4D9EA937FA3337169711BC68CB64C86F4827353C139AEB2526C942C72BBE28
+					EAA79134A6DD0C5FFE3B1972A40BF912D767A733A883887E4797DBD62F15040B769D869D9F3D2C9BBCFA14D3725F630A
+					F6D91DA9B58BF653D0A3DC1C540D5E1E0D8C87D72A4C5684A6C1DCD11990906C3A863AE04AB9D52FF01AE3B10848294B
+					E6035471FF9819DEF0680EE2F13BF71549EA08B030B6B2EE12699A480F9B3018CC6F9C3568939753F8A184F411DF5125
+				</publicKey>
+			</certificationAuthority>
+
+		</certificationAuthorities>
+
+	</terminalConfiguration>
+
+	<transactionContext id="1" name="default">
+		<tlvDataList>
+			<!-- Amount, Authorised: Authorised amount of the transaction (excluding adjustments) -->
+			<tlvData tag="9F02" value="000000001000" />
+			<!-- Amount, Other: Secondary amount associated with the transaction representing a cashback amount -->
+			<tlvData tag="9F03" value="000000000000" />
+			<!-- Terminal Country Code: Indicates the country of the terminal, represented according to ISO 3166 -->
+			<tlvData tag="9F1A" value="0250" />
+			<!-- Transaction Currency Code: Indicates the currency code of the transaction according to ISO 4217 -->
+			<tlvData tag="5F2A" value="0978" />
+			<!-- Transaction Date: Local date that the transaction was authorised -->
+			<tlvData tag="9A" value="070430" />
+			<!-- Transaction Type: Indicates the type of financial transaction, represented by the first two digits of the ISO 8583:1987 Processing Code. The actual values to be used for the Transaction Type data element are defined by the relevant payment system
+			00: Purchase of goods and services - 01: Cash (ATM) - 20: Purchase return -->
+			<tlvData tag="9C" value="00" />
+		</tlvDataList>
+	</transactionContext>
+
+</pluginConfiguration>

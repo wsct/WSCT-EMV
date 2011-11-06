@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
-using WSCT.Helpers;
-using WSCT.Helpers.BasicEncodingRules;
-
 using WSCT.EMV;
+using WSCT.EMV.Card;
 using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
+using WSCT.EMV.Terminal;
+using WSCT.Helpers;
+using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.GUI.Plugins.EMVExplorer
 {
@@ -23,10 +19,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         List<EMV.Card.EMVApplication> _emvApplications;
 
-        TLVDictionary _tlvManager;
+        TLVDictionary _tlvDictionary;
 
-        PluginParameters _parameters;
-        CertificationAuthorityRepository certificationAuthorityRepository;
+        PluginConfiguration _pluginConfiguration;
+        CertificationAuthorityRepository _certificationAuthorityRepository;
 
         EMV.Card.PaymentSystemEnvironment _pse;
         EMV.Card.EMVApplication _emv;
@@ -39,21 +35,17 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             InitializeComponent();
 
-            _tlvManager = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
+            _pluginConfiguration = PluginConfiguration.loadFromXml("Config.EMVExplorer.xml");
 
-            _parameters = new PluginParameters();
-            _parameters.loadFromXml("Config.EMVExplorer.xml");
+            _tlvDictionary = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
 
-            certificationAuthorityRepository = _parameters.terminalParameters.certificationAuthorityRepository;
+            _certificationAuthorityRepository = _pluginConfiguration.terminalConfiguration.certificationAuthorityRepository;
 
             _detailedLogs = new DetailedLogs(this);
+            _detailedLogs.tlvDictionary = _tlvDictionary;
 
-            _detailedLogs.tagsManager = _tlvManager;
-
-            List<String> pseNames = new List<string>();
-            pseNames.Add("1PAY.SYS.DDF01");
-            pseNames.Add("2PAY.SYS.DDF01");
-            guiPSEName.DataSource = pseNames;
+            guiPSEName.DataSource = _pluginConfiguration.terminalConfiguration.terminalCapabilities.supportedPSEs;
+            guiPSEName.DisplayMember = "name";
 
             guiAC1Type.DataSource = Enum.GetValues(typeof(CryptogramType));
             guiAC1Type.SelectedItem = CryptogramType.TC;
@@ -129,7 +121,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void guiDoSelectAID_Click(object sender, EventArgs e)
         {
-            // Get the EMV Application instance
+            // Get the EMV ApplicationID instance
             _emv = (EMV.Card.EMVApplication)guiApplicationAID.SelectedItem;
 
             // Check if it is a valid instance
@@ -140,7 +132,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
 
             // Set the Certification Authorities
-            _emv.certificationAuthorityRepository = certificationAuthorityRepository;
+            _emv.certificationAuthorityRepository = _certificationAuthorityRepository;
 
             // Select the PSE
             _emv.select();
@@ -154,7 +146,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             // TODO: remove that patch ! (
             _emv.tlvTerminalData.Add(new TLVData(0x9F66, 0x02, new Byte[2] { 0x80, 0x00 }));
 
-            // Do Get Processing Options on EMV Application
+            // Do Get Processing Options on EMV ApplicationID
             _emv.getProcessingOptions();
 
             // Enable next step
@@ -177,7 +169,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void guiDoGetData_Click(object sender, EventArgs e)
         {
-            // Get Data of the EMV Application
+            // Get Data of the EMV ApplicationID
             _emv.getData();
         }
 
@@ -186,22 +178,22 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             try
             {
                 // Try to select AID known by the terminal and undiscovered in PSE
-                foreach (String aid in _parameters.terminalParameters.knownAIDs)
+                foreach (TerminalCapabilities.SupportedApplication app in _pluginConfiguration.terminalConfiguration.terminalCapabilities.supportedApplications)
                 {
                     Boolean notFound = true;
-                    foreach (EMV.Card.EMVApplication emvFound in _emvApplications)
+                    foreach (EMVApplication emvFound in _emvApplications)
                     {
-                        if (emvFound.aid == aid)
+                        if (emvFound.aid == app.aid)
                             notFound = false;
                     }
                     // If AID not discovered, try to select it
                     if (notFound)
                     {
-                        EMV.Card.EMVApplication emv = new EMV.Card.EMVApplication(SharedData.cardChannel, new TLVData());
-                        emv.aid = aid;
+                        EMVApplication emv = new EMVApplication(SharedData.cardChannel, new TLVData());
+                        emv.aid = app.aid;
                         _detailedLogs.observeEMV(emv);
                         observeEMV(emv);
-                        // If success, add the EMV Application instance to the candidate list
+                        // If success, add the EMV ApplicationID instance to the candidate list
                         if (emv.select() == 0x9000)
                         {
                             _emvApplications.Add(emv);
@@ -322,7 +314,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             else
             {
                 // Add default terminal data
-                _emv.tlvTerminalData.AddRange(_parameters.transactionParameters.tlvDatas);
+                _emv.tlvTerminalData.AddRange(_pluginConfiguration.transactionContext.tlvDatas);
 
                 Byte[] unpredictableNumber;
                 try
@@ -408,7 +400,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.tlvFCI != null)
             {
-                fciNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvFCI, _tlvManager));
+                fciNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvFCI, _tlvDictionary));
             }
             else
             {
@@ -421,7 +413,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.tlvProcessingOptions != null)
             {
-                optionsNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvProcessingOptions, _tlvManager));
+                optionsNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvProcessingOptions, _tlvDictionary));
             }
             else
             {
@@ -468,7 +460,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 {
                     recordNumber++;
                     TreeNode recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
-                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvManager));
+                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }
@@ -482,13 +474,13 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             emvAppNode.Nodes.Add(dataNode);
 
             if (emv.tlvATC != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvATC, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvATC, _tlvDictionary));
             if (emv.tlvLastOnlineATCRegister != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLastOnlineATCRegister, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLastOnlineATCRegister, _tlvDictionary));
             if (emv.tlvLogFormat != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLogFormat, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLogFormat, _tlvDictionary));
             if (emv.tlvPINTryCounter != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvPINTryCounter, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvPINTryCounter, _tlvDictionary));
 
             guiEMVApplicationsContent.Nodes.Clear();
             guiEMVApplicationsContent.Nodes.Add(emvAppNode);
@@ -504,7 +496,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.tlvFCI != null)
             {
-                fciNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvFCI, _tlvManager));
+                fciNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvFCI, _tlvDictionary));
             }
             else
             {
@@ -517,7 +509,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.tlvProcessingOptions != null)
             {
-                optionsNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvProcessingOptions, _tlvManager));
+                optionsNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvProcessingOptions, _tlvDictionary));
             }
             else
             {
@@ -564,7 +556,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 {
                     recordNumber++;
                     TreeNode recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
-                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvManager));
+                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }
@@ -578,21 +570,21 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             emvAppNode.Nodes.Add(dataNode);
 
             if (emv.tlvATC != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvATC, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvATC, _tlvDictionary));
             if (emv.tlvLastOnlineATCRegister != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLastOnlineATCRegister, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLastOnlineATCRegister, _tlvDictionary));
             if (emv.tlvLogFormat != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLogFormat, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvLogFormat, _tlvDictionary));
             if (emv.tlvPINTryCounter != null)
-                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvPINTryCounter, _tlvManager));
+                dataNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvPINTryCounter, _tlvDictionary));
 
             TreeNode internalAuthenticateNode = new TreeNode("Internal Authenticate");
             emvAppNode.Nodes.Add(internalAuthenticateNode);
 
             if (emv.tlvSignedDynamicApplicationResponse != null)
             {
-                internalAuthenticateNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvInternalAuthenticateUnpredictableNumber, _tlvManager));
-                internalAuthenticateNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvSignedDynamicApplicationResponse, _tlvManager));
+                internalAuthenticateNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvInternalAuthenticateUnpredictableNumber, _tlvDictionary));
+                internalAuthenticateNode.Nodes.Add(convertTLVDataToTreeNode(emv.tlvSignedDynamicApplicationResponse, _tlvDictionary));
             }
             else
             {
@@ -704,9 +696,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             foreach (DataObjectList.DataObjectDefinition dol in emv.logFormat.getDataObjectDefinitions())
             {
                 String tagStr = String.Format("{0:T}", dol);
-                if (_tlvManager.get(tagStr) != null)
+                if (_tlvDictionary.get(tagStr) != null)
                 {
-                    guiLogRecords.Columns.Add(_tlvManager.get(tagStr).name);
+                    guiLogRecords.Columns.Add(_tlvDictionary.get(tagStr).name);
                 }
                 else
                 {
@@ -724,9 +716,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 {
                     // if tag is known by tlvManager, use the corresponding AbstractTLVObject else use BinaryTLVObject.
                     String tagStr = String.Format("{0:T}", tlvData);
-                    if (_tlvManager.get(tagStr) != null)
+                    if (_tlvDictionary.get(tagStr) != null)
                     {
-                        AbstractTLVObject tlvObject = _tlvManager.createInstance(tagStr);
+                        AbstractTLVObject tlvObject = _tlvDictionary.createInstance(tagStr);
                         tlvObject.tlv = tlvData;
                         item.SubItems.Add(String.Format("{0}", tlvObject));
                     }
@@ -793,9 +785,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                     // tag
                     item.SubItems.Add(String.Format("{0:T}", tlv));
                     // name
-                    if (_tlvManager != null && _tlvManager.get(String.Format("{0:T}", tlv)) != null)
+                    if (_tlvDictionary != null && _tlvDictionary.get(String.Format("{0:T}", tlv)) != null)
                     {
-                        AbstractTLVObject tlvObject = _tlvManager.createInstance(tlv);
+                        AbstractTLVObject tlvObject = _tlvDictionary.createInstance(tlv);
                         tlvObject.tlv = tlv;
                         item.SubItems.Add(String.Format("{0:N}", tlvObject));
                     }
@@ -861,7 +853,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (pse.tlvFCI != null)
             {
-                fciNode.Nodes.Add(convertTLVDataToTreeNode(pse.tlvFCI, _tlvManager));
+                fciNode.Nodes.Add(convertTLVDataToTreeNode(pse.tlvFCI, _tlvDictionary));
             }
             else
             {
@@ -899,7 +891,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 {
                     recordNumber++;
                     TreeNode recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
-                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvManager));
+                    recordNode.Nodes.Add(convertTLVDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }

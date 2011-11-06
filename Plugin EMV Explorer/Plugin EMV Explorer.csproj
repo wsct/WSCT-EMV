@@ -64,7 +64,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TransactionParameters.cs" />
     <Compile Include="DetailedLogs.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
@@ -72,10 +71,9 @@
     <Compile Include="GUI.Designer.cs">
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="PluginParameters.cs" />
+    <Compile Include="PluginConfiguration.cs" />
     <Compile Include="PluginEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TerminalParameters.cs" />
     <EmbeddedResource Include="GUI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GUI.cs</DependentUpon>
