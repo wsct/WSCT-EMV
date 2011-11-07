@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 using WSCT.Helpers.BasicEncodingRules;
-
+using WSCT.ISO7816;
 using WSCT.Core;
+using WSCT.EMV.Commands;
 
 namespace WSCT.EMV.Card
 {
@@ -146,13 +147,14 @@ namespace WSCT.EMV.Card
             do
             {
                 recordNumber++;
-                ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair();
-                crp.cAPDU = new ISO7816.Commands.ReadRecordCommand(recordNumber, sfi.sfi, ISO7816.Commands.ReadRecordCommand.SearchMode.READ_FIRST_OCCURENCE, 0);
+                CommandResponsePair crp = new CommandResponsePair();
+                crp.cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, 0);
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
 
                 TLVData PSEReadResult = new TLVData();
-                crp.cAPDU = new ISO7816.Commands.ReadRecordCommand(recordNumber, sfi.sfi, ISO7816.Commands.ReadRecordCommand.SearchMode.READ_FIRST_OCCURENCE, crp.rAPDU.sw2);
+                crp.cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, crp.rAPDU.sw2);
+                crp.transmit(_cardChannel);
                 if (crp.rAPDU.statusWord == 0x9000)
                 {
                     _tlvRecords.Add(new TLVData(crp.rAPDU.udr));

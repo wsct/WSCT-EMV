@@ -799,11 +799,11 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                     item.SubItems.Add(String.Format("{0:V}", tlv));
                     // insert item in SDA, DDA and/or CDA list
                     if (emv.aip.sda)
-                        guiSDASignedData.Items.Add(item);
+                        guiSDASignedData.Items.Add((ListViewItem)item.Clone());
                     if (emv.aip.dda)
-                        guiDDASignedData.Items.Add(item);
+                        guiDDASignedData.Items.Add((ListViewItem)item.Clone());
                     if (emv.aip.cda)
-                        guiCDASignedData.Items.Add(item);
+                        guiCDASignedData.Items.Add((ListViewItem)item.Clone());
                 }
                 //if (emv.tlvDataRecords.hasTag(0x9F4A))
                 //{

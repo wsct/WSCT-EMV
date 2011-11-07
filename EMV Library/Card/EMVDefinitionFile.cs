@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-using WSCT.Helpers;
-
-using WSCT.Helpers.BasicEncodingRules;
 using WSCT.Core;
-
+using WSCT.Helpers;
+using WSCT.Helpers.BasicEncodingRules;
+using WSCT.ISO7816;
 
 namespace WSCT.EMV.Card
 {
@@ -149,8 +146,7 @@ namespace WSCT.EMV.Card
             if (beforeSelectEvent != null) beforeSelectEvent(this);
 
             // Execute the SELECT
-            ISO7816.CommandAPDU cAPDU = new ISO7816.Commands.SelectCommand(ISO7816.Commands.SelectCommand.SelectionMode.SELECT_DF_NAME, ISO7816.Commands.SelectCommand.FileOccurrence.FIRST_OR_ONLY, ISO7816.Commands.SelectCommand.FileControlInformation.RETURN_FCI, _adfName, 0);
-            ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
+            CommandResponsePair crp = new CommandResponsePair(new Commands.EMVSelectByNameCommand(_adfName, 0));
             crp.transmit(_cardChannel);
             _lastStatusWord = crp.rAPDU.statusWord;
 

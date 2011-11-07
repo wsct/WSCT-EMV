@@ -95,6 +95,8 @@
     <Compile Include="Card\PINBlock.cs" />
     <Compile Include="Card\PlaintextPINBlock.cs" />
     <Compile Include="Card\VisaContactlessApplication.cs" />
+    <Compile Include="Commands\EMVReadRecordCommand.cs" />
+    <Compile Include="Commands\EMVSelectByNameCommand.cs" />
     <Compile Include="CryptogramType.cs" />
     <Compile Include="Objects\ApplicationCryptogram.cs" />
     <Compile Include="Objects\ApplicationFileLocator.cs" />

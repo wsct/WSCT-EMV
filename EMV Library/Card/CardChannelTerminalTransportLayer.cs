@@ -6,6 +6,8 @@ using WSCT;
 using WSCT.Wrapper;
 using WSCT.Core;
 using WSCT.Core.APDU;
+using WSCT.ISO7816;
+using WSCT.ISO7816.Commands;
 using WSCT.Stack;
 
 namespace WSCT.EMV.Card
@@ -117,7 +119,7 @@ namespace WSCT.EMV.Card
         }
 
         /// <inheritdoc />
-        public ErrorCode transmit(ICardCommand command, ref ICardResponse response)
+        public ErrorCode transmit(ICardCommand command, ICardResponse response)
         {
             if (beforeTransmitEvent != null) beforeTransmitEvent(this, command, response);
 
@@ -126,13 +128,12 @@ namespace WSCT.EMV.Card
             // Adapt APDU for T=0 smartcards
             if (protocol == Protocol.SCARD_PROTOCOL_T0)
             {
-                ISO7816.ResponseAPDU rAPDU = (ISO7816.ResponseAPDU)response;
-                ret = transmitT0((ISO7816.CommandAPDU)command, ref rAPDU);
+                ret = transmitT0((CommandAPDU)command, (ResponseAPDU)response);
             }
             // T=1 smartcards
             else
             {
-                ret = _cardChannel.transmit(command, ref response);
+                ret = _cardChannel.transmit(command, response);
             }
 
             if (afterTransmitEvent != null) afterTransmitEvent(this, command, response, ret);
@@ -185,7 +186,7 @@ namespace WSCT.EMV.Card
         #region >> Methods
 
         /// <inheritdoc />
-        public ErrorCode transmitT0(ISO7816.CommandAPDU cAPDU, ref ISO7816.ResponseAPDU rAPDU)
+        public ErrorCode transmitT0(CommandAPDU cAPDU, ResponseAPDU rAPDU)
         {
             ErrorCode ret;
 
@@ -193,7 +194,7 @@ namespace WSCT.EMV.Card
             // If C-APDU is CC1: add P3=0
             if (cAPDU.isCC1)
             {
-                ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
+                CommandResponsePair crp = new CommandResponsePair(cAPDU);
                 crp.cAPDU.le = 0;
                 crp.rAPDU = rAPDU;
                 ret = crp.transmit(_cardChannel);
@@ -201,17 +202,18 @@ namespace WSCT.EMV.Card
             // If C-APDU is CC2: test SW1=61/6C
             else if (cAPDU.isCC2)
             {
-                ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
+                CommandResponsePair crp = new CommandResponsePair(cAPDU);
+                crp.rAPDU = rAPDU;
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
-                    ISO7816.CommandResponsePair crpGetResponse = new ISO7816.CommandResponsePair(new ISO7816.Commands.GetResponseCommand(crp.rAPDU.sw2));
+                    CommandResponsePair crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
                     crpGetResponse.rAPDU = rAPDU;
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
                 else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
                 {
-                    ISO7816.CommandResponsePair crpWithLe = new ISO7816.CommandResponsePair();
+                    CommandResponsePair crpWithLe = new CommandResponsePair();
                     crpWithLe.cAPDU = crp.cAPDU;
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
                     crpWithLe.rAPDU = rAPDU;
@@ -220,13 +222,12 @@ namespace WSCT.EMV.Card
                 else
                 {
                     // last rAPDU must be returned as is
-                    rAPDU = crp.rAPDU;
                 }
             }
             // If C-APDU is CC3: nothing to do
-            else if (((ISO7816.CommandAPDU)cAPDU).isCC3)
+            else if (cAPDU.isCC3)
             {
-                ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
+                CommandResponsePair crp = new CommandResponsePair(cAPDU);
                 crp.rAPDU = rAPDU;
                 ret = crp.transmit(_cardChannel);
             }
@@ -235,17 +236,18 @@ namespace WSCT.EMV.Card
             {
                 UInt32 le = cAPDU.le;
                 cAPDU.hasLe = false;
-                ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
+                CommandResponsePair crp = new CommandResponsePair(cAPDU);
+                crp.rAPDU = rAPDU;
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
-                    ISO7816.CommandResponsePair crpGetResponse = new ISO7816.CommandResponsePair(new ISO7816.Commands.GetResponseCommand(crp.rAPDU.sw2));
+                    CommandResponsePair crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
                     crpGetResponse.rAPDU = rAPDU;
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
                 else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
                 {
-                    ISO7816.CommandResponsePair crpWithLe = new ISO7816.CommandResponsePair();
+                    CommandResponsePair crpWithLe = new CommandResponsePair();
                     crpWithLe.cAPDU = crp.cAPDU;
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
                     crpWithLe.rAPDU = rAPDU;
@@ -254,7 +256,6 @@ namespace WSCT.EMV.Card
                 else
                 {
                     // last rAPDU must be returned as is
-                    rAPDU = crp.rAPDU;
                 }
                 // Restore initial cAPDU for logs
                 cAPDU.hasLe = true;

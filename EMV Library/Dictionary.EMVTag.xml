@@ -298,7 +298,7 @@
 		<className>WSCT.EMV.Objects.DataObjectList</className>
 		<dll>WSCT.EMV.dll</dll>
 	</tlvDesc >
-	<tlvDesc  hexaValue="9F4A" name="SDTL" longName="Static Data Authentication tlvDesc  List" source="ICC">
+	<tlvDesc  hexaValue="9F4A" name="SDTL" longName="Static Data Authentication Tag List" source="ICC">
 		<value format="b"/>
 		<className>WSCT.Helpers.BasicEncodingRules.BinaryTLVObject</className>
 	</tlvDesc >
