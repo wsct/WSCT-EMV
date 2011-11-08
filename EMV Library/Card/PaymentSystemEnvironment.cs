@@ -151,15 +151,10 @@ namespace WSCT.EMV.Card
                 crp.cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, 0);
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
-
-                TLVData PSEReadResult = new TLVData();
-                crp.cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, crp.rAPDU.sw2);
-                crp.transmit(_cardChannel);
                 if (crp.rAPDU.statusWord == 0x9000)
                 {
                     _tlvRecords.Add(new TLVData(crp.rAPDU.udr));
                 }
-                _lastStatusWord = crp.rAPDU.statusWord;
             } while (_lastStatusWord == 0x9000);
 
             if (afterReadEvent != null) afterReadEvent(this);

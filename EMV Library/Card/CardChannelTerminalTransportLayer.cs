@@ -203,7 +203,7 @@ namespace WSCT.EMV.Card
             else if (cAPDU.isCC2)
             {
                 CommandResponsePair crp = new CommandResponsePair(cAPDU);
-                crp.rAPDU = rAPDU;
+                // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
@@ -222,6 +222,9 @@ namespace WSCT.EMV.Card
                 else
                 {
                     // last rAPDU must be returned as is
+                    rAPDU.udr = crp.rAPDU.udr;
+                    rAPDU.sw1 = crp.rAPDU.sw1;
+                    rAPDU.sw2 = crp.rAPDU.sw2;
                 }
             }
             // If C-APDU is CC3: nothing to do
@@ -237,7 +240,7 @@ namespace WSCT.EMV.Card
                 UInt32 le = cAPDU.le;
                 cAPDU.hasLe = false;
                 CommandResponsePair crp = new CommandResponsePair(cAPDU);
-                crp.rAPDU = rAPDU;
+                // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
@@ -256,6 +259,9 @@ namespace WSCT.EMV.Card
                 else
                 {
                     // last rAPDU must be returned as is
+                    rAPDU.udr = crp.rAPDU.udr;
+                    rAPDU.sw1 = crp.rAPDU.sw1;
+                    rAPDU.sw2 = crp.rAPDU.sw2;
                 }
                 // Restore initial cAPDU for logs
                 cAPDU.hasLe = true;

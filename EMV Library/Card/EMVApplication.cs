@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using WSCT.Core;
+using WSCT.EMV.Commands;
 using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
@@ -963,7 +964,7 @@ namespace WSCT.EMV.Card
         {
             for (byte recordNumber = file.firstRecord; recordNumber <= file.lastRecord; recordNumber++)
             {
-                ISO7816.CommandAPDU cAPDU = new ISO7816.Commands.ReadRecordCommand(recordNumber, file.sfi, ISO7816.Commands.ReadRecordCommand.SearchMode.READ_RECORD_P1, 0);
+                ISO7816.CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, file.sfi, 0);
                 ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
                 crp.transmit(_cardChannel);
 
@@ -1077,16 +1078,11 @@ namespace WSCT.EMV.Card
 
             _logRecords = new List<List<TLVData>>();
 
-            // Get record size
-            Byte recordSize = 0;
-            foreach (DataObjectList.DataObjectDefinition dod in logFormat.getDataObjectDefinitions())
-                recordSize += (Byte)dod.length;
-
             Byte recordNumber = 0;
             do
             {
                 recordNumber++;
-                ISO7816.CommandAPDU cAPDU = new ISO7816.Commands.ReadRecordCommand(recordNumber, logEntry.sfi, ISO7816.Commands.ReadRecordCommand.SearchMode.READ_RECORD_P1, recordSize);
+                ISO7816.CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, logEntry.sfi, 0);
                 ISO7816.CommandResponsePair crp = new ISO7816.CommandResponsePair(cAPDU);
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
