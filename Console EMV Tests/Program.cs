@@ -285,7 +285,7 @@ namespace WSCT.ConsoleEMVTests
 
             #region >> TagsManager
 
-            tagsManager = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
+            tagsManager = SerializedObject<TLVDictionary>.loadFromXml(@"Dictionary.EMVTag.xml");
 
             #endregion
 

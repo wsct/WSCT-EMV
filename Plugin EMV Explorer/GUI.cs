@@ -35,9 +35,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             InitializeComponent();
 
-            _pluginConfiguration = PluginConfiguration.loadFromXml("Config.EMVExplorer.xml");
+            _pluginConfiguration = SerializedObject<PluginConfiguration>.loadFromXml(@"Config.EMVExplorer.xml");
 
-            _tlvDictionary = TLVDictionary.loadFromXml("Dictionary.EMVTag.xml");
+            _tlvDictionary = SerializedObject<TLVDictionary>.loadFromXml(@"Dictionary.EMVTag.xml");
 
             _certificationAuthorityRepository = _pluginConfiguration.terminalConfiguration.certificationAuthorityRepository;
 

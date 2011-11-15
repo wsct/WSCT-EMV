@@ -35,26 +35,5 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         }
 
         #endregion
-
-        #region >> Static methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xmlFileName"></param>
-        /// <returns></returns>
-        public static PluginConfiguration loadFromXml(String xmlFileName)
-        {
-            XmlSerializer deserializer = new XmlSerializer(typeof(PluginConfiguration));
-            PluginConfiguration pluginConfiguration;
-
-            using (TextReader textReader = new StreamReader(xmlFileName))
-            {
-                pluginConfiguration = (PluginConfiguration)deserializer.Deserialize(textReader);
-            }
-            return pluginConfiguration;
-        }
-
-        #endregion
     }
 }
