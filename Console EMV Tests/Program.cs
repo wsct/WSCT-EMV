@@ -211,6 +211,9 @@ namespace WSCT.ConsoleEMVTests
         private void run(string[] args)
         {
             Console.WriteLine("=========== S o m e   T L V D a t a   e x a m p l e s");
+
+            #region >> TLV Example
+
             Console.WriteLine("88 01 02".toTLVData());
             TLVData tlv1 = "88 01 02".toTLVData();
             TLVData tlv2 = "5F 2D 03 01 02 03".toTLVData();
@@ -220,6 +223,8 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine(ltlv.toTLVData(0x20));
             Console.WriteLine(ltlv.toTLVData(0x20).getTag(0x88));
             Console.WriteLine(ltlv.toTLVData(0x20).getTag(0x5F2D));
+
+            #endregion
 
             Console.WriteLine();
             Console.WriteLine("=========== I n i t i a l i z i n g   P C / S C");
@@ -262,9 +267,34 @@ namespace WSCT.ConsoleEMVTests
 
             #endregion
 
+            Console.WriteLine();
+            Console.WriteLine("=========== C a r d   i n s e r t i o n   d e t e c t i o n");
+
+            #region >> StatusChangeMonitor
+
+            StatusChangeMonitor monitor = new StatusChangeMonitor(context);
+
+            logger.observeMonitor(monitor);
+
+            ReaderState readerState = monitor.waitForCardPresence(0);
+            if (readerState == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(">> Insert a card in one of the {0} readers (time out in 15s)", context.readersCount);
+                readerState = monitor.waitForCardPresence(15000);
+            }
+
+            if (readerState == null)
+            {
+                Console.WriteLine(">> Time Out! No card found");
+                return;
+            }
+
+            #endregion
+
             #region >> CardChannel
 
-            ICardChannel rawCardChannel = new Core.CardChannel(context, context.readers[context.readersCount - 1]);
+            ICardChannel rawCardChannel = new Core.CardChannel(context, readerState.readerName);
             logger.observeChannel((Core.CardChannelObservable)rawCardChannel);
 
             ISO7816.CardChannelISO7816 cardChannel = new ISO7816.CardChannelISO7816(rawCardChannel);
@@ -275,11 +305,16 @@ namespace WSCT.ConsoleEMVTests
                 return;
             }
 
+            Byte[] buffer = new Byte[0];
+            cardChannel.getAttrib(Attrib.SCARD_ATTR_ATR_STRING, ref buffer);
+
             if (cardChannel.reconnect(ShareMode.SCARD_SHARE_SHARED, Protocol.SCARD_PROTOCOL_ANY, Disposition.SCARD_RESET_CARD) != ErrorCode.SCARD_S_SUCCESS)
             {
                 Console.WriteLine("Erreur: reconnect() failed");
                 return;
             }
+
+            cardChannel.getAttrib(Attrib.SCARD_ATTR_ATR_STRING, ref buffer);
 
             #endregion
 
@@ -345,6 +380,23 @@ namespace WSCT.ConsoleEMVTests
             cardChannel.disconnect(Disposition.SCARD_UNPOWER_CARD);
 
             xmlDoc.Save(new System.IO.FileStream("EMV.TLV.xml", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite));
+
+            Console.WriteLine();
+            Console.WriteLine("=========== C a r d   r e m o v a l   d e t e c t i o n");
+
+            #region >> StatusChangeMonitor
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(">> Waiting for a change since last call (time out in 10s)");
+            // "unpower" change should be fired for the previously used reader
+            monitor.waitForChange(10000);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(">> Remove the card in one of the readers {0} (time out in 10s)", readerState.readerName);
+            // Wait for another change
+            monitor.waitForChange(10000);
+
+            #endregion
 
             Console.WriteLine();
             context.release();
