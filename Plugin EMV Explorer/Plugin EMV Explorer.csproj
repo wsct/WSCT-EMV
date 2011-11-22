@@ -16,7 +16,6 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +68,8 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -84,11 +85,14 @@
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>chip2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -147,10 +151,6 @@
       <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
       <Name>WSCT.Stack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
-      <Project>{19B66E6E-7E5E-481A-8718-3F9C44212AD6}</Project>
-      <Name>WSCT.Wrapper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WSCT GUI\WSCT.Plugins\WSCT.GUI.Plugins.csproj">
       <Project>{44D12C6F-7D70-40EC-864A-01202928D159}</Project>
       <Name>WSCT.GUI.Plugins</Name>
@@ -159,8 +159,13 @@
       <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
       <Name>EMV Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.linux.csproj">
+      <Project>{24FA07AF-D2A2-4CB1-9D3D-AC9A9F2451D0}</Project>
+      <Name>WSCT.Wrapper.linux</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chip2.ico" />
     <Content Include="Plugin.EMVExplorer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
