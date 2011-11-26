@@ -21,9 +21,14 @@ namespace WSCT.ConsoleEMVTests
 
         static void Main(string[] args)
         {
-            Console.WindowWidth = 132;
-            Console.WindowHeight = 50;
-            Console.SetBufferSize(132, 1000);
+            try
+            {
+                Console.WindowWidth = 132;
+                Console.WindowHeight = 50;
+                Console.SetBufferSize(132, 1000);
+            }
+            catch (Exception)
+            { }
             Console.ForegroundColor = ConsoleColor.Gray;
             new Program().run(args);
         }
@@ -276,7 +281,7 @@ namespace WSCT.ConsoleEMVTests
 
             logger.observeMonitor(monitor);
 
-            ReaderState readerState = monitor.waitForCardPresence(0);
+            AbstractReaderState readerState = monitor.waitForCardPresence(0);
             if (readerState == null)
             {
                 Console.ForegroundColor = ConsoleColor.Green;

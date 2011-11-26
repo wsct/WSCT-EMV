@@ -610,12 +610,12 @@
             this.label24.TabIndex = 2;
             this.label24.Text = "Un.Number:";
             // 
-            // guiGenerateAC1UnpredictableNumber
+            // guiAC1UnpredictableNumber
             // 
             this.guiAC1UnpredictableNumber.Enabled = false;
             this.guiAC1UnpredictableNumber.Location = new System.Drawing.Point(76, 19);
             this.guiAC1UnpredictableNumber.MaxLength = 8;
-            this.guiAC1UnpredictableNumber.Name = "guiGenerateAC1UnpredictableNumber";
+            this.guiAC1UnpredictableNumber.Name = "guiAC1UnpredictableNumber";
             this.guiAC1UnpredictableNumber.Size = new System.Drawing.Size(77, 20);
             this.guiAC1UnpredictableNumber.TabIndex = 3;
             this.guiAC1UnpredictableNumber.Text = "01020304";

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,6 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,7 +87,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>chip2.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\%24this.Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -159,13 +158,13 @@
       <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
       <Name>EMV Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.linux.csproj">
-      <Project>{24FA07AF-D2A2-4CB1-9D3D-AC9A9F2451D0}</Project>
-      <Name>WSCT.Wrapper.linux</Name>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
+      <Project>{19B66E6E-7E5E-481A-8718-3F9C44212AD6}</Project>
+      <Name>WSCT.Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chip2.ico" />
+    <Content Include="Resources\%24this.Icon.ico" />
     <Content Include="Plugin.EMVExplorer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

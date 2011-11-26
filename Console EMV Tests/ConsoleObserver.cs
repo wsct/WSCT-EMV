@@ -187,13 +187,13 @@ namespace WSCT.ConsoleEMVTests
             Console.ForegroundColor = standardColor;
         }
 
-        private void notifyGetStatusChange(ICardContext cardContext, UInt32 timeout, ReaderState[] readerStates, ErrorCode errorCode)
+        private void notifyGetStatusChange(ICardContext cardContext, UInt32 timeout, AbstractReaderState[] readerStates, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
             Console.WriteLine(String.Format(header + "getStatusChange(): {1}", LogLevel.Info, errorCode));
             Console.ForegroundColor = standardColor;
             if (errorCode == ErrorCode.SCARD_S_SUCCESS)
-                foreach (ReaderState readerState in readerStates)
+                foreach (AbstractReaderState readerState in readerStates)
                 {
                     Console.WriteLine(String.Format(header + ">> {2}", LogLevel.Info, readerState.eventState, readerState));
                 }
@@ -230,13 +230,13 @@ namespace WSCT.ConsoleEMVTests
 
         #region >> StatusChangeMonitor delegates
 
-        private void onCardInsertionEvent(ReaderState readerState)
+        private void onCardInsertionEvent(AbstractReaderState readerState)
         {
             Console.ForegroundColor = standardColor;
             Console.WriteLine(String.Format(header + ">> Card insertion detected on reader {1}", LogLevel.Info, readerState.readerName));
         }
 
-        private void onCardRemovalEvent(ReaderState readerState)
+        private void onCardRemovalEvent(AbstractReaderState readerState)
         {
             Console.ForegroundColor = standardColor;
             Console.WriteLine(String.Format(header + ">> Card removal detected on reader {1}", LogLevel.Info, readerState.readerName));
