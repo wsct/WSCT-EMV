@@ -1073,8 +1073,11 @@ namespace WSCT.EMV.Card
         {
             if (beforeReadLogFileEvent != null) beforeReadLogFileEvent(this);
 
-            if (logEntry == null || logFormat == null)
-                throw new Exception(String.Format("EMVApplication.readLogFile(): logEntry ({0}) or logFormat ({1}) not found.", _logEntry, _logFormat));
+            if (logEntry == null)
+                throw new Exceptions.LogEntryNotFoundException(String.Format("EMVApplication.readLogFile(): logEntry ({0}) undefined.", _logEntry));
+
+            if (logFormat == null)
+                throw new Exceptions.LogFormatNotFoundException(String.Format("EMVApplication.readLogFile(): logFormat ({1}) undefined.", _logFormat));
 
             _logRecords = new List<List<TLVData>>();
 

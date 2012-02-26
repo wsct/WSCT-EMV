@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -96,6 +96,8 @@
     <Compile Include="Commands\EMVReadRecordCommand.cs" />
     <Compile Include="Commands\EMVSelectByNameCommand.cs" />
     <Compile Include="CryptogramType.cs" />
+    <Compile Include="Exceptions\LogEntryNotFoundException.cs" />
+    <Compile Include="Exceptions\LogFormatNotFoundException.cs" />
     <Compile Include="Objects\ApplicationCryptogram.cs" />
     <Compile Include="Objects\ApplicationFileLocator.cs" />
     <Compile Include="Objects\ApplicationIdentifier.cs" />
