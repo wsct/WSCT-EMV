@@ -119,17 +119,6 @@ namespace WSCT.ConsoleEMVTests
                 Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
         }
 
-        public void notifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, Byte[] recvBuffer, UInt32 recvSize, ErrorCode errorCode)
-        {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
-            {
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
-                Console.WriteLine(String.Format(header + ">> RAPDU: [{1}]", LogLevel.Info, recvBuffer.toHexa((int)recvSize)));
-            }
-            else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
-        }
-
         public void notifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.SCARD_S_SUCCESS)
