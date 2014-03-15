@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using WSCT.ISO7816;
 using WSCT.ISO7816.Commands;
 
 namespace WSCT.EMV.Commands

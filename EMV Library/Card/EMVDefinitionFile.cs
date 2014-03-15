@@ -1,6 +1,7 @@
 using System;
 
 using WSCT.Core;
+using WSCT.EMV.Commands;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 using WSCT.ISO7816;
@@ -28,19 +29,16 @@ namespace WSCT.EMV.Card
         #region >> Fields
 
         /// <summary>
-        /// CardChannel used to access the smartcard
+        /// CardChannel used to access the smartcard.
         /// </summary>
-        internal ISO7816.CardChannelISO7816 _cardChannel;
+        internal CardChannelISO7816 _cardChannel;
+
         /// <summary>
-        /// FCI of the DF, in TLVData format
-        /// </summary>
-        internal TLVData _tlvFCI;
-        /// <summary>
-        /// Status word of the last "usefull" APDU
+        /// Status word of the last "usefull" APDU.
         /// </summary>
         internal UInt16 _lastStatusWord;
         /// <summary>
-        /// Name or AID of the DF
+        /// Name or AID of the DF.
         /// </summary>
         internal Byte[] _adfName;
 
@@ -49,88 +47,85 @@ namespace WSCT.EMV.Card
         #region >> Properties
 
         /// <summary>
-        /// Accessor to the last usefull status word
+        /// Accessor to the last usefull status word.
         /// </summary>
-        public UInt32 lastStatusWord
+        public UInt32 LastStatusWord
         {
             get { return _lastStatusWord; }
         }
 
         /// <summary>
-        /// Accessor to the name of the application
+        /// Accessor to the name of the application.
         /// </summary>
         /// <value>
-        /// String composed of printable characters, for example <c>"1PAY.SYS.DDF01"</c>
+        /// String composed of printable characters, for example <c>"1PAY.SYS.DDF01"</c>.
         /// </value>
         /// <remarks>
         /// <c>name</c> and <c>aid</c> properties are two ways to access the same internal field:
-        /// don't use both without care
+        /// don't use both without care.
         /// </remarks>
-        public String name
+        public String Name
         {
             get { return _adfName.toString(); }
             set { _adfName = value.fromString(); }
         }
 
         /// <summary>
-        /// Accessor to the AID of the application
+        /// Accessor to the AID of the application.
         /// </summary>
         /// <value>String interpretable as hexa numbers, for example <c>"A0 00 00 00 03 10 10"</c></value>
         /// <remarks><c>name</c> and <c>aid</c> are two ways to set the same internal field</remarks>
-        public String aid
+        public String Aid
         {
             get { return _adfName.toHexa(); }
             set { _adfName = value.fromHexa(); }
         }
 
         /// <summary>
-        /// Accessor to the FCI in <c>TLVData</c> format
+        /// Accessor to the FCI in <see cref="TLVData"/> format.
         /// </summary>
-        public TLVData tlvFCI
-        {
-            get { return _tlvFCI; }
-        }
+        public TLVData TlvFci { get; internal set; }
 
         #endregion
 
         #region >> Delegates
 
         /// <summary>
-        /// Delegate for event sent before execution of <see cref="select"/>
+        /// Delegate for event sent before execution of <see cref="EMVDefinitionFile.Select"/>.
         /// </summary>
         /// <param name="df">Caller instance</param>
-        public delegate void beforeSelectEventHandler(EMVDefinitionFile df);
+        public delegate void BeforeSelectEventHandler(EMVDefinitionFile df);
         /// <summary>
-        /// Delegate for event sent after execution of <see cref="select"/>
+        /// Delegate for event sent after execution of <see cref="EMVDefinitionFile.Select"/>.
         /// </summary>
         /// <param name="df">Caller instance</param>
-        public delegate void afterSelectEventHandler(EMVDefinitionFile df);
+        public delegate void AfterSelectEventHandler(EMVDefinitionFile df);
 
         #endregion
 
         #region >> Events
 
         /// <summary>
-        /// Event sent before execution of <see cref="select"/>
+        /// Event sent before execution of <see cref="Select"/>.
         /// </summary>
-        public event beforeSelectEventHandler beforeSelectEvent;
+        public event BeforeSelectEventHandler BeforeSelectEvent;
         /// <summary>
-        /// Event sent after execution of <see cref="select"/>
+        /// Event sent after execution of <see cref="Select"/>.
         /// </summary>
-        public event afterSelectEventHandler afterSelectEvent;
+        public event AfterSelectEventHandler AfterSelectEvent;
 
         #endregion
 
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Creates a new <see cref="EMVDefinitionFile"/> instance.
         /// </summary>
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
         public EMVDefinitionFile(ICardChannel cardChannel)
         {
-            _cardChannel = new ISO7816.CardChannelISO7816(new CardChannelTerminalTransportLayer(cardChannel));
-            _tlvFCI = null;
+            _cardChannel = new CardChannelISO7816(new CardChannelTerminalTransportLayer(cardChannel));
+            TlvFci = null;
         }
 
         #endregion
@@ -138,25 +133,25 @@ namespace WSCT.EMV.Card
         #region >> Methods
 
         /// <summary>
-        /// Selects the DF by its DF Name or AID
+        /// Selects the DF by its DF Name or AID.
         /// </summary>
         /// <returns>Last status word</returns>
-        public UInt16 select()
+        public UInt16 Select()
         {
-            if (beforeSelectEvent != null) beforeSelectEvent(this);
+            if (BeforeSelectEvent != null) BeforeSelectEvent(this);
 
             // Execute the SELECT
-            CommandResponsePair crp = new CommandResponsePair(new Commands.EMVSelectByNameCommand(_adfName, 0));
+            var crp = new CommandResponsePair(new EMVSelectByNameCommand(_adfName, 0));
             crp.transmit(_cardChannel);
             _lastStatusWord = crp.rAPDU.statusWord;
 
             // Finally, store FCI
             if (crp.rAPDU.statusWord == 0x9000)
             {
-                _tlvFCI = new TLVData(crp.rAPDU.udr);
+                TlvFci = new TLVData(crp.rAPDU.udr);
             }
 
-            if (afterSelectEvent != null) afterSelectEvent(this);
+            if (AfterSelectEvent != null) AfterSelectEvent(this);
 
             return _lastStatusWord;
         }

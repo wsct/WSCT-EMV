@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Paddings;
 using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities.Encoders;
 
 namespace WSCT.EMV.Security
 {
@@ -33,24 +27,30 @@ namespace WSCT.EMV.Security
         //            rsaParameters.Modulus = new Byte[] { };
         //            rsaParameters.Exponent = 3;
 
-        public Byte[] generateSignature(Byte[] data, AsymmetricKeyParameter privateKey)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="privateKey"></param>
+        /// <returns></returns>
+        public Byte[] GenerateSignature(Byte[] data, AsymmetricKeyParameter privateKey)
         {
-            Int32 n = ((RsaKeyParameters)privateKey).Modulus.BitLength / 8;
+            var n = ((RsaKeyParameters)privateKey).Modulus.BitLength / 8;
             // L = Length(MSG)
-            Int32 l = data.Length;
+            var l = data.Length;
             // Compute H = Hash(MSG)
-            Byte[] h = computeHash(data);
+            var h = ComputeHash(data);
             // MSG = MSG1 || MSG2 where MSG1 = N-22 leftmost bytes of MSG & MSG2 = remaining L-N+22 bytes of MSG
-            Byte[] msg1 = new Byte[n - 22];
+            var msg1 = new Byte[n - 22];
             Array.Copy(data, 0, msg1, 0, n - 22);
-            Byte[] msg2 = new Byte[l - n + 22];
+            var msg2 = new Byte[l - n + 22];
             Array.Copy(data, 0, msg2, n - 22, l - n + 22);
             // B = '6A'
             Byte b = 0x6A;
             // E = 'BC'
             Byte e = 0xBC;
             // X = ( B || MSG1 || H || E )
-            Byte[] x = new Byte[n];
+            var x = new Byte[n];
             x[0] = b;
             msg1.CopyTo(x, 1);
             h.CopyTo(x, n - 22);
@@ -67,7 +67,7 @@ namespace WSCT.EMV.Security
         /// <param name="signature">EMV certificate to recover data from</param>
         /// <param name="publicKey">Public Key to use</param>
         /// <returns>Data recovered from the certificate</returns>
-        public Byte[] recoverMessage(Byte[] signature, AsymmetricKeyParameter publicKey)
+        public Byte[] RecoverMessage(Byte[] signature, AsymmetricKeyParameter publicKey)
         {
             Byte[] x;
 
@@ -88,33 +88,40 @@ namespace WSCT.EMV.Security
              */
         }
 
-        public Boolean verifySignature(Byte[] signature, Byte[] message, AsymmetricKeyParameter publicKey)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="signature"></param>
+        /// <param name="message"></param>
+        /// <param name="publicKey"></param>
+        /// <returns></returns>
+        public Boolean VerifySignature(Byte[] signature, Byte[] message, AsymmetricKeyParameter publicKey)
         {
-            Int32 n = ((RsaKeyParameters)publicKey).Modulus.BitLength / 8;
-            
+            var n = ((RsaKeyParameters)publicKey).Modulus.BitLength / 8;
+
             // Check Length(S) = N
             if (signature.Length != n)
                 return false;
-            
+
             // X = Recover(Pk)[S]
-            Byte[] x = recoverMessage(signature, publicKey);
-            
+            var x = RecoverMessage(signature, publicKey);
+
             // X = ( B || MSG1 || H || E )
-            Byte b = x[0];
-            Byte[] msg1 = new Byte[n - 22];
+            var b = x[0];
+            var msg1 = new Byte[n - 22];
             Array.Copy(x, 1, msg1, 0, n - 22);
-            Byte[] h = new Byte[20];
+            var h = new Byte[20];
             Array.Copy(x, 1 + n - 22, h, 0, 20);
-            Byte e = x[x.Length - 1];
-            
+            var e = x[x.Length - 1];
+
             // Check B = '6A'
             if (b != 0x6A)
                 return false;
-            
+
             // Check E = 'BC'
             if (e != 0xBC)
                 return false;
-            
+
             // TODO
             // Check H = Hash(MSG)
             // TODO
@@ -127,7 +134,7 @@ namespace WSCT.EMV.Security
         /// <remarks>The approved algorithm for hashing is SHA-1 as specified in ISO/IEC 10118-3 [5].</remarks>
         /// <param name="data">Data to hash</param>
         /// <returns>Hash value</returns>
-        public Byte[] computeHash(Byte[] data)
+        public Byte[] ComputeHash(Byte[] data)
         {
             Byte[] h;
             IDigest sha1 = new Sha1Digest();
@@ -137,7 +144,13 @@ namespace WSCT.EMV.Security
             return h;
         }
 
-        public Byte[] computePayPassMac(Byte[] data, KeyParameter key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Byte[] ComputePayPassMac(Byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new CbcBlockCipherMac(cipher, 64, new ISO7816d4Padding());
@@ -145,13 +158,19 @@ namespace WSCT.EMV.Security
             mac.Init(key);
             mac.BlockUpdate(data, 0, data.Length);
 
-            byte[] m = new byte[mac.GetMacSize()];
+            var m = new byte[mac.GetMacSize()];
             mac.DoFinal(m, 0);
 
             return m;
         }
 
-        public Byte[] computeMacForPersoCryptogram(Byte[] data, KeyParameter key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Byte[] ComputeMacForPersoCryptogram(Byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new ISO9797Alg3Mac(cipher, 64, new ISO7816d4Padding());
@@ -159,13 +178,19 @@ namespace WSCT.EMV.Security
             mac.Init(key);
             mac.BlockUpdate(data, 0, data.Length);
 
-            byte[] m = new byte[mac.GetMacSize()];
+            var m = new byte[mac.GetMacSize()];
             mac.DoFinal(m, 0);
 
             return m;
         }
 
-        public Byte[] computeMacForIntegrity(Byte[] data, KeyParameter key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Byte[] ComputeMacForIntegrity(Byte[] data, KeyParameter key)
         {
             /*
              *  The computation of an s-byte MAC (4 ≤ s ≤ 8; see MAC algorithms) is according to ISO/IEC 9797-1 [2] using a 64-bit block cipher ALG in CBC mode as specified in ISO/IEC 10116. More precisely, the computation of a MAC S over a message MSG consisting of an arbitrary number of bytes with a MAC Session Key K$$_{{\rm S}}$$ takes place in the following steps:
@@ -191,38 +216,108 @@ namespace WSCT.EMV.Security
             mac.Init(key);
             mac.BlockUpdate(data, 0, data.Length);
 
-            byte[] m = new byte[mac.GetMacSize()];
+            var m = new byte[mac.GetMacSize()];
             mac.DoFinal(m, 0);
 
             return m;
         }
 
-        public Byte[] computeCBC3DES(Byte[] data, KeyParameter key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Byte[] ComputeCbc3Des(Byte[] data, KeyParameter key)
         {
             IBlockCipher engine = new DesEdeEngine();
-            BufferedBlockCipher cipher = new BufferedBlockCipher(new CbcBlockCipher(engine));                        
+            var cipher = new BufferedBlockCipher(new CbcBlockCipher(engine));
 
             cipher.Init(true, key);
 
-            Byte[] cbc = new Byte[cipher.GetOutputSize(data.Length)];
+            var cbc = new Byte[cipher.GetOutputSize(data.Length)];
 
-            int length = cipher.ProcessBytes(data, 0, data.Length, cbc, 0);
+            var length = cipher.ProcessBytes(data, 0, data.Length, cbc, 0);
             cipher.DoFinal(cbc, length);
 
             return cbc;
         }
 
-        //public Byte[] computeECB3DES(Byte[] data, KeyParameter key)
-        //{
-        //    IBlockCipher engine = new DesEdeEngine();
-        //    BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine);
-        //    Byte[] ecb = new Byte[16];
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Byte[] ComputeEcb3Des(Byte[] data, KeyParameter key)
+        {
+            IBlockCipher engine = new DesEdeEngine();
+            BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine);
+            var ecb = new Byte[16];
 
-        //    cipher.Init(true, key);
-        //    int length = cipher.ProcessBytes(data, 0, 16, ecb, 0);
-        //    cipher.DoFinal(ecb, length);
+            cipher.Init(true, key);
+            var length = cipher.ProcessBytes(data, 0, 16, ecb, 0);
+            cipher.DoFinal(ecb, length);
 
-        //    return ecb;
-        //}
+            return ecb;
+        }
+
+        #region >> [Obsolete]
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] generateSignature(Byte[] data, AsymmetricKeyParameter privateKey)
+        {
+            return GenerateSignature(data, privateKey);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] recoverMessage(Byte[] signature, AsymmetricKeyParameter publicKey)
+        {
+            return RecoverMessage(signature, publicKey);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Boolean verifySignature(Byte[] signature, Byte[] message, AsymmetricKeyParameter publicKey)
+        {
+            return VerifySignature(signature, message, publicKey);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computeHash(Byte[] data)
+        {
+            return ComputeHash(data);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computePayPassMac(Byte[] data, KeyParameter key)
+        {
+            return ComputePayPassMac(data, key);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computeMacForPersoCryptogram(Byte[] data, KeyParameter key)
+        {
+            return ComputeMacForPersoCryptogram(data, key);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computeMacForIntegrity(Byte[] data, KeyParameter key)
+        {
+            return ComputeMacForIntegrity(data, key);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computeCBC3DES(Byte[] data, KeyParameter key)
+        {
+            return ComputeCbc3Des(data, key);
+        }
+
+        [Obsolete("Naming updated to PascalCase.")]
+        public Byte[] computeECB3DES(Byte[] data, KeyParameter key)
+        {
+            return ComputeEcb3Des(data, key);
+        }
+
+        #endregion
     }
 }

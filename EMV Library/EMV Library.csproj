@@ -36,13 +36,13 @@
     <DocumentationFile>bin\Release\ZeToken.WinSCard.EMV.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
-    <Reference Include="crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\bouncy castle\crypto\bin\Debug\crypto.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +116,7 @@
     <None Include="Dictionary.EMVTag.xsx">
       <DependentUpon>Dictionary.EMVTag.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WSCT Core\WSCT.Core\WSCT.Core.csproj">

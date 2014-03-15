@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using WSCT.EMV;
-using WSCT.Helpers.BasicEncodingRules;
+﻿using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
 {

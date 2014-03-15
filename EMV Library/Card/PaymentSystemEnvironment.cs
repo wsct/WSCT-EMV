@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-
+using WSCT.EMV.Objects;
 using WSCT.Helpers.BasicEncodingRules;
 using WSCT.ISO7816;
 using WSCT.Core;
@@ -31,18 +30,16 @@ namespace WSCT.EMV.Card
     {
         #region >> Fields
 
-        private List<Helpers.BasicEncodingRules.TLVData> _tlvRecords;
-
-        private Boolean _searchTagAIDInFCI = false;
+        private readonly List<TLVData> _tlvRecords;
 
         #endregion
 
         #region >> Properties
 
         /// <summary>
-        /// Accessor to the records in <c>TLVData</c> format
+        /// Accessor to the records in <c>TLVData</c> format.
         /// </summary>
-        public List<Helpers.BasicEncodingRules.TLVData> tlvRecords
+        public List<TLVData> TlvRecords
         {
             get { return _tlvRecords; }
         }
@@ -54,49 +51,46 @@ namespace WSCT.EMV.Card
         /// Some specific card implementations, like VISA Contactless implementation, does not fully conform to EMV "contact" specifications and need store AID tag in the FCI.
         /// This property allows to support these cards.
         /// </remarks>
-        public Boolean searchTagAIDInFCI
-        {
-            get { return _searchTagAIDInFCI; }
-            set { _searchTagAIDInFCI = value; }
-        }
+        public bool SearchTagAidInFci { get; set; }
 
         #endregion
 
         #region >> Delegates
 
         /// <summary>
-        /// Delegate for event sent before execution of a <see cref="read"/>
+        /// Delegate for event sent before execution of a <see cref="PaymentSystemEnvironment.Read"/>.
         /// </summary>
-        /// <param name="pse">Caller instance</param>
-        public delegate void beforeReadEventHandler(PaymentSystemEnvironment pse);
+        /// <param name="pse">Caller instance.</param>
+        public delegate void BeforeReadEventHandler(PaymentSystemEnvironment pse);
         /// <summary>
-        /// Delegate for event sent after execution of a <see cref="read"/>
+        /// Delegate for event sent after execution of a <see cref="PaymentSystemEnvironment.Read"/>.
         /// </summary>
-        /// <param name="pse">Caller instance</param>
-        public delegate void afterReadEventHandler(PaymentSystemEnvironment pse);
+        /// <param name="pse">Caller instance.</param>
+        public delegate void AfterReadEventHandler(PaymentSystemEnvironment pse);
 
         /// <summary>
-        /// Event sent before execution of a <see cref="read"/>
+        /// Event sent before execution of a <see cref="Read"/>.
         /// </summary>
-        public event beforeReadEventHandler beforeReadEvent;
+        public event BeforeReadEventHandler BeforeReadEvent;
         /// <summary>
-        /// Event sent after execution of a <see cref="read"/>
+        /// Event sent after execution of a <see cref="Read"/>.
         /// </summary>
-        public event afterReadEventHandler afterReadEvent;
+        public event AfterReadEventHandler AfterReadEvent;
 
         #endregion
 
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="PaymentSystemEnvironment"/> instance.
         /// </summary>
-        /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
+        /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use.</param>
         public PaymentSystemEnvironment(ICardChannel cardChannel)
             : base(cardChannel)
         {
+            SearchTagAidInFci = false;
             _tlvRecords = new List<TLVData>();
-            name = "1PAY.SYS.DDF01";
+            Name = "1PAY.SYS.DDF01";
         }
 
         #endregion
@@ -104,51 +98,50 @@ namespace WSCT.EMV.Card
         #region >> Methods
 
         /// <summary>
-        /// Enumerates <see cref="EMVApplication">EMVApplication</see>s discovered by reading the PSE
+        /// Enumerates <see cref="EMVApplication">EMVApplication</see>s discovered by reading the PSE.
         /// </summary>
-        /// <returns>IEnumerable</returns>
-        public System.Collections.IEnumerable getApplications()
+        /// <returns></returns>
+        public IEnumerable<EMVApplication> GetApplications()
         {
             // Enumerate AID indicated in the records
-            foreach (TLVData tlvRecord in tlvRecords)
+            foreach (var tlvRecord in TlvRecords)
             {
                 foreach (TLVData tlvData in tlvRecord.getTags(0x61))
                 {
-                    EMVApplication emv = new EMVApplication(_cardChannel, tlvData);
+                    var emv = new EMVApplication(_cardChannel, tlvData);
                     yield return emv;
                 }
             }
 
             // If AID can also be found in FCI...
-            if (searchTagAIDInFCI && tlvFCI != null)
+            if (SearchTagAidInFci && TlvFci != null)
             {
-                foreach (TLVData tlvData in tlvFCI.getTags(0x61))
+                foreach (TLVData tlvData in TlvFci.getTags(0x61))
                 {
-                    EMVApplication emv = new EMVApplication(_cardChannel, tlvData);
+                    var emv = new EMVApplication(_cardChannel, tlvData);
                     yield return emv;
                 }
             }
         }
 
         /// <summary>
-        /// Reads the file pointed by the SFI found in the FCI of the application
+        /// Reads the file pointed by the SFI found in the FCI of the application.
         /// </summary>
-        /// <returns>Last status word</returns>
-        public UInt16 read()
+        /// <returns>Last status word.</returns>
+        public UInt16 Read()
         {
-            if (beforeReadEvent != null) beforeReadEvent(this);
+            if (BeforeReadEvent != null) BeforeReadEvent(this);
 
-            TLVData tlvSFI = _tlvFCI.getTag(0x88);
-            if (tlvSFI == null)
-                throw new Exception(String.Format("PSE: no tag 88 (sfi) found in FCI [{0}]", tlvFCI));
-            Objects.ShortFileIdentifier sfi = new EMV.Objects.ShortFileIdentifier(tlvSFI);
+            var tlvSfi = TlvFci.getTag(0x88);
+            if (tlvSfi == null)
+                throw new Exception(String.Format("PSE: no tag 88 (sfi) found in FCI [{0}]", TlvFci));
+            var sfi = new ShortFileIdentifier(tlvSfi);
 
             byte recordNumber = 0;
             do
             {
                 recordNumber++;
-                CommandResponsePair crp = new CommandResponsePair();
-                crp.cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, 0);
+                var crp = new CommandResponsePair { cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, 0) };
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
                 if (crp.rAPDU.statusWord == 0x9000)
@@ -157,7 +150,7 @@ namespace WSCT.EMV.Card
                 }
             } while (_lastStatusWord == 0x9000);
 
-            if (afterReadEvent != null) afterReadEvent(this);
+            if (AfterReadEvent != null) AfterReadEvent(this);
 
             return _lastStatusWord;
         }

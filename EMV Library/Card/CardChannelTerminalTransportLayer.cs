@@ -1,35 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using WSCT;
-using WSCT.Wrapper;
+﻿using WSCT.Wrapper;
 using WSCT.Core;
 using WSCT.Core.APDU;
 using WSCT.ISO7816;
 using WSCT.ISO7816.Commands;
-using WSCT.Stack;
 
 namespace WSCT.EMV.Card
 {
     /// <summary>
-    /// Internal wrapper that allows APDU adaptation for T=0 smartcards
+    /// Internal wrapper that allows APDU adaptation for T=0 smartcards.
     /// </summary>
     /// <remarks>
     /// TODO use a ICardChannelStack/Layer instead of this wrapper
     /// </remarks>
-    class CardChannelTerminalTransportLayer : ICardChannel, ICardChannelObservable
+    class CardChannelTerminalTransportLayer : ICardChannelObservable
     {
         #region >> Fields
 
-        ICardChannel _cardChannel;
+        readonly ICardChannel _cardChannel;
 
         #endregion
 
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="CardChannelTerminalTransportLayer"/> instance.
         /// </summary>
         public CardChannelTerminalTransportLayer(ICardChannel cardChannel)
         {
@@ -63,7 +57,7 @@ namespace WSCT.EMV.Card
         {
             if (beforeConnectEvent != null) beforeConnectEvent(this, shareMode, preferedProtocol);
 
-            ErrorCode ret = _cardChannel.connect(shareMode, preferedProtocol);
+            var ret = _cardChannel.connect(shareMode, preferedProtocol);
 
             if (afterConnectEvent != null) afterConnectEvent(this, shareMode, preferedProtocol, ret);
 
@@ -75,7 +69,7 @@ namespace WSCT.EMV.Card
         {
             if (beforeDisconnectEvent != null) beforeDisconnectEvent(this, disposition);
 
-            ErrorCode ret = _cardChannel.disconnect(disposition);
+            var ret = _cardChannel.disconnect(disposition);
 
             if (afterDisconnectEvent != null) afterDisconnectEvent(this, disposition, ret);
 
@@ -87,7 +81,7 @@ namespace WSCT.EMV.Card
         {
             if (beforeGetAttribEvent != null) beforeGetAttribEvent(this, attrib, buffer);
 
-            ErrorCode ret = _cardChannel.getAttrib(attrib, ref buffer);
+            var ret = _cardChannel.getAttrib(attrib, ref buffer);
 
             if (afterGetAttribEvent != null) afterGetAttribEvent(this, attrib, buffer, ret);
 
@@ -99,7 +93,7 @@ namespace WSCT.EMV.Card
         {
             if (beforeGetStatusEvent != null) beforeGetStatusEvent(this);
 
-            State ret = _cardChannel.getStatus();
+            var ret = _cardChannel.getStatus();
 
             if (afterGetStatusEvent != null) afterGetStatusEvent(this, ret);
 
@@ -111,7 +105,7 @@ namespace WSCT.EMV.Card
         {
             if (beforeReconnectEvent != null) beforeReconnectEvent(this, shareMode, preferedProtocol, initialization);
 
-            ErrorCode ret = _cardChannel.reconnect(shareMode, preferedProtocol, initialization);
+            var ret = _cardChannel.reconnect(shareMode, preferedProtocol, initialization);
 
             if (afterReconnectEvent != null) afterReconnectEvent(this, shareMode, preferedProtocol, initialization, ret);
 
@@ -128,7 +122,7 @@ namespace WSCT.EMV.Card
             // Adapt APDU for T=0 smartcards
             if (protocol == Protocol.SCARD_PROTOCOL_T0)
             {
-                ret = transmitT0((CommandAPDU)command, (ResponseAPDU)response);
+                ret = TransmitT0((CommandAPDU)command, (ResponseAPDU)response);
             }
             // T=1 smartcards
             else
@@ -185,8 +179,7 @@ namespace WSCT.EMV.Card
 
         #region >> Methods
 
-        /// <inheritdoc />
-        public ErrorCode transmitT0(CommandAPDU cAPDU, ResponseAPDU rAPDU)
+        private ErrorCode TransmitT0(CommandAPDU cAPDU, ResponseAPDU rAPDU)
         {
             ErrorCode ret;
 
@@ -194,27 +187,23 @@ namespace WSCT.EMV.Card
             // If C-APDU is CC1: add P3=0
             if (cAPDU.isCC1)
             {
-                CommandResponsePair crp = new CommandResponsePair(cAPDU);
-                crp.cAPDU.le = 0;
-                crp.rAPDU = rAPDU;
+                var crp = new CommandResponsePair(cAPDU) { cAPDU = { le = 0 }, rAPDU = rAPDU };
                 ret = crp.transmit(_cardChannel);
             }
             // If C-APDU is CC2: test SW1=61/6C
             else if (cAPDU.isCC2)
             {
-                CommandResponsePair crp = new CommandResponsePair(cAPDU);
+                var crp = new CommandResponsePair(cAPDU);
                 // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
-                    CommandResponsePair crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                    crpGetResponse.rAPDU = rAPDU;
+                    var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2)) { rAPDU = rAPDU };
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
                 else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
                 {
-                    CommandResponsePair crpWithLe = new CommandResponsePair();
-                    crpWithLe.cAPDU = crp.cAPDU;
+                    var crpWithLe = new CommandResponsePair { cAPDU = crp.cAPDU };
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
                     crpWithLe.rAPDU = rAPDU;
                     ret = crpWithLe.transmit(_cardChannel);
@@ -230,28 +219,24 @@ namespace WSCT.EMV.Card
             // If C-APDU is CC3: nothing to do
             else if (cAPDU.isCC3)
             {
-                CommandResponsePair crp = new CommandResponsePair(cAPDU);
-                crp.rAPDU = rAPDU;
+                var crp = new CommandResponsePair(cAPDU) { rAPDU = rAPDU };
                 ret = crp.transmit(_cardChannel);
             }
             // If C-APDU is CC4: first CC3 then CC2 GET RESPONSE
             else
             {
-                UInt32 le = cAPDU.le;
                 cAPDU.hasLe = false;
-                CommandResponsePair crp = new CommandResponsePair(cAPDU);
+                var crp = new CommandResponsePair(cAPDU);
                 // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
                 if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
                 {
-                    CommandResponsePair crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                    crpGetResponse.rAPDU = rAPDU;
+                    var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2)) { rAPDU = rAPDU };
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
                 else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
                 {
-                    CommandResponsePair crpWithLe = new CommandResponsePair();
-                    crpWithLe.cAPDU = crp.cAPDU;
+                    var crpWithLe = new CommandResponsePair { cAPDU = crp.cAPDU };
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
                     crpWithLe.rAPDU = rAPDU;
                     ret = crpWithLe.transmit(_cardChannel);

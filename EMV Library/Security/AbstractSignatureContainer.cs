@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
-using WSCT.Helpers;
-
-using WSCT.EMV.Card;
-
-using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
+using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
 {
@@ -123,7 +117,7 @@ namespace WSCT.EMV.Security
             keyLength = signature.Length;
 
             // recover data from the certificate
-            _recovered = cryptography.recoverMessage(signature, publicKey);
+            _recovered = cryptography.RecoverMessage(signature, publicKey);
 
             // extract and check data recovered
             if (dataHeader != 0x6A)

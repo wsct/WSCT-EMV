@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using WSCT.Helpers;
-
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-
-namespace WSCT.EMV.Security
+﻿namespace WSCT.EMV.Security
 {
     /// <summary>
     /// Represents an EMV Dynamic Data Authentication certificate (DDA)
