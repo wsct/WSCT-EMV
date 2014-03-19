@@ -3,7 +3,7 @@
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application Cryptogram generate by an EMV card
+    /// Represents the Application Cryptogram generate by an EMV card.
     /// </summary>
     public class ApplicationCryptogram : BinaryTLVObject
     {
@@ -13,14 +13,13 @@ namespace WSCT.EMV.Objects
         /// Default constructor
         /// </summary>
         public ApplicationCryptogram()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationCryptogram"/> instance.
         /// </summary>
-        /// <param name="tlvAC">TLVData containing AID</param>
+        /// <param name="tlvAC">TLVData containing AID.</param>
         public ApplicationCryptogram(TLVData tlvAC)
             : this()
         {

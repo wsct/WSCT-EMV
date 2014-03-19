@@ -7,13 +7,5 @@ namespace WSCT.EMV.Objects
     /// </summary>
     public class FileControlInformationProprietary : AbstractTLVObject
     {
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public FileControlInformationProprietary()
-            : base()
-        {
-        }
     }
 }

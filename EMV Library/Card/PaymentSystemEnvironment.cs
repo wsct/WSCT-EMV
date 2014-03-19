@@ -141,7 +141,7 @@ namespace WSCT.EMV.Card
             do
             {
                 recordNumber++;
-                var crp = new CommandResponsePair { cAPDU = new EMVReadRecordCommand(recordNumber, sfi.sfi, 0) };
+                var crp = new CommandResponsePair { cAPDU = new EMVReadRecordCommand(recordNumber, sfi.Sfi, 0) };
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
                 if (crp.rAPDU.statusWord == 0x9000)

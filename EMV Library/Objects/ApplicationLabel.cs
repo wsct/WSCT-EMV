@@ -3,16 +3,9 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application Label of an EMV smartcards
+    /// Represents the Application Label of an EMV smartcards.
     /// </summary>
     public class ApplicationLabel : StringTLVObject
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public ApplicationLabel()
-            : base()
-        {
-        }
     }
 }

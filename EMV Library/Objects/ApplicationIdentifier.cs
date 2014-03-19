@@ -5,28 +5,28 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application Identifier (AID) of an EMV smartcards
+    /// Represents the Application Identifier (AID) of an EMV smartcards.
     /// </summary>
     public class ApplicationIdentifier : BinaryTLVObject
     {
         #region >> Properties
 
         /// <summary>
-        /// Accessor to the RID part of the AID
+        /// Accessor to the RID part of the AID.
         /// </summary>
-        public String strRID
+        public String StrRid
         {
             get { return tlv.value.toHexa(5); }
         }
 
         /// <summary>
-        /// Accessor to PIX part of the AID
+        /// Accessor to PIX part of the AID.
         /// </summary>
-        public String strPIX
+        public String StrPix
         {
             get
             {
-                Byte[] pix = new Byte[tlv.value.Length - 5];
+                var pix = new Byte[tlv.value.Length - 5];
                 Array.Copy(tlv.value, 5, pix, 0, pix.Length);
                 return pix.toHexa();
             }
@@ -37,30 +37,31 @@ namespace WSCT.EMV.Objects
         #region >> Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="ApplicationIdentifier"/> instance.
         /// </summary>
         public ApplicationIdentifier()
-            : base()
         {
         }
 
         /// <summary>
+        /// Initializes a new <see cref="ApplicationIdentifier"/> instance.
         /// Constructor
         /// </summary>
-        /// <param name="tlvAID">TLVData containing AID</param>
-        public ApplicationIdentifier(TLVData tlvAID)
+        /// <param name="tlvAid">TLVData containing AID.</param>
+        public ApplicationIdentifier(TLVData tlvAid)
             : this()
         {
-            tlv = tlvAID;
+            tlv = tlvAid;
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationIdentifier"/> instance.
         /// </summary>
-        /// <param name="sAID">String AID</param>
-        public ApplicationIdentifier(String sAID)
+        /// <param name="sAid">String AID.</param>
+        public ApplicationIdentifier(String sAid)
         {
-            tlv = new TLVData(0x4F, (UInt32)sAID.Length, sAID.fromHexa());
+            var value = sAid.fromHexa();
+            tlv = new TLVData(0x4F, (UInt32)value.Length, value);
         }
 
         #endregion

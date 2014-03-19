@@ -8,20 +8,19 @@ namespace WSCT.EMV.Objects
     /// </summary>
     public class ApplicationUsageControl : BinaryTLVObject
     {
-
         #region >> Internal constants
 
-        const byte DOMESTIC_CASH = 0x80;
-        const byte INTERNATIONAL_CASH = 0x40;
-        const byte DOMESTIC_GOODS = 0x20;
-        const byte INTERNATIONAL_GOODS = 0x10;
-        const byte DOMESTIC_SERVICES = 0x08;
-        const byte INTERNATIONAL_SERVICES = 0x04;
-        const byte ATM = 0x02;
-        const byte OTHERTHANATM = 0x01;
+        const byte DomesticCashBit = 0x80;
+        const byte InternationalCashBit = 0x40;
+        const byte DomesticGoodsBit = 0x20;
+        const byte InternationalGoodsBit = 0x10;
+        const byte DomesticServicesBit = 0x08;
+        const byte InternationalServicesBit = 0x04;
+        const byte AtmBit = 0x02;
+        const byte OtherThanAtmBit = 0x01;
 
-        const byte DOMESTIC_CASHBACK = 0x80;
-        const byte INTERNATIONAL_CASHBACK = 0x40;
+        const byte DomesticCashbackBit = 0x80;
+        const byte InternationalCashbackBit = 0x40;
 
         #endregion
 
@@ -30,81 +29,81 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// AUC: Valid for domestic cash transactions.
         /// </summary>
-        public Boolean domesticCash
+        public Boolean DomesticCash
         {
-            get { return (tlv.value[0] & DOMESTIC_CASH) == DOMESTIC_CASH; }
+            get { return (tlv.value[0] & DomesticCashBit) == DomesticCashBit; }
         }
 
         /// <summary>
         /// AUC: Valid for international cash transactions.
         /// </summary>
-        public Boolean internationalCash
+        public Boolean InternationalCash
         {
-            get { return (tlv.value[0] & INTERNATIONAL_GOODS) == INTERNATIONAL_GOODS; }
+            get { return (tlv.value[0] & InternationalCashBit) == InternationalCashBit; }
         }
 
         /// <summary>
         /// AUC: Valid for domestic goods.
         /// </summary>
-        public Boolean domesticGoods
+        public Boolean DomesticGoods
         {
-            get { return (tlv.value[0] & DOMESTIC_GOODS) == DOMESTIC_GOODS; }
+            get { return (tlv.value[0] & DomesticGoodsBit) == DomesticGoodsBit; }
         }
 
         /// <summary>
-        /// AUC: Valid for international goods
+        /// AUC: Valid for international goods.
         /// </summary>
-        public Boolean internationalGoods
+        public Boolean InternationalGoods
         {
-            get { return (tlv.value[0] & INTERNATIONAL_GOODS) == INTERNATIONAL_GOODS; }
+            get { return (tlv.value[0] & InternationalGoodsBit) == InternationalGoodsBit; }
         }
 
         /// <summary>
-        /// AUC: Valid for domestic services
+        /// AUC: Valid for domestic services.
         /// </summary>
-        public Boolean domesticServices
+        public Boolean DomesticServices
         {
-            get { return (tlv.value[0] & DOMESTIC_SERVICES) == DOMESTIC_SERVICES; }
+            get { return (tlv.value[0] & DomesticServicesBit) == DomesticServicesBit; }
         }
 
         /// <summary>
-        /// AUC: Valid for international services
+        /// AUC: Valid for international services.
         /// </summary>
-        public Boolean internationalServices
+        public Boolean InternationalServices
         {
-            get { return (tlv.value[0] & INTERNATIONAL_SERVICES) == INTERNATIONAL_SERVICES; }
+            get { return (tlv.value[0] & InternationalServicesBit) == InternationalServicesBit; }
         }
 
         /// <summary>
-        /// AUC: Valid at ATMs
+        /// AUC: Valid at ATMs.
         /// </summary>
-        public Boolean atm
+        public Boolean Atm
         {
-            get { return (tlv.value[0] & ATM) == ATM; }
+            get { return (tlv.value[0] & AtmBit) == AtmBit; }
         }
 
         /// <summary>
-        /// AUC: Valid at terminals other than ATMs
+        /// AUC: Valid at terminals other than ATMs.
         /// </summary>
-        public Boolean otherThanATM
+        public Boolean OtherThanAtm
         {
-            get { return (tlv.value[0] & OTHERTHANATM) == OTHERTHANATM; }
+            get { return (tlv.value[0] & OtherThanAtmBit) == OtherThanAtmBit; }
         }
 
         /// <summary>
-        /// AUC: Domestic cashback allowed
+        /// AUC: Domestic cashback allowed.
         /// </summary>
-        public Boolean domesticCashback
+        public Boolean DomesticCashback
         {
-            get { return (tlv.value[1] & DOMESTIC_CASHBACK) == DOMESTIC_CASHBACK; }
+            get { return (tlv.value[1] & DomesticCashbackBit) == DomesticCashbackBit; }
         }
 
         /// <summary>
-        /// AUC: International cashback allowed
+        /// AUC: International cashback allowed.
         /// </summary>
-        public Boolean internationalCashBack
+        public Boolean InternationalCashBack
         {
-            get { return (tlv.value[1] & INTERNATIONAL_CASHBACK) == INTERNATIONAL_CASHBACK; }
+            get { return (tlv.value[1] & InternationalCashbackBit) == InternationalCashbackBit; }
         }
 
         #endregion
@@ -112,41 +111,45 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="ApplicationUsageControl"/> instance.
         /// </summary>
         public ApplicationUsageControl()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationUsageControl"/> instance.
         /// </summary>
         /// <param name="auc">TLV AUC data</param>
         public ApplicationUsageControl(TLVData auc)
-            : base()
         {
             tlv = auc;
         }
 
         #endregion
 
+        #region >> Object
+
         /// <inheritdoc />
         public override string ToString()
         {
-            String s = "";
-            if (domesticCash || internationalCash)
-                s += "[cash: " + (domesticCash ? "domestic " : "") + (internationalCash ? "international" : "") + "] ";
-            if (domesticGoods || internationalGoods)
-                s += "[goods: " + (domesticGoods ? "domestic " : "") + (internationalGoods ? "international" : "") + "] ";
-            if (domesticServices || internationalServices)
-                s += "[services: " + (domesticServices ? "domestic " : "") + (internationalServices ? "international" : "") + "] ";
-            if (atm || otherThanATM)
-                s += "[terminals: " + (atm ? "ATM " : "") + (otherThanATM ? "other" : "") + "] ";
-            if (domesticCashback || internationalCashBack)
-                s += "[cashback: " + (domesticCashback ? "domestic " : "") + (internationalCashBack ? "international" : "") + "]";
+            var s = "";
+            if (DomesticCash || InternationalCash)
+                s += "[cash: " + (DomesticCash ? "domestic " : "") + (InternationalCash ? "international" : "") + "] ";
+            if (DomesticGoods || InternationalGoods)
+                s += "[goods: " + (DomesticGoods ? "domestic " : "") + (InternationalGoods ? "international" : "") +
+                     "] ";
+            if (DomesticServices || InternationalServices)
+                s += "[services: " + (DomesticServices ? "domestic " : "") +
+                     (InternationalServices ? "international" : "") + "] ";
+            if (Atm || OtherThanAtm)
+                s += "[terminals: " + (Atm ? "ATM " : "") + (OtherThanAtm ? "other" : "") + "] ";
+            if (DomesticCashback || InternationalCashBack)
+                s += "[cashback: " + (DomesticCashback ? "domestic " : "") +
+                     (InternationalCashBack ? "international" : "") + "]";
             return s;
         }
 
+        #endregion
     }
 }

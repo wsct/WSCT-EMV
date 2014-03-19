@@ -4,7 +4,7 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Log Entry tag of an EMV application
+    /// Represents the Log Entry tag of an EMV application.
     /// </summary>
     public class LogEntry : BinaryTLVObject
     {
@@ -13,7 +13,7 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Accessor to the SFI defined by the log entry.
         /// </summary>
-        public Byte sfi
+        public Byte Sfi
         {
             get { return tlv.value[0]; }
             set { tlv.value[0] = value; }
@@ -22,7 +22,7 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Accessor to the record size defined by the log entry.
         /// </summary>
-        public Byte cyclicFileSize
+        public Byte CyclicFileSize
         {
             get { return tlv.value[1]; }
             set { tlv.value[1] = value; }
@@ -36,7 +36,6 @@ namespace WSCT.EMV.Objects
         /// Default constructor
         /// </summary>
         public LogEntry()
-            : base()
         {
         }
 
@@ -54,10 +53,14 @@ namespace WSCT.EMV.Objects
 
         #endregion
 
+        #region >> Onject
+
         /// <inheritdoc />
         public override string ToString()
         {
-            return String.Format("sfi:{0:X} record size:{1:X}", sfi, cyclicFileSize);
+            return String.Format("sfi:{0:X} record size:{1:X}", Sfi, CyclicFileSize);
         }
+
+        #endregion
     }
 }

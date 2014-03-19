@@ -5,96 +5,96 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Cardholder Verification Method List of an EMV application
+    /// Represents the Cardholder Verification Method List of an EMV application.
     /// </summary>
     public class CardholderVerificationMethodList : AbstractTLVObject
     {
         #region >> Enumerations
 
         /// <summary>
-        /// CV Rule Byte 1 (Leftmost):  Cardholder Verification Method (CVM) Codes
+        /// CV Rule Byte 1 (Leftmost):  Cardholder Verification Method (CVM) Codes.
         /// </summary>
-        public enum CVMCode
+        public enum CvmCode
         {
             /// <summary>
-            /// Fail CVM Processing
+            /// Fail CVM Processing.
             /// </summary>
-            FAIL_CVM = 0x00,
+            FailCvm = 0x00,
             /// <summary>
-            /// Plaintext PIN verification performed by ICC
+            /// Plaintext PIN verification performed by ICC.
             /// </summary>
-            PLAINTEXTPIN_ICC = 0x01,
+            PlaintextpinIcc = 0x01,
             /// <summary>
-            /// Enciphered PIN verified online
+            /// Enciphered PIN verified online.
             /// </summary>
-            ENCIPHEREDPIN_ONLINE = 0x02,
+            EncipheredpinOnline = 0x02,
             /// <summary>
-            /// Plaintext PIN verification performed by ICC and signature (paper)
+            /// Plaintext PIN verification performed by ICC and signature (paper).
             /// </summary>
-            PLAINTEXTPIN_ICC_AND_SIGN = 0x03,
+            PlaintextpinIccAndSign = 0x03,
             /// <summary>
-            /// Enciphered PIN verification performed by ICC
+            /// Enciphered PIN verification performed by ICC.
             /// </summary>
-            ENCIPHEREDPIN_ICC = 0x04,
+            EncipheredpinIcc = 0x04,
             /// <summary>
-            ///  Enciphered PIN verification performed by ICC and signature (paper)
+            ///  Enciphered PIN verification performed by ICC and signature (paper).
             /// </summary>
-            ENCIPHEREDPIN_ICC_AND_SIGN = 0x05,
+            EncipheredpinIccAndSign = 0x05,
             /// <summary>
-            /// Signature (paper)
+            /// Signature (paper).
             /// </summary>
-            SIGN = 0x1E,
+            Sign = 0x1E,
             /// <summary>
-            /// No CVM required
+            /// No CVM required.
             /// </summary>
-            NOCVM_REQUIRED = 0x1F
+            NocvmRequired = 0x1F
         }
 
         /// <summary>
-        /// CV Rule Byte 2 (Rightmost):  Cardholder Verification Method (CVM) Condition Codes
+        /// CV Rule Byte 2 (Rightmost):  Cardholder Verification Method (CVM) Condition Codes.
         /// </summary>
-        public enum CVMCondition
+        public enum CvmCondition
         {
             /// <summary>
-            /// Always
+            /// Always.
             /// </summary>
-            ALWAYS = 0x00,
+            Always = 0x00,
             /// <summary>
-            /// If unattended cash
+            /// If unattended cash.
             /// </summary>
-            UNATTENDED_CASH = 0x01,
+            UnattendedCash = 0x01,
             /// <summary>
-            /// If not unattended cash and not manual cash and not purchase with cashback
+            /// If not unattended cash and not manual cash and not purchase with cashback.
             /// </summary>
-            NOTCASH = 0x02,
+            Notcash = 0x02,
             /// <summary>
-            /// If terminal supports the CVM
+            /// If terminal supports the CVM.
             /// </summary>
-            SUPPORT = 0x03,
+            Support = 0x03,
             /// <summary>
-            /// If manual cash
+            /// If manual cash.
             /// </summary>
-            CASH = 0x04,
+            Cash = 0x04,
             /// <summary>
-            /// If purchase with cashback
+            /// If purchase with cashback.
             /// </summary>
-            PURCHASE_CASHBACK = 0x05,
+            PurchaseCashback = 0x05,
             /// <summary>
-            /// If transaction is in the application currency  22  and is under X value
+            /// If transaction is in the application currency  22  and is under X value.
             /// </summary>
-            UNDER_AMOUNTX = 0x06,
+            UnderAmountx = 0x06,
             /// <summary>
-            /// If transaction is in the application currency and is over X value
+            /// If transaction is in the application currency and is over X value.
             /// </summary>
-            OVER_AMOUNTX = 0x07,
+            OverAmountx = 0x07,
             /// <summary>
-            /// If transaction is in the application currency and is under Y value
+            /// If transaction is in the application currency and is under Y value.
             /// </summary>
-            UNDER_AMOUNTY = 0x08,
+            UnderAmounty = 0x08,
             /// <summary>
-            /// If transaction is in the application currency and is over Y value
+            /// If transaction is in the application currency and is over Y value.
             /// </summary>
-            OVER_AMOUNTY = 0x09
+            OverAmounty = 0x09
         }
 
         #endregion
@@ -102,38 +102,38 @@ namespace WSCT.EMV.Objects
         #region >> Class CVRule
 
         /// <summary>
-        /// Represents a CVM
+        /// Represents a CVM.
         /// </summary>
-        public class CVRule
+        public class CvRule
         {
             # region >> Fields
 
-            UInt16 _cvRule;
+            readonly UInt16 _cvRule;
 
             #endregion
 
             #region >> Properties
 
             /// <summary>
-            /// CVM Code (6 less significant bytes of first byte)
+            /// CVM Code (6 less significant bytes of first byte).
             /// </summary>
-            public CVMCode cvmCode
+            public CvmCode CvmCode
             {
-                get { return (CVMCode)((_cvRule / 0x100) & 0x3F); }
+                get { return (CvmCode)((_cvRule / 0x100) & 0x3F); }
             }
 
             /// <summary>
-            /// CVM Condition (second byte)
+            /// CVM Condition (second byte).
             /// </summary>
-            public CVMCondition cvmCondition
+            public CvmCondition CvmCondition
             {
-                get { return (CVMCondition)(_cvRule % 0x100); }
+                get { return (CvmCondition)(_cvRule % 0x100); }
             }
 
             /// <summary>
-            /// If true: Apply succeeding CV Rule if this CVM is unsuccessful. If <c>false</c>: Fail cardholder verification if this CVM is unsuccessful
+            /// If true: Apply succeeding CV Rule if this CVM is unsuccessful. If <c>false</c>: Fail cardholder verification if this CVM is unsuccessful.
             /// </summary>
-            public Boolean cvmTryable
+            public Boolean CvmTryable
             {
                 get { return (_cvRule & 0x8000) == 0x8000; }
             }
@@ -143,74 +143,78 @@ namespace WSCT.EMV.Objects
             #region >> Constructors
 
             /// <summary>
-            /// Constructor
+            /// Initializes a new <see cref="CvRule"/> instance.
             /// </summary>
-            /// <param name="twoBytes">Two bytes identifying the cv rule</param>
-            public CVRule(Byte[] twoBytes)
+            /// <param name="twoBytes">Two bytes identifying the cv rule.</param>
+            public CvRule(Byte[] twoBytes)
                 : this(twoBytes, 0)
             {
             }
 
             /// <summary>
-            /// Constructor
+            /// Initializes a new <see cref="CvRule"/> instance.
             /// </summary>
-            /// <param name="twoBytes">Two bytes identifying the cv rule</param>
-            /// <param name="offset">Offset in the array <paramref>twoBytes</paramref></param>
-            public CVRule(Byte[] twoBytes, Byte offset)
+            /// <param name="twoBytes">Two bytes identifying the cv rule.</param>
+            /// <param name="offset">Offset in the array <paramref name="twoBytes"/>.</param>
+            public CvRule(Byte[] twoBytes, Byte offset)
             {
                 _cvRule = (UInt16)(twoBytes[offset + 0] * 0x100 + twoBytes[offset + 1]);
             }
 
             #endregion
 
+            #region >> Object
+
             /// <inheritdoc />
             public override string ToString()
             {
-                return String.Format("cvr:{0:X4} ({1}={2}+{3})", _cvRule, cvmTryable, cvmCode, cvmCondition);
+                return String.Format("cvr:{0:X4} ({1}={2}+{3})", _cvRule, CvmTryable, CvmCode, CvmCondition);
             }
+
+            #endregion
         }
 
         #endregion
 
         #region >> Fields
 
-        List<CVRule> _cvRules;
+        List<CvRule> _cvRules;
 
         #endregion
 
         #region >> Properties
 
         /// <summary>
-        /// First amount field expressed in Application Currency Code with implicit decimal point
+        /// First amount field expressed in Application Currency Code with implicit decimal point.
         /// </summary>
-        public UInt32 amountX
+        public UInt32 AmountX
         {
             get { return (UInt32)(tlv.value[0] * 0x1000000 + tlv.value[1] * 0x10000 + tlv.value[2] * 0x100 + tlv.value[3]); }
         }
 
         /// <summary>
-        /// Second amount field expressed in Application Currency Code with implicit decimal point
+        /// Second amount field expressed in Application Currency Code with implicit decimal point.
         /// </summary>
-        public UInt32 amountY
+        public UInt32 AmountY
         {
             get { return (UInt32)(tlv.value[4] * 0x1000000 + tlv.value[5] * 0x10000 + tlv.value[6] * 0x100 + tlv.value[7]); }
         }
 
         /// <summary>
-        /// Accessor to Cardholder Verification Rules
+        /// Accessor to Cardholder Verification Rules.
         /// </summary>
-        public List<CardholderVerificationMethodList.CVRule> cvRules
+        public List<CvRule> CvRules
         {
             get
             {
                 if (_cvRules == null)
                 {
-                    _cvRules = new List<CVRule>();
+                    _cvRules = new List<CvRule>();
                     // CVRules starts at byte 8 in CVMList
                     Byte offset = 8;
                     while (offset < tlv.value.Length)
                     {
-                        _cvRules.Add(new CVRule(tlv.value, offset));
+                        _cvRules.Add(new CvRule(tlv.value, offset));
                         offset += 2;
                     }
                 }
@@ -223,49 +227,47 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="CardholderVerificationMethodList"/> instance.
         /// </summary>
         public CardholderVerificationMethodList()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="CardholderVerificationMethodList"/> instance.
         /// </summary>
-        /// <param name="cvmlData">Raw CVM List data</param>
+        /// <param name="cvmlData">Raw CVM List data.</param>
         public CardholderVerificationMethodList(Byte[] cvmlData)
             : this()
         {
-            tlv = new TLVData();
-            tlv.value = cvmlData;
+            tlv = new TLVData { value = cvmlData };
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="CardholderVerificationMethodList"/> instance.
         /// </summary>
-        /// <param name="tlvCVM">TLVData representing the CVM list</param>
-        public CardholderVerificationMethodList(TLVData tlvCVM)
+        /// <param name="tlvCvm">TLVData representing the CVM list.</param>
+        public CardholderVerificationMethodList(TLVData tlvCvm)
             : this()
         {
-            tlv = tlvCVM;
+            tlv = tlvCvm;
         }
 
         #endregion
 
-        #region >> Methods
-
-
-
-        #endregion
+        #region >> Object
 
         /// <inheritdoc />
         public override string ToString()
         {
-            String s = String.Format("X:{0} Y:{1}", amountX, amountY);
-            foreach (CVRule cvr in cvRules)
+            var s = String.Format("X:{0} Y:{1}", AmountX, AmountY);
+            foreach (var cvr in CvRules)
+            {
                 s += String.Format(" {0}", cvr);
+            }
             return s;
         }
+
+        #endregion
     }
 }

@@ -1,19 +1,20 @@
 using System;
+using System.Globalization;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Short File Identifier of an EMV smartcards
+    /// Represents the Short File Identifier of an EMV smartcards.
     /// </summary>
     public class ShortFileIdentifier : AbstractTLVObject
     {
         #region >> Properties
 
         /// <summary>
-        /// SFI value defined by the tag
+        /// SFI value defined by the tag.
         /// </summary>
-        public Byte sfi
+        public Byte Sfi
         {
             get { return tlv.value[0]; }
         }
@@ -23,28 +24,31 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="ShortFileIdentifier"/> instance.
         /// </summary>
         public ShortFileIdentifier()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ShortFileIdentifier"/> instance.
         /// </summary>
-        /// <param name="tlvSFI">TLVData defining the SFI tag</param>
-        public ShortFileIdentifier(TLVData tlvSFI)
+        /// <param name="tlvSfi">TLVData defining the SFI tag</param>
+        public ShortFileIdentifier(TLVData tlvSfi)
         {
-            tlv = tlvSFI;
+            tlv = tlvSfi;
         }
 
         #endregion
 
+        #region >> Object
+
         /// <inheritdoc />
         public override string ToString()
         {
-            return sfi.ToString(); ;
+            return Sfi.ToString(CultureInfo.InvariantCulture);
         }
+
+        #endregion
     }
 }

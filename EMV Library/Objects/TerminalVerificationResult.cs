@@ -4,7 +4,7 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Terminal Verification Result, Issuer Action Code or Terminal Action Code of an EMV application
+    /// Represents the Terminal Verification Result, Issuer Action Code or Terminal Action Code of an EMV application.
     /// </summary>
     public class TerminalVerificationResult : BinaryTLVObject
     {
@@ -46,237 +46,237 @@ namespace WSCT.EMV.Objects
         #region >> Properties
 
         /// <summary>
-        /// TVR: Offline data authentication was not performed
+        /// TVR: Offline data authentication was not performed.
         /// </summary>
-        public Boolean offlineDataAuthenticationNotPerformed
+        public Boolean OfflineDataAuthenticationNotPerformed
         {
-            get { return test(0, OFFLINE_DATA_AUTH); }
-            set { force(0, OFFLINE_DATA_AUTH, value); }
+            get { return Test(0, OFFLINE_DATA_AUTH); }
+            set { Force(0, OFFLINE_DATA_AUTH, value); }
         }
 
         /// <summary>
-        /// TVR: SDA failed
+        /// TVR: SDA failed.
         /// </summary>
-        public Boolean sdaFailed
+        public Boolean SdaFailed
         {
-            get { return test(0, SDA); }
-            set { force(0, SDA, value); }
+            get { return Test(0, SDA); }
+            set { Force(0, SDA, value); }
         }
 
         /// <summary>
-        /// TVR: ICC data missing
+        /// TVR: ICC data missing.
         /// </summary>
-        public Boolean iccDataMissing
+        public Boolean IccDataMissing
         {
-            get { return test(0, ICCDATA); }
-            set { force(0, ICCDATA, value); }
+            get { return Test(0, ICCDATA); }
+            set { Force(0, ICCDATA, value); }
         }
 
         /// <summary>
-        /// TVR: Card appears on terminal exception file
+        /// TVR: Card appears on terminal exception file.
         /// </summary>
-        public Boolean terminalExceptionFile
+        public Boolean TerminalExceptionFile
         {
-            get { return test(0, TERMINALEXCEPTIONFILE); }
-            set { force(0, TERMINALEXCEPTIONFILE, value); }
+            get { return Test(0, TERMINALEXCEPTIONFILE); }
+            set { Force(0, TERMINALEXCEPTIONFILE, value); }
         }
 
         /// <summary>
-        /// TVR: DDA failed
+        /// TVR: DDA failed.
         /// </summary>
-        public Boolean ddaFailed
+        public Boolean DdaFailed
         {
-            get { return test(0, DDA); }
-            set { force(0, DDA, value); }
+            get { return Test(0, DDA); }
+            set { Force(0, DDA, value); }
         }
 
         /// <summary>
-        /// TVR: CDA failed
+        /// TVR: CDA failed.
         /// </summary>
-        public Boolean cdaFailed
+        public Boolean CdaFailed
         {
-            get { return test(0, CDA); }
-            set { force(0, CDA, value); }
+            get { return Test(0, CDA); }
+            set { Force(0, CDA, value); }
         }
 
         /// <summary>
-        /// TVR: ICC and terminal have different application versions
+        /// TVR: ICC and terminal have different application versions.
         /// </summary>
         public Boolean IccAndTerminalVersionsDifferent
         {
-            get { return test(1, ICCTERMINALVERSION); }
-            set { force(1, ICCTERMINALVERSION, value); }
+            get { return Test(1, ICCTERMINALVERSION); }
+            set { Force(1, ICCTERMINALVERSION, value); }
         }
 
         /// <summary>
-        /// TVR: Expired application
+        /// TVR: Expired application.
         /// </summary>
-        public Boolean expiredApplication
+        public Boolean ExpiredApplication
         {
-            get { return test(1, EXPIREDAPPLICATION); }
-            set { force(1, EXPIREDAPPLICATION, value); }
+            get { return Test(1, EXPIREDAPPLICATION); }
+            set { Force(1, EXPIREDAPPLICATION, value); }
         }
 
         /// <summary>
-        /// TVR: Application not yet effective
+        /// TVR: Application not yet effective.
         /// </summary>
-        public Boolean notYetEffectiveApplication
+        public Boolean NotYetEffectiveApplication
         {
-            get { return test(1, NOTYETEFFECTIVEAPPLICATION); }
-            set { force(1, NOTYETEFFECTIVEAPPLICATION, value); }
+            get { return Test(1, NOTYETEFFECTIVEAPPLICATION); }
+            set { Force(1, NOTYETEFFECTIVEAPPLICATION, value); }
         }
 
         /// <summary>
-        /// TVR: Requested service not allowed for card product
+        /// TVR: Requested service not allowed for card product.
         /// </summary>
-        public Boolean serviceNotAllowed
+        public Boolean ServiceNotAllowed
         {
-            get { return test(1, SERVICENOTALLOWED); }
-            set { force(1, SERVICENOTALLOWED, value); }
+            get { return Test(1, SERVICENOTALLOWED); }
+            set { Force(1, SERVICENOTALLOWED, value); }
         }
 
         /// <summary>
-        /// TVR: New card
+        /// TVR: New card.
         /// </summary>
-        public Boolean newCard
+        public Boolean NewCard
         {
-            get { return test(1, NEWCARD); }
-            set { force(1, NEWCARD, value); }
+            get { return Test(1, NEWCARD); }
+            set { Force(1, NEWCARD, value); }
         }
 
         /// <summary>
-        /// TVR: Cardholder verification was not successful
+        /// TVR: Cardholder verification was not successful.
         /// </summary>
-        public Boolean cardholderVerificationFailed
+        public Boolean CardholderVerificationFailed
         {
-            get { return test(2, CARDHOLDERVERIFICATIONFAILED); }
-            set { force(2, CARDHOLDERVERIFICATIONFAILED, value); }
+            get { return Test(2, CARDHOLDERVERIFICATIONFAILED); }
+            set { Force(2, CARDHOLDERVERIFICATIONFAILED, value); }
         }
 
         /// <summary>
-        /// TVR: Unrecognised CVM
+        /// TVR: Unrecognised CVM.
         /// </summary>
-        public Boolean unrecognisedCVM
+        public Boolean UnrecognisedCvm
         {
-            get { return test(2, UNRECOGNISED_CVM); }
-            set { force(2, UNRECOGNISED_CVM, value); }
+            get { return Test(2, UNRECOGNISED_CVM); }
+            set { Force(2, UNRECOGNISED_CVM, value); }
         }
 
         /// <summary>
-        /// TVR: PIN Try limit exceeded
+        /// TVR: PIN Try limit exceeded.
         /// </summary>
-        public Boolean pinTryLimitExceeded
+        public Boolean PINTryLimitExceeded
         {
-            get { return test(2, PINTRYLIMIT); }
-            set { force(2, PINTRYLIMIT, value); }
+            get { return Test(2, PINTRYLIMIT); }
+            set { Force(2, PINTRYLIMIT, value); }
         }
 
         /// <summary>
-        /// TVR: PIN entry required and PIN pad not present or not working
+        /// TVR: PIN entry required and PIN pad not present or not working.
         /// </summary>
-        public Boolean pinpadError
+        public Boolean PinpadError
         {
-            get { return test(2, PINPAD_ERROR); }
-            set { force(2, PINPAD_ERROR, value); }
+            get { return Test(2, PINPAD_ERROR); }
+            set { Force(2, PINPAD_ERROR, value); }
         }
 
         /// <summary>
-        /// TVR: PIN entry required, PIN pad present, but PIN was not entered
+        /// TVR: PIN entry required, PIN pad present, but PIN was not entered.
         /// </summary>
-        public Boolean pinNotEntered
+        public Boolean PINNotEntered
         {
-            get { return test(2, PIN_NOTENTERED); }
-            set { force(2, PIN_NOTENTERED, value); }
+            get { return Test(2, PIN_NOTENTERED); }
+            set { Force(2, PIN_NOTENTERED, value); }
         }
 
         /// <summary>
-        /// TVR: Online PIN entered
+        /// TVR: Online PIN entered.
         /// </summary>
-        public Boolean onlinePinEntered
+        public Boolean OnlinePinEntered
         {
-            get { return test(2, ONLINEPIN_ENTERED); }
-            set { force(2, ONLINEPIN_ENTERED, value); }
+            get { return Test(2, ONLINEPIN_ENTERED); }
+            set { Force(2, ONLINEPIN_ENTERED, value); }
         }
 
         /// <summary>
-        /// TVR: Transaction exceeds floor limit
+        /// TVR: Transaction exceeds floor limit.
         /// </summary>
-        public Boolean transactionExceedFloorLimit
+        public Boolean TransactionExceedFloorLimit
         {
-            get { return test(3, TRANSACTION_FLOORLIMIT); }
-            set { force(3, TRANSACTION_FLOORLIMIT, value); }
+            get { return Test(3, TRANSACTION_FLOORLIMIT); }
+            set { Force(3, TRANSACTION_FLOORLIMIT, value); }
         }
 
         /// <summary>
-        /// TVR: Lower consecutive offline limit exceeded
+        /// TVR: Lower consecutive offline limit exceeded.
         /// </summary>
-        public Boolean lowerConsecutiveOfflineLimitExceeded
+        public Boolean LowerConsecutiveOfflineLimitExceeded
         {
-            get { return test(3, LOWER_OFFLINELIMIT); }
-            set { force(3, LOWER_OFFLINELIMIT, value); }
+            get { return Test(3, LOWER_OFFLINELIMIT); }
+            set { Force(3, LOWER_OFFLINELIMIT, value); }
         }
 
         /// <summary>
-        /// TVR: Upper consecutive offline limite exceeded
+        /// TVR: Upper consecutive offline limite exceeded.
         /// </summary>
-        public Boolean upperConsecutiveOfflineLimitExceeded
+        public Boolean UpperConsecutiveOfflineLimitExceeded
         {
-            get { return test(3, UPPER_OFFLINELIMIT); }
-            set { force(3, UPPER_OFFLINELIMIT, value); }
+            get { return Test(3, UPPER_OFFLINELIMIT); }
+            set { Force(3, UPPER_OFFLINELIMIT, value); }
         }
 
         /// <summary>
-        /// TVR: Transaction selected randomly for online processing 
+        /// TVR: Transaction selected randomly for online processing.
         /// </summary>
-        public Boolean transactionRandomlySelectedOnline
+        public Boolean TransactionRandomlySelectedOnline
         {
-            get { return test(3, RANDOMLYSELECTED_ONLINE); }
-            set { force(3, RANDOMLYSELECTED_ONLINE, value); }
+            get { return Test(3, RANDOMLYSELECTED_ONLINE); }
+            set { Force(3, RANDOMLYSELECTED_ONLINE, value); }
         }
 
         /// <summary>
-        /// TVR: Merchant forced transaction online
+        /// TVR: Merchant forced transaction online.
         /// </summary>
-        public Boolean merchantForcedTransactionOnline
+        public Boolean MerchantForcedTransactionOnline
         {
-            get { return test(3, MERCHANT_FORCEDONLINE); }
-            set { force(3, MERCHANT_FORCEDONLINE, value); }
+            get { return Test(3, MERCHANT_FORCEDONLINE); }
+            set { Force(3, MERCHANT_FORCEDONLINE, value); }
         }
 
         /// <summary>
-        /// TVR: Default TDOL used
+        /// TVR: Default TDOL used.
         /// </summary>
-        public Boolean defaultTDOLUsed
+        public Boolean DefaultTdolUsed
         {
-            get { return test(4, DEFAULT_TDOL_USED); }
-            set { force(4, DEFAULT_TDOL_USED, value); }
+            get { return Test(4, DEFAULT_TDOL_USED); }
+            set { Force(4, DEFAULT_TDOL_USED, value); }
         }
 
         /// <summary>
-        /// Issuer authentication failed
+        /// Issuer authentication failed.
         /// </summary>
-        public Boolean issuerAuthenticationFailed
+        public Boolean IssuerAuthenticationFailed
         {
-            get { return test(4, ISSUER_AUTHENTICATION_FAILED); }
-            set { force(4, ISSUER_AUTHENTICATION_FAILED, value); }
+            get { return Test(4, ISSUER_AUTHENTICATION_FAILED); }
+            set { Force(4, ISSUER_AUTHENTICATION_FAILED, value); }
         }
 
         /// <summary>
-        /// Script processing failed before final GENERATE AC
+        /// Script processing failed before final GENERATE AC.
         /// </summary>
-        public Boolean scriptProcessingFailedBeforeGenerateAC
+        public Boolean ScriptProcessingFailedBeforeGenerateAC
         {
-            get { return test(4, SCRIPT_FAILED_BEFORE_GENERATEAC); }
-            set { force(4, SCRIPT_FAILED_BEFORE_GENERATEAC, value); }
+            get { return Test(4, SCRIPT_FAILED_BEFORE_GENERATEAC); }
+            set { Force(4, SCRIPT_FAILED_BEFORE_GENERATEAC, value); }
         }
 
         /// <summary>
-        /// Script processing failed after final GENERATE AC
+        /// Script processing failed after final GENERATE AC.
         /// </summary>
-        public Boolean scriptProcessingFailedAfterGenerateAC
+        public Boolean ScriptProcessingFailedAfterGenerateAC
         {
-            get { return test(4, SCRIPT_FAILED_AFTER_GENERATEAC); }
-            set { force(4, SCRIPT_FAILED_AFTER_GENERATEAC, value); }
+            get { return Test(4, SCRIPT_FAILED_AFTER_GENERATEAC); }
+            set { Force(4, SCRIPT_FAILED_AFTER_GENERATEAC, value); }
         }
 
         #endregion
@@ -284,18 +284,17 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="TerminalVerificationResult"/> instance.
         /// </summary>
         public TerminalVerificationResult()
-            : base()
         {
             tlv = new TLVData();
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="TerminalVerificationResult"/> instance.
         /// </summary>
-        /// <param name="tlvTVR">TLV TVR data</param>
+        /// <param name="tlvTVR">TLV TVR data.</param>
         public TerminalVerificationResult(TLVData tlvTVR)
             : this()
         {
@@ -306,21 +305,30 @@ namespace WSCT.EMV.Objects
 
         #region >> Methods
 
-        Boolean test(byte byteNumber, byte bit)
+        Boolean Test(byte byteNumber, byte bit)
         {
             if (tlv.value.Length == 0)
+            {
                 tlv.value = new Byte[5];
+            }
+
             return (tlv.value[byteNumber] & bit) == bit;
         }
 
-        void force(byte byteNumber, byte bit, Boolean value)
+        void Force(byte byteNumber, byte bit, Boolean value)
         {
             if (tlv.value.Length == 0)
+            {
                 tlv.value = new Byte[5];
+            }
             if (value)
+            {
                 tlv.value[byteNumber] |= bit;
+            }
             else
+            {
                 tlv.value[byteNumber] &= (byte)(~bit);
+            }
         }
 
         #endregion

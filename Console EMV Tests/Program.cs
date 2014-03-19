@@ -143,7 +143,7 @@ namespace WSCT.ConsoleEMVTests
             }
 
             Console.WriteLine("    >> {0}", emv.Aip);
-            foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.getFiles())
+            foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
             {
                 Console.WriteLine("    >> {0}", file);
             }

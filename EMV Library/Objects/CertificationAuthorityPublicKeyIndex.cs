@@ -4,16 +4,16 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Certification Authority Public Key Index of an EMV Application
+    /// Represents the Certification Authority Public Key Index of an EMV Application.
     /// </summary>
     public class CertificationAuthorityPublicKeyIndex : BinaryTLVObject
     {
         #region >> Properties
 
         /// <summary>
-        /// Accessor to the index
+        /// Accessor to the index.
         /// </summary>
-        public Byte index
+        public Byte Index
         {
             get { return tlv.value[0]; }
         }
@@ -23,20 +23,19 @@ namespace WSCT.EMV.Objects
         #region >> Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="CertificationAuthorityPublicKeyIndex"/> instance.
         /// </summary>
         public CertificationAuthorityPublicKeyIndex()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="CertificationAuthorityPublicKeyIndex"/> instance.
         /// </summary>
-        /// <param name="tlvCAPublicKeyIndex">TLVData defining the Certification Authority Public Key Index tag</param>
-        public CertificationAuthorityPublicKeyIndex(TLVData tlvCAPublicKeyIndex)
+        /// <param name="tlvCaPublicKeyIndex">TLVData defining the Certification Authority Public Key Index tag.</param>
+        public CertificationAuthorityPublicKeyIndex(TLVData tlvCaPublicKeyIndex)
         {
-            tlv = tlvCAPublicKeyIndex;
+            tlv = tlvCaPublicKeyIndex;
         }
 
         #endregion

@@ -277,10 +277,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void guiDoVerifyCardholder_Click(object sender, EventArgs e)
         {
-            CardholderVerificationMethodList.CVRule cvRule = (CardholderVerificationMethodList.CVRule)guiCVMList.SelectedItem;
+            CardholderVerificationMethodList.CvRule cvRule = (CardholderVerificationMethodList.CvRule)guiCVMList.SelectedItem;
             EMV.Card.PINBlock pinBlock;
-            if (cvRule.cvmCode == CardholderVerificationMethodList.CVMCode.PLAINTEXTPIN_ICC
-                || cvRule.cvmCode == CardholderVerificationMethodList.CVMCode.PLAINTEXTPIN_ICC_AND_SIGN)
+            if (cvRule.CvmCode == CardholderVerificationMethodList.CvmCode.PlaintextpinIcc
+                || cvRule.CvmCode == CardholderVerificationMethodList.CvmCode.PlaintextpinIccAndSign)
             {
                 if (guiPINEntry.Enabled)
                 {
@@ -364,11 +364,11 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void guiCVMList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CardholderVerificationMethodList.CVRule cvRule = (CardholderVerificationMethodList.CVRule)guiCVMList.SelectedItem;
-            switch (cvRule.cvmCode)
+            CardholderVerificationMethodList.CvRule cvRule = (CardholderVerificationMethodList.CvRule)guiCVMList.SelectedItem;
+            switch (cvRule.CvmCode)
             {
-                case CardholderVerificationMethodList.CVMCode.ENCIPHEREDPIN_ICC:
-                case CardholderVerificationMethodList.CVMCode.ENCIPHEREDPIN_ICC_AND_SIGN:
+                case CardholderVerificationMethodList.CvmCode.EncipheredpinIcc:
+                case CardholderVerificationMethodList.CvmCode.EncipheredpinIccAndSign:
                     guiDoGetChallenge.Enabled = true;
                     break;
                 default:
@@ -439,7 +439,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Afl != null)
             {
-                foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.getFiles())
+                foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
                 {
                     aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
                 }
@@ -535,7 +535,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Afl != null)
             {
-                foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.getFiles())
+                foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
                 {
                     aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
                 }
@@ -623,7 +623,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             TreeNode pinNode = new TreeNode("Cardholder Verification");
             emvAppNode.Nodes.Add(pinNode);
-            pinNode.Nodes.Add(new TreeNode(String.Format("TVR :: Cardholder Verification: {0}", (emv.Tvr.cardholderVerificationFailed ? "failed" : "success"))));
+            pinNode.Nodes.Add(new TreeNode(String.Format("TVR :: Cardholder Verification: {0}", (emv.Tvr.CardholderVerificationFailed ? "failed" : "success"))));
             if (emv.VerifyPinStatusWord != 0x0000)
             {
                 pinNode.Nodes.Add(new TreeNode(String.Format("VERIFY PIN status: 0x{0:X4}", emv.VerifyPinStatusWord)));
@@ -650,7 +650,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (_emv.CvmList != null)
             {
-                guiCVMList.DataSource = _emv.CvmList.cvRules;
+                guiCVMList.DataSource = _emv.CvmList.CvRules;
                 guiCVMList.DisplayMember = "cvmCode";
             }
         }
@@ -666,8 +666,8 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.LogEntry != null)
             {
-                guiCardLogSFI.Text = String.Format("{0:X2}", emv.LogEntry.sfi);
-                guiCardLogLength.Text = String.Format("{0:X2}", emv.LogEntry.cyclicFileSize);
+                guiCardLogSFI.Text = String.Format("{0:X2}", emv.LogEntry.Sfi);
+                guiCardLogLength.Text = String.Format("{0:X2}", emv.LogEntry.CyclicFileSize);
             }
 
             if (emv.LogEntry != null && emv.LogFormat != null)
@@ -693,7 +693,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             // Set column names. If tag is known by tlvManager, its name is used instead of the tag number.
             guiLogRecords.Columns.Add("Record");
-            foreach (DataObjectList.DataObjectDefinition dol in emv.LogFormat.getDataObjectDefinitions())
+            foreach (DataObjectList.DataObjectDefinition dol in emv.LogFormat.GetDataObjectDefinitions())
             {
                 String tagStr = String.Format("{0:T}", dol);
                 if (_tlvDictionary.get(tagStr) != null)
@@ -741,7 +741,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             // Certification Authority Public Key
             ApplicationIdentifier aidObject = new ApplicationIdentifier(emv.Aid);
             guiPublicKeysAID.Text = emv.Aid;
-            guiPublicKeysRID.Text = aidObject.strRID;
+            guiPublicKeysRID.Text = aidObject.StrRid;
 
             if (emv.TlvDataRecords.hasTag(0x8F))
             {
@@ -798,11 +798,11 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                     // value
                     item.SubItems.Add(String.Format("{0:V}", tlv));
                     // insert item in SDA, DDA and/or CDA list
-                    if (emv.Aip.sda)
+                    if (emv.Aip.Sda)
                         guiSDASignedData.Items.Add((ListViewItem)item.Clone());
-                    if (emv.Aip.dda)
+                    if (emv.Aip.Dda)
                         guiDDASignedData.Items.Add((ListViewItem)item.Clone());
-                    if (emv.Aip.cda)
+                    if (emv.Aip.Cda)
                         guiCDASignedData.Items.Add((ListViewItem)item.Clone());
                 }
                 //if (emv.tlvDataRecords.hasTag(0x9F4A))
@@ -909,40 +909,40 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         private void updateTVR(EMV.Card.EMVApplication emv)
         {
             // byte 1
-            guiTVR_1_1.Checked = emv.Tvr.offlineDataAuthenticationNotPerformed;
-            guiTVR_1_2.Checked = emv.Tvr.sdaFailed;
-            guiTVR1_3.Checked = emv.Tvr.iccDataMissing;
-            guiTVR1_4.Checked = emv.Tvr.terminalExceptionFile;
-            guiTVR1_5.Checked = emv.Tvr.ddaFailed;
-            guiTVR1_6.Checked = emv.Tvr.cdaFailed;
+            guiTVR_1_1.Checked = emv.Tvr.OfflineDataAuthenticationNotPerformed;
+            guiTVR_1_2.Checked = emv.Tvr.SdaFailed;
+            guiTVR1_3.Checked = emv.Tvr.IccDataMissing;
+            guiTVR1_4.Checked = emv.Tvr.TerminalExceptionFile;
+            guiTVR1_5.Checked = emv.Tvr.DdaFailed;
+            guiTVR1_6.Checked = emv.Tvr.CdaFailed;
 
             // byte 2
             guiTVR2_1.Checked = emv.Tvr.IccAndTerminalVersionsDifferent;
-            guiTVR2_2.Checked = emv.Tvr.expiredApplication;
-            guiTVR2_3.Checked = emv.Tvr.notYetEffectiveApplication;
-            guiTVR2_4.Checked = emv.Tvr.serviceNotAllowed;
-            guiTVR2_5.Checked = emv.Tvr.newCard;
+            guiTVR2_2.Checked = emv.Tvr.ExpiredApplication;
+            guiTVR2_3.Checked = emv.Tvr.NotYetEffectiveApplication;
+            guiTVR2_4.Checked = emv.Tvr.ServiceNotAllowed;
+            guiTVR2_5.Checked = emv.Tvr.NewCard;
 
             // byte 3
-            guiTVR3_1.Checked = emv.Tvr.cardholderVerificationFailed;
-            guiTVR3_2.Checked = emv.Tvr.unrecognisedCVM;
-            guiTVR3_3.Checked = emv.Tvr.pinTryLimitExceeded;
-            guiTVR3_4.Checked = emv.Tvr.pinpadError;
-            guiTVR3_5.Checked = emv.Tvr.pinNotEntered;
-            guiTVR3_6.Checked = emv.Tvr.onlinePinEntered;
+            guiTVR3_1.Checked = emv.Tvr.CardholderVerificationFailed;
+            guiTVR3_2.Checked = emv.Tvr.UnrecognisedCvm;
+            guiTVR3_3.Checked = emv.Tvr.PINTryLimitExceeded;
+            guiTVR3_4.Checked = emv.Tvr.PinpadError;
+            guiTVR3_5.Checked = emv.Tvr.PINNotEntered;
+            guiTVR3_6.Checked = emv.Tvr.OnlinePinEntered;
 
             // byte 4
-            guiTVR4_1.Checked = emv.Tvr.transactionExceedFloorLimit;
-            guiTVR4_2.Checked = emv.Tvr.lowerConsecutiveOfflineLimitExceeded;
-            guiTVR4_3.Checked = emv.Tvr.upperConsecutiveOfflineLimitExceeded;
-            guiTVR4_4.Checked = emv.Tvr.transactionRandomlySelectedOnline;
-            guiTVR4_5.Checked = emv.Tvr.merchantForcedTransactionOnline;
+            guiTVR4_1.Checked = emv.Tvr.TransactionExceedFloorLimit;
+            guiTVR4_2.Checked = emv.Tvr.LowerConsecutiveOfflineLimitExceeded;
+            guiTVR4_3.Checked = emv.Tvr.UpperConsecutiveOfflineLimitExceeded;
+            guiTVR4_4.Checked = emv.Tvr.TransactionRandomlySelectedOnline;
+            guiTVR4_5.Checked = emv.Tvr.MerchantForcedTransactionOnline;
 
             // byte 5
-            guiTVR5_1.Checked = emv.Tvr.defaultTDOLUsed;
-            guiTVR5_2.Checked = emv.Tvr.issuerAuthenticationFailed;
-            guiTVR5_3.Checked = emv.Tvr.scriptProcessingFailedBeforeGenerateAC;
-            guiTVR5_4.Checked = emv.Tvr.scriptProcessingFailedAfterGenerateAC;
+            guiTVR5_1.Checked = emv.Tvr.DefaultTdolUsed;
+            guiTVR5_2.Checked = emv.Tvr.IssuerAuthenticationFailed;
+            guiTVR5_3.Checked = emv.Tvr.ScriptProcessingFailedBeforeGenerateAC;
+            guiTVR5_4.Checked = emv.Tvr.ScriptProcessingFailedAfterGenerateAC;
         }
 
         #endregion
@@ -977,7 +977,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void activateEMVInternalAuthenticate()
         {
-            if (_emv.Aip != null && _emv.Aip.dda)
+            if (_emv.Aip != null && _emv.Aip.Dda)
             {
                 // Generates a new unpredictable number
                 Byte[] unpredictableNumber = new Byte[4];

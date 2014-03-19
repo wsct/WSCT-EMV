@@ -391,7 +391,7 @@ namespace WSCT.EMV.Card
                     var aidObject = new ApplicationIdentifier(Aid);
                     try
                     {
-                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.get(aidObject.strRID, caPublicKeyIndex.tlv.value.toHexa());
+                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.get(aidObject.StrRid, caPublicKeyIndex.tlv.value.toHexa());
                     }
                     catch (EMVCertificationAuthorityNotFoundException)
                     {
@@ -924,7 +924,7 @@ namespace WSCT.EMV.Card
                 var tlvAll = new List<TLVData>();
                 tlvAll.Add(TlvFci);
                 tlvAll.AddRange(TlvTerminalData);
-                pdolDataValue = pdol.buildData(tlvAll);
+                pdolDataValue = pdol.BuildData(tlvAll);
             }
             else
             {
@@ -967,9 +967,9 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ReadDataFile(ApplicationFileLocator.FileIdentification file)
         {
-            for (var recordNumber = file.firstRecord; recordNumber <= file.lastRecord; recordNumber++)
+            for (var recordNumber = file.FirstRecord; recordNumber <= file.LastRecord; recordNumber++)
             {
-                CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, file.sfi, 0);
+                CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, file.Sfi, 0);
                 var crp = new CommandResponsePair(cAPDU);
                 crp.transmit(_cardChannel);
 
@@ -983,10 +983,10 @@ namespace WSCT.EMV.Card
                         throw new Exception(String.Format("EMVApplication.readData(): record is not TLV-coded with tag 70 [{0}]", tlv));
 
                     // If used for offline, store it in dedicated list
-                    if (recordNumber - file.firstRecord < file.offlineNumberOfRecords)
+                    if (recordNumber - file.FirstRecord < file.OfflineNumberOfRecords)
                     {
                         // For files with SFI in the range 1 to 10, the record tag ('70') and the record length are excluded from the offline data authentication process.
-                        if (file.sfi <= 10)
+                        if (file.Sfi <= 10)
                         {
                             foreach (var tlvData in tlv.subFields)
                                 _tlvOfflineRecords.Add(tlvData);
@@ -1011,7 +1011,7 @@ namespace WSCT.EMV.Card
         {
             if (BeforeReadApplicationDataEvent != null) BeforeReadApplicationDataEvent(this);
 
-            foreach (ApplicationFileLocator.FileIdentification file in Afl.getFiles())
+            foreach (ApplicationFileLocator.FileIdentification file in Afl.GetFiles())
             {
                 ReadDataFile(file);
             }
@@ -1089,18 +1089,18 @@ namespace WSCT.EMV.Card
             do
             {
                 recordNumber++;
-                CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, LogEntry.sfi, 0);
+                CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, LogEntry.Sfi, 0);
                 var crp = new CommandResponsePair(cAPDU);
                 crp.transmit(_cardChannel);
                 _lastStatusWord = crp.rAPDU.statusWord;
                 if (crp.rAPDU.statusWord == 0x9000)
                 {
                     var record = crp.rAPDU.udr;
-                    var dataInRecord = _logFormat.parseRawData(record);
+                    var dataInRecord = _logFormat.ParseRawData(record);
                     _logRecords.Add(dataInRecord);
                 }
 
-            } while (_lastStatusWord == 0x9000 && recordNumber < _logEntry.cyclicFileSize);
+            } while (_lastStatusWord == 0x9000 && recordNumber < _logEntry.CyclicFileSize);
 
             if (AfterReadLogFileEvent != null) AfterReadLogFileEvent(this);
 
@@ -1128,7 +1128,7 @@ namespace WSCT.EMV.Card
             _verifyPinStatusWord = _lastStatusWord;
 
             if (_lastStatusWord != 0x9000)
-                Tvr.cardholderVerificationFailed = true;
+                Tvr.CardholderVerificationFailed = true;
 
             if (AfterVerifyPinEvent != null) AfterVerifyPinEvent(this);
 
@@ -1157,7 +1157,7 @@ namespace WSCT.EMV.Card
                 tlvAll.Add(_tlvInternalAuthenticateUnpredictableNumber);
                 tlvAll.AddRange(TlvRecords);
                 tlvAll.AddRange(TlvTerminalData);
-                ddolDataValue = Ddol.buildData(tlvAll);
+                ddolDataValue = Ddol.BuildData(tlvAll);
             }
             else
             {
@@ -1269,7 +1269,7 @@ namespace WSCT.EMV.Card
                 tlvAll.AddRange(TlvRecords);
                 tlvAll.AddRange(TlvTerminalData);
                 tlvAll.Add(Tvr.tlv);
-                cdolDataValue = Cdol1.buildData(tlvAll);
+                cdolDataValue = Cdol1.BuildData(tlvAll);
             }
             else
             {
@@ -1322,7 +1322,7 @@ namespace WSCT.EMV.Card
                 {
                     var udol = new DataObjectList(record.getTag(0x9F69).value);
                     tlvAll.AddRange(TlvTerminalData);
-                    udolDataValue = udol.buildData(tlvAll);
+                    udolDataValue = udol.BuildData(tlvAll);
                 }
             }
 

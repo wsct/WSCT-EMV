@@ -4,16 +4,16 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application Transaction Counter of an EMV card
+    /// Represents the Application Transaction Counter of an EMV card.
     /// </summary>
     public class ApplicationTransactionCounter : BinaryTLVObject
     {
         #region >> Properties
 
         /// <summary>
-        /// ATC value
+        /// ATC value.
         /// </summary>
-        public UInt16 counter
+        public UInt16 Counter
         {
             get { return (UInt16)(tlv.value[0] * 0x100 + tlv.value[1]); }
         }
@@ -23,18 +23,17 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="ApplicationTransactionCounter"/> instance.
         /// </summary>
         public ApplicationTransactionCounter()
-            : base()
         {
             tlv = new TLVData();
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationTransactionCounter"/> instance.
         /// </summary>
-        /// <param name="tlvATC">TLV TVR data</param>
+        /// <param name="tlvATC">TLV TVR data.</param>
         public ApplicationTransactionCounter(TLVData tlvATC)
             : this()
         {

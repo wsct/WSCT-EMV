@@ -1,64 +1,68 @@
 using System;
+using System.Collections;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application File Locator of an EMV application
+    /// Represents the Application File Locator of an EMV application.
     /// </summary>
     public class ApplicationFileLocator : BinaryTLVObject
     {
         #region >> Nested classes
 
         /// <summary>
-        /// Represents identification informations for one file in the AFL
+        /// Represents identification informations for one file in the AFL.
         /// </summary>
         public class FileIdentification
         {
             /// <summary>
-            /// SFI of the file
+            /// SFI of the file.
             /// </summary>
-            public Byte sfi;
+            public Byte Sfi;
+
             /// <summary>
-            /// First record to be read
+            /// First record to be read.
             /// </summary>
-            public Byte firstRecord;
+            public Byte FirstRecord;
+
             /// <summary>
-            /// Last record to be read
+            /// Last record to be read.
             /// </summary>
-            public Byte lastRecord;
+            public Byte LastRecord;
+
             /// <summary>
-            /// Last record to be used in offline data authentication (from <c>firstRecord</c> to <c>firstRecord+offlineNumberOfRecords</c>)
+            /// Last record to be used in offline data authentication (from <c>firstRecord</c> to <c>firstRecord+offlineNumberOfRecords</c>).
             /// </summary>
-            public Byte offlineNumberOfRecords;
+            public Byte OfflineNumberOfRecords;
+
             /// <summary>
-            /// Constructor
+            /// Initializes a new <see cref="FileIdentification"/> instance.
             /// </summary>
-            /// <param name="fourBytes">Four bytes identifying the file</param>
+            /// <param name="fourBytes">Four bytes identifying the file.</param>
             public FileIdentification(Byte[] fourBytes)
                 : this(fourBytes, 0)
             {
             }
+
             /// <summary>
-            /// Constructor
+            /// Initializes a new <see cref="FileIdentification"/> instance.
             /// </summary>
-            /// <param name="fourBytes">Four bytes identifying the file</param>
-            /// <param name="offset">Offset in the array <paramref>fourBytes</paramref></param>
+            /// <param name="fourBytes">Four bytes identifying the file.</param>
+            /// <param name="offset">Offset in the array <paramref>fourBytes</paramref>.</param>
             public FileIdentification(Byte[] fourBytes, Byte offset)
             {
-                sfi = (Byte)(fourBytes[offset + 0] >> 3);
-                firstRecord = fourBytes[offset + 1];
-                lastRecord = fourBytes[offset + 2];
-                offlineNumberOfRecords = fourBytes[offset + 3];
+                Sfi = (Byte)(fourBytes[offset + 0] >> 3);
+                FirstRecord = fourBytes[offset + 1];
+                LastRecord = fourBytes[offset + 2];
+                OfflineNumberOfRecords = fourBytes[offset + 3];
             }
-            /// <summary>
-            /// Represents the object in String format
-            /// </summary>
-            /// <returns>String representation</returns>
+
+            /// <inheritdoc />
             public override string ToString()
             {
                 return String.Format("sfi:{0} from {1} to {2} (used for offline auth:{3})",
-                    sfi, firstRecord, lastRecord, offlineNumberOfRecords); ;
+                    Sfi, FirstRecord, LastRecord, OfflineNumberOfRecords);
             }
         }
 
@@ -67,22 +71,20 @@ namespace WSCT.EMV.Objects
         #region >> Constructors
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationFileLocator"/> instance.
         /// </summary>
         public ApplicationFileLocator()
-            : base()
         {
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new <see cref="ApplicationFileLocator"/> instance.
         /// </summary>
-        /// <param name="aflData">Raw AFL data</param>
+        /// <param name="aflData">Raw AFL data.</param>
         public ApplicationFileLocator(Byte[] aflData)
             : this()
         {
-            tlv = new WSCT.Helpers.BasicEncodingRules.TLVData();
-            tlv.value = aflData;
+            tlv = new TLVData { value = aflData };
         }
 
         #endregion
@@ -90,20 +92,19 @@ namespace WSCT.EMV.Objects
         #region >> Methods
 
         /// <summary>
-        /// Enumerates files 
+        /// Enumerates files.
         /// </summary>
-        /// <returns><see cref="ApplicationFileLocator.FileIdentification">FileIdentification</see> instances</returns>
-        public System.Collections.IEnumerable getFiles()
+        /// <returns><see cref="FileIdentification" /> instances.</returns>
+        public IEnumerable GetFiles()
         {
             Byte offset = 0;
             while (offset < tlv.value.Length)
             {
-                yield return new ApplicationFileLocator.FileIdentification(tlv.value, offset);
+                yield return new FileIdentification(tlv.value, offset);
                 offset += 4;
             }
         }
 
         #endregion
-
     }
 }
