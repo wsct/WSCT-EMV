@@ -4,7 +4,7 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     /// <summary>
-    /// Represents the Application Usage Control of an EMV application
+    /// Represents the Application Usage Control of an EMV application.
     /// </summary>
     public class ApplicationUsageControl : BinaryTLVObject
     {

@@ -67,7 +67,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public ApplicationInterchangeProfile()
         {
-            tlv = new TLVData { value = new Byte[2] };
+            tlv = new TLVData { tag = 0x82, value = new Byte[2] };
         }
 
         /// <summary>

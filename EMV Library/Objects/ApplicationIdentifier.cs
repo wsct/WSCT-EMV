@@ -16,7 +16,10 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public String StrRid
         {
-            get { return tlv.value.toHexa(5); }
+            get
+            {
+                return (tlv != null && tlv.value != null ? tlv.value.toHexa(5) : String.Empty);
+            }
         }
 
         /// <summary>
@@ -26,9 +29,14 @@ namespace WSCT.EMV.Objects
         {
             get
             {
-                var pix = new Byte[tlv.value.Length - 5];
-                Array.Copy(tlv.value, 5, pix, 0, pix.Length);
-                return pix.toHexa();
+                if (tlv != null && tlv.value != null)
+                {
+                    var pix = new Byte[tlv.value.Length - 5];
+                    Array.Copy(tlv.value, 5, pix, 0, pix.Length);
+                    return pix.toHexa();
+                }
+
+                return String.Empty;
             }
         }
 

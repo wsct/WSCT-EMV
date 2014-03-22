@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -95,13 +96,16 @@ namespace WSCT.EMV.Objects
         /// Enumerates files.
         /// </summary>
         /// <returns><see cref="FileIdentification" /> instances.</returns>
-        public IEnumerable GetFiles()
+        public IEnumerable<FileIdentification> GetFiles()
         {
-            Byte offset = 0;
-            while (offset < tlv.value.Length)
+            if (tlv != null && tlv.value != null)
             {
-                yield return new FileIdentification(tlv.value, offset);
-                offset += 4;
+                Byte offset = 0;
+                while (offset < tlv.value.Length)
+                {
+                    yield return new FileIdentification(tlv.value, offset);
+                    offset += 4;
+                }
             }
         }
 

@@ -8,6 +8,8 @@ namespace WSCT.EMV.Objects
     /// </summary>
     public class ApplicationLabel : StringTLVObject
     {
+        #region >> Constructors
+
         /// <summary>
         /// Initializes a new <see cref="ApplicationLabel"/> instance.
         /// </summary>
@@ -24,5 +26,7 @@ namespace WSCT.EMV.Objects
             : base(0x50, label)
         {
         }
+
+        #endregion
     }
 }
