@@ -9,10 +9,10 @@ namespace WSCT.EMV.Security
     public interface IHashAlgorithmProvider
     {
         /// <summary>
-        /// Implementation of hash computation
+        /// Implementation of hash computation.
         /// </summary>
-        /// <param name="data">List of Byte[] to be concatenated an hashed</param>
-        /// <returns>Hash value</returns>
-        Byte[] computeHash(List<Byte[]> data);
+        /// <param name="data">List of Byte[] to be concatenated an hashed.</param>
+        /// <returns>Hash value.</returns>
+        Byte[] ComputeHash(List<Byte[]> data);
     }
 }

@@ -9,9 +9,9 @@
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="AbstractDataAuthenticationFormat03"/> instance.
         /// </summary>
-        public AbstractDataAuthenticationFormat03()
+        protected AbstractDataAuthenticationFormat03()
             : base(2)
         {
         }

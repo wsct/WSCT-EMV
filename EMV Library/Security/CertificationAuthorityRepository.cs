@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Represents a collection of public keys of Certificate Authorities
+    /// Represents a collection of public keys of Certificate Authorities.
     /// </summary>
     [XmlRoot("certificationAuthorities")]
     public class CertificationAuthorityRepository : IXmlSerializable
@@ -22,7 +23,7 @@ namespace WSCT.EMV.Security
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="CertificationAuthorityRepository"/> instance.
         /// </summary>
         public CertificationAuthorityRepository()
         {
@@ -34,7 +35,7 @@ namespace WSCT.EMV.Security
 
         #region >> Internal Methods
 
-        private String getIdentifier(String rid, String index)
+        private String GetIdentifier(String rid, String index)
         {
             return (rid + index).Replace(" ", "");
         }
@@ -44,30 +45,32 @@ namespace WSCT.EMV.Security
         #region >> Methods
 
         /// <summary>
-        /// Add a new Certificate Authority public key
+        /// Adds a new Authority Certificate public key.
         /// </summary>
-        /// <param name="rid">RID of the EMV application</param>
-        /// <param name="index">Index of the Certificate Authority</param>
-        /// <param name="publicKey">The Public Key of the Certificate Authority</param>
-        public void add(String rid, String index, PublicKey publicKey)
+        /// <param name="rid">RID of the EMV application.</param>
+        /// <param name="index">Index of the Certificate Authority.</param>
+        /// <param name="publicKey">The Public Key of the Certificate Authority.</param>
+        public void Add(String rid, String index, PublicKey publicKey)
         {
-            _keys.Add(getIdentifier(rid, index), publicKey);
+            _keys.Add(GetIdentifier(rid, index), publicKey);
         }
 
         /// <summary>
-        /// Get the EMV Certificate Authority public key associated with <paramref name="rid"/> and <paramref name="index"/>
+        /// Get the EMV Certificate Authority public key associated with <paramref name="rid"/> and <paramref name="index"/>.
         /// </summary>
-        /// <param name="rid">RID of the EMV application</param>
-        /// <param name="index">Index of the Certificate Authority</param>
-        /// <returns>The Public Key of the Certificate Authority</returns>
-        /// <exception cref="Exception">If no public key found</exception>
-        public PublicKey get(String rid, String index)
+        /// <param name="rid">RID of the EMV application.</param>
+        /// <param name="index">Index of the Certificate Authority.</param>
+        /// <returns>The Public Key of the Certificate Authority.</returns>
+        /// <exception cref="Exception">If no public key found.</exception>
+        public PublicKey Get(String rid, String index)
         {
             PublicKey publicKey;
-            if (_keys.TryGetValue(getIdentifier(rid, index), out publicKey))
+            if (_keys.TryGetValue(GetIdentifier(rid, index), out publicKey))
+            {
                 return publicKey;
-            else
-                throw new EMVCertificationAuthorityNotFoundException(String.Format("CertificateAuthorityRepository: no Certificate Authority found for RID+index [{0}+{1}]", rid, index));
+            }
+
+            throw new EMVCertificationAuthorityNotFoundException(String.Format("CertificateAuthorityRepository: no Certificate Authority found for RID+index [{0}+{1}]", rid, index));
         }
 
         #endregion
@@ -75,15 +78,15 @@ namespace WSCT.EMV.Security
         #region >> IXmlSerializable Members
 
         /// <inheritdoc />
-        public System.Xml.Schema.XmlSchema GetSchema()
+        public XmlSchema GetSchema()
         {
             return null;
         }
 
         /// <inheritdoc />
-        public void ReadXml(System.Xml.XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(CertificationAuthority));
+            var serializer = new XmlSerializer(typeof(CertificationAuthority));
             reader.ReadStartElement();
 
             while (reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.None)
@@ -91,9 +94,9 @@ namespace WSCT.EMV.Security
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        CertificationAuthority ca = (CertificationAuthority)serializer.Deserialize(reader);
+                        var ca = (CertificationAuthority)serializer.Deserialize(reader);
                         _certificationAuthorities.Add(ca);
-                        _keys.Add(getIdentifier(ca.rid, ca.index), ca.publicKey);
+                        _keys.Add(GetIdentifier(ca.Rid, ca.Index), ca.PublicKey);
                         break;
                     case XmlNodeType.Comment:
                         reader.Read();
@@ -107,10 +110,10 @@ namespace WSCT.EMV.Security
         }
 
         /// <inheritdoc />
-        public void WriteXml(System.Xml.XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(CertificationAuthority));
-            foreach (CertificationAuthority ca in _certificationAuthorities)
+            var serializer = new XmlSerializer(typeof(CertificationAuthority));
+            foreach (var ca in _certificationAuthorities)
             {
                 serializer.Serialize(writer, ca);
             }

@@ -3,7 +3,7 @@
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Exception called when a Hash algorithm used was not found in a <see cref="AbstractSignatureContainer"/>
+    /// Exception called when a Hash algorithm used was not found in a <see cref="AbstractSignatureContainer"/>.
     /// </summary>
     public class HashAlgorithmUnknownException : Exception
     {

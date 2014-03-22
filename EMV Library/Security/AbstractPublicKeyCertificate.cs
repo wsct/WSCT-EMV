@@ -3,13 +3,13 @@
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Represents an EMV certificate for a Public Key
+    /// Represents an EMV certificate for a Public Key.
     /// </summary>
     public abstract class AbstractPublicKeyCertificate : AbstractSignatureContainer
     {
         #region >> Fields
 
-        private Int32 _identifierLength;
+        private readonly Int32 _identifierLength;
 
         private Byte[] _certificateExpirationDate;
         private Byte[] _certificateSerialNumber;
@@ -20,9 +20,9 @@ namespace WSCT.EMV.Security
         #region >> Properties
 
         /// <summary>
-        /// Certificate Expiration Date (2): MMYY after which this certificate is invalid 
+        /// Certificate Expiration Date (2): MMYY after which this certificate is invalid.
         /// </summary>
-        public Byte[] certificateExpirationDate
+        public Byte[] CertificateExpirationDate
         {
             get
             {
@@ -36,9 +36,9 @@ namespace WSCT.EMV.Security
         }
 
         /// <summary>
-        /// Certificate Serial Number (3): Binary number unique to this certificate assigned by the certification authority
+        /// Certificate Serial Number (3): Binary number unique to this certificate assigned by the certification authority.
         /// </summary>
-        public Byte[] certificateSerialNumber
+        public Byte[] CertificateSerialNumber
         {
             get
             {
@@ -52,25 +52,25 @@ namespace WSCT.EMV.Security
         }
 
         /// <summary>
-        /// Public Key (1): Identifies the digital signature algorithm to be used with the Public KeyAlgorithm Indicator
+        /// Public Key (1): Identifies the digital signature algorithm to be used with the Public KeyAlgorithm Indicator.
         /// </summary>
-        public Byte publicKeyAlgorithmIndicator
+        public Byte PublicKeyAlgorithmIndicator
         {
             get { return _recovered[2 + _identifierLength + 6]; }
         }
 
         /// <summary>
-        /// Public Key Length (1): Identifies the length of the Public Key Modulus in bytes 
+        /// Public Key Length (1): Identifies the length of the Public Key Modulus in bytes.
         /// </summary>
-        public Byte publicKeyLength
+        public Byte PublicKeyLength
         {
             get { return _recovered[2 + _identifierLength + 7]; }
         }
 
         /// <summary>
-        /// Public Key Exponent Length (1): Identifies the length of the Public Key Exponent in bytes
+        /// Public Key Exponent Length (1): Identifies the length of the Public Key Exponent in bytes.
         /// </summary>
-        public Byte publicKeyExponentLength
+        public Byte PublicKeyExponentLength
         {
             get { return _recovered[2 + _identifierLength + 8]; }
         }
@@ -78,21 +78,21 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// 
         /// </summary>
-        public Byte[] publicKeyorLeftmostDigitsofthePublicKey
+        public Byte[] PublicKeyorLeftmostDigitsofthePublicKey
         {
             get
             {
                 if (_publicKeyorLeftmostDigitsofthePublicKey == null)
                 {
-                    if (publicKeyLength <= keyLength - (22 + 10 + _identifierLength))
+                    if (PublicKeyLength <= KeyLength - (22 + 10 + _identifierLength))
                     {
-                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[publicKeyLength];
-                        Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, publicKeyLength);
+                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[PublicKeyLength];
+                        Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, PublicKeyLength);
                     }
                     else
                     {
-                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[keyLength - (22 + 10 + _identifierLength)];
-                        Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, keyLength - (22 + 10 + _identifierLength));
+                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[KeyLength - (22 + 10 + _identifierLength)];
+                        Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, KeyLength - (22 + 10 + _identifierLength));
                     }
                 }
                 return _publicKeyorLeftmostDigitsofthePublicKey;
@@ -104,9 +104,9 @@ namespace WSCT.EMV.Security
         #region >> Constructors
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new <see cref="AbstractPublicKeyCertificate"/> instance.
         /// </summary>
-        public AbstractPublicKeyCertificate(Int32 identifierLength)
+        protected AbstractPublicKeyCertificate(Int32 identifierLength)
             : base(7 + identifierLength)
         {
             _identifierLength = identifierLength;

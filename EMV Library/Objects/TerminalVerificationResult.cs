@@ -8,38 +8,164 @@ namespace WSCT.EMV.Objects
     /// </summary>
     public class TerminalVerificationResult : BinaryTLVObject
     {
-        #region >> Internal constants
+        #region >> Nested Enums
 
-        const byte OFFLINE_DATA_AUTH = 0x80;
-        const byte SDA = 0x40;
-        const byte ICCDATA = 0x20;
-        const byte TERMINALEXCEPTIONFILE = 0x10;
-        const byte DDA = 0x08;
-        const byte CDA = 0x04;
+        /// <summary>
+        /// Bit signification of TVR first byte.
+        /// </summary>
+        public enum Byte1
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            OfflineDataAuth = 0x80,
 
-        const byte ICCTERMINALVERSION = 0x80;
-        const byte EXPIREDAPPLICATION = 0x40;
-        const byte NOTYETEFFECTIVEAPPLICATION = 0x20;
-        const byte SERVICENOTALLOWED = 0x10;
-        const byte NEWCARD = 0x08;
+            /// <summary>
+            /// 
+            /// </summary>
+            StaticDataAuthentication = 0x40,
 
-        const byte CARDHOLDERVERIFICATIONFAILED = 0x80;
-        const byte UNRECOGNISED_CVM = 0x40;
-        const byte PINTRYLIMIT = 0x20;
-        const byte PINPAD_ERROR = 0x10;
-        const byte PIN_NOTENTERED = 0x08;
-        const byte ONLINEPIN_ENTERED = 0x04;
+            /// <summary>
+            /// 
+            /// </summary>
+            IccData = 0x20,
 
-        const byte TRANSACTION_FLOORLIMIT = 0x80;
-        const byte LOWER_OFFLINELIMIT = 0x40;
-        const byte UPPER_OFFLINELIMIT = 0x20;
-        const byte RANDOMLYSELECTED_ONLINE = 0x10;
-        const byte MERCHANT_FORCEDONLINE = 0x08;
+            /// <summary>
+            /// 
+            /// </summary>
+            TerminalExceptionFile = 0x10,
 
-        const byte DEFAULT_TDOL_USED = 0x80;
-        const byte ISSUER_AUTHENTICATION_FAILED = 0x40;
-        const byte SCRIPT_FAILED_BEFORE_GENERATEAC = 0x20;
-        const byte SCRIPT_FAILED_AFTER_GENERATEAC = 0x10;
+            /// <summary>
+            /// 
+            /// </summary>
+            DynamicDataAuthentication = 0x08,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            CombinedDataAuthentication = 0x04
+        };
+
+        /// <summary>
+        /// Bit signification of TVR second byte.
+        /// </summary>
+        public enum Byte2
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            IccTerminalVersion = 0x80,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            ExpiredApplication = 0x40,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            NotYetEffectiveApplication = 0x20,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            ServiceNotAllowed = 0x10,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            NewCard = 0x08
+        }
+
+        /// <summary>
+        /// Bit signification of TVR third byte.
+        /// </summary>
+        public enum Byte3
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            CardholderVerificationFailed = 0x80,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UnrecognisedCvm = 0x40,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PinTrylimit = 0x20,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PinpadError = 0x10,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PINNotentered = 0x08,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            OnlinepinEntered = 0x04
+        }
+
+        /// <summary>
+        /// Bit signification of fourth TVR byte.
+        /// </summary>
+        public enum Byte4
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            TransactionFloorLimit = 0x80,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            LowerOfflineLimit = 0x40,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UpperOfflineLimit = 0x20,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            RandomlySelectedOnline = 0x10,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            MerchantForcedOnline = 0x08
+        }
+
+        /// <summary>
+        /// Bit signification of fifth TVR byte.
+        /// </summary>
+        public enum Byte5
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            DefaultTdolUsed = 0x80,
+            /// <summary>
+            /// 
+            /// </summary>
+            IssuerAuthenticationFailed = 0x40,
+            /// <summary>
+            /// 
+            /// </summary>
+            ScriptFailedBeforeGenerateAc = 0x20,
+            /// <summary>
+            /// 
+            /// </summary>
+            ScriptFailedAfterGenerateAc = 0x10
+        }
 
         #endregion
 
@@ -50,8 +176,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean OfflineDataAuthenticationNotPerformed
         {
-            get { return Test(0, OFFLINE_DATA_AUTH); }
-            set { Force(0, OFFLINE_DATA_AUTH, value); }
+            get { return Test(0, (int)Byte1.OfflineDataAuth); }
+            set { Force(0, (int)Byte1.OfflineDataAuth, value); }
         }
 
         /// <summary>
@@ -59,8 +185,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean SdaFailed
         {
-            get { return Test(0, SDA); }
-            set { Force(0, SDA, value); }
+            get { return Test(0, (int)Byte1.StaticDataAuthentication); }
+            set { Force(0, (int)Byte1.StaticDataAuthentication, value); }
         }
 
         /// <summary>
@@ -68,8 +194,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean IccDataMissing
         {
-            get { return Test(0, ICCDATA); }
-            set { Force(0, ICCDATA, value); }
+            get { return Test(0, (int)Byte1.IccData); }
+            set { Force(0, (int)Byte1.IccData, value); }
         }
 
         /// <summary>
@@ -77,8 +203,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean TerminalExceptionFile
         {
-            get { return Test(0, TERMINALEXCEPTIONFILE); }
-            set { Force(0, TERMINALEXCEPTIONFILE, value); }
+            get { return Test(0, (int)Byte1.TerminalExceptionFile); }
+            set { Force(0, (int)Byte1.TerminalExceptionFile, value); }
         }
 
         /// <summary>
@@ -86,8 +212,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean DdaFailed
         {
-            get { return Test(0, DDA); }
-            set { Force(0, DDA, value); }
+            get { return Test(0, (int)Byte1.DynamicDataAuthentication); }
+            set { Force(0, (int)Byte1.DynamicDataAuthentication, value); }
         }
 
         /// <summary>
@@ -95,8 +221,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean CdaFailed
         {
-            get { return Test(0, CDA); }
-            set { Force(0, CDA, value); }
+            get { return Test(0, (int)Byte1.CombinedDataAuthentication); }
+            set { Force(0, (int)Byte1.CombinedDataAuthentication, value); }
         }
 
         /// <summary>
@@ -104,8 +230,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean IccAndTerminalVersionsDifferent
         {
-            get { return Test(1, ICCTERMINALVERSION); }
-            set { Force(1, ICCTERMINALVERSION, value); }
+            get { return Test(1, (int)Byte2.IccTerminalVersion); }
+            set { Force(1, (int)Byte2.IccTerminalVersion, value); }
         }
 
         /// <summary>
@@ -113,8 +239,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean ExpiredApplication
         {
-            get { return Test(1, EXPIREDAPPLICATION); }
-            set { Force(1, EXPIREDAPPLICATION, value); }
+            get { return Test(1, (int)Byte2.ExpiredApplication); }
+            set { Force(1, (int)Byte2.ExpiredApplication, value); }
         }
 
         /// <summary>
@@ -122,8 +248,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean NotYetEffectiveApplication
         {
-            get { return Test(1, NOTYETEFFECTIVEAPPLICATION); }
-            set { Force(1, NOTYETEFFECTIVEAPPLICATION, value); }
+            get { return Test(1, (int)Byte2.NotYetEffectiveApplication); }
+            set { Force(1, (int)Byte2.NotYetEffectiveApplication, value); }
         }
 
         /// <summary>
@@ -131,8 +257,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean ServiceNotAllowed
         {
-            get { return Test(1, SERVICENOTALLOWED); }
-            set { Force(1, SERVICENOTALLOWED, value); }
+            get { return Test(1, (int)Byte2.ServiceNotAllowed); }
+            set { Force(1, (int)Byte2.ServiceNotAllowed, value); }
         }
 
         /// <summary>
@@ -140,8 +266,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean NewCard
         {
-            get { return Test(1, NEWCARD); }
-            set { Force(1, NEWCARD, value); }
+            get { return Test(1, (int)Byte2.NewCard); }
+            set { Force(1, (int)Byte2.NewCard, value); }
         }
 
         /// <summary>
@@ -149,8 +275,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean CardholderVerificationFailed
         {
-            get { return Test(2, CARDHOLDERVERIFICATIONFAILED); }
-            set { Force(2, CARDHOLDERVERIFICATIONFAILED, value); }
+            get { return Test(2, (int)Byte3.CardholderVerificationFailed); }
+            set { Force(2, (int)Byte3.CardholderVerificationFailed, value); }
         }
 
         /// <summary>
@@ -158,8 +284,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean UnrecognisedCvm
         {
-            get { return Test(2, UNRECOGNISED_CVM); }
-            set { Force(2, UNRECOGNISED_CVM, value); }
+            get { return Test(2, (int)Byte3.UnrecognisedCvm); }
+            set { Force(2, (int)Byte3.UnrecognisedCvm, value); }
         }
 
         /// <summary>
@@ -167,8 +293,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean PINTryLimitExceeded
         {
-            get { return Test(2, PINTRYLIMIT); }
-            set { Force(2, PINTRYLIMIT, value); }
+            get { return Test(2, (int)Byte3.PinTrylimit); }
+            set { Force(2, (int)Byte3.PinTrylimit, value); }
         }
 
         /// <summary>
@@ -176,8 +302,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean PinpadError
         {
-            get { return Test(2, PINPAD_ERROR); }
-            set { Force(2, PINPAD_ERROR, value); }
+            get { return Test(2, (int)Byte3.PinpadError); }
+            set { Force(2, (int)Byte3.PinpadError, value); }
         }
 
         /// <summary>
@@ -185,8 +311,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean PINNotEntered
         {
-            get { return Test(2, PIN_NOTENTERED); }
-            set { Force(2, PIN_NOTENTERED, value); }
+            get { return Test(2, (int)Byte3.PINNotentered); }
+            set { Force(2, (int)Byte3.PINNotentered, value); }
         }
 
         /// <summary>
@@ -194,8 +320,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean OnlinePinEntered
         {
-            get { return Test(2, ONLINEPIN_ENTERED); }
-            set { Force(2, ONLINEPIN_ENTERED, value); }
+            get { return Test(2, (int)Byte3.OnlinepinEntered); }
+            set { Force(2, (int)Byte3.OnlinepinEntered, value); }
         }
 
         /// <summary>
@@ -203,8 +329,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean TransactionExceedFloorLimit
         {
-            get { return Test(3, TRANSACTION_FLOORLIMIT); }
-            set { Force(3, TRANSACTION_FLOORLIMIT, value); }
+            get { return Test(3, (int)Byte4.TransactionFloorLimit); }
+            set { Force(3, (int)Byte4.TransactionFloorLimit, value); }
         }
 
         /// <summary>
@@ -212,8 +338,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean LowerConsecutiveOfflineLimitExceeded
         {
-            get { return Test(3, LOWER_OFFLINELIMIT); }
-            set { Force(3, LOWER_OFFLINELIMIT, value); }
+            get { return Test(3, (int)Byte4.LowerOfflineLimit); }
+            set { Force(3, (int)Byte4.LowerOfflineLimit, value); }
         }
 
         /// <summary>
@@ -221,8 +347,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean UpperConsecutiveOfflineLimitExceeded
         {
-            get { return Test(3, UPPER_OFFLINELIMIT); }
-            set { Force(3, UPPER_OFFLINELIMIT, value); }
+            get { return Test(3, (int)Byte4.UpperOfflineLimit); }
+            set { Force(3, (int)Byte4.UpperOfflineLimit, value); }
         }
 
         /// <summary>
@@ -230,8 +356,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean TransactionRandomlySelectedOnline
         {
-            get { return Test(3, RANDOMLYSELECTED_ONLINE); }
-            set { Force(3, RANDOMLYSELECTED_ONLINE, value); }
+            get { return Test(3, (int)Byte4.RandomlySelectedOnline); }
+            set { Force(3, (int)Byte4.RandomlySelectedOnline, value); }
         }
 
         /// <summary>
@@ -239,8 +365,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean MerchantForcedTransactionOnline
         {
-            get { return Test(3, MERCHANT_FORCEDONLINE); }
-            set { Force(3, MERCHANT_FORCEDONLINE, value); }
+            get { return Test(3, (int)Byte4.MerchantForcedOnline); }
+            set { Force(3, (int)Byte4.MerchantForcedOnline, value); }
         }
 
         /// <summary>
@@ -248,8 +374,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean DefaultTdolUsed
         {
-            get { return Test(4, DEFAULT_TDOL_USED); }
-            set { Force(4, DEFAULT_TDOL_USED, value); }
+            get { return Test(4, (int)Byte5.DefaultTdolUsed); }
+            set { Force(4, (int)Byte5.DefaultTdolUsed, value); }
         }
 
         /// <summary>
@@ -257,8 +383,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean IssuerAuthenticationFailed
         {
-            get { return Test(4, ISSUER_AUTHENTICATION_FAILED); }
-            set { Force(4, ISSUER_AUTHENTICATION_FAILED, value); }
+            get { return Test(4, (int)Byte5.IssuerAuthenticationFailed); }
+            set { Force(4, (int)Byte5.IssuerAuthenticationFailed, value); }
         }
 
         /// <summary>
@@ -266,8 +392,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean ScriptProcessingFailedBeforeGenerateAC
         {
-            get { return Test(4, SCRIPT_FAILED_BEFORE_GENERATEAC); }
-            set { Force(4, SCRIPT_FAILED_BEFORE_GENERATEAC, value); }
+            get { return Test(4, (int)Byte5.ScriptFailedBeforeGenerateAc); }
+            set { Force(4, (int)Byte5.ScriptFailedBeforeGenerateAc, value); }
         }
 
         /// <summary>
@@ -275,8 +401,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean ScriptProcessingFailedAfterGenerateAC
         {
-            get { return Test(4, SCRIPT_FAILED_AFTER_GENERATEAC); }
-            set { Force(4, SCRIPT_FAILED_AFTER_GENERATEAC, value); }
+            get { return Test(4, (int)Byte5.ScriptFailedAfterGenerateAc); }
+            set { Force(4, (int)Byte5.ScriptFailedAfterGenerateAc, value); }
         }
 
         #endregion
@@ -294,11 +420,11 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Initializes a new <see cref="TerminalVerificationResult"/> instance.
         /// </summary>
-        /// <param name="tlvTVR">TLV TVR data.</param>
-        public TerminalVerificationResult(TLVData tlvTVR)
+        /// <param name="tlvTvr">TLV TVR data.</param>
+        public TerminalVerificationResult(TLVData tlvTvr)
             : this()
         {
-            tlv = tlvTVR;
+            tlv = tlvTvr;
         }
 
         #endregion

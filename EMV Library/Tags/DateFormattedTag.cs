@@ -5,17 +5,11 @@ namespace WSCT.EMV.Tags
 {
 
     /// <summary>
-    /// Represents the TLV formatted as YYMMDD date format
+    /// Represents the TLV formatted as YYMMDD date format.
     /// </summary>
     public class DateFormattedTag : AbstractTLVObject
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public DateFormattedTag()
-            : base()
-        {
-        }
+        #region >> Object
 
         /// <inheritdoc />
         public override string ToString()
@@ -25,5 +19,7 @@ namespace WSCT.EMV.Tags
                 tlv.value[1] / 16, tlv.value[1] % 16,
                 tlv.value[2] / 16, tlv.value[2] % 16);
         }
+
+        #endregion
     }
 }

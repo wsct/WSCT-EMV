@@ -145,11 +145,11 @@ namespace WSCT.EMV.Objects
             {
                 // Search the object
                 var tagFound = false;
-                foreach (var tlv in tlvData)
+                foreach (var tlvSubData in tlvData)
                 {
-                    if (tlv != null && tlv.tag == dod.Tag)
+                    if (tlvSubData != null && tlvSubData.tag == dod.Tag)
                     {
-                        Array.Copy(tlv.value, 0, data, offset, dod.Length);
+                        Array.Copy(tlvSubData.value, 0, data, offset, dod.Length);
                         tagFound = true;
                     }
                 }

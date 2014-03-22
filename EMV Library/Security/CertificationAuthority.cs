@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// 
+    /// EMV Authority Certification public key.
     /// </summary>
     [XmlRoot("certificationAuthority")]
     public class CertificationAuthority
@@ -13,21 +13,18 @@ namespace WSCT.EMV.Security
         /// 
         /// </summary>
         [XmlAttribute("rid")]
-        public String rid
-        { get; set; }
+        public String Rid { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [XmlAttribute("index")]
-        public String index
-        { get; set; }
+        public String Index { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [XmlElement("publicKey")]
-        public PublicKey publicKey
-        { get; set; }
+        public PublicKey PublicKey { get; set; }
     }
 }

@@ -391,7 +391,7 @@ namespace WSCT.EMV.Card
                     var aidObject = new ApplicationIdentifier(Aid);
                     try
                     {
-                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.get(aidObject.StrRid, caPublicKeyIndex.tlv.value.toHexa());
+                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.Get(aidObject.StrRid, caPublicKeyIndex.tlv.value.toHexa());
                     }
                     catch (EMVCertificationAuthorityNotFoundException)
                     {
@@ -412,7 +412,7 @@ namespace WSCT.EMV.Card
                 if (_issuerPublicKeyCertificate == null && CertificationAuthorityPublicKey != null && TlvDataRecords.hasTag(0x90))
                 {
                     _issuerPublicKeyCertificate = new IssuerPublicKeyCertificate();
-                    _issuerPublicKeyCertificate.recoverFromSignature(TlvDataRecords.getTag(0x90).value, CertificationAuthorityPublicKey);
+                    _issuerPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.getTag(0x90).value, CertificationAuthorityPublicKey);
                 }
                 return _issuerPublicKeyCertificate;
             }
@@ -428,7 +428,7 @@ namespace WSCT.EMV.Card
                 if (_issuerPublicKey == null && IssuerPublicKeyCertificate != null)
                 {
                     // Public key modulus = modulus part contained in certificate + remainder from the ICC records
-                    var modulus = IssuerPublicKeyCertificate.publicKeyorLeftmostDigitsofthePublicKey.toHexa();
+                    var modulus = IssuerPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.toHexa();
                     if (TlvDataRecords.hasTag(0x92))
                         modulus += TlvDataRecords.getTag(0x92).value.toHexa();
                     // Exponent from the ICC records
@@ -450,7 +450,7 @@ namespace WSCT.EMV.Card
                 if (_iccPublicKeyCertificate == null && IssuerPublicKey != null && TlvDataRecords.hasTag(0x9F46))
                 {
                     _iccPublicKeyCertificate = new IccPublicKeyCertificate();
-                    _iccPublicKeyCertificate.recoverFromSignature(TlvDataRecords.getTag(0x9F46).value, IssuerPublicKey);
+                    _iccPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.getTag(0x9F46).value, IssuerPublicKey);
                 }
                 return _iccPublicKeyCertificate;
             }
@@ -466,7 +466,7 @@ namespace WSCT.EMV.Card
                 if (_iccPublicKey == null && IccPublicKeyCertificate != null)
                 {
                     // Public key modulus = modulus part contained in certificate + remainder from the ICC records
-                    var modulus = IccPublicKeyCertificate.publicKeyorLeftmostDigitsofthePublicKey.toHexa();
+                    var modulus = IccPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.toHexa();
                     if (TlvDataRecords.hasTag(0x9F48))
                         modulus += TlvDataRecords.getTag(0x9F48).value.toHexa();
                     // Exponent from the ICC records
@@ -488,7 +488,7 @@ namespace WSCT.EMV.Card
                 if (_sda == null && TlvDataRecords.hasTag(0x93) && IssuerPublicKeyCertificate != null)
                 {
                     _sda = new StaticDataAuthentication();
-                    _sda.recoverFromSignature(TlvDataRecords.getTag(0x93).value, IssuerPublicKey);
+                    _sda.RecoverFromSignature(TlvDataRecords.getTag(0x93).value, IssuerPublicKey);
                 }
                 return _sda;
             }
@@ -517,7 +517,7 @@ namespace WSCT.EMV.Card
                             signature = TlvSignedDynamicApplicationResponse.getTag(0x9F4B).value;
                         }
                         _dda = new DynamicDataAuthentication();
-                        _dda.recoverFromSignature(signature, IccPublicKey);
+                        _dda.RecoverFromSignature(signature, IccPublicKey);
                     }
                 }
                 return _dda;
@@ -921,8 +921,7 @@ namespace WSCT.EMV.Card
             {
                 // Use PDOL to build tag 83 value
                 var pdol = new DataObjectList(TlvFci.getTag(0x9F38).value);
-                var tlvAll = new List<TLVData>();
-                tlvAll.Add(TlvFci);
+                var tlvAll = new List<TLVData> { TlvFci };
                 tlvAll.AddRange(TlvTerminalData);
                 pdolDataValue = pdol.BuildData(tlvAll);
             }
@@ -1151,10 +1150,12 @@ namespace WSCT.EMV.Card
             if (Ddol != null)
             {
                 // Use DDOL to build data
-                var tlvAll = new List<TLVData>();
-                tlvAll.Add(TlvFci);
-                tlvAll.Add(TlvProcessingOptions);
-                tlvAll.Add(_tlvInternalAuthenticateUnpredictableNumber);
+                var tlvAll = new List<TLVData>
+                {
+                    TlvFci,
+                    TlvProcessingOptions,
+                    _tlvInternalAuthenticateUnpredictableNumber
+                };
                 tlvAll.AddRange(TlvRecords);
                 tlvAll.AddRange(TlvTerminalData);
                 ddolDataValue = Ddol.BuildData(tlvAll);
@@ -1262,10 +1263,7 @@ namespace WSCT.EMV.Card
             if (Cdol1 != null)
             {
                 // Use CDOL1 to build data
-                var tlvAll = new List<TLVData>();
-                tlvAll.Add(TlvFci);
-                tlvAll.Add(TlvProcessingOptions);
-                tlvAll.Add(_tlvGenerateAC1UnpredictableNumber);
+                var tlvAll = new List<TLVData> { TlvFci, TlvProcessingOptions, _tlvGenerateAC1UnpredictableNumber };
                 tlvAll.AddRange(TlvRecords);
                 tlvAll.AddRange(TlvTerminalData);
                 tlvAll.Add(Tvr.tlv);

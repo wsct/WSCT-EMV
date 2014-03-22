@@ -3,7 +3,7 @@
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Exception called when a Certification Authority was not found in a <see cref="CertificationAuthorityRepository"/>
+    /// Exception called when a Certification Authority was not found in a <see cref="CertificationAuthorityRepository"/>.
     /// </summary>
     public class EMVCertificationAuthorityNotFoundException : Exception
     {

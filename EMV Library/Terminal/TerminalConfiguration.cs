@@ -4,40 +4,37 @@ using WSCT.EMV.Security;
 
 namespace WSCT.EMV.Terminal
 {
+    /// <summary>
+    /// Configuration of the terminal.
+    /// </summary>
     [XmlRoot("terminalConfiguration")]
     public class TerminalConfiguration
     {
-        #region >> Fields
-
-        TerminalCapabilities _terminalCapabilities;
-        CertificationAuthorityRepository _certificationAuthorityRepository;
-
-        #endregion
-
         #region >> Properties
 
+        /// <summary>
+        /// Terminal capabilities.
+        /// </summary>
         [XmlElement("capabilities")]
-        public TerminalCapabilities terminalCapabilities
-        {
-            get { return _terminalCapabilities; }
-            set { _terminalCapabilities = value; }
-        }
+        public TerminalCapabilities TerminalCapabilities { get; set; }
 
+        /// <summary>
+        /// Repository of AC.
+        /// </summary>
         [XmlElement("certificationAuthorities")]
-        public CertificationAuthorityRepository certificationAuthorityRepository
-        {
-            get { return _certificationAuthorityRepository; }
-            set { _certificationAuthorityRepository = value; }
-        }
+        public CertificationAuthorityRepository CertificationAuthorityRepository { get; set; }
 
         #endregion
 
         #region >> Constructors
 
+        /// <summary>
+        /// Initializes a new <see cref="TerminalConfiguration"/> instance.
+        /// </summary>
         public TerminalConfiguration()
         {
-            _terminalCapabilities = new TerminalCapabilities();
-            _certificationAuthorityRepository = new CertificationAuthorityRepository();
+            TerminalCapabilities = new TerminalCapabilities();
+            CertificationAuthorityRepository = new CertificationAuthorityRepository();
         }
 
         #endregion

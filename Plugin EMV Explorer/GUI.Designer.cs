@@ -1,6 +1,6 @@
 ﻿namespace WSCT.GUI.Plugins.EMVExplorer
 {
-    partial class GUI
+    partial class Gui
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -86,7 +86,7 @@
             System.Windows.Forms.GroupBox groupBox20;
             System.Windows.Forms.GroupBox groupBox21;
             System.Windows.Forms.GroupBox groupBox22;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Gui));
             this.guiParamsTagAIDInFCI = new System.Windows.Forms.CheckBox();
             this.guiDoExplicitDiscoveryOfAID = new System.Windows.Forms.Button();
             this.guiPSEName = new System.Windows.Forms.ComboBox();

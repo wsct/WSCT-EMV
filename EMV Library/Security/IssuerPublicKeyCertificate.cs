@@ -12,7 +12,7 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        private Byte[] _issuerIdentifier;
+        private byte[] _issuerIdentifier;
 
         #endregion
 
@@ -21,7 +21,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Issuer Identifier: Leftmost 3-8 digits from the PAN (padded to the right with Hex 'F's)
         /// </summary>
-        public Byte[] issuerIdentifier
+        public Byte[] IssuerIdentifier
         {
             get
             {
@@ -48,24 +48,28 @@ namespace WSCT.EMV.Security
 
         #endregion
 
+        #region >> Object
+
         /// <inheritdoc />
         public override string ToString()
         {
-            StringBuilder s = new StringBuilder();
-            s.AppendFormat("Header:[{0:X2}] ", dataHeader);
-            s.AppendFormat("Format:[{0:X2}] ", dataFormat);
-            s.AppendFormat("Issuer Identifier:[{0}] ", issuerIdentifier.toHexa('\0'));
-            s.AppendFormat("Expiration:[{0}] ", certificateExpirationDate.toHexa('\0'));
-            s.AppendFormat("Serial:[{0}] ", certificateSerialNumber.toHexa('\0'));
-            s.AppendFormat("Hash Algorithm:[{0:X2}] ", hashAlgorithmIndicator);
-            s.AppendFormat("PK Algorithm:[{0:X2}] ", publicKeyAlgorithmIndicator);
-            s.AppendFormat("PK Length:[{0:X2}] ", publicKeyLength);
-            s.AppendFormat("PKExp Length:[{0:X2}] ", publicKeyExponentLength);
-            s.AppendFormat("Leftmost IssuerPK:[{0}] ", publicKeyorLeftmostDigitsofthePublicKey.toHexa('\0'));
-            s.AppendFormat("Hash:[{0}] ", hashResult.toHexa('\0'));
-            s.AppendFormat("Trailer:[{0:X2}] ", dataTrailer);
+            var s = new StringBuilder();
+            s.AppendFormat("Header:[{0:X2}] ", DataHeader);
+            s.AppendFormat("Format:[{0:X2}] ", DataFormat);
+            s.AppendFormat("Issuer Identifier:[{0}] ", IssuerIdentifier.toHexa('\0'));
+            s.AppendFormat("Expiration:[{0}] ", CertificateExpirationDate.toHexa('\0'));
+            s.AppendFormat("Serial:[{0}] ", CertificateSerialNumber.toHexa('\0'));
+            s.AppendFormat("Hash Algorithm:[{0:X2}] ", HashAlgorithmIndicator);
+            s.AppendFormat("PK Algorithm:[{0:X2}] ", PublicKeyAlgorithmIndicator);
+            s.AppendFormat("PK Length:[{0:X2}] ", PublicKeyLength);
+            s.AppendFormat("PKExp Length:[{0:X2}] ", PublicKeyExponentLength);
+            s.AppendFormat("Leftmost IssuerPK:[{0}] ", PublicKeyorLeftmostDigitsofthePublicKey.toHexa('\0'));
+            s.AppendFormat("Hash:[{0}] ", HashResult.toHexa('\0'));
+            s.AppendFormat("Trailer:[{0:X2}] ", DataTrailer);
 
             return s.ToString();
         }
+
+        #endregion
     }
 }

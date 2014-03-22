@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -261,11 +262,7 @@ namespace WSCT.EMV.Objects
         public override string ToString()
         {
             var s = String.Format("X:{0} Y:{1}", AmountX, AmountY);
-            foreach (var cvr in CvRules)
-            {
-                s += String.Format(" {0}", cvr);
-            }
-            return s;
+            return CvRules.Aggregate(s, (current, cvr) => current + String.Format(" {0}", cvr));
         }
 
         #endregion

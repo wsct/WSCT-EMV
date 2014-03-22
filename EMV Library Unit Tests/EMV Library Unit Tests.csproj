@@ -53,6 +53,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Objects\ApplicationLabelUnitTest.cs" />
     <Compile Include="Objects\DataObjectListUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

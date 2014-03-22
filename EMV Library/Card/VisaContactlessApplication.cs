@@ -45,7 +45,7 @@ namespace WSCT.EMV.Card
                     _nic = signature.Length;
 
                     _dda = new DynamicDataAuthentication();
-                    _dda.recoverFromSignature(signature, IccPublicKey);
+                    _dda.RecoverFromSignature(signature, IccPublicKey);
                 }
                 return _dda;
             }
@@ -76,14 +76,14 @@ namespace WSCT.EMV.Card
                         if (TlvDataTerminalData.hasTag(0x9F37)      // Terminal Unpredictable Number
                             && TlvDataRecords.hasTag(0x9F36))       // ATC
                         {
-                            var k = (uint)_nic - _dda.iccDynamicDataLength - 25;
+                            var k = (uint)_nic - _dda.IccDynamicDataLength - 25;
                             var length9F37 = TlvDataTerminalData.getTag(0x9F37).length;
                             var length9F36 = TlvDataRecords.getTag(0x9F36).length;
 
                             var data = new byte[3 + k + length9F37];
                             data[0] = 0x05; // Signed Data Format
                             data[1] = 0x01; // Hash Algorithm Indicator
-                            data[2] = _dda.iccDynamicDataLength; // ICC Dynamic Data Length
+                            data[2] = _dda.IccDynamicDataLength; // ICC Dynamic Data Length
                             data[3] = (byte)length9F36;
                             uint offset = 4;
 
@@ -99,7 +99,7 @@ namespace WSCT.EMV.Card
                             // offset += length9F37;
 
                             var hash = cryptography.ComputeHash(data);
-                            if (hash.SequenceEqual(_dda.hashResult))
+                            if (hash.SequenceEqual(_dda.HashResult))
                                 return true;
                         }
                         else return false;
@@ -112,7 +112,7 @@ namespace WSCT.EMV.Card
                             && TlvProcessingOptions.hasTag(0x9F36)  // ATC
                             && TlvDataRecords.hasTag(0x9F69))       // Card Authentication Related Data
                         {
-                            uint iccDynamicDataLength = _dda.iccDynamicDataLength;
+                            uint iccDynamicDataLength = _dda.IccDynamicDataLength;
                             var k = (uint)_nic - iccDynamicDataLength - 25;
                             var length9F37 = TlvDataTerminalData.getTag(0x9F37).length;
                             var length9F36 = TlvProcessingOptions.getTag(0x9F36).length;
@@ -148,7 +148,7 @@ namespace WSCT.EMV.Card
                             // offset += length9F69;
 
                             var hash = cryptography.ComputeHash(data);
-                            if (hash.SequenceEqual(_dda.hashResult))
+                            if (hash.SequenceEqual(_dda.HashResult))
                                 return true;
                         }
                         else return false;

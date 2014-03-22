@@ -17,18 +17,18 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         readonly Color highlightColor = Color.DarkBlue;
         readonly Color standardColor = Color.Black;
 
-        readonly GUI gui;
+        readonly Gui gui;
 
         public TLVDictionary TlvDictionary;
 
         #region >> Constructors
 
-        public DetailedLogs(GUI guiInstance)
+        public DetailedLogs(Gui guiInstance)
             : this(guiInstance, "[{0,7}] Core ")
         {
         }
 
-        public DetailedLogs(GUI guiInstance, String header)
+        public DetailedLogs(Gui guiInstance, String header)
         {
             gui = guiInstance;
             this.header = header ?? string.Empty;

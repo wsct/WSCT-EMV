@@ -6,7 +6,7 @@ using WSCT.Helpers;
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Represents an EMV Static Data Authentication certificate (SDA)
+    /// Represents an EMV Static Data Authentication certificate (SDA).
     /// </summary>
     public class StaticDataAuthentication : AbstractDataAuthenticationFormat03
     {
@@ -21,9 +21,9 @@ namespace WSCT.EMV.Security
         #region >> Properties
 
         /// <summary>
-        /// Data Authentication Code (2): Issuer-assigned code
+        /// Data Authentication Code (2): Issuer-assigned code.
         /// </summary>
-        public Byte[] dataAuthenticationCode
+        public Byte[] DataAuthenticationCode
         {
             get
             {
@@ -37,16 +37,16 @@ namespace WSCT.EMV.Security
         }
 
         /// <summary>
-        /// Pad Pattern (NI - 26): (NI - 26) padding bytes of value 'BB'
+        /// Pad Pattern (NI - 26): (NI - 26) padding bytes of value 'BB'.
         /// </summary>
-        public Byte[] padPattern
+        public Byte[] PadPattern
         {
             get
             {
                 if (_padPattern == null)
                 {
-                    _padPattern = new Byte[keyLength - 26];
-                    Array.Copy(_recovered, 5, _padPattern, 0, keyLength - 26);
+                    _padPattern = new Byte[KeyLength - 26];
+                    Array.Copy(_recovered, 5, _padPattern, 0, KeyLength - 26);
                 }
                 return _padPattern;
             }
@@ -55,31 +55,23 @@ namespace WSCT.EMV.Security
 
         #endregion
 
-        #region >> Constructors
-
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public StaticDataAuthentication()
-            : base()
-        {
-        }
-
-        #endregion
+        #region >> Object
 
         /// <inheritdoc />
         public override string ToString()
         {
-            StringBuilder s = new StringBuilder();
-            s.AppendFormat("Header:[{0:X2}] ", dataHeader);
-            s.AppendFormat("Format:[{0:X2}] ", dataFormat);
-            s.AppendFormat("Hash Algorithm:[{0:X2}] ", hashAlgorithmIndicator);
-            s.AppendFormat("ICC Dynamic Data:[{0}] ", dataAuthenticationCode.toHexa('\0'));
-            s.AppendFormat("Pad:[{0}] ", padPattern.toHexa('\0'));
-            s.AppendFormat("Hash:[{0}] ", hashResult.toHexa('\0'));
-            s.AppendFormat("Trailer:[{0:X2}] ", dataTrailer);
+            var s = new StringBuilder();
+            s.AppendFormat("Header:[{0:X2}] ", DataHeader);
+            s.AppendFormat("Format:[{0:X2}] ", DataFormat);
+            s.AppendFormat("Hash Algorithm:[{0:X2}] ", HashAlgorithmIndicator);
+            s.AppendFormat("ICC Dynamic Data:[{0}] ", DataAuthenticationCode.toHexa('\0'));
+            s.AppendFormat("Pad:[{0}] ", PadPattern.toHexa('\0'));
+            s.AppendFormat("Hash:[{0}] ", HashResult.toHexa('\0'));
+            s.AppendFormat("Trailer:[{0:X2}] ", DataTrailer);
 
             return s.ToString();
         }
+
+        #endregion
     }
 }

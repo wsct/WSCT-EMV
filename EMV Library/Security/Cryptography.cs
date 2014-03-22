@@ -10,7 +10,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Cryptography methods used by EMV Specification
+    /// Cryptography methods used by EMV Specification.
     /// </summary>
     /// <remarks>
     /// From EMV Book 2:
@@ -46,9 +46,9 @@ namespace WSCT.EMV.Security
             var msg2 = new Byte[l - n + 22];
             Array.Copy(data, 0, msg2, n - 22, l - n + 22);
             // B = '6A'
-            Byte b = 0x6A;
+            const byte b = 0x6A;
             // E = 'BC'
-            Byte e = 0xBC;
+            const byte e = 0xBC;
             // X = ( B || MSG1 || H || E )
             var x = new Byte[n];
             x[0] = b;
@@ -57,25 +57,25 @@ namespace WSCT.EMV.Security
             x[n - 1] = e;
             // S = Sign(Sk)[X]
             // TODO
-            Byte[] s = null;
-            return s;
+            // Byte[] s = null;
+            // return s;
+
+            throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Execute the EMV Recovery Function to retrieve data contained
+        /// Executes the EMV Recovery Function to retrieve data.
         /// </summary>
-        /// <param name="signature">EMV certificate to recover data from</param>
-        /// <param name="publicKey">Public Key to use</param>
-        /// <returns>Data recovered from the certificate</returns>
+        /// <param name="signature">EMV certificate to recover data from.</param>
+        /// <param name="publicKey">Public Key to use.</param>
+        /// <returns>Data recovered from the certificate.</returns>
         public Byte[] RecoverMessage(Byte[] signature, AsymmetricKeyParameter publicKey)
         {
-            Byte[] x;
-
             IAsymmetricBlockCipher engine = new RsaEngine();
 
             engine.Init(false, publicKey);
 
-            x = engine.ProcessBlock(signature, 0, signature.Length);
+            var x = engine.ProcessBlock(signature, 0, signature.Length);
 
             return x;
             /*
@@ -129,16 +129,15 @@ namespace WSCT.EMV.Security
         }
 
         /// <summary>
-        /// Compute the Hash of <paramref name="data"/> using the SHA-1 algorithm
+        /// Compute the Hash of <paramref name="data"/> using the SHA-1 algorithm.
         /// </summary>
         /// <remarks>The approved algorithm for hashing is SHA-1 as specified in ISO/IEC 10118-3 [5].</remarks>
-        /// <param name="data">Data to hash</param>
-        /// <returns>Hash value</returns>
+        /// <param name="data">Data to hash.</param>
+        /// <returns>Hash value.</returns>
         public Byte[] ComputeHash(Byte[] data)
         {
-            Byte[] h;
             IDigest sha1 = new Sha1Digest();
-            h = new Byte[sha1.GetDigestSize()];
+            var h = new Byte[sha1.GetDigestSize()];
             sha1.BlockUpdate(data, 0, data.Length);
             sha1.DoFinal(h, 0);
             return h;
@@ -261,63 +260,5 @@ namespace WSCT.EMV.Security
 
             return ecb;
         }
-
-        #region >> [Obsolete]
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] generateSignature(Byte[] data, AsymmetricKeyParameter privateKey)
-        {
-            return GenerateSignature(data, privateKey);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] recoverMessage(Byte[] signature, AsymmetricKeyParameter publicKey)
-        {
-            return RecoverMessage(signature, publicKey);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Boolean verifySignature(Byte[] signature, Byte[] message, AsymmetricKeyParameter publicKey)
-        {
-            return VerifySignature(signature, message, publicKey);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computeHash(Byte[] data)
-        {
-            return ComputeHash(data);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computePayPassMac(Byte[] data, KeyParameter key)
-        {
-            return ComputePayPassMac(data, key);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computeMacForPersoCryptogram(Byte[] data, KeyParameter key)
-        {
-            return ComputeMacForPersoCryptogram(data, key);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computeMacForIntegrity(Byte[] data, KeyParameter key)
-        {
-            return ComputeMacForIntegrity(data, key);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computeCBC3DES(Byte[] data, KeyParameter key)
-        {
-            return ComputeCbc3Des(data, key);
-        }
-
-        [Obsolete("Naming updated to PascalCase.")]
-        public Byte[] computeECB3DES(Byte[] data, KeyParameter key)
-        {
-            return ComputeEcb3Des(data, key);
-        }
-
-        #endregion
     }
 }
