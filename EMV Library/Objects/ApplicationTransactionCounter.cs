@@ -15,7 +15,10 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public UInt16 Counter
         {
-            get { return (UInt16)(tlv.value[0] * 0x100 + tlv.value[1]); }
+            get
+            {
+                return (UInt16)(tlv.value[0] * 0x100 + tlv.value[1]);
+            }
         }
 
         #endregion
@@ -27,7 +30,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public ApplicationTransactionCounter()
         {
-            tlv = new TLVData();
+            tlv = new TLVData(0x9F36, 02, new byte[2]);
         }
 
         /// <summary>

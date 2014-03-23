@@ -13,16 +13,16 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Accessor to the SFI defined by the log entry.
         /// </summary>
-        public Byte Sfi
+        public byte Sfi
         {
-            get { return tlv.value[0]; }
+            get { return (byte)(tlv.value[0] & 0x8F); }
             set { tlv.value[0] = value; }
         }
 
         /// <summary>
         /// Accessor to the record size defined by the log entry.
         /// </summary>
-        public Byte CyclicFileSize
+        public byte CyclicFileSize
         {
             get { return tlv.value[1]; }
             set { tlv.value[1] = value; }
@@ -36,6 +36,7 @@ namespace WSCT.EMV.Objects
         /// Default constructor
         /// </summary>
         public LogEntry()
+            : this(new TLVData(0x9F4D, 2, new byte[] { 0x00, 0x00 }))
         {
         }
 
@@ -44,10 +45,11 @@ namespace WSCT.EMV.Objects
         /// </summary>
         /// <param name="tlvLogEntry">Raw Log Entry tag</param>
         public LogEntry(TLVData tlvLogEntry)
-            : this()
         {
             if (tlvLogEntry.length < 2)
+            {
                 throw new Exception(String.Format("LogEntry: TLV data length < 2, can't parse [{0}]", tlvLogEntry));
+            }
             tlv = tlvLogEntry;
         }
 

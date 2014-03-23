@@ -60,9 +60,11 @@
     <Compile Include="Objects\ApplicationFileLocatorUnitTest.cs" />
     <Compile Include="Objects\ApplicationIdentifierUnitTest.cs" />
     <Compile Include="Objects\ApplicationInterchangeProfileUnitTest.cs" />
+    <Compile Include="Objects\ApplicationTransactionCounterUnitTest.cs" />
     <Compile Include="Objects\LanguagePreferenceUnitTest.cs" />
     <Compile Include="Objects\ApplicationLabelUnitTest.cs" />
     <Compile Include="Objects\DataObjectListUnitTest.cs" />
+    <Compile Include="Objects\LogEntryUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
