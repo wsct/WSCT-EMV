@@ -9,3 +9,4 @@ obj
 *.shfbproj_*
 /packages/BouncyCastle.1.7.0
 /packages/NUnit.2.6.3
+/.nuget

@@ -83,7 +83,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void NotifyDisconnect(ICardChannel cardChannel, Disposition disposition, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
             else
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
@@ -91,7 +91,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void NotifyReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
             else
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
@@ -99,7 +99,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void NotifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, Byte[] recvBuffer, UInt32 recvSize, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
             {
 
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
@@ -111,7 +111,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void NotifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
             {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> RAPDU: [{0}]\n", cardResponse));

@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 using WSCT.Core;
 using WSCT.Core.APDU;
 using WSCT.Wrapper;
@@ -33,14 +30,14 @@ namespace WSCT.ConsoleEMVTests
 
         internal virtual void __start()
         {
-            Console.WriteLine(String.Format(header + "ConsoleObserver started", LogLevel.Info));
+            Console.WriteLine(header + "ConsoleObserver started", LogLevel.Info);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void observeContext(Core.CardContextObservable context)
+        public void observeContext(CardContextObservable context)
         {
             context.afterEstablishEvent += notifyEstablish;
             context.afterGetStatusChangeEvent += notifyGetStatusChange;
@@ -53,7 +50,7 @@ namespace WSCT.ConsoleEMVTests
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        public void observeChannel(Core.CardChannelObservable channel)
+        public void observeChannel(CardChannelObservable channel)
         {
             channel.beforeConnectEvent += beforeConnect;
             channel.afterConnectEvent += notifyConnect;
@@ -75,93 +72,93 @@ namespace WSCT.ConsoleEMVTests
         /// 
         /// </summary>
         /// <param name="monitor"></param>
-        public void observeMonitor(Core.StatusChangeMonitor monitor)
+        public void observeMonitor(StatusChangeMonitor monitor)
         {
-            monitor.onCardInsertionEvent += onCardInsertionEvent;
-            monitor.onCardRemovalEvent += onCardRemovalEvent;
+            monitor.OnCardInsertionEvent += onCardInsertionEvent;
+            monitor.OnCardRemovalEvent += onCardRemovalEvent;
         }
 
         #region >> CardChannelObservable delegates
 
         public void notifyConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
+            if (errorCode == ErrorCode.Success)
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
             else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
         }
 
         public void notifyDisconnect(ICardChannel cardChannel, Disposition disposition, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
+            if (errorCode == ErrorCode.Success)
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
             else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
         }
 
         public void notifyGetAttrib(ICardChannel cardChannel, Attrib attrib, Byte[] buffer, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
             {
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
-                Console.WriteLine(String.Format(header + ">> Byte[]: [{1}]", LogLevel.Info, buffer.toHexa()));
-                Console.WriteLine(String.Format(header + ">> String: \"{1}\"", LogLevel.Info, buffer.toString()));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+                Console.WriteLine(header + ">> Byte[]: [{1}]", LogLevel.Info, buffer.toHexa());
+                Console.WriteLine(header + ">> String: \"{1}\"", LogLevel.Info, buffer.toString());
             }
             else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
         }
 
         public void notifyReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
+            if (errorCode == ErrorCode.Success)
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
             else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
         }
 
         public void notifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
         {
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
             {
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Info, errorCode));
-                Console.WriteLine(String.Format(header + ">> RAPDU: [{1}]", LogLevel.Info, cardResponse));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+                Console.WriteLine(header + ">> RAPDU: [{1}]", LogLevel.Info, cardResponse);
             }
             else
-                Console.WriteLine(String.Format(header + ">> Error: {1}", LogLevel.Warning, errorCode));
+                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
         }
 
         public void beforeConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "connect(\"{1}\",{2},{3})", LogLevel.Info, cardChannel.readerName, shareMode, preferedProtocol));
+            Console.WriteLine(header + "connect(\"{1}\",{2},{3})", LogLevel.Info, cardChannel.readerName, shareMode, preferedProtocol);
             Console.ForegroundColor = standardColor;
         }
 
         public void beforeDisconnect(ICardChannel cardChannel, Disposition disposition)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "disconnect({1})", LogLevel.Info, disposition));
+            Console.WriteLine(header + "disconnect({1})", LogLevel.Info, disposition);
             Console.ForegroundColor = standardColor;
         }
 
         public void beforeGetAttrib(ICardChannel channel, Attrib attrib, Byte[] buffer)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "getAttrib({1})", LogLevel.Info, attrib));
+            Console.WriteLine(header + "getAttrib({1})", LogLevel.Info, attrib);
             Console.ForegroundColor = standardColor;
         }
 
         public void beforeReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "reconnect({1},{2},{3})", LogLevel.Info, shareMode, preferedProtocol, initialization));
+            Console.WriteLine(header + "reconnect({1},{2},{3})", LogLevel.Info, shareMode, preferedProtocol, initialization);
             Console.ForegroundColor = standardColor;
         }
 
         public void beforeTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "transmit({1})", LogLevel.Info, cardCommand));
+            Console.WriteLine(header + "transmit({1})", LogLevel.Info, cardCommand);
             Console.ForegroundColor = standardColor;
         }
 
@@ -172,46 +169,46 @@ namespace WSCT.ConsoleEMVTests
         public void notifyEstablish(ICardContext cardContext, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "establish(): {1}", LogLevel.Info, errorCode));
+            Console.WriteLine(header + "establish(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
         }
 
         private void notifyGetStatusChange(ICardContext cardContext, UInt32 timeout, AbstractReaderState[] readerStates, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "getStatusChange(): {1}", LogLevel.Info, errorCode));
+            Console.WriteLine(header + "getStatusChange(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
                 foreach (AbstractReaderState readerState in readerStates)
                 {
-                    Console.WriteLine(String.Format(header + ">> {2}", LogLevel.Info, readerState.eventState, readerState));
+                    Console.WriteLine(header + ">> {2}", LogLevel.Info, readerState.EventState, readerState);
                 }
         }
 
         public void notifyListReaders(ICardContext cardContext, string group, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "listReaders({2}): {1}", LogLevel.Info, errorCode, group));
+            Console.WriteLine(header + "listReaders({2}): {1}", LogLevel.Info, errorCode, @group);
             Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
                 foreach (String reader in cardContext.readers)
-                    Console.WriteLine(String.Format(header + ">> Reader found: {1}", LogLevel.Info, reader));
+                    Console.WriteLine(header + ">> Reader found: {1}", LogLevel.Info, reader);
         }
 
         public void notifyListReaderGroups(ICardContext cardContext, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "listReaderGroups(): {1}", LogLevel.Info, errorCode));
+            Console.WriteLine(header + "listReaderGroups(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.SCARD_S_SUCCESS)
+            if (errorCode == ErrorCode.Success)
                 foreach (String group in cardContext.groups)
-                    Console.WriteLine(String.Format(header + ">> Reader groups found: {1}", LogLevel.Info, group));
+                    Console.WriteLine(header + ">> Reader groups found: {1}", LogLevel.Info, @group);
         }
 
         public void notifyRelease(ICardContext cardContext, ErrorCode errorCode)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(String.Format(header + "release(): {1}", LogLevel.Info, errorCode));
+            Console.WriteLine(header + "release(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
         }
 
@@ -222,13 +219,13 @@ namespace WSCT.ConsoleEMVTests
         private void onCardInsertionEvent(AbstractReaderState readerState)
         {
             Console.ForegroundColor = standardColor;
-            Console.WriteLine(String.Format(header + ">> Card insertion detected on reader {1}", LogLevel.Info, readerState.readerName));
+            Console.WriteLine(header + ">> Card insertion detected on reader {1}", LogLevel.Info, readerState.ReaderName);
         }
 
         private void onCardRemovalEvent(AbstractReaderState readerState)
         {
             Console.ForegroundColor = standardColor;
-            Console.WriteLine(String.Format(header + ">> Card removal detected on reader {1}", LogLevel.Info, readerState.readerName));
+            Console.WriteLine(header + ">> Card removal detected on reader {1}", LogLevel.Info, readerState.ReaderName);
         }
 
         #endregion

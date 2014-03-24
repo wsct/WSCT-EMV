@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-
+using System.IO;
+using System.Xml;
 using WSCT.Core;
-using WSCT.Core.APDU;
+using WSCT.EMV.Card;
+using WSCT.EMV.Objects;
+using WSCT.ISO7816;
 using WSCT.Wrapper;
-using WSCT;
-using WSCT.EMV;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
@@ -15,9 +15,9 @@ namespace WSCT.ConsoleEMVTests
     class Program
     {
         TLVDictionary tagsManager;
-        List<EMV.Card.EMVApplication> emvApplications;
-        System.Xml.XmlDocument xmlDoc;
-        System.Xml.XmlElement xmlRoot;
+        List<EMVApplication> emvApplications;
+        XmlDocument xmlDoc;
+        XmlElement xmlRoot;
 
         static void Main(string[] args)
         {
@@ -35,7 +35,7 @@ namespace WSCT.ConsoleEMVTests
 
         #region >> EMV Event Handlers
 
-        private void beforePSESelection(EMV.Card.EMVDefinitionFile df)
+        private void beforePSESelection(EMVDefinitionFile df)
         {
             Console.WriteLine();
             Console.WriteLine("=========== P S E   S e l e c t i o n");
@@ -44,7 +44,7 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.AppendChild(xmlDoc.CreateElement("PSESelection"));
         }
 
-        private void afterPSESelection(EMV.Card.EMVDefinitionFile df)
+        private void afterPSESelection(EMVDefinitionFile df)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = P S E   S e l e c t i o n");
@@ -54,14 +54,14 @@ namespace WSCT.ConsoleEMVTests
             {
                 xmlRoot.LastChild.AppendChild(df.TlvFci.toXmlNode(xmlDoc));
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
-                foreach (Helpers.BasicEncodingRules.TLVData tlv in df.TlvFci.getTags())
+                foreach (TLVData tlv in df.TlvFci.getTags())
                 {
-                    Program.WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tagsManager);
                 }
             }
         }
 
-        private void beforePSERead(EMV.Card.PaymentSystemEnvironment pse)
+        private void beforePSERead(PaymentSystemEnvironment pse)
         {
             Console.WriteLine();
             Console.WriteLine("=========== P S E   R e a d");
@@ -70,18 +70,18 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.AppendChild(xmlDoc.CreateElement("PSERead"));
         }
 
-        private void afterPSERead(EMV.Card.PaymentSystemEnvironment pse)
+        private void afterPSERead(PaymentSystemEnvironment pse)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = P S E   R e a d");
             Console.WriteLine();
 
-            foreach (Helpers.BasicEncodingRules.TLVData record in pse.TlvRecords)
+            foreach (TLVData record in pse.TlvRecords)
             {
-                foreach (Helpers.BasicEncodingRules.TLVData tlv in record.getTags())
+                foreach (TLVData tlv in record.getTags())
                 {
                     xmlRoot.LastChild.AppendChild(tlv.toXmlNode(xmlDoc));
-                    Program.WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tagsManager);
                 }
             }
 
@@ -89,13 +89,13 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== P S E   A p p l i c a t i o n s   f o u n d");
             Console.WriteLine();
 
-            foreach (EMV.Card.EMVApplication emvFound in pse.GetApplications())
+            foreach (EMVApplication emvFound in pse.GetApplications())
             {
                 Console.WriteLine("  >> Application '{0}' [ {1} ] found", emvFound.Aid, tagsManager.createInstance(emvFound.TlvFromPSE.getTag(0x50)));
             }
         }
 
-        private void beforeApplicationSelection(EMV.Card.EMVDefinitionFile df)
+        private void beforeApplicationSelection(EMVDefinitionFile df)
         {
             Console.WriteLine();
             Console.WriteLine("=========== E M V   A I D   S e l e c t i o n   {0}", df.Aid);
@@ -104,7 +104,7 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.AppendChild(xmlDoc.CreateElement("ApplicationSelection"));
         }
 
-        private void afterApplicationSelection(EMV.Card.EMVDefinitionFile df)
+        private void afterApplicationSelection(EMVDefinitionFile df)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   A I D   S e l e c t i o n   {0}", df.Aid);
@@ -113,15 +113,15 @@ namespace WSCT.ConsoleEMVTests
             if (df.TlvFci != null)
             {
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
-                foreach (Helpers.BasicEncodingRules.TLVData tlv in df.TlvFci.getTags())
+                foreach (TLVData tlv in df.TlvFci.getTags())
                 {
                     xmlRoot.LastChild.AppendChild(tlv.toXmlNode(xmlDoc));
-                    Program.WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tagsManager);
                 }
             }
         }
 
-        private void beforeGetProcessingOptions(EMV.Card.EMVApplication emv)
+        private void beforeGetProcessingOptions(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("=========== E M V   G e t P r o c e s s i n g O p t i o n s   {0}", emv.Aid);
@@ -130,26 +130,26 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.LastChild.AppendChild(xmlDoc.CreateElement("GetProcessingOptions"));
         }
 
-        private void afterGetProcessingOptions(EMV.Card.EMVApplication emv)
+        private void afterGetProcessingOptions(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   G e t P r o c e s s i n g O p t i o n s   {0}", emv.Aid);
             Console.WriteLine();
 
-            foreach (Helpers.BasicEncodingRules.TLVData tlv in emv.TlvProcessingOptions.getTags())
+            foreach (TLVData tlv in emv.TlvProcessingOptions.getTags())
             {
                 xmlRoot.LastChild.AppendChild(tlv.toXmlNode(xmlDoc));
-                Program.WriteTLV(tlv.tag, tlv, tagsManager);
+                WriteTLV(tlv.tag, tlv, tagsManager);
             }
 
             Console.WriteLine("    >> {0}", emv.Aip);
-            foreach (EMV.Objects.ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
+            foreach (ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
             {
                 Console.WriteLine("    >> {0}", file);
             }
         }
 
-        private void beforeReadApplicationData(EMV.Card.EMVApplication emv)
+        private void beforeReadApplicationData(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("=========== E M V   R e a d A p p l i c a t i o n D a t a   {0}", emv.Aid);
@@ -158,23 +158,23 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.AppendChild(xmlDoc.CreateElement("ReadApplicationData"));
         }
 
-        private void afterReadApplicationData(EMV.Card.EMVApplication emv)
+        private void afterReadApplicationData(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   R e a d A p p l i c a t i o n D a t a   {0}", emv.Aid);
             Console.WriteLine();
 
-            foreach (Helpers.BasicEncodingRules.TLVData record in emv.TlvRecords)
+            foreach (TLVData record in emv.TlvRecords)
             {
-                foreach (Helpers.BasicEncodingRules.TLVData tlv in record.getTags())
+                foreach (TLVData tlv in record.getTags())
                 {
                     xmlRoot.LastChild.AppendChild(tlv.toXmlNode(xmlDoc));
-                    Program.WriteTLV(tlv.tag, tlv, tagsManager);
+                    WriteTLV(tlv.tag, tlv, tagsManager);
                 }
             }
         }
 
-        private void beforeGetData(EMV.Card.EMVApplication emv)
+        private void beforeGetData(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("=========== E M V   G e t D a t a   {0}", emv.Aid);
@@ -183,7 +183,7 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.AppendChild(xmlDoc.CreateElement("GetData"));
         }
 
-        private void afterGetData(EMV.Card.EMVApplication emv)
+        private void afterGetData(EMVApplication emv)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   G e t D a t a   {0}", emv.Aid);
@@ -192,22 +192,22 @@ namespace WSCT.ConsoleEMVTests
             if (emv.TlvATC != null)
             {
                 xmlRoot.LastChild.AppendChild(emv.TlvATC.toXmlNode(xmlDoc));
-                Program.WriteTLV(emv.TlvATC.tag, emv.TlvATC, tagsManager);
+                WriteTLV(emv.TlvATC.tag, emv.TlvATC, tagsManager);
             }
             if (emv.TlvLastOnlineATCRegister != null)
             {
                 xmlRoot.LastChild.AppendChild(emv.TlvLastOnlineATCRegister.toXmlNode(xmlDoc));
-                Program.WriteTLV(emv.TlvLastOnlineATCRegister.tag, emv.TlvLastOnlineATCRegister, tagsManager);
+                WriteTLV(emv.TlvLastOnlineATCRegister.tag, emv.TlvLastOnlineATCRegister, tagsManager);
             }
             if (emv.TlvPINTryCounter != null)
             {
                 xmlRoot.LastChild.AppendChild(emv.TlvPINTryCounter.toXmlNode(xmlDoc));
-                Program.WriteTLV(emv.TlvPINTryCounter.tag, emv.TlvPINTryCounter, tagsManager);
+                WriteTLV(emv.TlvPINTryCounter.tag, emv.TlvPINTryCounter, tagsManager);
             }
             if (emv.TlvLogFormat != null)
             {
                 xmlRoot.LastChild.AppendChild(emv.TlvLogFormat.toXmlNode(xmlDoc));
-                Program.WriteTLV(emv.TlvLogFormat.tag, emv.TlvLogFormat, tagsManager);
+                WriteTLV(emv.TlvLogFormat.tag, emv.TlvLogFormat, tagsManager);
             }
         }
 
@@ -234,7 +234,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine();
             Console.WriteLine("=========== I n i t i a l i z i n g   P C / S C");
 
-            xmlDoc = new System.Xml.XmlDocument();
+            xmlDoc = new XmlDocument();
             xmlRoot = xmlDoc.CreateElement("WinSCard");
             xmlDoc.AppendChild(xmlRoot);
 
@@ -246,10 +246,10 @@ namespace WSCT.ConsoleEMVTests
 
             #region >> CardContext
 
-            ICardContext context = new Core.CardContext();
-            logger.observeContext((Core.CardContextObservable)context);
+            ICardContext context = new CardContext();
+            logger.observeContext((CardContextObservable)context);
 
-            if (context.establish() != ErrorCode.SCARD_S_SUCCESS)
+            if (context.establish() != ErrorCode.Success)
             {
                 Console.WriteLine("Erreur: establish() failed");
                 return;
@@ -281,12 +281,12 @@ namespace WSCT.ConsoleEMVTests
 
             logger.observeMonitor(monitor);
 
-            AbstractReaderState readerState = monitor.waitForCardPresence(0);
+            AbstractReaderState readerState = monitor.WaitForCardPresence(0);
             if (readerState == null)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(">> Insert a card in one of the {0} readers (time out in 15s)", context.readersCount);
-                readerState = monitor.waitForCardPresence(15000);
+                readerState = monitor.WaitForCardPresence(15000);
             }
 
             if (readerState == null)
@@ -299,27 +299,27 @@ namespace WSCT.ConsoleEMVTests
 
             #region >> CardChannel
 
-            ICardChannel rawCardChannel = new Core.CardChannel(context, readerState.readerName);
-            logger.observeChannel((Core.CardChannelObservable)rawCardChannel);
+            ICardChannel rawCardChannel = new CardChannel(context, readerState.ReaderName);
+            logger.observeChannel((CardChannelObservable)rawCardChannel);
 
-            ISO7816.CardChannelISO7816 cardChannel = new ISO7816.CardChannelISO7816(rawCardChannel);
+            CardChannelISO7816 cardChannel = new CardChannelISO7816(rawCardChannel);
 
-            if (cardChannel.connect(ShareMode.SCARD_SHARE_SHARED, Protocol.SCARD_PROTOCOL_ANY) != ErrorCode.SCARD_S_SUCCESS)
+            if (cardChannel.connect(ShareMode.Shared, Protocol.Any) != ErrorCode.Success)
             {
                 Console.WriteLine("Erreur: connect() failed");
                 return;
             }
 
             Byte[] buffer = new Byte[0];
-            cardChannel.getAttrib(Attrib.SCARD_ATTR_ATR_STRING, ref buffer);
+            cardChannel.getAttrib(Attrib.AtrString, ref buffer);
 
-            if (cardChannel.reconnect(ShareMode.SCARD_SHARE_SHARED, Protocol.SCARD_PROTOCOL_ANY, Disposition.SCARD_RESET_CARD) != ErrorCode.SCARD_S_SUCCESS)
+            if (cardChannel.reconnect(ShareMode.Shared, Protocol.Any, Disposition.ResetCard) != ErrorCode.Success)
             {
                 Console.WriteLine("Erreur: reconnect() failed");
                 return;
             }
 
-            cardChannel.getAttrib(Attrib.SCARD_ATTR_ATR_STRING, ref buffer);
+            cardChannel.getAttrib(Attrib.AtrString, ref buffer);
 
             #endregion
 
@@ -331,7 +331,7 @@ namespace WSCT.ConsoleEMVTests
 
             #region >> PSE Analysis
 
-            EMV.Card.PaymentSystemEnvironment pse = new EMV.Card.PaymentSystemEnvironment(cardChannel);
+            PaymentSystemEnvironment pse = new PaymentSystemEnvironment(cardChannel);
 
             pse.BeforeSelectEvent += beforePSESelection;
             pse.AfterSelectEvent += afterPSESelection;
@@ -348,24 +348,24 @@ namespace WSCT.ConsoleEMVTests
 
             #endregion
 
-            emvApplications = new List<WSCT.EMV.Card.EMVApplication>();
-            foreach (EMV.Card.EMVApplication emvFound in pse.GetApplications())
+            emvApplications = new List<EMVApplication>();
+            foreach (EMVApplication emvFound in pse.GetApplications())
             {
                 emvApplications.Add(emvFound);
             }
 
             #region >> AID selection
 
-            foreach (EMV.Card.EMVApplication emv in emvApplications)
+            foreach (EMVApplication emv in emvApplications)
             {
-                emv.BeforeSelectEvent += this.beforeApplicationSelection;
-                emv.AfterSelectEvent += this.afterApplicationSelection;
-                emv.BeforeGetProcessingOptionsEvent += this.beforeGetProcessingOptions;
-                emv.AfterGetProcessingOptionsEvent += this.afterGetProcessingOptions;
-                emv.BeforeReadApplicationDataEvent += this.beforeReadApplicationData;
-                emv.AfterReadApplicationDataEvent += this.afterReadApplicationData;
-                emv.BeforeGetDataEvent += this.beforeGetData;
-                emv.AfterGetDataEvent += this.afterGetData;
+                emv.BeforeSelectEvent += beforeApplicationSelection;
+                emv.AfterSelectEvent += afterApplicationSelection;
+                emv.BeforeGetProcessingOptionsEvent += beforeGetProcessingOptions;
+                emv.AfterGetProcessingOptionsEvent += afterGetProcessingOptions;
+                emv.BeforeReadApplicationDataEvent += beforeReadApplicationData;
+                emv.AfterReadApplicationDataEvent += afterReadApplicationData;
+                emv.BeforeGetDataEvent += beforeGetData;
+                emv.AfterGetDataEvent += afterGetData;
 
                 if (emv.Select() == 0x9000)
                 {
@@ -382,9 +382,9 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine();
             Console.WriteLine("=========== T e r m i n a t i n g");
 
-            cardChannel.disconnect(Disposition.SCARD_UNPOWER_CARD);
+            cardChannel.disconnect(Disposition.UnpowerCard);
 
-            xmlDoc.Save(new System.IO.FileStream("EMV.TLV.xml", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite));
+            xmlDoc.Save(new FileStream("EMV.TLV.xml", FileMode.Create, FileAccess.ReadWrite));
 
             Console.WriteLine();
             Console.WriteLine("=========== C a r d   r e m o v a l   d e t e c t i o n");
@@ -397,7 +397,7 @@ namespace WSCT.ConsoleEMVTests
             monitor.waitForChange(10000);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(">> Remove the card in one of the readers {0} (time out in 10s)", readerState.readerName);
+            Console.WriteLine(">> Remove the card in one of the readers {0} (time out in 10s)", readerState.ReaderName);
             // Wait for another change
             monitor.waitForChange(10000);
 
@@ -413,7 +413,7 @@ namespace WSCT.ConsoleEMVTests
         /// <param name="tagId"></param>
         /// <param name="tlv"></param>
         /// <param name="tagsManager"></param>
-        static void WriteTLV(UInt32 tagId, Helpers.BasicEncodingRules.TLVData tlv, TLVDictionary tagsManager)
+        static void WriteTLV(UInt32 tagId, TLVData tlv, TLVDictionary tagsManager)
         {
             AbstractTLVObject tagObject = null;
             Console.WriteLine("  >> Contains tag {0:X2}: {1} [ {2} ]", tagId, tlv.hasTag(tagId), tlv.getTag(tagId));

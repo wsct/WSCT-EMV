@@ -120,7 +120,7 @@ namespace WSCT.EMV.Card
             ErrorCode ret;
 
             // Adapt APDU for T=0 smartcards
-            if (protocol == Protocol.SCARD_PROTOCOL_T0)
+            if (protocol == Protocol.T0)
             {
                 ret = TransmitT0((CommandAPDU)command, (ResponseAPDU)response);
             }
@@ -196,12 +196,12 @@ namespace WSCT.EMV.Card
                 var crp = new CommandResponsePair(cAPDU);
                 // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
-                if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
+                if (ret == ErrorCode.Success && crp.rAPDU.sw1 == 0x61)
                 {
                     var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2)) { rAPDU = rAPDU };
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
-                else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
+                else if (ret == ErrorCode.Success && crp.rAPDU.sw1 == 0x6C)
                 {
                     var crpWithLe = new CommandResponsePair { cAPDU = crp.cAPDU };
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
@@ -229,12 +229,12 @@ namespace WSCT.EMV.Card
                 var crp = new CommandResponsePair(cAPDU);
                 // Let the crp create a new crp.rAPDU
                 ret = crp.transmit(_cardChannel);
-                if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x61)
+                if (ret == ErrorCode.Success && crp.rAPDU.sw1 == 0x61)
                 {
                     var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2)) { rAPDU = rAPDU };
                     ret = crpGetResponse.transmit(_cardChannel);
                 }
-                else if (ret == ErrorCode.SCARD_S_SUCCESS && crp.rAPDU.sw1 == 0x6C)
+                else if (ret == ErrorCode.Success && crp.rAPDU.sw1 == 0x6C)
                 {
                     var crpWithLe = new CommandResponsePair { cAPDU = crp.cAPDU };
                     crpWithLe.cAPDU.le = crp.rAPDU.sw2;
