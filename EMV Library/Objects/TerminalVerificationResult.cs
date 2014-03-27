@@ -6,7 +6,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Terminal Verification Result, Issuer Action Code or Terminal Action Code of an EMV application.
     /// </summary>
-    public class TerminalVerificationResult : BinaryTLVObject
+    public class TerminalVerificationResult : BinaryTlvObject
     {
         #region >> Nested Enums
 
@@ -153,14 +153,17 @@ namespace WSCT.EMV.Objects
             /// 
             /// </summary>
             DefaultTdolUsed = 0x80,
+
             /// <summary>
             /// 
             /// </summary>
             IssuerAuthenticationFailed = 0x40,
+
             /// <summary>
             /// 
             /// </summary>
             ScriptFailedBeforeGenerateAc = 0x20,
+
             /// <summary>
             /// 
             /// </summary>
@@ -414,46 +417,46 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public TerminalVerificationResult()
         {
-            tlv = new TLVData();
+            Tlv = new TlvData();
         }
 
         /// <summary>
         /// Initializes a new <see cref="TerminalVerificationResult"/> instance.
         /// </summary>
         /// <param name="tlvTvr">TLV TVR data.</param>
-        public TerminalVerificationResult(TLVData tlvTvr)
+        public TerminalVerificationResult(TlvData tlvTvr)
             : this()
         {
-            tlv = tlvTvr;
+            Tlv = tlvTvr;
         }
 
         #endregion
 
         #region >> Methods
 
-        Boolean Test(byte byteNumber, byte bit)
+        private Boolean Test(byte byteNumber, byte bit)
         {
-            if (tlv.value.Length == 0)
+            if (Tlv.Value.Length == 0)
             {
-                tlv.value = new Byte[5];
+                Tlv.Value = new byte[5];
             }
 
-            return (tlv.value[byteNumber] & bit) == bit;
+            return (Tlv.Value[byteNumber] & bit) == bit;
         }
 
-        void Force(byte byteNumber, byte bit, Boolean value)
+        private void Force(byte byteNumber, byte bit, Boolean value)
         {
-            if (tlv.value.Length == 0)
+            if (Tlv.Value.Length == 0)
             {
-                tlv.value = new Byte[5];
+                Tlv.Value = new byte[5];
             }
             if (value)
             {
-                tlv.value[byteNumber] |= bit;
+                Tlv.Value[byteNumber] |= bit;
             }
             else
             {
-                tlv.value[byteNumber] &= (byte)(~bit);
+                Tlv.Value[byteNumber] &= (byte)(~bit);
             }
         }
 

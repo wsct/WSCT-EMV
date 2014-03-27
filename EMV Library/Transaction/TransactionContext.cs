@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Transaction
@@ -17,7 +16,7 @@ namespace WSCT.EMV.Transaction
         /// List of TLV object associated with the transaction.
         /// </summary>
         [XmlArray("tlvDataList"), XmlArrayItem("tlvData")]
-        public List<TLVData> TlvDatas { get; set; }
+        public List<TlvData> TlvDatas { get; set; }
 
         #endregion
 
@@ -28,7 +27,7 @@ namespace WSCT.EMV.Transaction
         /// </summary>
         public TransactionContext()
         {
-            TlvDatas = new List<TLVData>();
+            TlvDatas = new List<TlvData>();
         }
 
         #endregion

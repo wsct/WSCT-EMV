@@ -14,7 +14,7 @@ namespace WSCT.EMV.Security
         }
 
         /// <inheritdoc />
-        public HashAlgorithmUnknownException(Byte hashIndicator)
+        public HashAlgorithmUnknownException(byte hashIndicator)
             : base(String.Format("Unknown hash algorithm: {0}", hashIndicator))
         {
         }

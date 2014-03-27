@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
@@ -15,7 +14,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Application PAN (10): PAN (padded to the right with Hex 'F's) .
         /// </summary>
-        private Byte[] applicationPan;
+        private byte[] applicationPan;
 
         #endregion
 
@@ -24,13 +23,13 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Application PAN (10): PAN (padded to the right with Hex 'F's).
         /// </summary>
-        public Byte[] ApplicationPan
+        public byte[] ApplicationPan
         {
             get
             {
                 if (applicationPan == null)
                 {
-                    applicationPan = new Byte[10];
+                    applicationPan = new byte[10];
                     Array.Copy(_recovered, 2, applicationPan, 0, 10);
                 }
                 return applicationPan;
@@ -59,15 +58,15 @@ namespace WSCT.EMV.Security
             var s = new StringBuilder();
             s.AppendFormat("Header:[{0:X2}] ", DataHeader);
             s.AppendFormat("Format:[{0:X2}] ", DataFormat);
-            s.AppendFormat("Issuer Identifier:[{0}] ", ApplicationPan.toHexa('\0'));
-            s.AppendFormat("Expiration:[{0}] ", CertificateExpirationDate.toHexa('\0'));
-            s.AppendFormat("Serial:[{0}] ", CertificateSerialNumber.toHexa('\0'));
+            s.AppendFormat("Issuer Identifier:[{0}] ", ApplicationPan.ToHexa('\0'));
+            s.AppendFormat("Expiration:[{0}] ", CertificateExpirationDate.ToHexa('\0'));
+            s.AppendFormat("Serial:[{0}] ", CertificateSerialNumber.ToHexa('\0'));
             s.AppendFormat("Hash Algorithm:[{0:X2}] ", HashAlgorithmIndicator);
             s.AppendFormat("PK Algorithm:[{0:X2}] ", PublicKeyAlgorithmIndicator);
             s.AppendFormat("PK Length:[{0:X2}] ", PublicKeyLength);
             s.AppendFormat("PKExp Length:[{0:X2}] ", PublicKeyExponentLength);
-            s.AppendFormat("Leftmost IssuerPK:[{0}] ", PublicKeyorLeftmostDigitsofthePublicKey.toHexa('\0'));
-            s.AppendFormat("Hash:[{0}] ", HashResult.toHexa('\0'));
+            s.AppendFormat("Leftmost IssuerPK:[{0}] ", PublicKeyorLeftmostDigitsofthePublicKey.ToHexa('\0'));
+            s.AppendFormat("Hash:[{0}] ", HashResult.ToHexa('\0'));
             s.AppendFormat("Trailer:[{0:X2}] ", DataTrailer);
 
             return s.ToString();

@@ -3,23 +3,20 @@ using System.Drawing;
 using WSCT.Core;
 using WSCT.Core.APDU;
 using WSCT.EMV.Card;
-using WSCT.EMV.Objects;
-using WSCT.Wrapper;
-
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
+using WSCT.Wrapper;
 
 namespace WSCT.GUI.Plugins.EMVExplorer
 {
-    class DetailedLogs
+    internal class DetailedLogs
     {
-        readonly String header;
-        readonly Color highlightColor = Color.DarkBlue;
-        readonly Color standardColor = Color.Black;
+        private readonly Gui gui;
+        private readonly String header;
+        private readonly Color highlightColor = Color.DarkBlue;
+        private readonly Color standardColor = Color.Black;
 
-        readonly Gui gui;
-
-        public TLVDictionary TlvDictionary;
+        public TlvDictionary TlvDictionary;
 
         #region >> Constructors
 
@@ -84,29 +81,38 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         public void NotifyDisconnect(ICardChannel cardChannel, Disposition disposition, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
             else
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
         }
 
         public void NotifyReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
             else
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
         }
 
-        public void NotifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, Byte[] recvBuffer, UInt32 recvSize, ErrorCode errorCode)
+        public void NotifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, byte[] recvBuffer, UInt32 recvSize, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
             {
-
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
-                gui.guiDetailedLogs.AppendText(String.Format(header + ">> RAPDU: [{0}]\n", recvBuffer.toHexa((int)recvSize)));
+                gui.guiDetailedLogs.AppendText(String.Format(header + ">> RAPDU: [{0}]\n", recvBuffer.ToHexa((int)recvSize)));
             }
             else
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
         }
 
         public void NotifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
@@ -117,7 +123,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> RAPDU: [{0}]\n", cardResponse));
             }
             else
+            {
                 gui.guiDetailedLogs.AppendText(String.Format(header + ">> Error: {0}\n", errorCode));
+            }
         }
 
         public void BeforeDisconnect(ICardChannel cardChannel, Disposition disposition)
@@ -134,7 +142,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             gui.guiDetailedLogs.SelectionColor = standardColor;
         }
 
-        public void BeforeTransmit(ICardChannel cardChannel, ICardCommand cardCommand, Byte[] recvBuffer, UInt32 recvSize)
+        public void BeforeTransmit(ICardChannel cardChannel, ICardCommand cardCommand, byte[] recvBuffer, UInt32 recvSize)
         {
             gui.guiDetailedLogs.SelectionColor = highlightColor;
             gui.guiDetailedLogs.AppendText(String.Format(header + "transmit({0})\n", cardCommand));
@@ -164,9 +172,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             if (df.TlvFci != null)
             {
                 gui.guiDetailedLogs.AppendText("  >> TLV: " + df.TlvFci + "\n");
-                foreach (TLVData tlv in df.TlvFci.getTags())
+                foreach (TlvData tlv in df.TlvFci.GetTags())
                 {
-                    WriteTlv(tlv.tag, tlv, TlvDictionary);
+                    WriteTlv(tlv.Tag, tlv, TlvDictionary);
                 }
             }
             else
@@ -184,20 +192,20 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterPSERead(PaymentSystemEnvironment pse)
         {
-            foreach (TLVData record in pse.TlvRecords)
+            foreach (var record in pse.TlvRecords)
             {
-                foreach (TLVData tlv in record.getTags())
+                foreach (TlvData tlv in record.GetTags())
                 {
-                    WriteTlv(tlv.tag, tlv, TlvDictionary);
+                    WriteTlv(tlv.Tag, tlv, TlvDictionary);
                 }
             }
 
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText("PSE Applications found:\n");
 
-            foreach (EMVApplication emvFound in pse.GetApplications())
+            foreach (var emvFound in pse.GetApplications())
             {
-                gui.guiDetailedLogs.AppendText(String.Format("  >> Application '{0}' [ {1} ] found\n", emvFound.Aid, TlvDictionary.createInstance(emvFound.TlvFromPSE.getTag(0x50))));
+                gui.guiDetailedLogs.AppendText(String.Format("  >> Application '{0}' [ {1} ] found\n", emvFound.Aid, TlvDictionary.CreateInstance(emvFound.TlvFromPSE.GetTag(0x50))));
             }
         }
 
@@ -213,9 +221,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             if (df.TlvFci != null)
             {
                 gui.guiDetailedLogs.AppendText(String.Format("  >> TLV: {0}\n", df.TlvFci));
-                foreach (TLVData tlv in df.TlvFci.getTags())
+                foreach (TlvData tlv in df.TlvFci.GetTags())
                 {
-                    WriteTlv(tlv.tag, tlv, TlvDictionary);
+                    WriteTlv(tlv.Tag, tlv, TlvDictionary);
                 }
             }
             else
@@ -234,14 +242,16 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         public void AfterGetProcessingOptions(EMVApplication emv)
         {
             if (emv.TlvProcessingOptions == null)
-                return;
-            foreach (TLVData tlv in emv.TlvProcessingOptions.getTags())
             {
-                WriteTlv(tlv.tag, tlv, TlvDictionary);
+                return;
+            }
+            foreach (TlvData tlv in emv.TlvProcessingOptions.GetTags())
+            {
+                WriteTlv(tlv.Tag, tlv, TlvDictionary);
             }
 
             gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.Aip));
-            foreach (ApplicationFileLocator.FileIdentification file in emv.Afl.GetFiles())
+            foreach (var file in emv.Afl.GetFiles())
             {
                 gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", file));
             }
@@ -257,11 +267,11 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         public void AfterReadApplicationData(EMVApplication emv)
         {
             // dump all records
-            foreach (TLVData record in emv.TlvRecords)
+            foreach (var record in emv.TlvRecords)
             {
-                foreach (TLVData tlv in record.getTags())
+                foreach (TlvData tlv in record.GetTags())
                 {
-                    WriteTlv(tlv.tag, tlv, TlvDictionary);
+                    WriteTlv(tlv.Tag, tlv, TlvDictionary);
                 }
             }
 
@@ -287,19 +297,19 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.TlvATC != null)
             {
-                WriteTlv(emv.TlvATC.tag, emv.TlvATC, TlvDictionary);
+                WriteTlv(emv.TlvATC.Tag, emv.TlvATC, TlvDictionary);
             }
             if (emv.TlvLastOnlineATCRegister != null)
             {
-                WriteTlv(emv.TlvLastOnlineATCRegister.tag, emv.TlvLastOnlineATCRegister, TlvDictionary);
+                WriteTlv(emv.TlvLastOnlineATCRegister.Tag, emv.TlvLastOnlineATCRegister, TlvDictionary);
             }
             if (emv.TlvPINTryCounter != null)
             {
-                WriteTlv(emv.TlvPINTryCounter.tag, emv.TlvPINTryCounter, TlvDictionary);
+                WriteTlv(emv.TlvPINTryCounter.Tag, emv.TlvPINTryCounter, TlvDictionary);
             }
             if (emv.TlvLogFormat != null)
             {
-                WriteTlv(emv.TlvLogFormat.tag, emv.TlvLogFormat, TlvDictionary);
+                WriteTlv(emv.TlvLogFormat.Tag, emv.TlvLogFormat, TlvDictionary);
             }
         }
 
@@ -336,7 +346,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.TlvSignedDynamicApplicationResponse != null)
             {
-                WriteTlv(emv.TlvSignedDynamicApplicationResponse.tag, emv.TlvSignedDynamicApplicationResponse, TlvDictionary);
+                WriteTlv(emv.TlvSignedDynamicApplicationResponse.Tag, emv.TlvSignedDynamicApplicationResponse, TlvDictionary);
             }
 
             // informations about DDA
@@ -361,7 +371,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (emv.IccChallenge != null)
             {
-                gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.IccChallenge.toHexa()));
+                gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.IccChallenge.ToHexa()));
             }
         }
 
@@ -382,7 +392,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 return;
             }
 
-            WriteTlv(emv.TlvGenerateAC1Response.tag, emv.TlvGenerateAC1Response, TlvDictionary);
+            WriteTlv(emv.TlvGenerateAC1Response.Tag, emv.TlvGenerateAC1Response, TlvDictionary);
             gui.guiDetailedLogs.AppendText(String.Format("    >> Cryptogram Information Data: {0}\n", emv.Cid1));
             gui.guiDetailedLogs.AppendText(String.Format("    >> Application Cryptogram Counter: {0}\n", emv.AtcFromAC1));
         }
@@ -395,15 +405,18 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         /// <param name="tagId"></param>
         /// <param name="tlv"></param>
         /// <param name="tagsManager"></param>
-        void WriteTlv(UInt32 tagId, TLVData tlv, TLVDictionary tagsManager)
+        private void WriteTlv(UInt32 tagId, TlvData tlv, TlvDictionary tagsManager)
         {
-            gui.guiDetailedLogs.AppendText(String.Format("  >> TLV {0:X2}: [ {1} ]\n", tagId, tlv.getTag(tagId)));
-            if (tlv.hasTag(tagId) && ((tagsManager.createInstance(tlv.getTag(tagId))) != null))
+            gui.guiDetailedLogs.AppendText(String.Format("  >> TLV {0:X2}: [ {1} ]\n", tagId, tlv.GetTag(tagId)));
+
+            if (!tlv.HasTag(tagId) || ((tagsManager.CreateInstance(tlv.GetTag(tagId))) == null))
             {
-                gui.guiDetailedLogs.SelectionColor = highlightColor;
-                gui.guiDetailedLogs.AppendText(String.Format("     >> {0:N}: {0}\n", tagsManager.createInstance(tlv.getTag(tagId))));
-                gui.guiDetailedLogs.SelectionColor = standardColor;
+                return;
             }
+
+            gui.guiDetailedLogs.SelectionColor = highlightColor;
+            gui.guiDetailedLogs.AppendText(String.Format("     >> {0:N}: {0}\n", tagsManager.CreateInstance(tlv.GetTag(tagId))));
+            gui.guiDetailedLogs.SelectionColor = standardColor;
         }
     }
 }

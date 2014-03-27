@@ -6,7 +6,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Application Interchange Profile of an EMV application.
     /// </summary>
-    public class ApplicationInterchangeProfile : AbstractTLVObject
+    public class ApplicationInterchangeProfile : AbstractTlvObject
     {
         #region >> Properties
 
@@ -15,7 +15,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean Cda
         {
-            get { return (tlv.value[0] & 0x01) != 0x00; }
+            get { return (Tlv.Value[0] & 0x01) != 0x00; }
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean Dda
         {
-            get { return (tlv.value[0] & 0x20) != 0x00; }
+            get { return (Tlv.Value[0] & 0x20) != 0x00; }
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean Sda
         {
-            get { return (tlv.value[0] & 0x40) != 0x00; }
+            get { return (Tlv.Value[0] & 0x40) != 0x00; }
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean CardholderVerification
         {
-            get { return (tlv.value[0] & 0x10) != 0x00; }
+            get { return (Tlv.Value[0] & 0x10) != 0x00; }
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean IssuerAuthentication
         {
-            get { return (tlv.value[0] & 0x04) != 0x00; }
+            get { return (Tlv.Value[0] & 0x04) != 0x00; }
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public Boolean TerminalRiskManagement
         {
-            get { return (tlv.value[0] & 0x08) != 0x00; }
+            get { return (Tlv.Value[0] & 0x08) != 0x00; }
         }
 
         #endregion
@@ -67,18 +67,18 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public ApplicationInterchangeProfile()
         {
-            tlv = new TLVData { tag = 0x82, value = new Byte[2] };
+            Tlv = new TlvData { Tag = 0x82, Value = new byte[2] };
         }
 
         /// <summary>
         /// Initializes a new <see cref="ApplicationInterchangeProfile"/> instance.
         /// </summary>
-        /// <param name="aipBytes">Byte array of 2 bytes containing the value.</param>
-        public ApplicationInterchangeProfile(Byte[] aipBytes)
+        /// <param name="aipBytes">byte array of 2 bytes containing the value.</param>
+        public ApplicationInterchangeProfile(byte[] aipBytes)
             : this()
         {
-            tlv.value[0] = aipBytes[0];
-            tlv.value[1] = aipBytes[1];
+            Tlv.Value[0] = aipBytes[0];
+            Tlv.Value[1] = aipBytes[1];
         }
 
         /// <summary>
@@ -86,11 +86,11 @@ namespace WSCT.EMV.Objects
         /// </summary>
         /// <param name="hi">First byte of AIP (left).</param>
         /// <param name="lo">Second byte of AIP (right).</param>
-        public ApplicationInterchangeProfile(Byte hi, Byte lo)
+        public ApplicationInterchangeProfile(byte hi, byte lo)
             : this()
         {
-            tlv.value[0] = hi;
-            tlv.value[1] = lo;
+            Tlv.Value[0] = hi;
+            Tlv.Value[1] = lo;
         }
 
         #endregion

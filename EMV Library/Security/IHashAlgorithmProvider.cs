@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WSCT.EMV.Security
 {
@@ -11,8 +10,8 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Implementation of hash computation.
         /// </summary>
-        /// <param name="data">List of Byte[] to be concatenated an hashed.</param>
+        /// <param name="data">List of byte[] to be concatenated an hashed.</param>
         /// <returns>Hash value.</returns>
-        Byte[] ComputeHash(List<Byte[]> data);
+        byte[] ComputeHash(List<byte[]> data);
     }
 }

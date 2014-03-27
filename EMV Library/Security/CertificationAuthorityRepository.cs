@@ -14,9 +14,8 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        Dictionary<String, PublicKey> _keys;
-
-        List<CertificationAuthority> _certificationAuthorities;
+        private List<CertificationAuthority> _certificationAuthorities;
+        private Dictionary<String, PublicKey> _keys;
 
         #endregion
 

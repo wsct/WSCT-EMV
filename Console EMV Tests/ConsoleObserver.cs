@@ -1,13 +1,12 @@
 using System;
 using WSCT.Core;
 using WSCT.Core.APDU;
-using WSCT.Wrapper;
-
 using WSCT.Helpers;
+using WSCT.Wrapper;
 
 namespace WSCT.ConsoleEMVTests
 {
-    class ConsoleObserver
+    internal class ConsoleObserver
     {
         internal String header;
         internal ConsoleColor highlightColor = ConsoleColor.White;
@@ -39,11 +38,11 @@ namespace WSCT.ConsoleEMVTests
         /// <param name="context"></param>
         public void observeContext(CardContextObservable context)
         {
-            context.afterEstablishEvent += notifyEstablish;
-            context.afterGetStatusChangeEvent += notifyGetStatusChange;
-            context.afterListReaderGroupsEvent += notifyListReaderGroups;
-            context.afterListReadersEvent += notifyListReaders;
-            context.afterReleaseEvent += notifyRelease;
+            context.AfterEstablishEvent += notifyEstablish;
+            context.AfterGetStatusChangeEvent += notifyGetStatusChange;
+            context.AfterListReaderGroupsEvent += notifyListReaderGroups;
+            context.AfterListReadersEvent += notifyListReaders;
+            context.AfterReleaseEvent += notifyRelease;
         }
 
         /// <summary>
@@ -52,20 +51,20 @@ namespace WSCT.ConsoleEMVTests
         /// <param name="channel"></param>
         public void observeChannel(CardChannelObservable channel)
         {
-            channel.beforeConnectEvent += beforeConnect;
-            channel.afterConnectEvent += notifyConnect;
+            channel.BeforeConnectEvent += beforeConnect;
+            channel.AfterConnectEvent += notifyConnect;
 
-            channel.beforeDisconnectEvent += beforeDisconnect;
-            channel.afterDisconnectEvent += notifyDisconnect;
+            channel.BeforeDisconnectEvent += beforeDisconnect;
+            channel.AfterDisconnectEvent += notifyDisconnect;
 
-            channel.beforeGetAttribEvent += beforeGetAttrib;
-            channel.afterGetAttribEvent += notifyGetAttrib;
+            channel.BeforeGetAttribEvent += beforeGetAttrib;
+            channel.AfterGetAttribEvent += notifyGetAttrib;
 
-            channel.beforeReconnectEvent += beforeReconnect;
-            channel.afterReconnectEvent += notifyReconnect;
+            channel.BeforeReconnectEvent += beforeReconnect;
+            channel.AfterReconnectEvent += notifyReconnect;
 
-            channel.beforeTransmitEvent += beforeTransmit;
-            channel.afterTransmitEvent += notifyTransmit;
+            channel.BeforeTransmitEvent += beforeTransmit;
+            channel.AfterTransmitEvent += notifyTransmit;
         }
 
         /// <summary>
@@ -83,37 +82,51 @@ namespace WSCT.ConsoleEMVTests
         public void notifyConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+            }
             else
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+            }
         }
 
         public void notifyDisconnect(ICardChannel cardChannel, Disposition disposition, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+            }
             else
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+            }
         }
 
-        public void notifyGetAttrib(ICardChannel cardChannel, Attrib attrib, Byte[] buffer, ErrorCode errorCode)
+        public void notifyGetAttrib(ICardChannel cardChannel, Attrib attrib, byte[] buffer, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
             {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
-                Console.WriteLine(header + ">> Byte[]: [{1}]", LogLevel.Info, buffer.toHexa());
-                Console.WriteLine(header + ">> String: \"{1}\"", LogLevel.Info, buffer.toString());
+                Console.WriteLine(header + ">> byte[]: [{1}]", LogLevel.Info, buffer.ToHexa());
+                Console.WriteLine(header + ">> String: \"{1}\"", LogLevel.Info, buffer.ToAsciiString());
             }
             else
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+            }
         }
 
         public void notifyReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization, ErrorCode errorCode)
         {
             if (errorCode == ErrorCode.Success)
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+            }
             else
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+            }
         }
 
         public void notifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
@@ -124,13 +137,15 @@ namespace WSCT.ConsoleEMVTests
                 Console.WriteLine(header + ">> RAPDU: [{1}]", LogLevel.Info, cardResponse);
             }
             else
+            {
                 Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+            }
         }
 
         public void beforeConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol)
         {
             Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "connect(\"{1}\",{2},{3})", LogLevel.Info, cardChannel.readerName, shareMode, preferedProtocol);
+            Console.WriteLine(header + "connect(\"{1}\",{2},{3})", LogLevel.Info, cardChannel.ReaderName, shareMode, preferedProtocol);
             Console.ForegroundColor = standardColor;
         }
 
@@ -141,7 +156,7 @@ namespace WSCT.ConsoleEMVTests
             Console.ForegroundColor = standardColor;
         }
 
-        public void beforeGetAttrib(ICardChannel channel, Attrib attrib, Byte[] buffer)
+        public void beforeGetAttrib(ICardChannel channel, Attrib attrib, byte[] buffer)
         {
             Console.ForegroundColor = highlightColor;
             Console.WriteLine(header + "getAttrib({1})", LogLevel.Info, attrib);
@@ -179,10 +194,12 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine(header + "getStatusChange(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
             if (errorCode == ErrorCode.Success)
-                foreach (AbstractReaderState readerState in readerStates)
+            {
+                foreach (var readerState in readerStates)
                 {
                     Console.WriteLine(header + ">> {2}", LogLevel.Info, readerState.EventState, readerState);
                 }
+            }
         }
 
         public void notifyListReaders(ICardContext cardContext, string group, ErrorCode errorCode)
@@ -191,8 +208,12 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine(header + "listReaders({2}): {1}", LogLevel.Info, errorCode, @group);
             Console.ForegroundColor = standardColor;
             if (errorCode == ErrorCode.Success)
-                foreach (String reader in cardContext.readers)
+            {
+                foreach (var reader in cardContext.Readers)
+                {
                     Console.WriteLine(header + ">> Reader found: {1}", LogLevel.Info, reader);
+                }
+            }
         }
 
         public void notifyListReaderGroups(ICardContext cardContext, ErrorCode errorCode)
@@ -201,8 +222,12 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine(header + "listReaderGroups(): {1}", LogLevel.Info, errorCode);
             Console.ForegroundColor = standardColor;
             if (errorCode == ErrorCode.Success)
-                foreach (String group in cardContext.groups)
+            {
+                foreach (var group in cardContext.Groups)
+                {
                     Console.WriteLine(header + ">> Reader groups found: {1}", LogLevel.Info, @group);
+                }
+            }
         }
 
         public void notifyRelease(ICardContext cardContext, ErrorCode errorCode)

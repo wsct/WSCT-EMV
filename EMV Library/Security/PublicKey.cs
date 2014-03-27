@@ -11,8 +11,8 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        String _modulus;
-        String _exponent;
+        private String _exponent;
+        private String _modulus;
 
         #endregion
 

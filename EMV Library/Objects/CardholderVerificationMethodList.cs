@@ -8,12 +8,12 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Cardholder Verification Method List of an EMV application.
     /// </summary>
-    public class CardholderVerificationMethodList : AbstractTLVObject
+    public class CardholderVerificationMethodList : AbstractTlvObject
     {
         #region >> Enumerations
 
         /// <summary>
-        /// CV Rule Byte 1 (Leftmost):  Cardholder Verification Method (CVM) Codes.
+        /// CV Rule byte 1 (Leftmost):  Cardholder Verification Method (CVM) Codes.
         /// </summary>
         public enum CvmCode
         {
@@ -21,30 +21,37 @@ namespace WSCT.EMV.Objects
             /// Fail CVM Processing.
             /// </summary>
             FailCvm = 0x00,
+
             /// <summary>
             /// Plaintext PIN verification performed by ICC.
             /// </summary>
             PlaintextpinIcc = 0x01,
+
             /// <summary>
             /// Enciphered PIN verified online.
             /// </summary>
             EncipheredpinOnline = 0x02,
+
             /// <summary>
             /// Plaintext PIN verification performed by ICC and signature (paper).
             /// </summary>
             PlaintextpinIccAndSign = 0x03,
+
             /// <summary>
             /// Enciphered PIN verification performed by ICC.
             /// </summary>
             EncipheredpinIcc = 0x04,
+
             /// <summary>
             ///  Enciphered PIN verification performed by ICC and signature (paper).
             /// </summary>
             EncipheredpinIccAndSign = 0x05,
+
             /// <summary>
             /// Signature (paper).
             /// </summary>
             Sign = 0x1E,
+
             /// <summary>
             /// No CVM required.
             /// </summary>
@@ -52,7 +59,7 @@ namespace WSCT.EMV.Objects
         }
 
         /// <summary>
-        /// CV Rule Byte 2 (Rightmost):  Cardholder Verification Method (CVM) Condition Codes.
+        /// CV Rule byte 2 (Rightmost):  Cardholder Verification Method (CVM) Condition Codes.
         /// </summary>
         public enum CvmCondition
         {
@@ -60,38 +67,47 @@ namespace WSCT.EMV.Objects
             /// Always.
             /// </summary>
             Always = 0x00,
+
             /// <summary>
             /// If unattended cash.
             /// </summary>
             UnattendedCash = 0x01,
+
             /// <summary>
             /// If not unattended cash and not manual cash and not purchase with cashback.
             /// </summary>
             Notcash = 0x02,
+
             /// <summary>
             /// If terminal supports the CVM.
             /// </summary>
             Support = 0x03,
+
             /// <summary>
             /// If manual cash.
             /// </summary>
             Cash = 0x04,
+
             /// <summary>
             /// If purchase with cashback.
             /// </summary>
             PurchaseCashback = 0x05,
+
             /// <summary>
             /// If transaction is in the application currency  22  and is under X value.
             /// </summary>
             UnderAmountx = 0x06,
+
             /// <summary>
             /// If transaction is in the application currency and is over X value.
             /// </summary>
             OverAmountx = 0x07,
+
             /// <summary>
             /// If transaction is in the application currency and is under Y value.
             /// </summary>
             UnderAmounty = 0x08,
+
             /// <summary>
             /// If transaction is in the application currency and is over Y value.
             /// </summary>
@@ -109,7 +125,7 @@ namespace WSCT.EMV.Objects
         {
             # region >> Fields
 
-            readonly UInt16 _cvRule;
+            private readonly UInt16 _cvRule;
 
             #endregion
 
@@ -120,7 +136,7 @@ namespace WSCT.EMV.Objects
             /// </summary>
             public CvmCode CvmCode
             {
-                get { return (CvmCode)((_cvRule / 0x100) & 0x3F); }
+                get { return (CvmCode)((_cvRule/0x100) & 0x3F); }
             }
 
             /// <summary>
@@ -128,7 +144,7 @@ namespace WSCT.EMV.Objects
             /// </summary>
             public CvmCondition CvmCondition
             {
-                get { return (CvmCondition)(_cvRule % 0x100); }
+                get { return (CvmCondition)(_cvRule%0x100); }
             }
 
             /// <summary>
@@ -147,7 +163,7 @@ namespace WSCT.EMV.Objects
             /// Initializes a new <see cref="CvRule"/> instance.
             /// </summary>
             /// <param name="twoBytes">Two bytes identifying the cv rule.</param>
-            public CvRule(Byte[] twoBytes)
+            public CvRule(byte[] twoBytes)
                 : this(twoBytes, 0)
             {
             }
@@ -157,9 +173,9 @@ namespace WSCT.EMV.Objects
             /// </summary>
             /// <param name="twoBytes">Two bytes identifying the cv rule.</param>
             /// <param name="offset">Offset in the array <paramref name="twoBytes"/>.</param>
-            public CvRule(Byte[] twoBytes, Byte offset)
+            public CvRule(byte[] twoBytes, byte offset)
             {
-                _cvRule = (UInt16)(twoBytes[offset + 0] * 0x100 + twoBytes[offset + 1]);
+                _cvRule = (UInt16)(twoBytes[offset + 0]*0x100 + twoBytes[offset + 1]);
             }
 
             #endregion
@@ -179,7 +195,7 @@ namespace WSCT.EMV.Objects
 
         #region >> Fields
 
-        List<CvRule> _cvRules;
+        private List<CvRule> _cvRules;
 
         #endregion
 
@@ -190,7 +206,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public UInt32 AmountX
         {
-            get { return (UInt32)(tlv.value[0] * 0x1000000 + tlv.value[1] * 0x10000 + tlv.value[2] * 0x100 + tlv.value[3]); }
+            get { return (UInt32)(Tlv.Value[0]*0x1000000 + Tlv.Value[1]*0x10000 + Tlv.Value[2]*0x100 + Tlv.Value[3]); }
         }
 
         /// <summary>
@@ -198,7 +214,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public UInt32 AmountY
         {
-            get { return (UInt32)(tlv.value[4] * 0x1000000 + tlv.value[5] * 0x10000 + tlv.value[6] * 0x100 + tlv.value[7]); }
+            get { return (UInt32)(Tlv.Value[4]*0x1000000 + Tlv.Value[5]*0x10000 + Tlv.Value[6]*0x100 + Tlv.Value[7]); }
         }
 
         /// <summary>
@@ -212,10 +228,10 @@ namespace WSCT.EMV.Objects
                 {
                     _cvRules = new List<CvRule>();
                     // CVRules starts at byte 8 in CVMList
-                    Byte offset = 8;
-                    while (offset < tlv.value.Length)
+                    byte offset = 8;
+                    while (offset < Tlv.Value.Length)
                     {
-                        _cvRules.Add(new CvRule(tlv.value, offset));
+                        _cvRules.Add(new CvRule(Tlv.Value, offset));
                         offset += 2;
                     }
                 }
@@ -238,20 +254,20 @@ namespace WSCT.EMV.Objects
         /// Initializes a new <see cref="CardholderVerificationMethodList"/> instance.
         /// </summary>
         /// <param name="cvmlData">Raw CVM List data.</param>
-        public CardholderVerificationMethodList(Byte[] cvmlData)
+        public CardholderVerificationMethodList(byte[] cvmlData)
             : this()
         {
-            tlv = new TLVData { value = cvmlData };
+            Tlv = new TlvData { Value = cvmlData };
         }
 
         /// <summary>
         /// Initializes a new <see cref="CardholderVerificationMethodList"/> instance.
         /// </summary>
         /// <param name="tlvCvm">TLVData representing the CVM list.</param>
-        public CardholderVerificationMethodList(TLVData tlvCvm)
+        public CardholderVerificationMethodList(TlvData tlvCvm)
             : this()
         {
-            tlv = tlvCvm;
+            Tlv = tlvCvm;
         }
 
         #endregion

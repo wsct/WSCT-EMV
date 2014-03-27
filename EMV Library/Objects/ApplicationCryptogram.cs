@@ -5,7 +5,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Application Cryptogram generate by an EMV card.
     /// </summary>
-    public class ApplicationCryptogram : BinaryTLVObject
+    public class ApplicationCryptogram : BinaryTlvObject
     {
         #region >> Constructor
 
@@ -20,10 +20,10 @@ namespace WSCT.EMV.Objects
         /// Initializes a new <see cref="ApplicationCryptogram"/> instance.
         /// </summary>
         /// <param name="tlvAC">TLVData containing AID.</param>
-        public ApplicationCryptogram(TLVData tlvAC)
+        public ApplicationCryptogram(TlvData tlvAC)
             : this()
         {
-            tlv = tlvAC;
+            Tlv = tlvAC;
         }
 
         #endregion

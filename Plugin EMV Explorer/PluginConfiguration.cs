@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-
+﻿using System.Xml.Serialization;
 using WSCT.EMV.Terminal;
 using WSCT.EMV.Transaction;
 

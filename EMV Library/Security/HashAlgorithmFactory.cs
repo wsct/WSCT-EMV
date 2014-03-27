@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WSCT.EMV.Security
+﻿namespace WSCT.EMV.Security
 {
     /// <summary>
     /// Factory to use to obtain a hash algorithm provider.
@@ -12,7 +10,7 @@ namespace WSCT.EMV.Security
         /// </summary>
         /// <param name="hashIndicator">Hash algorithm indicator.</param>
         /// <returns>Instance of hash algorithm provider.</returns>
-        public IHashAlgorithmProvider GetProvider(Byte hashIndicator)
+        public IHashAlgorithmProvider GetProvider(byte hashIndicator)
         {
             // TODO: use an xml file to define hash providers
             IHashAlgorithmProvider hashProvider;

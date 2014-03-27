@@ -5,7 +5,7 @@ namespace WSCT.EMV.Security
     /// <summary>
     /// Exception called when the recovery function failed because of bad header, trailer or format.
     /// </summary>
-    class EMVBadRecoveredDataException : Exception
+    internal class EMVBadRecoveredDataException : Exception
     {
         /// <inheritdoc />
         public EMVBadRecoveredDataException()

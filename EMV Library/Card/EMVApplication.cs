@@ -31,58 +31,51 @@ namespace WSCT.EMV.Card
     {
         #region >> Fields
 
-        protected CertificationAuthorityRepository _certificationAuthorityRepository;
-        protected List<TLVData> _tlvTerminalData;
-
-        protected TerminalVerificationResult _tvr;
-        protected TLVData _tlvFromPSE;
-        protected TLVData _tlvProcessingOptions;
-        protected ApplicationInterchangeProfile _aip;
         protected ApplicationFileLocator _afl;
-        protected CardholderVerificationMethodList _cvmList;
-        protected List<TLVData> _tlvRecords;
-        protected List<TLVData> _tlvOfflineRecords;
-        protected TLVData _tlvATC;
-        protected TLVData _tlvLastOnlineATCRegister;
-        protected TLVData _tlvPINTryCounter;
-        protected TLVData _tlvLogFormat;
-        protected TLVData _tlvCryptographicChecksum;
-
-        protected LogEntry _logEntry;
-        protected DataObjectList _logFormat;
-        protected List<List<TLVData>> _logRecords;
-
-        protected DataObjectList _ddol;
+        protected ApplicationInterchangeProfile _aip;
+        protected ApplicationCryptogram _applicationCryptogram1;
+        protected ApplicationTransactionCounter _atcFromAC1;
+        protected CombinedDataAuthentication _cda;
         protected DataObjectList _cdol1;
         protected DataObjectList _cdol2;
 
         protected PublicKey _certificationAuthorityPublicKey;
-        protected IssuerPublicKeyCertificate _issuerPublicKeyCertificate;
-        protected PublicKey _issuerPublicKey;
-        protected IccPublicKeyCertificate _iccPublicKeyCertificate;
+        protected CertificationAuthorityRepository _certificationAuthorityRepository;
+        protected CryptogramInformationData _cid1;
+        protected CardholderVerificationMethodList _cvmList;
+        protected DynamicDataAuthentication _dda;
+        protected DataObjectList _ddol;
+        protected byte[] _iccChallenge;
         protected PublicKey _iccPublicKey;
+        protected IccPublicKeyCertificate _iccPublicKeyCertificate;
+        protected PublicKey _issuerPublicKey;
+        protected IssuerPublicKeyCertificate _issuerPublicKeyCertificate;
+        protected LogEntry _logEntry;
+        protected DataObjectList _logFormat;
+        protected List<List<TlvData>> _logRecords;
+        protected CryptogramType _requestedAC1Type;
+        protected CryptogramType _requestedAC2Type;
 
         protected StaticDataAuthentication _sda;
-        protected DynamicDataAuthentication _dda;
-        protected CombinedDataAuthentication _cda;
+        protected TlvData _tlvATC;
+        protected TlvData _tlvCryptographicChecksum;
+        protected TlvData _tlvFromPSE;
+        protected TlvData _tlvGenerateAC1Response;
+        protected TlvData _tlvGenerateAC1UnpredictableNumber;
+        protected TlvData _tlvGenerateAC2Response;
+        protected TlvData _tlvInternalAuthenticateUnpredictableNumber;
+        protected TlvData _tlvLastOnlineATCRegister;
+        protected TlvData _tlvLogFormat;
+        protected List<TlvData> _tlvOfflineRecords;
+        protected TlvData _tlvPINTryCounter;
+        protected TlvData _tlvProcessingOptions;
+        protected List<TlvData> _tlvRecords;
+        protected TlvData _tlvSignedDynamicApplicationResponse;
+        protected List<TlvData> _tlvTerminalData;
 
-        protected TLVData _tlvInternalAuthenticateUnpredictableNumber;
-        protected TLVData _tlvSignedDynamicApplicationResponse;
-
-        protected TLVData _tlvGenerateAC1UnpredictableNumber;
-        protected TLVData _tlvGenerateAC1Response;
-        protected TLVData _tlvGenerateAC2Response;
-
-        protected Byte[] _iccChallenge;
+        protected TerminalVerificationResult _tvr;
 
         protected UInt16 _verifyPinStatusWord;
-
-        protected CryptogramType _requestedAC1Type;
-        protected CryptogramInformationData _cid1;
-        protected ApplicationTransactionCounter _atcFromAC1;
-        protected ApplicationCryptogram _applicationCryptogram1;
-
-        protected CryptogramType _requestedAC2Type;
 
         #endregion
 
@@ -105,15 +98,15 @@ namespace WSCT.EMV.Card
         }
 
         /// <summary>
-        /// Accessor to public terminal data in <see cref="TLVData"/> format.
+        /// Accessor to public terminal data in <see cref="TlvData"/> format.
         /// </summary>
-        public List<TLVData> TlvTerminalData
+        public List<TlvData> TlvTerminalData
         {
             get
             {
                 if (_tlvTerminalData == null)
                 {
-                    _tlvTerminalData = new List<TLVData>();
+                    _tlvTerminalData = new List<TlvData>();
                 }
                 return _tlvTerminalData;
             }
@@ -121,20 +114,17 @@ namespace WSCT.EMV.Card
         }
 
         /// <summary>
-        /// Accessor to the data read in a fictive <see cref="TLVData"/>.
+        /// Accessor to the data read in a fictive <see cref="TlvData"/>.
         /// </summary>
-        public TLVData TlvDataTerminalData
+        public TlvData TlvDataTerminalData
         {
-            get
-            {
-                return new TLVData(0x00, 0x00, null) { subFields = _tlvTerminalData };
-            }
+            get { return new TlvData(0x00, 0x00, null) { SubFields = _tlvTerminalData }; }
         }
 
         /// <summary>
         /// Accessor to the Cryptographic Checksum generated by the application.
         /// </summary>
-        public TLVData TlvCryptographicChecksum
+        public TlvData TlvCryptographicChecksum
         {
             get { return _tlvCryptographicChecksum; }
         }
@@ -148,7 +138,7 @@ namespace WSCT.EMV.Card
             {
                 if (_tvr == null)
                 {
-                    _tvr = new TerminalVerificationResult(new TLVData("95 05 00 00 00 00 80"));
+                    _tvr = new TerminalVerificationResult(new TlvData("95 05 00 00 00 00 80"));
                 }
 
                 return _tvr;
@@ -164,16 +154,16 @@ namespace WSCT.EMV.Card
             {
                 if (_afl == null && _tlvProcessingOptions != null)
                 {
-                    if (TlvProcessingOptions.tag == 0x80)
+                    if (TlvProcessingOptions.Tag == 0x80)
                     {
                         // Format 1
-                        var rawAfl = new Byte[_tlvProcessingOptions.value.Length - 2];
-                        Array.Copy(_tlvProcessingOptions.value, 2, rawAfl, 0, rawAfl.Length);
+                        var rawAfl = new byte[_tlvProcessingOptions.Value.Length - 2];
+                        Array.Copy(_tlvProcessingOptions.Value, 2, rawAfl, 0, rawAfl.Length);
                         _afl = new ApplicationFileLocator(rawAfl);
                     }
-                    else if (_tlvProcessingOptions.tag == 0x77)
+                    else if (_tlvProcessingOptions.Tag == 0x77)
                     {
-                        _afl = new ApplicationFileLocator(_tlvProcessingOptions.getTag(0x94).value);
+                        _afl = new ApplicationFileLocator(_tlvProcessingOptions.GetTag(0x94).Value);
                     }
                 }
                 return _afl;
@@ -189,15 +179,15 @@ namespace WSCT.EMV.Card
             {
                 if (_aip == null && _tlvProcessingOptions != null)
                 {
-                    if (TlvProcessingOptions.tag == 0x80)
+                    if (TlvProcessingOptions.Tag == 0x80)
                     {
                         // Format 1
-                        _aip = new ApplicationInterchangeProfile(_tlvProcessingOptions.value[0], _tlvProcessingOptions.value[1]);
+                        _aip = new ApplicationInterchangeProfile(_tlvProcessingOptions.Value[0], _tlvProcessingOptions.Value[1]);
                     }
-                    else if (_tlvProcessingOptions.tag == 0x77)
+                    else if (_tlvProcessingOptions.Tag == 0x77)
                     {
                         // Format 2
-                        _aip = new ApplicationInterchangeProfile(_tlvProcessingOptions.getTag(0x82).value);
+                        _aip = new ApplicationInterchangeProfile(_tlvProcessingOptions.GetTag(0x82).Value);
                     }
                 }
                 return _aip;
@@ -215,9 +205,9 @@ namespace WSCT.EMV.Card
                 {
                     foreach (var record in TlvRecords)
                     {
-                        if (record.hasTag(0x8E))
+                        if (record.HasTag(0x8E))
                         {
-                            _cvmList = new CardholderVerificationMethodList(record.getTag(0x8E));
+                            _cvmList = new CardholderVerificationMethodList(record.GetTag(0x8E));
                             break;
                         }
                     }
@@ -233,8 +223,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_logEntry == null && TlvFci != null && TlvFci.hasTag(0x9F4D))
-                    _logEntry = new LogEntry(TlvFci.getTag(0x9F4D));
+                if (_logEntry == null && TlvFci != null && TlvFci.HasTag(0x9F4D))
+                {
+                    _logEntry = new LogEntry(TlvFci.GetTag(0x9F4D));
+                }
                 return _logEntry;
             }
         }
@@ -247,7 +239,9 @@ namespace WSCT.EMV.Card
             get
             {
                 if (_logFormat == null && TlvLogFormat != null)
-                    _logFormat = new DataObjectList(_tlvLogFormat.value);
+                {
+                    _logFormat = new DataObjectList(_tlvLogFormat.Value);
+                }
                 return _logFormat;
             }
         }
@@ -255,85 +249,82 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the records read from log file.
         /// </summary>
-        public List<List<TLVData>> LogRecords
+        public List<List<TlvData>> LogRecords
         {
             get { return _logRecords; }
         }
 
         /// <summary>
-        /// Accessor to the informations coming from PSE in <see cref="TLVData"/> format (if available).
+        /// Accessor to the informations coming from PSE in <see cref="TlvData"/> format (if available).
         /// </summary>
-        public TLVData TlvFromPSE
+        public TlvData TlvFromPSE
         {
             get { return _tlvFromPSE; }
         }
 
         /// <summary>
-        /// Accessor to the processing options in <see cref="TLVData"/> format.
+        /// Accessor to the processing options in <see cref="TlvData"/> format.
         /// </summary>
-        public TLVData TlvProcessingOptions
+        public TlvData TlvProcessingOptions
         {
             get { return _tlvProcessingOptions; }
         }
 
         /// <summary>
-        /// Accessor to the data read in <see cref="TLVData"/> format.
+        /// Accessor to the data read in <see cref="TlvData"/> format.
         /// </summary>
-        public List<TLVData> TlvRecords
+        public List<TlvData> TlvRecords
         {
             get { return _tlvRecords; }
             set { _tlvRecords = value; }
         }
 
         /// <summary>
-        /// Accessor to the offline signed data in <see cref="TLVData"/> format.
+        /// Accessor to the offline signed data in <see cref="TlvData"/> format.
         /// </summary>
-        public List<TLVData> TlvOfflineRecords
+        public List<TlvData> TlvOfflineRecords
         {
             get { return _tlvOfflineRecords; }
         }
 
         /// <summary>
-        /// Accessor to the data read in a fictive <see cref="TLVData"/>.
+        /// Accessor to the data read in a fictive <see cref="TlvData"/>.
         /// </summary>
-        public TLVData TlvDataRecords
+        public TlvData TlvDataRecords
         {
-            get
-            {
-                return _tlvRecords.toTLVData(0x20);
-            }
+            get { return _tlvRecords.ToTlvData(0x20); }
         }
 
         /// <summary>
-        /// Accessor to ATC (obtained by GET DATA) in <see cref="TLVData"/> format.
+        /// Accessor to ATC (obtained by GET DATA) in <see cref="TlvData"/> format.
         /// </summary>
-        public TLVData TlvATC
+        public TlvData TlvATC
         {
             get { return _tlvATC; }
         }
 
         /// <summary>
-        /// Accessor to Last Online ATC Register (obtained by GET DATA) in <see cref="TLVData"/> format.
+        /// Accessor to Last Online ATC Register (obtained by GET DATA) in <see cref="TlvData"/> format.
         /// </summary>
-        public TLVData TlvLastOnlineATCRegister
+        public TlvData TlvLastOnlineATCRegister
         {
             get { return _tlvLastOnlineATCRegister; }
             set { _tlvLastOnlineATCRegister = value; }
         }
 
         /// <summary>
-        /// Accessor to PIN Try Counter (obtained by GET DATA) in <see cref="TLVData"/> format.
+        /// Accessor to PIN Try Counter (obtained by GET DATA) in <see cref="TlvData"/> format.
         /// </summary>
-        public TLVData TlvPINTryCounter
+        public TlvData TlvPINTryCounter
         {
             get { return _tlvPINTryCounter; }
             set { _tlvPINTryCounter = value; }
         }
 
         /// <summary>
-        /// Accessor to Log Format (obtained by GET DATA) in <see cref="TLVData"/> format.
+        /// Accessor to Log Format (obtained by GET DATA) in <see cref="TlvData"/> format.
         /// </summary>
-        public TLVData TlvLogFormat
+        public TlvData TlvLogFormat
         {
             get { return _tlvLogFormat; }
             set { _tlvLogFormat = value; }
@@ -346,8 +337,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_ddol == null && TlvDataRecords.hasTag(0x9F49))
-                    _ddol = new DataObjectList(TlvDataRecords.getTag(0x9F49).value);
+                if (_ddol == null && TlvDataRecords.HasTag(0x9F49))
+                {
+                    _ddol = new DataObjectList(TlvDataRecords.GetTag(0x9F49).Value);
+                }
                 return _ddol;
             }
         }
@@ -359,8 +352,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_cdol1 == null && TlvDataRecords.hasTag(0x8C))
-                    _cdol1 = new DataObjectList(TlvDataRecords.getTag(0x8C).value);
+                if (_cdol1 == null && TlvDataRecords.HasTag(0x8C))
+                {
+                    _cdol1 = new DataObjectList(TlvDataRecords.GetTag(0x8C).Value);
+                }
                 return _cdol1;
             }
         }
@@ -372,8 +367,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_cdol2 == null && TlvDataRecords.hasTag(0x8D))
-                    _cdol2 = new DataObjectList(TlvDataRecords.getTag(0x8D).value);
+                if (_cdol2 == null && TlvDataRecords.HasTag(0x8D))
+                {
+                    _cdol2 = new DataObjectList(TlvDataRecords.GetTag(0x8D).Value);
+                }
                 return _cdol2;
             }
         }
@@ -385,13 +382,13 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_certificationAuthorityPublicKey == null && TlvDataRecords.hasTag(0x8F))
+                if (_certificationAuthorityPublicKey == null && TlvDataRecords.HasTag(0x8F))
                 {
-                    var caPublicKeyIndex = new CertificationAuthorityPublicKeyIndex(TlvDataRecords.getTag(0x8F));
+                    var caPublicKeyIndex = new CertificationAuthorityPublicKeyIndex(TlvDataRecords.GetTag(0x8F));
                     var aidObject = new ApplicationIdentifier(Aid);
                     try
                     {
-                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.Get(aidObject.StrRid, caPublicKeyIndex.tlv.value.toHexa());
+                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.Get(aidObject.StrRid, caPublicKeyIndex.Tlv.Value.ToHexa());
                     }
                     catch (EMVCertificationAuthorityNotFoundException)
                     {
@@ -409,10 +406,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_issuerPublicKeyCertificate == null && CertificationAuthorityPublicKey != null && TlvDataRecords.hasTag(0x90))
+                if (_issuerPublicKeyCertificate == null && CertificationAuthorityPublicKey != null && TlvDataRecords.HasTag(0x90))
                 {
                     _issuerPublicKeyCertificate = new IssuerPublicKeyCertificate();
-                    _issuerPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.getTag(0x90).value, CertificationAuthorityPublicKey);
+                    _issuerPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.GetTag(0x90).Value, CertificationAuthorityPublicKey);
                 }
                 return _issuerPublicKeyCertificate;
             }
@@ -428,11 +425,13 @@ namespace WSCT.EMV.Card
                 if (_issuerPublicKey == null && IssuerPublicKeyCertificate != null)
                 {
                     // Public key modulus = modulus part contained in certificate + remainder from the ICC records
-                    var modulus = IssuerPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.toHexa();
-                    if (TlvDataRecords.hasTag(0x92))
-                        modulus += TlvDataRecords.getTag(0x92).value.toHexa();
+                    var modulus = IssuerPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.ToHexa();
+                    if (TlvDataRecords.HasTag(0x92))
+                    {
+                        modulus += TlvDataRecords.GetTag(0x92).Value.ToHexa();
+                    }
                     // Exponent from the ICC records
-                    var exponent = TlvDataRecords.getTag(0x9F32).value.toHexa();
+                    var exponent = TlvDataRecords.GetTag(0x9F32).Value.ToHexa();
                     // Compute the public key
                     _issuerPublicKey = new PublicKey(modulus, exponent);
                 }
@@ -447,10 +446,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_iccPublicKeyCertificate == null && IssuerPublicKey != null && TlvDataRecords.hasTag(0x9F46))
+                if (_iccPublicKeyCertificate == null && IssuerPublicKey != null && TlvDataRecords.HasTag(0x9F46))
                 {
                     _iccPublicKeyCertificate = new IccPublicKeyCertificate();
-                    _iccPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.getTag(0x9F46).value, IssuerPublicKey);
+                    _iccPublicKeyCertificate.RecoverFromSignature(TlvDataRecords.GetTag(0x9F46).Value, IssuerPublicKey);
                 }
                 return _iccPublicKeyCertificate;
             }
@@ -466,11 +465,13 @@ namespace WSCT.EMV.Card
                 if (_iccPublicKey == null && IccPublicKeyCertificate != null)
                 {
                     // Public key modulus = modulus part contained in certificate + remainder from the ICC records
-                    var modulus = IccPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.toHexa();
-                    if (TlvDataRecords.hasTag(0x9F48))
-                        modulus += TlvDataRecords.getTag(0x9F48).value.toHexa();
+                    var modulus = IccPublicKeyCertificate.PublicKeyorLeftmostDigitsofthePublicKey.ToHexa();
+                    if (TlvDataRecords.HasTag(0x9F48))
+                    {
+                        modulus += TlvDataRecords.GetTag(0x9F48).Value.ToHexa();
+                    }
                     // Exponent from the ICC records
-                    var exponent = TlvDataRecords.getTag(0x9F47).value.toHexa();
+                    var exponent = TlvDataRecords.GetTag(0x9F47).Value.ToHexa();
                     // Compute the public key
                     _iccPublicKey = new PublicKey(modulus, exponent);
                 }
@@ -485,10 +486,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_sda == null && TlvDataRecords.hasTag(0x93) && IssuerPublicKeyCertificate != null)
+                if (_sda == null && TlvDataRecords.HasTag(0x93) && IssuerPublicKeyCertificate != null)
                 {
                     _sda = new StaticDataAuthentication();
-                    _sda.RecoverFromSignature(TlvDataRecords.getTag(0x93).value, IssuerPublicKey);
+                    _sda.RecoverFromSignature(TlvDataRecords.GetTag(0x93).Value, IssuerPublicKey);
                 }
                 return _sda;
             }
@@ -503,18 +504,18 @@ namespace WSCT.EMV.Card
             {
                 if (_dda == null && TlvSignedDynamicApplicationResponse != null && IccPublicKeyCertificate != null)
                 {
-                    if (TlvDataRecords.hasTag(0x8F))
+                    if (TlvDataRecords.HasTag(0x8F))
                     {
-                        Byte[] signature = null;
-                        if (TlvSignedDynamicApplicationResponse.tag == 0x80)
+                        byte[] signature = null;
+                        if (TlvSignedDynamicApplicationResponse.Tag == 0x80)
                         {
                             // Format 1
-                            signature = TlvSignedDynamicApplicationResponse.value;
+                            signature = TlvSignedDynamicApplicationResponse.Value;
                         }
-                        else if (TlvSignedDynamicApplicationResponse.tag == 0x77)
+                        else if (TlvSignedDynamicApplicationResponse.Tag == 0x77)
                         {
                             // Format 2
-                            signature = TlvSignedDynamicApplicationResponse.getTag(0x9F4B).value;
+                            signature = TlvSignedDynamicApplicationResponse.GetTag(0x9F4B).Value;
                         }
                         _dda = new DynamicDataAuthentication();
                         _dda.RecoverFromSignature(signature, IccPublicKey);
@@ -535,7 +536,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the unpredictable number used for INTERNAL AUTHENTICATE (DDA).
         /// </summary>
-        public TLVData TlvInternalAuthenticateUnpredictableNumber
+        public TlvData TlvInternalAuthenticateUnpredictableNumber
         {
             get { return _tlvInternalAuthenticateUnpredictableNumber; }
         }
@@ -550,7 +551,7 @@ namespace WSCT.EMV.Card
         /// <para>Format 2: The data object returned in the rAPDU message is a constructed data object with tag equal to '77'.
         /// The value field may contain several BER-TLV coded objects, but shall always include the Signed Dynamic Application Data as specified in Book 2.</para>
         /// </remarks>
-        public TLVData TlvSignedDynamicApplicationResponse
+        public TlvData TlvSignedDynamicApplicationResponse
         {
             get { return _tlvSignedDynamicApplicationResponse; }
         }
@@ -558,7 +559,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the unpredictable number used for GENERATE AC 1.
         /// </summary>
-        public TLVData TlvGenerateAC1UnpredictableNumber
+        public TlvData TlvGenerateAC1UnpredictableNumber
         {
             get { return _tlvGenerateAC1UnpredictableNumber; }
         }
@@ -566,7 +567,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the rAPDU obtained by GENERATE AC1.
         /// </summary>
-        public TLVData TlvGenerateAC1Response
+        public TlvData TlvGenerateAC1Response
         {
             get { return _tlvGenerateAC1Response; }
         }
@@ -574,7 +575,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the rAPDU obtained by GENERATE AC2.
         /// </summary>
-        public TLVData TlvGenerateAC2Response
+        public TlvData TlvGenerateAC2Response
         {
             get { return _tlvGenerateAC2Response; }
         }
@@ -582,7 +583,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to last GET CHALLENGE rAPDU.
         /// </summary>
-        public Byte[] IccChallenge
+        public byte[] IccChallenge
         {
             get { return _iccChallenge; }
         }
@@ -612,16 +613,16 @@ namespace WSCT.EMV.Card
             {
                 if (_cid1 == null && _tlvGenerateAC1Response != null)
                 {
-                    if (_tlvGenerateAC1Response.tag == 0x80)
+                    if (_tlvGenerateAC1Response.Tag == 0x80)
                     {
                         // Format 1
-                        var rawCid = new Byte[1];
-                        Array.Copy(_tlvGenerateAC1Response.value, 0, rawCid, 0, rawCid.Length);
-                        _cid1 = new CryptogramInformationData(new TLVData(0x9F27, 1, rawCid));
+                        var rawCid = new byte[1];
+                        Array.Copy(_tlvGenerateAC1Response.Value, 0, rawCid, 0, rawCid.Length);
+                        _cid1 = new CryptogramInformationData(new TlvData(0x9F27, 1, rawCid));
                     }
-                    else if (_tlvGenerateAC1Response.tag == 0x77)
+                    else if (_tlvGenerateAC1Response.Tag == 0x77)
                     {
-                        _cid1 = new CryptogramInformationData(_tlvGenerateAC1Response.getTag(0x9F27));
+                        _cid1 = new CryptogramInformationData(_tlvGenerateAC1Response.GetTag(0x9F27));
                     }
                 }
                 return _cid1;
@@ -637,16 +638,16 @@ namespace WSCT.EMV.Card
             {
                 if (_atcFromAC1 == null && _tlvGenerateAC1Response != null)
                 {
-                    if (_tlvGenerateAC1Response.tag == 0x80)
+                    if (_tlvGenerateAC1Response.Tag == 0x80)
                     {
                         // Format 1
-                        var rawATC = new Byte[2];
-                        Array.Copy(_tlvGenerateAC1Response.value, 1, rawATC, 0, rawATC.Length);
-                        _atcFromAC1 = new ApplicationTransactionCounter(new TLVData(0x9F36, 2, rawATC));
+                        var rawATC = new byte[2];
+                        Array.Copy(_tlvGenerateAC1Response.Value, 1, rawATC, 0, rawATC.Length);
+                        _atcFromAC1 = new ApplicationTransactionCounter(new TlvData(0x9F36, 2, rawATC));
                     }
-                    else if (_tlvGenerateAC1Response.tag == 0x77)
+                    else if (_tlvGenerateAC1Response.Tag == 0x77)
                     {
-                        _atcFromAC1 = new ApplicationTransactionCounter(_tlvGenerateAC1Response.getTag(0x9F36));
+                        _atcFromAC1 = new ApplicationTransactionCounter(_tlvGenerateAC1Response.GetTag(0x9F36));
                     }
                 }
                 return _atcFromAC1;
@@ -662,16 +663,16 @@ namespace WSCT.EMV.Card
             {
                 if (_applicationCryptogram1 == null && _tlvGenerateAC1Response != null)
                 {
-                    if (_tlvGenerateAC1Response.tag == 0x80)
+                    if (_tlvGenerateAC1Response.Tag == 0x80)
                     {
                         // Format 1
-                        var rawAC = new Byte[8];
-                        Array.Copy(_tlvGenerateAC1Response.value, 0, rawAC, 0, rawAC.Length);
-                        _applicationCryptogram1 = new ApplicationCryptogram(new TLVData(0x00, 8, rawAC));
+                        var rawAC = new byte[8];
+                        Array.Copy(_tlvGenerateAC1Response.Value, 0, rawAC, 0, rawAC.Length);
+                        _applicationCryptogram1 = new ApplicationCryptogram(new TlvData(0x00, 8, rawAC));
                     }
-                    else if (_tlvGenerateAC1Response.tag == 0x77)
+                    else if (_tlvGenerateAC1Response.Tag == 0x77)
                     {
-                        _applicationCryptogram1 = new ApplicationCryptogram(_tlvGenerateAC1Response.getTag(0x9F4B));
+                        _applicationCryptogram1 = new ApplicationCryptogram(_tlvGenerateAC1Response.GetTag(0x9F4B));
                     }
                 }
                 return _applicationCryptogram1;
@@ -691,76 +692,17 @@ namespace WSCT.EMV.Card
         #region >> Delegates
 
         /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetData"/>.
+        /// Delegate for event sent after execution of <see cref="ComputeCryptographicChecksum()"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetDataEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GetData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGetDataEventHandler(EMVApplication emv);
+        public delegate void AfterComputeCryptographicChecksumEventHandler(EMVApplication emv);
 
         /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetProcessingOptions"/>.
+        /// Delegate for event sent after execution of <see cref="EMVApplication.GenerateAc1"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetProcessingOptionsEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GetProcessingOptions"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGetProcessingOptionsEventHandler(EMVApplication emv);
+        public delegate void AfterGenerateAC1EventHandler(EMVApplication emv);
 
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadApplicationData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeReadApplicationDataEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadApplicationData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterReadApplicationDataEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadLogFile"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeReadLogFileEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadLogFile"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterReadLogFileEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.VerifyPin"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeVerifyPinEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.VerifyPin"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterVerifyPinEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.InternalAuthenticate"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeInternalAuthenticateEventHandler(EMVApplication emv);
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.InternalAuthenticate"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterInternalAuthenticateEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetChallenge"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetChallengeEventHandler(EMVApplication emv);
         /// <summary>
         /// Delegate for event sent after execution of <see cref="EMVApplication.GetChallenge"/>.
         /// </summary>
@@ -768,25 +710,94 @@ namespace WSCT.EMV.Card
         public delegate void AfterGetChallengeEventHandler(EMVApplication emv);
 
         /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GenerateAc1"/>.
+        /// Delegate for event sent after execution of <see cref="EMVApplication.GetData"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGenerateAC1EventHandler(EMVApplication emv);
+        public delegate void AfterGetDataEventHandler(EMVApplication emv);
+
         /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GenerateAc1"/>.
+        /// Delegate for event sent after execution of <see cref="EMVApplication.GetProcessingOptions"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGenerateAC1EventHandler(EMVApplication emv);
+        public delegate void AfterGetProcessingOptionsEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent after execution of <see cref="EMVApplication.InternalAuthenticate"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void AfterInternalAuthenticateEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadApplicationData"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void AfterReadApplicationDataEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadLogFile"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void AfterReadLogFileEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent after execution of <see cref="EMVApplication.VerifyPin"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void AfterVerifyPinEventHandler(EMVApplication emv);
+
         /// <summary>
         /// Delegate for event sent before execution of <see cref="EMVApplication.ComputeCryptographicChecksum"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
         public delegate void BeforeComputeCryptographicChecksumEventHandler(EMVApplication emv);
+
         /// <summary>
-        /// Delegate for event sent after execution of <see cref="ComputeCryptographicChecksum()"/>.
+        /// Delegate for event sent before execution of <see cref="EMVApplication.GenerateAc1"/>.
         /// </summary>
         /// <param name="emv">Caller instance.</param>
-        public delegate void AfterComputeCryptographicChecksumEventHandler(EMVApplication emv);
+        public delegate void BeforeGenerateAC1EventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.GetChallenge"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeGetChallengeEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.GetData"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeGetDataEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.GetProcessingOptions"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeGetProcessingOptionsEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.InternalAuthenticate"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeInternalAuthenticateEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadApplicationData"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeReadApplicationDataEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadLogFile"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeReadLogFileEventHandler(EMVApplication emv);
+
+        /// <summary>
+        /// Delegate for event sent before execution of <see cref="EMVApplication.VerifyPin"/>.
+        /// </summary>
+        /// <param name="emv">Caller instance.</param>
+        public delegate void BeforeVerifyPinEventHandler(EMVApplication emv);
 
         #endregion
 
@@ -796,6 +807,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="GetData"/>.
         /// </summary>
         public event BeforeGetDataEventHandler BeforeGetDataEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="GetData"/>.
         /// </summary>
@@ -805,6 +817,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="GetProcessingOptions"/>.
         /// </summary>
         public event BeforeGetProcessingOptionsEventHandler BeforeGetProcessingOptionsEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="GetProcessingOptions"/>.
         /// </summary>
@@ -814,6 +827,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="ReadApplicationData"/>.
         /// </summary>
         public event BeforeReadApplicationDataEventHandler BeforeReadApplicationDataEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="ReadApplicationData"/>.
         /// </summary>
@@ -823,6 +837,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="ReadLogFile"/>.
         /// </summary>
         public event BeforeGetDataEventHandler BeforeReadLogFileEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="ReadLogFile"/>.
         /// </summary>
@@ -832,6 +847,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="VerifyPin"/>.
         /// </summary>
         public event BeforeVerifyPinEventHandler BeforeVerifyPinEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="VerifyPin"/>.
         /// </summary>
@@ -841,6 +857,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="InternalAuthenticate"/>.
         /// </summary>
         public event BeforeInternalAuthenticateEventHandler BeforeInternalAuthenticateEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="InternalAuthenticate"/>.
         /// </summary>
@@ -850,6 +867,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="GetChallenge"/>.
         /// </summary>
         public event BeforeGetChallengeEventHandler BeforeGetChallengeEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="GetChallenge"/>.
         /// </summary>
@@ -859,6 +877,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="GenerateAc1"/>.
         /// </summary>
         public event BeforeGenerateAC1EventHandler BeforeGenerateAC1Event;
+
         /// <summary>
         /// Event sent after execution of <see cref="GenerateAc1"/>.
         /// </summary>
@@ -868,6 +887,7 @@ namespace WSCT.EMV.Card
         /// Event sent before execution of <see cref="ComputeCryptographicChecksum()"/>.
         /// </summary>
         public event BeforeComputeCryptographicChecksumEventHandler BeforeComputeCryptographicChecksumEvent;
+
         /// <summary>
         /// Event sent after execution of <see cref="ComputeCryptographicChecksum()"/>.
         /// </summary>
@@ -884,22 +904,22 @@ namespace WSCT.EMV.Card
         public EMVApplication(ICardChannel cardChannel)
             : base(cardChannel)
         {
-            _tlvRecords = new List<TLVData>();
-            _tlvOfflineRecords = new List<TLVData>();
+            _tlvRecords = new List<TlvData>();
+            _tlvOfflineRecords = new List<TlvData>();
         }
 
         /// <summary>
         /// Initializes a new <see cref="EMVApplication"/> instance.
         /// </summary>
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
-        /// <param name="tlvFromPSE"><see cref="TLVData">TLVData</see> object coming from PSE records for this application</param>
-        public EMVApplication(ICardChannel cardChannel, TLVData tlvFromPSE)
+        /// <param name="tlvFromPSE"><see cref="TlvData">TLVData</see> object coming from PSE records for this application</param>
+        public EMVApplication(ICardChannel cardChannel, TlvData tlvFromPSE)
             : this(cardChannel)
         {
             _tlvFromPSE = tlvFromPSE;
-            if (_tlvFromPSE.hasTag(0x4F))
+            if (_tlvFromPSE.HasTag(0x4F))
             {
-                Aid = _tlvFromPSE.getTag(0x4F).value.toHexa();
+                Aid = _tlvFromPSE.GetTag(0x4F).Value.ToHexa();
             }
         }
 
@@ -913,49 +933,55 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetProcessingOptions()
         {
-            if (BeforeGetProcessingOptionsEvent != null) BeforeGetProcessingOptionsEvent(this);
+            if (BeforeGetProcessingOptionsEvent != null)
+            {
+                BeforeGetProcessingOptionsEvent(this);
+            }
 
             // If PDOL 9F38 is not supplied in FCI, then used 8300 as UDC; if supplied: build the PDOL in tag 83 L V
-            Byte[] pdolDataValue;
-            if (TlvFci.hasTag(0x9F38))
+            byte[] pdolDataValue;
+            if (TlvFci.HasTag(0x9F38))
             {
                 // Use PDOL to build tag 83 value
-                var pdol = new DataObjectList(TlvFci.getTag(0x9F38).value);
-                var tlvAll = new List<TLVData> { TlvFci };
+                var pdol = new DataObjectList(TlvFci.GetTag(0x9F38).Value);
+                var tlvAll = new List<TlvData> { TlvFci };
                 tlvAll.AddRange(TlvTerminalData);
                 pdolDataValue = pdol.BuildData(tlvAll);
             }
             else
             {
-                pdolDataValue = new Byte[0];
+                pdolDataValue = new byte[0];
             }
             // Build tag 83 with computed value
-            var tlvPdolData = new TLVData(0x83, (uint)pdolDataValue.Length, pdolDataValue);
+            var tlvPdolData = new TlvData(0x83, (uint)pdolDataValue.Length, pdolDataValue);
 
             // Execute GET PROCESSING OPTIONS
-            var cAPDU = new CommandAPDU(0x80, 0xA8, 0x00, 0x00, tlvPdolData.length + 2, tlvPdolData.toByteArray(), 0);
+            var cAPDU = new CommandAPDU(0x80, 0xA8, 0x00, 0x00, tlvPdolData.Length + 2, tlvPdolData.ToByteArray(), 0);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
+            crp.Transmit(_cardChannel);
 
-            _lastStatusWord = crp.rAPDU.statusWord;
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // If GET RESPONSE needed, do it
-            if (crp.rAPDU.sw1 == 0x61)
+            if (crp.RApdu.Sw1 == 0x61)
             {
-                _tlvProcessingOptions = new TLVData();
+                _tlvProcessingOptions = new TlvData();
 
-                crp = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                crp.transmit(_cardChannel);
-                _lastStatusWord = crp.rAPDU.statusWord;
+                crp = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2));
+                crp.Transmit(_cardChannel);
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
 
             // Finally, store result
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                _tlvProcessingOptions = new TLVData(crp.rAPDU.udr);
+                _tlvProcessingOptions = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterGetProcessingOptionsEvent != null) AfterGetProcessingOptionsEvent(this);
+            if (AfterGetProcessingOptionsEvent != null)
+            {
+                AfterGetProcessingOptionsEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -970,16 +996,18 @@ namespace WSCT.EMV.Card
             {
                 CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, file.Sfi, 0);
                 var crp = new CommandResponsePair(cAPDU);
-                crp.transmit(_cardChannel);
+                crp.Transmit(_cardChannel);
 
-                if (crp.rAPDU.statusWord == 0x9000)
+                if (crp.RApdu.StatusWord == 0x9000)
                 {
-                    var tlv = new TLVData(crp.rAPDU.udr);
+                    var tlv = new TlvData(crp.RApdu.Udr);
                     // Store data in list
                     _tlvRecords.Add(tlv);
 
-                    if (tlv.tag != 0x70)
+                    if (tlv.Tag != 0x70)
+                    {
                         throw new Exception(String.Format("EMVApplication.readData(): record is not TLV-coded with tag 70 [{0}]", tlv));
+                    }
 
                     // If used for offline, store it in dedicated list
                     if (recordNumber - file.FirstRecord < file.OfflineNumberOfRecords)
@@ -987,17 +1015,19 @@ namespace WSCT.EMV.Card
                         // For files with SFI in the range 1 to 10, the record tag ('70') and the record length are excluded from the offline data authentication process.
                         if (file.Sfi <= 10)
                         {
-                            foreach (var tlvData in tlv.subFields)
+                            foreach (var tlvData in tlv.SubFields)
+                            {
                                 _tlvOfflineRecords.Add(tlvData);
+                            }
                         }
-                        //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
+                            //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
                         else
                         {
                             _tlvOfflineRecords.Add(tlv);
                         }
                     }
                 }
-                _lastStatusWord = crp.rAPDU.statusWord;
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
             return _lastStatusWord;
         }
@@ -1008,14 +1038,20 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ReadApplicationData()
         {
-            if (BeforeReadApplicationDataEvent != null) BeforeReadApplicationDataEvent(this);
+            if (BeforeReadApplicationDataEvent != null)
+            {
+                BeforeReadApplicationDataEvent(this);
+            }
 
-            foreach (ApplicationFileLocator.FileIdentification file in Afl.GetFiles())
+            foreach (var file in Afl.GetFiles())
             {
                 ReadDataFile(file);
             }
 
-            if (AfterReadApplicationDataEvent != null) AfterReadApplicationDataEvent(this);
+            if (AfterReadApplicationDataEvent != null)
+            {
+                AfterReadApplicationDataEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1026,14 +1062,20 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetData()
         {
-            if (BeforeGetDataEvent != null) BeforeGetDataEvent(this);
+            if (BeforeGetDataEvent != null)
+            {
+                BeforeGetDataEvent(this);
+            }
 
             GetData(0x9F36, ref _tlvATC);
             GetData(0x9F13, ref _tlvLastOnlineATCRegister);
             GetData(0x9F17, ref _tlvPINTryCounter);
             GetData(0x9F4F, ref _tlvLogFormat);
 
-            if (AfterGetDataEvent != null) AfterGetDataEvent(this);
+            if (AfterGetDataEvent != null)
+            {
+                AfterGetDataEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1051,18 +1093,18 @@ namespace WSCT.EMV.Card
         /// </param>
         /// <param name="tlv"></param>
         /// <returns>Last status word.</returns>
-        protected UInt16 GetData(UInt32 tag, ref TLVData tlv)
+        protected UInt16 GetData(UInt32 tag, ref TlvData tlv)
         {
             // Execute GET DATA instruction
-            var cAPDU = new CommandAPDU(0x80, 0xCA, (Byte)(tag / 0x100), (Byte)(tag % 0x100), 0);
+            var cAPDU = new CommandAPDU(0x80, 0xCA, (byte)(tag/0x100), (byte)(tag%0x100), 0);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
-            _lastStatusWord = crp.rAPDU.statusWord;
+            crp.Transmit(_cardChannel);
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // Finally store rAPDU
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                tlv = new TLVData(crp.rAPDU.udr);
+                tlv = new TlvData(crp.RApdu.Udr);
             }
 
             return _lastStatusWord;
@@ -1074,34 +1116,43 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ReadLogFile()
         {
-            if (BeforeReadLogFileEvent != null) BeforeReadLogFileEvent(this);
+            if (BeforeReadLogFileEvent != null)
+            {
+                BeforeReadLogFileEvent(this);
+            }
 
             if (LogEntry == null)
+            {
                 throw new LogEntryNotFoundException(String.Format("EMVApplication.readLogFile(): logEntry ({0}) undefined.", _logEntry));
+            }
 
             if (LogFormat == null)
+            {
                 throw new LogFormatNotFoundException(String.Format("EMVApplication.readLogFile(): logFormat ({0}) undefined.", _logFormat));
+            }
 
-            _logRecords = new List<List<TLVData>>();
+            _logRecords = new List<List<TlvData>>();
 
-            Byte recordNumber = 0;
+            byte recordNumber = 0;
             do
             {
                 recordNumber++;
                 CommandAPDU cAPDU = new EMVReadRecordCommand(recordNumber, LogEntry.Sfi, 0);
                 var crp = new CommandResponsePair(cAPDU);
-                crp.transmit(_cardChannel);
-                _lastStatusWord = crp.rAPDU.statusWord;
-                if (crp.rAPDU.statusWord == 0x9000)
+                crp.Transmit(_cardChannel);
+                _lastStatusWord = crp.RApdu.StatusWord;
+                if (crp.RApdu.StatusWord == 0x9000)
                 {
-                    var record = crp.rAPDU.udr;
+                    var record = crp.RApdu.Udr;
                     var dataInRecord = _logFormat.ParseRawData(record);
                     _logRecords.Add(dataInRecord);
                 }
-
             } while (_lastStatusWord == 0x9000 && recordNumber < _logEntry.CyclicFileSize);
 
-            if (AfterReadLogFileEvent != null) AfterReadLogFileEvent(this);
+            if (AfterReadLogFileEvent != null)
+            {
+                AfterReadLogFileEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1113,23 +1164,33 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 VerifyPin(PINBlock pinBlock)
         {
-            if (BeforeVerifyPinEvent != null) BeforeVerifyPinEvent(this);
+            if (BeforeVerifyPinEvent != null)
+            {
+                BeforeVerifyPinEvent(this);
+            }
 
-            Byte p2 = 0x00;
+            byte p2 = 0x00;
             if (pinBlock is PlaintextPINBlock)
+            {
                 p2 = 0x80;
+            }
 
             // Execute the VERIFY instruction
             var cAPDU = new CommandAPDU(0x00, 0x20, 0x00, p2, (UInt32)pinBlock.PinBlock.Length, pinBlock.PinBlock);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
-            _lastStatusWord = crp.rAPDU.statusWord;
+            crp.Transmit(_cardChannel);
+            _lastStatusWord = crp.RApdu.StatusWord;
             _verifyPinStatusWord = _lastStatusWord;
 
             if (_lastStatusWord != 0x9000)
+            {
                 Tvr.CardholderVerificationFailed = true;
+            }
 
-            if (AfterVerifyPinEvent != null) AfterVerifyPinEvent(this);
+            if (AfterVerifyPinEvent != null)
+            {
+                AfterVerifyPinEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1139,18 +1200,21 @@ namespace WSCT.EMV.Card
         /// </summary>
         /// <param name="unpredictableNumber">Unpredictable number.</param>
         /// <returns>Last status word.</returns>
-        public UInt16 InternalAuthenticate(Byte[] unpredictableNumber)
+        public UInt16 InternalAuthenticate(byte[] unpredictableNumber)
         {
-            _tlvInternalAuthenticateUnpredictableNumber = new TLVData(0x9F37, 0x04, unpredictableNumber);
+            _tlvInternalAuthenticateUnpredictableNumber = new TlvData(0x9F37, 0x04, unpredictableNumber);
 
-            if (BeforeInternalAuthenticateEvent != null) BeforeInternalAuthenticateEvent(this);
+            if (BeforeInternalAuthenticateEvent != null)
+            {
+                BeforeInternalAuthenticateEvent(this);
+            }
 
             // Build DDOL data
-            Byte[] ddolDataValue;
+            byte[] ddolDataValue;
             if (Ddol != null)
             {
                 // Use DDOL to build data
-                var tlvAll = new List<TLVData>
+                var tlvAll = new List<TlvData>
                 {
                     TlvFci,
                     TlvProcessingOptions,
@@ -1162,31 +1226,34 @@ namespace WSCT.EMV.Card
             }
             else
             {
-                ddolDataValue = new Byte[0];
+                ddolDataValue = new byte[0];
             }
 
             // Execute GET PROCESSING OPTIONS
             var cAPDU = new CommandAPDU(0x00, 0x88, 0x00, 0x00, (uint)ddolDataValue.Length, ddolDataValue, 0);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
-            _lastStatusWord = crp.rAPDU.statusWord;
+            crp.Transmit(_cardChannel);
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // If GET RESPONSE needed, do it
-            if (crp.rAPDU.sw1 == 0x61)
+            if (crp.RApdu.Sw1 == 0x61)
             {
-                _tlvSignedDynamicApplicationResponse = new TLVData();
-                crp = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                crp.transmit(_cardChannel);
-                _lastStatusWord = crp.rAPDU.statusWord;
+                _tlvSignedDynamicApplicationResponse = new TlvData();
+                crp = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2));
+                crp.Transmit(_cardChannel);
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
 
             // Finally, store result
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                _tlvSignedDynamicApplicationResponse = new TLVData(crp.rAPDU.udr);
+                _tlvSignedDynamicApplicationResponse = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterInternalAuthenticateEvent != null) AfterInternalAuthenticateEvent(this);
+            if (AfterInternalAuthenticateEvent != null)
+            {
+                AfterInternalAuthenticateEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1197,7 +1264,10 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetChallenge()
         {
-            if (BeforeGetChallengeEvent != null) BeforeGetChallengeEvent(this);
+            if (BeforeGetChallengeEvent != null)
+            {
+                BeforeGetChallengeEvent(this);
+            }
 
             // Clear previous challenge
             _iccChallenge = null;
@@ -1205,23 +1275,26 @@ namespace WSCT.EMV.Card
             // Execute GET CHALLENGE
             var cAPDU = new CommandAPDU(0x00, 0x84, 0x00, 0x00, 0);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
-            _lastStatusWord = crp.rAPDU.statusWord;
+            crp.Transmit(_cardChannel);
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // If GET RESPONSE needed, do it
-            if (crp.rAPDU.sw1 == 0x61)
+            if (crp.RApdu.Sw1 == 0x61)
             {
-                crp = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                _lastStatusWord = crp.rAPDU.statusWord;
+                crp = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2));
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
 
             // Finally, store result
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                _iccChallenge = crp.rAPDU.udr;
+                _iccChallenge = crp.RApdu.Udr;
             }
 
-            if (AfterGetChallengeEvent != null) AfterGetChallengeEvent(this);
+            if (AfterGetChallengeEvent != null)
+            {
+                AfterGetChallengeEvent(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1232,15 +1305,18 @@ namespace WSCT.EMV.Card
         /// <param name="cryptogramType">Type of the cryptogram to be generated.</param>
         /// <param name="unpredictableNumber">Unpredictable number.</param>
         /// <returns>Last status word.</returns>
-        public UInt16 GenerateAc1(CryptogramType cryptogramType, Byte[] unpredictableNumber)
+        public UInt16 GenerateAc1(CryptogramType cryptogramType, byte[] unpredictableNumber)
         {
-            _tlvGenerateAC1UnpredictableNumber = new TLVData(0x9F37, (uint)unpredictableNumber.Length, unpredictableNumber);
+            _tlvGenerateAC1UnpredictableNumber = new TlvData(0x9F37, (uint)unpredictableNumber.Length, unpredictableNumber);
 
             _requestedAC1Type = cryptogramType;
 
-            if (BeforeGenerateAC1Event != null) BeforeGenerateAC1Event(this);
+            if (BeforeGenerateAC1Event != null)
+            {
+                BeforeGenerateAC1Event(this);
+            }
 
-            Byte referenceControlParameter;
+            byte referenceControlParameter;
             switch (cryptogramType)
             {
                 case CryptogramType.AAC:
@@ -1259,44 +1335,47 @@ namespace WSCT.EMV.Card
             // TODO: if CDA signature requested, set bit 5 to 1 (0x08)
 
             // Build CDOL1 data
-            Byte[] cdolDataValue;
+            byte[] cdolDataValue;
             if (Cdol1 != null)
             {
                 // Use CDOL1 to build data
-                var tlvAll = new List<TLVData> { TlvFci, TlvProcessingOptions, _tlvGenerateAC1UnpredictableNumber };
+                var tlvAll = new List<TlvData> { TlvFci, TlvProcessingOptions, _tlvGenerateAC1UnpredictableNumber };
                 tlvAll.AddRange(TlvRecords);
                 tlvAll.AddRange(TlvTerminalData);
-                tlvAll.Add(Tvr.tlv);
+                tlvAll.Add(Tvr.Tlv);
                 cdolDataValue = Cdol1.BuildData(tlvAll);
             }
             else
             {
-                cdolDataValue = new Byte[0];
+                cdolDataValue = new byte[0];
             }
 
             // Execute GENERATE AC
             var cAPDU = new CommandAPDU(0x80, 0xAE, referenceControlParameter, 0x00, (UInt32)cdolDataValue.Length, cdolDataValue, 0); // Bad APDU !
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
+            crp.Transmit(_cardChannel);
 
-            _lastStatusWord = crp.rAPDU.statusWord;
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // If GET RESPONSE needed, do it
-            if (crp.rAPDU.sw1 == 0x61)
+            if (crp.RApdu.Sw1 == 0x61)
             {
-                _tlvGenerateAC1Response = new TLVData();
-                crp = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                crp.transmit(_cardChannel);
-                _lastStatusWord = crp.rAPDU.statusWord;
+                _tlvGenerateAC1Response = new TlvData();
+                crp = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2));
+                crp.Transmit(_cardChannel);
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
 
             // Finally, store result
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                _tlvGenerateAC1Response = new TLVData(crp.rAPDU.udr);
+                _tlvGenerateAC1Response = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterGenerateAC1Event != null) AfterGenerateAC1Event(this);
+            if (AfterGenerateAC1Event != null)
+            {
+                AfterGenerateAC1Event(this);
+            }
 
             return _lastStatusWord;
         }
@@ -1308,17 +1387,20 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ComputeCryptographicChecksum()
         {
-            if (BeforeComputeCryptographicChecksumEvent != null) BeforeComputeCryptographicChecksumEvent(this);
+            if (BeforeComputeCryptographicChecksumEvent != null)
+            {
+                BeforeComputeCryptographicChecksumEvent(this);
+            }
 
             // If UDOL 9F69 is not supplied in records, then use default UDOL = 9F6A04
-            Byte[] udolDataValue = null;
-            var tlvAll = new List<TLVData>();
+            byte[] udolDataValue = null;
+            var tlvAll = new List<TlvData>();
             foreach (var record in _tlvRecords)
             {
                 tlvAll.Add(record);
-                if (record.hasTag(0x9F69))
+                if (record.HasTag(0x9F69))
                 {
-                    var udol = new DataObjectList(record.getTag(0x9F69).value);
+                    var udol = new DataObjectList(record.GetTag(0x9F69).Value);
                     tlvAll.AddRange(TlvTerminalData);
                     udolDataValue = udol.BuildData(tlvAll);
                 }
@@ -1334,34 +1416,36 @@ namespace WSCT.EMV.Card
                     var rndNumber = rndNumbers.Next(10);
                     tmp += rndNumber.ToString(CultureInfo.InvariantCulture);
                 }
-                udolDataValue = tmp.fromHexa();
+                udolDataValue = tmp.FromHexa();
             }
 
             // Execute COMPUTE CRYPTOGRAPHIC CHECKSUM
             var cAPDU = new CommandAPDU(0x80, 0x2A, 0x8E, 0x80, (uint)udolDataValue.Length, udolDataValue, 0);
             var crp = new CommandResponsePair(cAPDU);
-            crp.transmit(_cardChannel);
-            _lastStatusWord = crp.rAPDU.statusWord;
+            crp.Transmit(_cardChannel);
+            _lastStatusWord = crp.RApdu.StatusWord;
 
             // If GET RESPONSE needed, do it
-            if (crp.rAPDU.sw1 == 0x61)
+            if (crp.RApdu.Sw1 == 0x61)
             {
-                _tlvCryptographicChecksum = new TLVData();
-                crp = new CommandResponsePair(new GetResponseCommand(crp.rAPDU.sw2));
-                crp.transmit(_cardChannel);
-                _lastStatusWord = crp.rAPDU.statusWord;
+                _tlvCryptographicChecksum = new TlvData();
+                crp = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2));
+                crp.Transmit(_cardChannel);
+                _lastStatusWord = crp.RApdu.StatusWord;
             }
 
             // Finally, store result
-            if (crp.rAPDU.statusWord == 0x9000)
+            if (crp.RApdu.StatusWord == 0x9000)
             {
-                _tlvCryptographicChecksum = new TLVData(crp.rAPDU.udr);
+                _tlvCryptographicChecksum = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterComputeCryptographicChecksumEvent != null) AfterComputeCryptographicChecksumEvent(this);
+            if (AfterComputeCryptographicChecksumEvent != null)
+            {
+                AfterComputeCryptographicChecksumEvent(this);
+            }
 
             return _lastStatusWord;
-
         }
 
         #endregion

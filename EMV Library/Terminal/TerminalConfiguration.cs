@@ -1,5 +1,4 @@
 ﻿using System.Xml.Serialization;
-
 using WSCT.EMV.Security;
 
 namespace WSCT.EMV.Terminal
