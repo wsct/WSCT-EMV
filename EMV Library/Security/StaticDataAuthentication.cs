@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
@@ -12,9 +11,9 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        Byte[] _dataAuthenticationCode;
+        private byte[] _dataAuthenticationCode;
 
-        Byte[] _padPattern;
+        private byte[] _padPattern;
 
         #endregion
 
@@ -23,13 +22,13 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Data Authentication Code (2): Issuer-assigned code.
         /// </summary>
-        public Byte[] DataAuthenticationCode
+        public byte[] DataAuthenticationCode
         {
             get
             {
                 if (_dataAuthenticationCode == null)
                 {
-                    _dataAuthenticationCode = new Byte[2];
+                    _dataAuthenticationCode = new byte[2];
                     Array.Copy(_recovered, 2, _dataAuthenticationCode, 0, 2);
                 }
                 return _dataAuthenticationCode;
@@ -39,19 +38,18 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Pad Pattern (NI - 26): (NI - 26) padding bytes of value 'BB'.
         /// </summary>
-        public Byte[] PadPattern
+        public byte[] PadPattern
         {
             get
             {
                 if (_padPattern == null)
                 {
-                    _padPattern = new Byte[KeyLength - 26];
+                    _padPattern = new byte[KeyLength - 26];
                     Array.Copy(_recovered, 5, _padPattern, 0, KeyLength - 26);
                 }
                 return _padPattern;
             }
         }
-
 
         #endregion
 
@@ -64,9 +62,9 @@ namespace WSCT.EMV.Security
             s.AppendFormat("Header:[{0:X2}] ", DataHeader);
             s.AppendFormat("Format:[{0:X2}] ", DataFormat);
             s.AppendFormat("Hash Algorithm:[{0:X2}] ", HashAlgorithmIndicator);
-            s.AppendFormat("ICC Dynamic Data:[{0}] ", DataAuthenticationCode.toHexa('\0'));
-            s.AppendFormat("Pad:[{0}] ", PadPattern.toHexa('\0'));
-            s.AppendFormat("Hash:[{0}] ", HashResult.toHexa('\0'));
+            s.AppendFormat("ICC Dynamic Data:[{0}] ", DataAuthenticationCode.ToHexa('\0'));
+            s.AppendFormat("Pad:[{0}] ", PadPattern.ToHexa('\0'));
+            s.AppendFormat("Hash:[{0}] ", HashResult.ToHexa('\0'));
             s.AppendFormat("Trailer:[{0:X2}] ", DataTrailer);
 
             return s.ToString();

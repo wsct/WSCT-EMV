@@ -1,21 +1,20 @@
-﻿using System;
-using WSCT.Helpers.BasicEncodingRules;
+﻿using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
 {
     /// <summary>
     /// Represents the Certification Authority Public Key Index of an EMV Application.
     /// </summary>
-    public class CertificationAuthorityPublicKeyIndex : BinaryTLVObject
+    public class CertificationAuthorityPublicKeyIndex : BinaryTlvObject
     {
         #region >> Properties
 
         /// <summary>
         /// Accessor to the index.
         /// </summary>
-        public Byte Index
+        public byte Index
         {
-            get { return tlv.value[0]; }
+            get { return Tlv.Value[0]; }
         }
 
         #endregion
@@ -33,9 +32,9 @@ namespace WSCT.EMV.Objects
         /// Initializes a new <see cref="CertificationAuthorityPublicKeyIndex"/> instance.
         /// </summary>
         /// <param name="tlvCaPublicKeyIndex">TLVData defining the Certification Authority Public Key Index tag.</param>
-        public CertificationAuthorityPublicKeyIndex(TLVData tlvCaPublicKeyIndex)
+        public CertificationAuthorityPublicKeyIndex(TlvData tlvCaPublicKeyIndex)
         {
-            tlv = tlvCaPublicKeyIndex;
+            Tlv = tlvCaPublicKeyIndex;
         }
 
         #endregion

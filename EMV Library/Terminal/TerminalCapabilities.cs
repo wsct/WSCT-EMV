@@ -22,13 +22,13 @@ namespace WSCT.EMV.Terminal
             /// AID of the application (text).
             /// </summary>
             [XmlAttribute("aid")]
-            public String Aid { get; set; }
+            public string Aid { get; set; }
 
             /// <summary>
             /// Label of the application.
             /// </summary>
             [XmlAttribute("label")]
-            public String Label { get; set; }
+            public string Label { get; set; }
         }
 
         /// <summary>
@@ -41,13 +41,13 @@ namespace WSCT.EMV.Terminal
             /// DF Name of the PSE.
             /// </summary>
             [XmlAttribute("name")]
-            public String Name { get; set; }
+            public string Name { get; set; }
 
             /// <summary>
             /// Label of the PSE.
             /// </summary>
             [XmlAttribute("label")]
-            public String Label { get; set; }
+            public string Label { get; set; }
         }
 
         #endregion

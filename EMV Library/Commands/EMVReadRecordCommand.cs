@@ -15,7 +15,7 @@ namespace WSCT.EMV.Commands
         /// </summary>
         public EMVReadRecordCommand()
         {
-            searchMode = SearchMode.READ_RECORD_P1;
+            Search = SearchMode.ReadRecordP1;
         }
 
         /// <summary>
@@ -24,8 +24,8 @@ namespace WSCT.EMV.Commands
         /// <param name="record">Record number to read.</param>
         /// <param name="sfi">Short File Identifier of the EF to read.</param>
         /// <param name="le">Length of data to read.</param>
-        public EMVReadRecordCommand(Byte record, Byte sfi, UInt32 le)
-            : base(record, sfi, SearchMode.READ_RECORD_P1, le)
+        public EMVReadRecordCommand(byte record, byte sfi, UInt32 le)
+            : base(record, sfi, SearchMode.ReadRecordP1, le)
         {
         }
 

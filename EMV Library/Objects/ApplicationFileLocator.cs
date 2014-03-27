@@ -7,7 +7,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Application File Locator of an EMV application.
     /// </summary>
-    public class ApplicationFileLocator : BinaryTLVObject
+    public class ApplicationFileLocator : BinaryTlvObject
     {
         #region >> Nested classes
 
@@ -17,30 +17,30 @@ namespace WSCT.EMV.Objects
         public class FileIdentification
         {
             /// <summary>
-            /// SFI of the file.
-            /// </summary>
-            public Byte Sfi;
-
-            /// <summary>
             /// First record to be read.
             /// </summary>
-            public Byte FirstRecord;
+            public byte FirstRecord;
 
             /// <summary>
             /// Last record to be read.
             /// </summary>
-            public Byte LastRecord;
+            public byte LastRecord;
 
             /// <summary>
             /// Last record to be used in offline data authentication (from <c>firstRecord</c> to <c>firstRecord+offlineNumberOfRecords</c>).
             /// </summary>
-            public Byte OfflineNumberOfRecords;
+            public byte OfflineNumberOfRecords;
+
+            /// <summary>
+            /// SFI of the file.
+            /// </summary>
+            public byte Sfi;
 
             /// <summary>
             /// Initializes a new <see cref="FileIdentification"/> instance.
             /// </summary>
             /// <param name="fourBytes">Four bytes identifying the file.</param>
-            public FileIdentification(Byte[] fourBytes)
+            public FileIdentification(byte[] fourBytes)
                 : this(fourBytes, 0)
             {
             }
@@ -50,9 +50,9 @@ namespace WSCT.EMV.Objects
             /// </summary>
             /// <param name="fourBytes">Four bytes identifying the file.</param>
             /// <param name="offset">Offset in the array <paramref>fourBytes</paramref>.</param>
-            public FileIdentification(Byte[] fourBytes, Byte offset)
+            public FileIdentification(byte[] fourBytes, byte offset)
             {
-                Sfi = (Byte)(fourBytes[offset + 0] >> 3);
+                Sfi = (byte)(fourBytes[offset + 0] >> 3);
                 FirstRecord = fourBytes[offset + 1];
                 LastRecord = fourBytes[offset + 2];
                 OfflineNumberOfRecords = fourBytes[offset + 3];
@@ -81,10 +81,10 @@ namespace WSCT.EMV.Objects
         /// Initializes a new <see cref="ApplicationFileLocator"/> instance.
         /// </summary>
         /// <param name="aflData">Raw AFL data.</param>
-        public ApplicationFileLocator(Byte[] aflData)
+        public ApplicationFileLocator(byte[] aflData)
             : this()
         {
-            tlv = new TLVData { value = aflData };
+            Tlv = new TlvData { Value = aflData };
         }
 
         #endregion
@@ -97,12 +97,12 @@ namespace WSCT.EMV.Objects
         /// <returns><see cref="FileIdentification" /> instances.</returns>
         public IEnumerable<FileIdentification> GetFiles()
         {
-            if (tlv != null && tlv.value != null)
+            if (Tlv != null && Tlv.Value != null)
             {
-                Byte offset = 0;
-                while (offset < tlv.value.Length)
+                byte offset = 0;
+                while (offset < Tlv.Value.Length)
                 {
-                    yield return new FileIdentification(tlv.value, offset);
+                    yield return new FileIdentification(Tlv.Value, offset);
                     offset += 4;
                 }
             }

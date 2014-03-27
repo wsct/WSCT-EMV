@@ -11,7 +11,7 @@ namespace WSCT.EMV.Exceptions
         /// <summary>
         /// Initializes a new <see cref="LogFormatNotFoundException"/> instance.
         /// </summary>
-        public LogFormatNotFoundException(String message)
+        public LogFormatNotFoundException(string message)
             : base(message)
         {
         }

@@ -5,7 +5,7 @@ using WSCT.Helpers;
 namespace WSCT.EMV.Objects
 {
     [TestFixture]
-    class ApplicationFileLocatorUnitTest
+    internal class ApplicationFileLocatorUnitTest
     {
         [Test]
         public void Constructor()
@@ -19,7 +19,7 @@ namespace WSCT.EMV.Objects
         [Test]
         public void GetFiles()
         {
-            var afl = new ApplicationFileLocator("08 02 03 04".fromHexa());
+            var afl = new ApplicationFileLocator("08 02 03 04".FromHexa());
 
             var files = afl.GetFiles().ToList();
             Assert.AreEqual(1, files.Count());

@@ -11,9 +11,9 @@ namespace WSCT.EMV.Security
 
         private readonly Int32 _identifierLength;
 
-        private Byte[] _certificateExpirationDate;
-        private Byte[] _certificateSerialNumber;
-        private Byte[] _publicKeyorLeftmostDigitsofthePublicKey;
+        private byte[] _certificateExpirationDate;
+        private byte[] _certificateSerialNumber;
+        private byte[] _publicKeyorLeftmostDigitsofthePublicKey;
 
         #endregion
 
@@ -22,13 +22,13 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Certificate Expiration Date (2): MMYY after which this certificate is invalid.
         /// </summary>
-        public Byte[] CertificateExpirationDate
+        public byte[] CertificateExpirationDate
         {
             get
             {
                 if (_certificateExpirationDate == null)
                 {
-                    _certificateExpirationDate = new Byte[2];
+                    _certificateExpirationDate = new byte[2];
                     Array.Copy(_recovered, 2 + _identifierLength, _certificateExpirationDate, 0, 2);
                 }
                 return _certificateExpirationDate;
@@ -38,13 +38,13 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Certificate Serial Number (3): Binary number unique to this certificate assigned by the certification authority.
         /// </summary>
-        public Byte[] CertificateSerialNumber
+        public byte[] CertificateSerialNumber
         {
             get
             {
                 if (_certificateSerialNumber == null)
                 {
-                    _certificateSerialNumber = new Byte[3];
+                    _certificateSerialNumber = new byte[3];
                     Array.Copy(_recovered, 2 + _identifierLength + 2, _certificateSerialNumber, 0, 3);
                 }
                 return _certificateSerialNumber;
@@ -54,7 +54,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Public Key (1): Identifies the digital signature algorithm to be used with the Public KeyAlgorithm Indicator.
         /// </summary>
-        public Byte PublicKeyAlgorithmIndicator
+        public byte PublicKeyAlgorithmIndicator
         {
             get { return _recovered[2 + _identifierLength + 6]; }
         }
@@ -62,7 +62,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Public Key Length (1): Identifies the length of the Public Key Modulus in bytes.
         /// </summary>
-        public Byte PublicKeyLength
+        public byte PublicKeyLength
         {
             get { return _recovered[2 + _identifierLength + 7]; }
         }
@@ -70,7 +70,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Public Key Exponent Length (1): Identifies the length of the Public Key Exponent in bytes.
         /// </summary>
-        public Byte PublicKeyExponentLength
+        public byte PublicKeyExponentLength
         {
             get { return _recovered[2 + _identifierLength + 8]; }
         }
@@ -78,7 +78,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// 
         /// </summary>
-        public Byte[] PublicKeyorLeftmostDigitsofthePublicKey
+        public byte[] PublicKeyorLeftmostDigitsofthePublicKey
         {
             get
             {
@@ -86,12 +86,12 @@ namespace WSCT.EMV.Security
                 {
                     if (PublicKeyLength <= KeyLength - (22 + 10 + _identifierLength))
                     {
-                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[PublicKeyLength];
+                        _publicKeyorLeftmostDigitsofthePublicKey = new byte[PublicKeyLength];
                         Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, PublicKeyLength);
                     }
                     else
                     {
-                        _publicKeyorLeftmostDigitsofthePublicKey = new Byte[KeyLength - (22 + 10 + _identifierLength)];
+                        _publicKeyorLeftmostDigitsofthePublicKey = new byte[KeyLength - (22 + 10 + _identifierLength)];
                         Array.Copy(_recovered, 2 + _identifierLength + 9, _publicKeyorLeftmostDigitsofthePublicKey, 0, KeyLength - (22 + 10 + _identifierLength));
                     }
                 }

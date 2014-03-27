@@ -6,7 +6,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Application Label of an EMV smartcards.
     /// </summary>
-    public class ApplicationLabel : StringTLVObject
+    public class ApplicationLabel : StringTlvObject
     {
         #region >> Constructors
 

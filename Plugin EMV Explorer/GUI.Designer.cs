@@ -1581,7 +1581,7 @@
             groupBox17.Size = new System.Drawing.Size(285, 216);
             groupBox17.TabIndex = 8;
             groupBox17.TabStop = false;
-            groupBox17.Text = "TVR Byte 1";
+            groupBox17.Text = "TVR byte 1";
             // 
             // guiTVR1_7
             // 
@@ -1679,7 +1679,7 @@
             groupBox19.Size = new System.Drawing.Size(285, 216);
             groupBox19.TabIndex = 16;
             groupBox19.TabStop = false;
-            groupBox19.Text = "TVR Byte 2";
+            groupBox19.Text = "TVR byte 2";
             // 
             // guiTVR2_7
             // 
@@ -1777,7 +1777,7 @@
             groupBox20.Size = new System.Drawing.Size(285, 216);
             groupBox20.TabIndex = 17;
             groupBox20.TabStop = false;
-            groupBox20.Text = "TVR Byte 3";
+            groupBox20.Text = "TVR byte 3";
             // 
             // guiTVR3_7
             // 
@@ -1875,7 +1875,7 @@
             groupBox21.Size = new System.Drawing.Size(285, 216);
             groupBox21.TabIndex = 18;
             groupBox21.TabStop = false;
-            groupBox21.Text = "TVR Byte 4";
+            groupBox21.Text = "TVR byte 4";
             // 
             // guiTVR4_7
             // 
@@ -1973,7 +1973,7 @@
             groupBox22.Size = new System.Drawing.Size(285, 216);
             groupBox22.TabIndex = 18;
             groupBox22.TabStop = false;
-            groupBox22.Text = "TVR Byte 5";
+            groupBox22.Text = "TVR byte 5";
             // 
             // guiTVR5_7
             // 

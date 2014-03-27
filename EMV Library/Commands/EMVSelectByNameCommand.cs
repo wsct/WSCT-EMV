@@ -1,5 +1,4 @@
-﻿using System;
-using WSCT.ISO7816.Commands;
+﻿using WSCT.ISO7816.Commands;
 
 namespace WSCT.EMV.Commands
 {
@@ -15,19 +14,19 @@ namespace WSCT.EMV.Commands
         /// </summary>
         public EMVSelectByNameCommand()
         {
-            selectionMode = SelectionMode.SELECT_DF_NAME;
-            fileOccurence = FileOccurrence.FIRST_OR_ONLY;
-            fileControlInformation = FileControlInformation.RETURN_FCI;
+            Selection = SelectionMode.SelectDFName;
+            Occurence = FileOccurrence.FirstOrOnly;
+            Information = FileControlInformation.ReturnFci;
         }
 
         /// <summary>
         /// Initializes a new <see cref="EMVSelectByNameCommand"/> instance.
         /// </summary>
         /// <param name="name">DF Name or AID.</param>
-        public EMVSelectByNameCommand(Byte[] name) :
+        public EMVSelectByNameCommand(byte[] name) :
             this()
         {
-            udc = name;
+            Udc = name;
         }
 
         /// <summary>
@@ -35,10 +34,10 @@ namespace WSCT.EMV.Commands
         /// </summary>
         /// <param name="name">DF Name or AID.</param>
         /// <param name="le">Length of FCI.</param>
-        public EMVSelectByNameCommand(Byte[] name, uint le) :
+        public EMVSelectByNameCommand(byte[] name, uint le) :
             this(name)
         {
-            this.le = le;
+            Le = le;
         }
 
         #endregion

@@ -14,9 +14,8 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        Dictionary<String, PublicKey> _keys;
-
-        List<CertificationAuthority> _certificationAuthorities;
+        private List<CertificationAuthority> _certificationAuthorities;
+        private Dictionary<string, PublicKey> _keys;
 
         #endregion
 
@@ -35,7 +34,7 @@ namespace WSCT.EMV.Security
 
         #region >> Internal Methods
 
-        private String GetIdentifier(String rid, String index)
+        private string GetIdentifier(string rid, string index)
         {
             return (rid + index).Replace(" ", "");
         }
@@ -50,7 +49,7 @@ namespace WSCT.EMV.Security
         /// <param name="rid">RID of the EMV application.</param>
         /// <param name="index">Index of the Certificate Authority.</param>
         /// <param name="publicKey">The Public Key of the Certificate Authority.</param>
-        public void Add(String rid, String index, PublicKey publicKey)
+        public void Add(string rid, string index, PublicKey publicKey)
         {
             _keys.Add(GetIdentifier(rid, index), publicKey);
         }
@@ -62,7 +61,7 @@ namespace WSCT.EMV.Security
         /// <param name="index">Index of the Certificate Authority.</param>
         /// <returns>The Public Key of the Certificate Authority.</returns>
         /// <exception cref="Exception">If no public key found.</exception>
-        public PublicKey Get(String rid, String index)
+        public PublicKey Get(string rid, string index)
         {
             PublicKey publicKey;
             if (_keys.TryGetValue(GetIdentifier(rid, index), out publicKey))

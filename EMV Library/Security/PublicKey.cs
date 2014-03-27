@@ -11,8 +11,8 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        String _modulus;
-        String _exponent;
+        private string _exponent;
+        private string _modulus;
 
         #endregion
 
@@ -22,7 +22,7 @@ namespace WSCT.EMV.Security
         /// Accessor to the modulus of the public key.
         /// </summary>
         [XmlText]
-        public String Modulus
+        public string Modulus
         {
             get { return _modulus; }
             set { _modulus = value.Replace("\n", "").Replace("\r", "").Replace("\t", "").Replace(" ", ""); }
@@ -32,7 +32,7 @@ namespace WSCT.EMV.Security
         /// Accessor to the exponent of the public key.
         /// </summary>
         [XmlAttribute("exponent")]
-        public String Exponent
+        public string Exponent
         {
             get { return _exponent; }
             set { _exponent = value.Replace(" ", ""); }
@@ -42,13 +42,13 @@ namespace WSCT.EMV.Security
         /// Accessor to the size of the public key.
         /// </summary>
         [XmlAttribute("size")]
-        public String SizeString { get; set; }
+        public string SizeString { get; set; }
 
         /// <summary>
         /// Accessor to the expiration date of the public key.
         /// </summary>
         [XmlAttribute("expiration")]
-        public String DateString { get; set; }
+        public string DateString { get; set; }
 
         #endregion
 
@@ -67,7 +67,7 @@ namespace WSCT.EMV.Security
         /// </summary>
         /// <param name="modulo">Modulo of the public key.</param>
         /// <param name="exponent">Exponent of the public key.</param>
-        public PublicKey(String modulo, String exponent)
+        public PublicKey(string modulo, string exponent)
         {
             Modulus = modulo;
             Exponent = exponent;

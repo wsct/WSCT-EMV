@@ -14,7 +14,7 @@ namespace WSCT.EMV.Security
         }
 
         /// <inheritdoc />
-        public EMVCertificationAuthorityNotFoundException(String message)
+        public EMVCertificationAuthorityNotFoundException(string message)
             : base(message)
         {
         }

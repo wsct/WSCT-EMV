@@ -11,7 +11,7 @@ namespace WSCT.EMV.Exceptions
         /// <summary>
         /// Initializes a new <see cref="LogEntryNotFoundException"/> instance.
         /// </summary>
-        public LogEntryNotFoundException(String message)
+        public LogEntryNotFoundException(string message)
             : base(message)
         {
         }

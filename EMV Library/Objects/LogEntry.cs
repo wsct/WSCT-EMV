@@ -6,7 +6,7 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Log Entry tag of an EMV application.
     /// </summary>
-    public class LogEntry : BinaryTLVObject
+    public class LogEntry : BinaryTlvObject
     {
         #region >> Properties
 
@@ -15,8 +15,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public byte Sfi
         {
-            get { return (byte)(tlv.value[0] & 0x8F); }
-            set { tlv.value[0] = value; }
+            get { return (byte)(Tlv.Value[0] & 0x8F); }
+            set { Tlv.Value[0] = value; }
         }
 
         /// <summary>
@@ -24,8 +24,8 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public byte CyclicFileSize
         {
-            get { return tlv.value[1]; }
-            set { tlv.value[1] = value; }
+            get { return Tlv.Value[1]; }
+            set { Tlv.Value[1] = value; }
         }
 
         #endregion
@@ -36,7 +36,7 @@ namespace WSCT.EMV.Objects
         /// Default constructor
         /// </summary>
         public LogEntry()
-            : this(new TLVData(0x9F4D, 2, new byte[] { 0x00, 0x00 }))
+            : this(new TlvData(0x9F4D, 2, new byte[] { 0x00, 0x00 }))
         {
         }
 
@@ -44,13 +44,13 @@ namespace WSCT.EMV.Objects
         /// Constructor
         /// </summary>
         /// <param name="tlvLogEntry">Raw Log Entry tag</param>
-        public LogEntry(TLVData tlvLogEntry)
+        public LogEntry(TlvData tlvLogEntry)
         {
-            if (tlvLogEntry.length < 2)
+            if (tlvLogEntry.Length < 2)
             {
                 throw new Exception(String.Format("LogEntry: TLV data length < 2, can't parse [{0}]", tlvLogEntry));
             }
-            tlv = tlvLogEntry;
+            Tlv = tlvLogEntry;
         }
 
         #endregion

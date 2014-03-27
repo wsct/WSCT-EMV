@@ -7,33 +7,30 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Application Identifier (AID) of an EMV smartcards.
     /// </summary>
-    public class ApplicationIdentifier : BinaryTLVObject
+    public class ApplicationIdentifier : BinaryTlvObject
     {
         #region >> Properties
 
         /// <summary>
         /// Accessor to the RID part of the AID.
         /// </summary>
-        public String StrRid
+        public string StrRid
         {
-            get
-            {
-                return (tlv != null && tlv.value != null ? tlv.value.toHexa(5) : String.Empty);
-            }
+            get { return (Tlv != null && Tlv.Value != null ? Tlv.Value.ToHexa(5) : String.Empty); }
         }
 
         /// <summary>
         /// Accessor to PIX part of the AID.
         /// </summary>
-        public String StrPix
+        public string StrPix
         {
             get
             {
-                if (tlv != null && tlv.value != null)
+                if (Tlv != null && Tlv.Value != null)
                 {
-                    var pix = new Byte[tlv.value.Length - 5];
-                    Array.Copy(tlv.value, 5, pix, 0, pix.Length);
-                    return pix.toHexa();
+                    var pix = new byte[Tlv.Value.Length - 5];
+                    Array.Copy(Tlv.Value, 5, pix, 0, pix.Length);
+                    return pix.ToHexa();
                 }
 
                 return String.Empty;
@@ -56,20 +53,20 @@ namespace WSCT.EMV.Objects
         /// Constructor
         /// </summary>
         /// <param name="tlvAid">TLVData containing AID.</param>
-        public ApplicationIdentifier(TLVData tlvAid)
+        public ApplicationIdentifier(TlvData tlvAid)
             : this()
         {
-            tlv = tlvAid;
+            Tlv = tlvAid;
         }
 
         /// <summary>
         /// Initializes a new <see cref="ApplicationIdentifier"/> instance.
         /// </summary>
-        /// <param name="sAid">String AID.</param>
-        public ApplicationIdentifier(String sAid)
+        /// <param name="sAid">string AID.</param>
+        public ApplicationIdentifier(string sAid)
         {
-            var value = sAid.fromHexa();
-            tlv = new TLVData(0x4F, (UInt32)value.Length, value);
+            var value = sAid.FromHexa();
+            Tlv = new TlvData(0x4F, (UInt32)value.Length, value);
         }
 
         #endregion

@@ -13,13 +13,13 @@ namespace WSCT.EMV.Security
         /// 
         /// </summary>
         [XmlAttribute("rid")]
-        public String Rid { get; set; }
+        public string Rid { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [XmlAttribute("index")]
-        public String Index { get; set; }
+        public string Index { get; set; }
 
         /// <summary>
         /// 

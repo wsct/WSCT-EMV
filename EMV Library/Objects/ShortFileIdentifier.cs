@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using WSCT.Helpers.BasicEncodingRules;
 
@@ -7,16 +6,16 @@ namespace WSCT.EMV.Objects
     /// <summary>
     /// Represents the Short File Identifier of an EMV smartcards.
     /// </summary>
-    public class ShortFileIdentifier : AbstractTLVObject
+    public class ShortFileIdentifier : AbstractTlvObject
     {
         #region >> Properties
 
         /// <summary>
         /// SFI value defined by the tag.
         /// </summary>
-        public Byte Sfi
+        public byte Sfi
         {
-            get { return tlv.value[0]; }
+            get { return Tlv.Value[0]; }
         }
 
         #endregion
@@ -34,9 +33,9 @@ namespace WSCT.EMV.Objects
         /// Initializes a new <see cref="ShortFileIdentifier"/> instance.
         /// </summary>
         /// <param name="tlvSfi">TLVData defining the SFI tag</param>
-        public ShortFileIdentifier(TLVData tlvSfi)
+        public ShortFileIdentifier(TlvData tlvSfi)
         {
-            tlv = tlvSfi;
+            Tlv = tlvSfi;
         }
 
         #endregion
