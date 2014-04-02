@@ -20,14 +20,26 @@ namespace WSCT.EMV.Card
 
         #endregion
 
+        #region >> Properties
+
+        /// <summary>
+        /// Set it to <c>false</c> for a TTL conforming the EMV specification, or <c>true</c> for a T=1 permissive mode.
+        /// </summary>
+        public bool StrictT1 { get; set; }
+
+        #endregion
+
         #region >> Constructors
 
         /// <summary>
         /// Initializes a new <see cref="CardChannelTerminalTransportLayer"/> instance.
         /// </summary>
-        public CardChannelTerminalTransportLayer(ICardChannel cardChannel)
+        /// <param name="cardChannel"></param>
+        /// <param name="strictT1">Set it to <c>false</c> for a TTL conforming the EMV specification, or <c>true</c> for a T=1 permissive mode.</param>
+        public CardChannelTerminalTransportLayer(ICardChannel cardChannel, bool strictT1)
         {
             _cardChannel = cardChannel;
+            this.StrictT1 = strictT1;
         }
 
         #endregion
@@ -157,10 +169,18 @@ namespace WSCT.EMV.Card
             {
                 ret = TransmitT0((CommandAPDU)command, (ResponseAPDU)response);
             }
-                // T=1 smartcards
+            // T=1 smartcards
             else
             {
-                ret = _cardChannel.Transmit(command, response);
+                if (StrictT1)
+                {
+                    ret = _cardChannel.Transmit(command, response);
+                }
+                else
+                {
+                    // T=1 Permissive mode
+                    ret = TransmitT1Permissive((CommandAPDU)command, (ResponseAPDU)response);
+                }
             }
 
             if (AfterTransmitEvent != null)
@@ -226,7 +246,7 @@ namespace WSCT.EMV.Card
                 var crp = new CommandResponsePair(cAPDU) { CApdu = { Le = 0 }, RApdu = rAPDU };
                 ret = crp.Transmit(_cardChannel);
             }
-                // If C-APDU is CC2: test SW1=61/6C
+            // If C-APDU is CC2: test SW1=61/6C
             else if (cAPDU.IsCc2)
             {
                 var crp = new CommandResponsePair(cAPDU);
@@ -252,13 +272,13 @@ namespace WSCT.EMV.Card
                     rAPDU.Sw2 = crp.RApdu.Sw2;
                 }
             }
-                // If C-APDU is CC3: nothing to do
+            // If C-APDU is CC3: nothing to do
             else if (cAPDU.IsCc3)
             {
                 var crp = new CommandResponsePair(cAPDU) { RApdu = rAPDU };
                 ret = crp.Transmit(_cardChannel);
             }
-                // If C-APDU is CC4: first CC3 then CC2 GET RESPONSE
+            // If C-APDU is CC4: first CC3 then CC2 GET RESPONSE
             else
             {
                 cAPDU.HasLe = false;
@@ -286,6 +306,87 @@ namespace WSCT.EMV.Card
                 }
                 // Restore initial cAPDU for logs
                 cAPDU.HasLe = true;
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// WARNING: This is NOT CONFORM TO THE EMV SPECIFICATION (Book 3, §9.3 "Terminal Transport Layer (TTL)").
+        /// It's a HACK allowing a permissive use when developing T=0 EMV applet on T=1 concrete card.
+        /// </summary>
+        /// <param name="cAPDU"></param>
+        /// <param name="rAPDU"></param>
+        /// <returns></returns>
+        private ErrorCode TransmitT1Permissive(CommandAPDU cAPDU, ResponseAPDU rAPDU)
+        {
+            ErrorCode ret;
+
+            // Adapt APDU for T=0 smartcards
+            if (cAPDU.IsCc1)
+            {
+                var crp = new CommandResponsePair(cAPDU) { RApdu = rAPDU };
+                ret = crp.Transmit(_cardChannel);
+            }
+            // If C-APDU is CC2: test SW1=61/6C
+            else if (cAPDU.IsCc2)
+            {
+                var crp = new CommandResponsePair(cAPDU);
+                // Let the crp create a new crp.rAPDU
+                ret = crp.Transmit(_cardChannel);
+                if (ret == ErrorCode.Success && crp.RApdu.Sw1 == 0x61)
+                {
+                    var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2)) { RApdu = rAPDU };
+                    ret = crpGetResponse.Transmit(_cardChannel);
+                }
+                else if (ret == ErrorCode.Success && crp.RApdu.Sw1 == 0x6C)
+                {
+                    var crpWithLe = new CommandResponsePair { CApdu = crp.CApdu };
+                    crpWithLe.CApdu.Le = crp.RApdu.Sw2;
+                    crpWithLe.RApdu = rAPDU;
+                    ret = crpWithLe.Transmit(_cardChannel);
+                }
+                else
+                {
+                    // last rAPDU must be returned as is
+                    rAPDU.Udr = crp.RApdu.Udr;
+                    rAPDU.Sw1 = crp.RApdu.Sw1;
+                    rAPDU.Sw2 = crp.RApdu.Sw2;
+                }
+            }
+            // If C-APDU is CC4 (use CC2 GET RESPONSE if 6Cxx state word is received or with new Le if 61xx is received)
+            else if (cAPDU.IsCc2 || cAPDU.IsCc4)
+            {
+                var crp = new CommandResponsePair(cAPDU);
+                // Let the crp create a new crp.rAPDU
+                ret = crp.Transmit(_cardChannel);
+                if (ret == ErrorCode.Success && crp.RApdu.Sw1 == 0x61)
+                {
+                    var crpGetResponse = new CommandResponsePair(new GetResponseCommand(crp.RApdu.Sw2)) { RApdu = rAPDU };
+                    ret = crpGetResponse.Transmit(_cardChannel);
+                }
+                else if (ret == ErrorCode.Success && crp.RApdu.Sw1 == 0x6C)
+                {
+                    var crpWithLe = new CommandResponsePair { CApdu = crp.CApdu };
+                    crpWithLe.CApdu.Le = crp.RApdu.Sw2;
+                    crpWithLe.RApdu = rAPDU;
+                    ret = crpWithLe.Transmit(_cardChannel);
+                }
+                else
+                {
+                    // last rAPDU must be returned as is
+                    rAPDU.Udr = crp.RApdu.Udr;
+                    rAPDU.Sw1 = crp.RApdu.Sw1;
+                    rAPDU.Sw2 = crp.RApdu.Sw2;
+                }
+                // Restore initial cAPDU for logs
+                cAPDU.HasLe = true;
+            }
+            // If C-APDU is CC1 or CC3: nothing to do
+            else
+            {
+                var crp = new CommandResponsePair(cAPDU) { RApdu = rAPDU };
+                ret = crp.Transmit(_cardChannel);
             }
 
             return ret;

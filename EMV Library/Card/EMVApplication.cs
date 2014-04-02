@@ -1020,7 +1020,7 @@ namespace WSCT.EMV.Card
                                 _tlvOfflineRecords.Add(tlvData);
                             }
                         }
-                            //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
+                        //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
                         else
                         {
                             _tlvOfflineRecords.Add(tlv);
