@@ -1,4 +1,5 @@
 ﻿using System;
+using WSCT.EMV.Security;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects

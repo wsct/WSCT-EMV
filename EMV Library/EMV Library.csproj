@@ -57,7 +57,7 @@
     <Compile Include="Card\VisaContactlessApplication.cs" />
     <Compile Include="Commands\EMVReadRecordCommand.cs" />
     <Compile Include="Commands\EMVSelectByNameCommand.cs" />
-    <Compile Include="CryptogramType.cs" />
+    <Compile Include="Security\CryptogramType.cs" />
     <Compile Include="Exceptions\LogEntryNotFoundException.cs" />
     <Compile Include="Exceptions\LogFormatNotFoundException.cs" />
     <Compile Include="Objects\ApplicationCryptogram.cs" />
