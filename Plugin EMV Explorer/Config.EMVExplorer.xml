@@ -24,7 +24,7 @@
 
         <application aid="A0 00 00 00 69" label="MONEO" />
 
-        <application aid="A0 00 00 00 01 10" label="EMV ENSICAEN" />
+        <application aid="A0 00 00 00 01 10 00" label="EMV ENSICAEN" />
       </supportedApplications>
 
       <supportedPSEs>
