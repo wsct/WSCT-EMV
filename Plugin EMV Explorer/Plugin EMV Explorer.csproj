@@ -15,6 +15,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\%24this.Icon.ico</ApplicationIcon>
@@ -96,6 +100,10 @@
     <ProjectReference Include="..\..\WSCT Core\WSCT.Stack\WSCT.Stack.csproj">
       <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
       <Name>WSCT.Stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.Core\WSCT.Wrapper.Core.csproj">
+      <Project>{f0afba85-a6f7-4a45-8dc8-3346d7060629}</Project>
+      <Name>WSCT.Wrapper.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WSCT GUI\WSCT.Plugins\WSCT.GUI.Plugins.csproj">
       <Project>{44d12c6f-7d70-40ec-864a-01202928d159}</Project>
