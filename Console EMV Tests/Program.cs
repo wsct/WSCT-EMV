@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using System.Linq;
+using System.Xml.Linq;
 using WSCT.Core;
 using WSCT.EMV.Card;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
+using WSCT.Helpers.Portable.Windows;
 using WSCT.ISO7816;
 using WSCT.Wrapper;
 
@@ -15,8 +17,8 @@ namespace WSCT.ConsoleEMVTests
     {
         private List<EMVApplication> emvApplications;
         private TlvDictionary tagsManager;
-        private XmlDocument xmlDoc;
-        private XmlElement xmlRoot;
+        private XDocument xmlDoc;
+        private XElement xmlRoot;
 
         private static void Main(string[] args)
         {
@@ -30,6 +32,9 @@ namespace WSCT.ConsoleEMVTests
             {
             }
             Console.ForegroundColor = ConsoleColor.Gray;
+
+            RegisterPcl.Register();
+
             new Program().Run(args);
         }
 
@@ -54,9 +59,8 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine();
             Console.WriteLine("=========== I n i t i a l i z i n g   P C / S C");
 
-            xmlDoc = new XmlDocument();
-            xmlRoot = xmlDoc.CreateElement("WinSCard");
-            xmlDoc.AppendChild(xmlRoot);
+            xmlRoot = new XElement("WinSCard");
+            xmlDoc = new XDocument(xmlRoot);
 
             #region >> ConsoleObserver
 
@@ -253,7 +257,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== P S E   S e l e c t i o n");
             Console.WriteLine();
 
-            xmlRoot.AppendChild(xmlDoc.CreateElement("PSESelection"));
+            xmlRoot.Add(new XElement("PSESelection"));
         }
 
         private void afterPSESelection(EMVDefinitionFile df)
@@ -264,7 +268,7 @@ namespace WSCT.ConsoleEMVTests
 
             if (df.TlvFci != null)
             {
-                xmlRoot.LastChild.AppendChild(df.TlvFci.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(df.TlvFci.ToXmlNode(xmlDoc));
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
                 foreach (TlvData tlv in df.TlvFci.GetTags())
                 {
@@ -279,7 +283,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== P S E   R e a d");
             Console.WriteLine();
 
-            xmlRoot.AppendChild(xmlDoc.CreateElement("PSERead"));
+            xmlRoot.Add(new XElement("PSERead"));
         }
 
         private void afterPSERead(PaymentSystemEnvironment pse)
@@ -292,7 +296,7 @@ namespace WSCT.ConsoleEMVTests
             {
                 foreach (TlvData tlv in record.GetTags())
                 {
-                    xmlRoot.LastChild.AppendChild(tlv.ToXmlNode(xmlDoc));
+                    xmlRoot.Elements().Last().Add(tlv.ToXmlNode(xmlDoc));
                     WriteTlv(tlv.Tag, tlv, tagsManager);
                 }
             }
@@ -313,7 +317,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== E M V   A I D   S e l e c t i o n   {0}", df.Aid);
             Console.WriteLine();
 
-            xmlRoot.AppendChild(xmlDoc.CreateElement("ApplicationSelection"));
+            xmlRoot.Add(new XElement("ApplicationSelection"));
         }
 
         private void afterApplicationSelection(EMVDefinitionFile df)
@@ -327,7 +331,7 @@ namespace WSCT.ConsoleEMVTests
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
                 foreach (TlvData tlv in df.TlvFci.GetTags())
                 {
-                    xmlRoot.LastChild.AppendChild(tlv.ToXmlNode(xmlDoc));
+                    xmlRoot.Elements().Last().Add(tlv.ToXmlNode(xmlDoc));
                     WriteTlv(tlv.Tag, tlv, tagsManager);
                 }
             }
@@ -339,7 +343,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== E M V   G e t P r o c e s s i n g O p t i o n s   {0}", emv.Aid);
             Console.WriteLine();
 
-            xmlRoot.LastChild.AppendChild(xmlDoc.CreateElement("GetProcessingOptions"));
+            xmlRoot.Elements().Last().Add(new XElement("GetProcessingOptions"));
         }
 
         private void afterGetProcessingOptions(EMVApplication emv)
@@ -350,7 +354,7 @@ namespace WSCT.ConsoleEMVTests
 
             foreach (TlvData tlv in emv.TlvProcessingOptions.GetTags())
             {
-                xmlRoot.LastChild.AppendChild(tlv.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(tlv.ToXmlNode(xmlDoc));
                 WriteTlv(tlv.Tag, tlv, tagsManager);
             }
 
@@ -367,7 +371,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== E M V   R e a d A p p l i c a t i o n D a t a   {0}", emv.Aid);
             Console.WriteLine();
 
-            xmlRoot.AppendChild(xmlDoc.CreateElement("ReadApplicationData"));
+            xmlRoot.Add(new XElement("ReadApplicationData"));
         }
 
         private void afterReadApplicationData(EMVApplication emv)
@@ -380,7 +384,7 @@ namespace WSCT.ConsoleEMVTests
             {
                 foreach (TlvData tlv in record.GetTags())
                 {
-                    xmlRoot.LastChild.AppendChild(tlv.ToXmlNode(xmlDoc));
+                    xmlRoot.Elements().Last().Add(tlv.ToXmlNode(xmlDoc));
                     WriteTlv(tlv.Tag, tlv, tagsManager);
                 }
             }
@@ -392,7 +396,7 @@ namespace WSCT.ConsoleEMVTests
             Console.WriteLine("=========== E M V   G e t D a t a   {0}", emv.Aid);
             Console.WriteLine();
 
-            xmlRoot.AppendChild(xmlDoc.CreateElement("GetData"));
+            xmlRoot.Add(new XElement("GetData"));
         }
 
         private void afterGetData(EMVApplication emv)
@@ -403,22 +407,22 @@ namespace WSCT.ConsoleEMVTests
 
             if (emv.TlvATC != null)
             {
-                xmlRoot.LastChild.AppendChild(emv.TlvATC.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(emv.TlvATC.ToXmlNode(xmlDoc));
                 WriteTlv(emv.TlvATC.Tag, emv.TlvATC, tagsManager);
             }
             if (emv.TlvLastOnlineATCRegister != null)
             {
-                xmlRoot.LastChild.AppendChild(emv.TlvLastOnlineATCRegister.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(emv.TlvLastOnlineATCRegister.ToXmlNode(xmlDoc));
                 WriteTlv(emv.TlvLastOnlineATCRegister.Tag, emv.TlvLastOnlineATCRegister, tagsManager);
             }
             if (emv.TlvPINTryCounter != null)
             {
-                xmlRoot.LastChild.AppendChild(emv.TlvPINTryCounter.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(emv.TlvPINTryCounter.ToXmlNode(xmlDoc));
                 WriteTlv(emv.TlvPINTryCounter.Tag, emv.TlvPINTryCounter, tagsManager);
             }
             if (emv.TlvLogFormat != null)
             {
-                xmlRoot.LastChild.AppendChild(emv.TlvLogFormat.ToXmlNode(xmlDoc));
+                xmlRoot.Elements().Last().Add(emv.TlvLogFormat.ToXmlNode(xmlDoc));
                 WriteTlv(emv.TlvLogFormat.Tag, emv.TlvLogFormat, tagsManager);
             }
         }

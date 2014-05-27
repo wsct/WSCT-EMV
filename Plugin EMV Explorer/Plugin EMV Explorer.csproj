@@ -101,9 +101,9 @@
       <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
       <Name>WSCT.Stack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.Core\WSCT.Wrapper.Core.csproj">
+    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
       <Project>{f0afba85-a6f7-4a45-8dc8-3346d7060629}</Project>
-      <Name>WSCT.Wrapper.Core</Name>
+      <Name>WSCT.Wrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WSCT GUI\WSCT.Plugins\WSCT.GUI.Plugins.csproj">
       <Project>{44d12c6f-7d70-40ec-864a-01202928d159}</Project>
@@ -112,10 +112,6 @@
     <ProjectReference Include="..\EMV Library\EMV Library.csproj">
       <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
       <Name>EMV Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
-      <Project>{19B66E6E-7E5E-481A-8718-3F9C44212AD6}</Project>
-      <Name>WSCT.Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
