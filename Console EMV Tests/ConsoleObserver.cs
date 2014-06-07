@@ -3,6 +3,7 @@ using WSCT.Core;
 using WSCT.Core.APDU;
 using WSCT.Helpers;
 using WSCT.Wrapper;
+using WSCT.Wrapper.Desktop.Core;
 
 namespace WSCT.ConsoleEMVTests
 {

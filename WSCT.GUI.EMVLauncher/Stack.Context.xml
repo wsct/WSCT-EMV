@@ -7,10 +7,10 @@
 		<pathToDll></pathToDll>
 	</layer>
 
-	<layer name="WinSCard Core Context">
-		<dll>WSCT.Stack.dll</dll>
-		<className>WSCT.Stack.Core.CardContextLayer</className>
-		<pathToDll></pathToDll>
-	</layer>
+  <layer name="WinSCard Core Context">
+    <dll>WSCT.Wrapper.Desktop.dll</dll>
+    <className>WSCT.Wrapper.Desktop.Stack.CardContextLayer</className>
+    <pathToDll></pathToDll>
+  </layer>
 
 </ContextStack>

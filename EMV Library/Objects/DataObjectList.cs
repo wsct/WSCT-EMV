@@ -112,14 +112,14 @@ namespace WSCT.EMV.Objects
         {
             var tlvDataList = new List<TlvData>();
 
-            UInt32 offset = 0;
+            var offset = 0;
             foreach (var dod in GetDataObjectDefinitions())
             {
                 var tlvData = new TlvData { Tag = dod.Tag, Length = dod.Length, Value = new byte[dod.Length] };
-                Array.Copy(data, offset, tlvData.Value, 0, dod.Length);
+                Array.Copy(data, offset, tlvData.Value, 0, (int)dod.Length);
                 tlvDataList.Add(tlvData);
 
-                offset += dod.Length;
+                offset += (int)dod.Length;
             }
 
             return tlvDataList;
@@ -140,7 +140,7 @@ namespace WSCT.EMV.Objects
             // Initialize final array
             var data = new byte[length];
             // Build content
-            UInt32 offset = 0;
+            var offset = 0;
             foreach (var dod in GetDataObjectDefinitions())
             {
                 // Search the object
@@ -149,7 +149,7 @@ namespace WSCT.EMV.Objects
                 {
                     if (tlvSubData != null && tlvSubData.Tag == dod.Tag)
                     {
-                        Array.Copy(tlvSubData.Value, 0, data, offset, dod.Length);
+                        Array.Copy(tlvSubData.Value, 0, data, offset, (int)dod.Length);
                         tagFound = true;
                     }
                 }
@@ -159,7 +159,7 @@ namespace WSCT.EMV.Objects
                     throw new Exception(String.Format("DataObjectList.buildData(): tag '{0:T}' not found in available TLVData (DOL: {1}]", dod, this));
                 }
 
-                offset += dod.Length;
+                offset += (int)dod.Length;
             }
             return data;
         }

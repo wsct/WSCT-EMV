@@ -7,10 +7,10 @@
 		<pathToDll></pathToDll>
 	</layer>
 
-	<layer name="WinSCard Core Channel">
-		<dll>WSCT.Stack.dll</dll>
-		<className>WSCT.Stack.Core.CardChannelLayer</className>
-		<pathToDll></pathToDll>
-	</layer>
+  <layer name="WinSCard Core Channel">
+    <dll>WSCT.Wrapper.Desktop.dll</dll>
+    <className>WSCT.Wrapper.Desktop.Stack.CardChannelLayer</className>
+    <pathToDll></pathToDll>
+  </layer>
 
 </ChannelStack>

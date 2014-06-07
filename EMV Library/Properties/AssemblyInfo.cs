@@ -14,16 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 
-// aux composants COM. Si vous devez accéder à un type dans cet assembly à partir de 
-// COM, affectez la valeur true à l'attribut ComVisible sur ce type.
-
-[assembly: ComVisible(false)]
-
-// Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-
-[assembly: Guid("68539134-662f-4292-85a4-bb7321a1fd1e")]
-
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //
 //      Version principale

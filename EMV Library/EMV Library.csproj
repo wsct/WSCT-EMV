@@ -1,24 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WSCT.EMV</RootNamespace>
     <AssemblyName>WSCT.EMV</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,8 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ZeToken.WinSCard.EMV.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,20 +33,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ZeToken.WinSCard.EMV.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Content Include="Dictionary.EMVTag.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Card\CardChannelTerminalTransportLayer.cs" />
     <Compile Include="Card\EMVApplication.cs" />
     <Compile Include="Card\EMVDefinitionFile.cs" />
     <Compile Include="Card\PaymentSystemEnvironment.cs" />
-    <Compile Include="Card\CardChannelTerminalTransportLayer.cs" />
     <Compile Include="Card\PINBlock.cs" />
     <Compile Include="Card\PlaintextPINBlock.cs" />
     <Compile Include="Card\VisaContactlessApplication.cs" />
     <Compile Include="Commands\EMVReadRecordCommand.cs" />
     <Compile Include="Commands\EMVSelectByNameCommand.cs" />
-    <Compile Include="Security\CryptogramType.cs" />
     <Compile Include="Exceptions\LogEntryNotFoundException.cs" />
     <Compile Include="Exceptions\LogFormatNotFoundException.cs" />
     <Compile Include="Objects\ApplicationCryptogram.cs" />
@@ -70,40 +69,35 @@
     <Compile Include="Objects\FileControlInformationIssuer.cs" />
     <Compile Include="Objects\FileControlInformationProprietary.cs" />
     <Compile Include="Objects\FileControlInformationTemplate.cs" />
-    <Compile Include="Objects\LogEntry.cs" />
-    <Compile Include="Objects\TerminalVerificationResult.cs" />
     <Compile Include="Objects\LanguagePreference.cs" />
+    <Compile Include="Objects\LogEntry.cs" />
     <Compile Include="Objects\ShortFileIdentifier.cs" />
+    <Compile Include="Objects\TerminalVerificationResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat03.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
     <Compile Include="Security\AbstractPublicKeyCertificate.cs" />
     <Compile Include="Security\AbstractSignatureContainer.cs" />
     <Compile Include="Security\CertificationAuthority.cs" />
-    <Compile Include="Security\HashAlgorithmFactory.cs" />
-    <Compile Include="Security\HashAlgorithmUnknownException.cs" />
-    <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
+    <Compile Include="Security\CertificationAuthorityRepository.cs" />
     <Compile Include="Security\CombinedDataAuthentication.cs" />
+    <Compile Include="Security\CryptogramType.cs" />
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\DynamicDataAuthentication.cs" />
+    <Compile Include="Security\EMVBadRecoveredDataException.cs" />
+    <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
+    <Compile Include="Security\HashAlgorithmFactory.cs" />
+    <Compile Include="Security\HashAlgorithmUnknownException.cs" />
     <Compile Include="Security\IccPublicKeyCertificate.cs" />
     <Compile Include="Security\IHashAlgorithmProvider.cs" />
     <Compile Include="Security\IssuerPublicKeyCertificate.cs" />
     <Compile Include="Security\PublicKey.cs" />
-    <Compile Include="Security\CertificationAuthorityRepository.cs" />
-    <Compile Include="Security\EMVBadRecoveredDataException.cs" />
     <Compile Include="Security\SHA1HashAlgorithmProvider.cs" />
     <Compile Include="Security\StaticDataAuthentication.cs" />
     <Compile Include="Tags\DateFormattedTag.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terminal\TerminalCapabilities.cs" />
     <Compile Include="Terminal\TerminalConfiguration.cs" />
     <Compile Include="Transaction\TransactionContext.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Dictionary.EMVTag.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dictionary.EMVTag.xsd">
@@ -115,34 +109,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Core\WSCT.Core.csproj">
-      <Project>{764A5311-A573-4774-A198-43A660167FC7}</Project>
-      <Name>WSCT.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
-      <Project>{B95B0E58-9296-4A15-AA69-10A7B6DC2267}</Project>
+      <Project>{b95b0e58-9296-4a15-aa69-10a7b6dc2267}</Project>
       <Name>WSCT.Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.ISO7816\WSCT.ISO7816.csproj">
-      <Project>{BDECF2A5-900E-4C5D-BEEE-7903F9145BC1}</Project>
-      <Name>WSCT.ISO7816</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Stack\WSCT.Stack.csproj">
-      <Project>{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6}</Project>
-      <Name>WSCT.Stack</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper\WSCT.Wrapper.csproj">
-      <Project>{f0afba85-a6f7-4a45-8dc8-3346d7060629}</Project>
-      <Name>WSCT.Wrapper</Name>
+    <ProjectReference Include="..\..\WSCT Core\WSCT\WSCT.csproj">
+      <Project>{4eabe8da-0bcb-4bc6-a571-7618ac0ec4b6}</Project>
+      <Name>WSCT</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\WSCT JCOP\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="crypto">
+      <HintPath>..\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -79,16 +79,16 @@ namespace WSCT.EMV.Card
                         if (TlvDataTerminalData.HasTag(0x9F37) // Terminal Unpredictable Number
                             && TlvDataRecords.HasTag(0x9F36)) // ATC
                         {
-                            var k = (uint)_nic - _dda.IccDynamicDataLength - 25;
-                            var length9F37 = TlvDataTerminalData.GetTag(0x9F37).Length;
-                            var length9F36 = TlvDataRecords.GetTag(0x9F36).Length;
+                            var k = (int)((uint)_nic - _dda.IccDynamicDataLength - 25);
+                            var length9F37 = (int)TlvDataTerminalData.GetTag(0x9F37).Length;
+                            var length9F36 = (int)TlvDataRecords.GetTag(0x9F36).Length;
 
                             var data = new byte[3 + k + length9F37];
                             data[0] = 0x05; // Signed Data Format
                             data[1] = 0x01; // Hash Algorithm Indicator
                             data[2] = _dda.IccDynamicDataLength; // ICC Dynamic Data Length
                             data[3] = (byte)length9F36;
-                            uint offset = 4;
+                            var offset = 4;
 
                             Array.Copy(TlvDataRecords.GetTag(0x9F36).Value, 0, data, offset, length9F36); // ATC
                             offset += length9F36;
@@ -124,19 +124,19 @@ namespace WSCT.EMV.Card
                             && TlvDataRecords.HasTag(0x9F69)) // Card Authentication Related Data
                         {
                             uint iccDynamicDataLength = _dda.IccDynamicDataLength;
-                            var k = (uint)_nic - iccDynamicDataLength - 25;
-                            var length9F37 = TlvDataTerminalData.GetTag(0x9F37).Length;
-                            var length9F36 = TlvProcessingOptions.GetTag(0x9F36).Length;
-                            var length9F02 = TlvDataTerminalData.GetTag(0x9F02).Length;
-                            var length5F2A = TlvDataTerminalData.GetTag(0x5F2A).Length;
-                            var length9F69 = TlvDataRecords.GetTag(0x9F69).Length;
+                            var k = (int)((uint)_nic - iccDynamicDataLength - 25);
+                            var length9F37 = (int)TlvDataTerminalData.GetTag(0x9F37).Length;
+                            var length9F36 = (int)TlvProcessingOptions.GetTag(0x9F36).Length;
+                            var length9F02 = (int)TlvDataTerminalData.GetTag(0x9F02).Length;
+                            var length5F2A = (int)TlvDataTerminalData.GetTag(0x5F2A).Length;
+                            var length9F69 = (int)TlvDataRecords.GetTag(0x9F69).Length;
 
                             var data = new byte[3 + 1 + length9F36 + k + length9F37 + length9F02 + length5F2A + length9F69];
                             data[0] = 0x05; // Signed Data Format
                             data[1] = 0x01; // Hash Algorithm Indicator
                             data[2] = (byte)iccDynamicDataLength; // ICC Dynamic Data Length
                             data[3] = (byte)length9F36;
-                            uint offset = 4;
+                            var offset = 4;
 
                             Array.Copy(TlvProcessingOptions.GetTag(0x9F36).Value, 0, data, offset, length9F36); // ATC as ICC Dynamic Data
                             offset += length9F36;

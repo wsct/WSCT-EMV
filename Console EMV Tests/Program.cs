@@ -7,9 +7,10 @@ using WSCT.Core;
 using WSCT.EMV.Card;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
-using WSCT.Helpers.Portable.Windows;
+using WSCT.Helpers.Desktop;
 using WSCT.ISO7816;
 using WSCT.Wrapper;
+using WSCT.Wrapper.Desktop.Core;
 
 namespace WSCT.ConsoleEMVTests
 {
