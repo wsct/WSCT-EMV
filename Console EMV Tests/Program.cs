@@ -72,7 +72,7 @@ namespace WSCT.ConsoleEMVTests
             #region >> CardContext
 
             ICardContext context = new CardContext();
-            logger.observeContext((CardContextObservable)context);
+            logger.ObserveContext((CardContextObservable)context);
 
             if (context.Establish() != ErrorCode.Success)
             {
@@ -104,7 +104,7 @@ namespace WSCT.ConsoleEMVTests
 
             var monitor = new StatusChangeMonitor(context);
 
-            logger.observeMonitor(monitor);
+            logger.ObserveMonitor(monitor);
 
             var readerState = monitor.WaitForCardPresence(0);
             if (readerState == null)
@@ -125,7 +125,7 @@ namespace WSCT.ConsoleEMVTests
             #region >> CardChannel
 
             ICardChannel rawCardChannel = new CardChannel(context, readerState.ReaderName);
-            logger.observeChannel((CardChannelObservable)rawCardChannel);
+            logger.ObserveChannel((CardChannelObservable)rawCardChannel);
 
             var cardChannel = new CardChannelIso7816(rawCardChannel);
 

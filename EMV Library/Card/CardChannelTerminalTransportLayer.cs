@@ -2,6 +2,7 @@
 using WSCT.Core.APDU;
 using WSCT.ISO7816;
 using WSCT.ISO7816.Commands;
+using WSCT.Stack;
 using WSCT.Wrapper;
 
 namespace WSCT.EMV.Card
@@ -12,7 +13,7 @@ namespace WSCT.EMV.Card
     /// <remarks>
     /// TODO use a ICardChannelStack/Layer instead of this wrapper
     /// </remarks>
-    internal class CardChannelTerminalTransportLayer : ICardChannelObservable
+    internal class CardChannelTerminalTransportLayer : ICardChannel
     {
         #region >> Fields
 
@@ -67,17 +68,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public ErrorCode Connect(ShareMode shareMode, Protocol preferedProtocol)
         {
-            if (BeforeConnectEvent != null)
-            {
-                BeforeConnectEvent(this, shareMode, preferedProtocol);
-            }
-
             var ret = _cardChannel.Connect(shareMode, preferedProtocol);
-
-            if (AfterConnectEvent != null)
-            {
-                AfterConnectEvent(this, shareMode, preferedProtocol, ret);
-            }
 
             return ret;
         }
@@ -85,17 +76,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public ErrorCode Disconnect(Disposition disposition)
         {
-            if (BeforeDisconnectEvent != null)
-            {
-                BeforeDisconnectEvent(this, disposition);
-            }
-
             var ret = _cardChannel.Disconnect(disposition);
-
-            if (AfterDisconnectEvent != null)
-            {
-                AfterDisconnectEvent(this, disposition, ret);
-            }
 
             return ret;
         }
@@ -103,17 +84,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public ErrorCode GetAttrib(Attrib attrib, ref byte[] buffer)
         {
-            if (BeforeGetAttribEvent != null)
-            {
-                BeforeGetAttribEvent(this, attrib, buffer);
-            }
-
             var ret = _cardChannel.GetAttrib(attrib, ref buffer);
-
-            if (AfterGetAttribEvent != null)
-            {
-                AfterGetAttribEvent(this, attrib, buffer, ret);
-            }
 
             return ret;
         }
@@ -121,17 +92,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public State GetStatus()
         {
-            if (BeforeGetStatusEvent != null)
-            {
-                BeforeGetStatusEvent(this);
-            }
-
             var ret = _cardChannel.GetStatus();
-
-            if (AfterGetStatusEvent != null)
-            {
-                AfterGetStatusEvent(this, ret);
-            }
 
             return ret;
         }
@@ -139,17 +100,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public ErrorCode Reconnect(ShareMode shareMode, Protocol preferedProtocol, Disposition initialization)
         {
-            if (BeforeReconnectEvent != null)
-            {
-                BeforeReconnectEvent(this, shareMode, preferedProtocol, initialization);
-            }
-
             var ret = _cardChannel.Reconnect(shareMode, preferedProtocol, initialization);
-
-            if (AfterReconnectEvent != null)
-            {
-                AfterReconnectEvent(this, shareMode, preferedProtocol, initialization, ret);
-            }
 
             return ret;
         }
@@ -157,11 +108,6 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public ErrorCode Transmit(ICardCommand command, ICardResponse response)
         {
-            if (BeforeTransmitEvent != null)
-            {
-                BeforeTransmitEvent(this, command, response);
-            }
-
             ErrorCode ret;
 
             // Adapt APDU for T=0 smartcards
@@ -183,53 +129,8 @@ namespace WSCT.EMV.Card
                 }
             }
 
-            if (AfterTransmitEvent != null)
-            {
-                AfterTransmitEvent(this, command, response, ret);
-            }
-
             return ret;
         }
-
-        #endregion
-
-        #region >> ICardChannelObservable Membres
-
-        /// <inheritdoc />
-        public event BeforeConnect BeforeConnectEvent;
-
-        /// <inheritdoc />
-        public event AfterConnect AfterConnectEvent;
-
-        /// <inheritdoc />
-        public event BeforeDisconnect BeforeDisconnectEvent;
-
-        /// <inheritdoc />
-        public event AfterDisconnect AfterDisconnectEvent;
-
-        /// <inheritdoc />
-        public event BeforeGetAttrib BeforeGetAttribEvent;
-
-        /// <inheritdoc />
-        public event AfterGetAttrib AfterGetAttribEvent;
-
-        /// <inheritdoc />
-        public event BeforeGetStatus BeforeGetStatusEvent;
-
-        /// <inheritdoc />
-        public event AfterGetStatus AfterGetStatusEvent;
-
-        /// <inheritdoc />
-        public event BeforeReconnect BeforeReconnectEvent;
-
-        /// <inheritdoc />
-        public event AfterReconnect AfterReconnectEvent;
-
-        /// <inheritdoc />
-        public event BeforeTransmit BeforeTransmitEvent;
-
-        /// <inheritdoc />
-        public event AfterTransmit AfterTransmitEvent;
 
         #endregion
 

@@ -1,7 +1,9 @@
 using System;
 using WSCT.Core;
 using WSCT.Core.APDU;
+using WSCT.Core.Events;
 using WSCT.Helpers;
+using WSCT.Stack;
 using WSCT.Wrapper;
 using WSCT.Wrapper.Desktop.Core;
 
@@ -9,249 +11,285 @@ namespace WSCT.ConsoleEMVTests
 {
     internal class ConsoleObserver
     {
-        internal string header;
-        internal ConsoleColor highlightColor = ConsoleColor.White;
-        internal ConsoleColor standardColor = ConsoleColor.Gray;
+        internal string Header;
+        internal ConsoleColor HighlightColor = ConsoleColor.White;
+        internal ConsoleColor StandardColor = ConsoleColor.Gray;
 
         #region >> Constructors
 
         public ConsoleObserver()
-            : this("[{0,7}] Core ")
         {
-        }
-
-        public ConsoleObserver(string _header)
-        {
-            header = _header;
-            __start();
+            Header = "[{0,7}] [{1,7}] {2}";
         }
 
         #endregion
-
-        internal virtual void __start()
-        {
-            Console.WriteLine(header + "ConsoleObserver started", LogLevel.Info);
-        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public void observeContext(CardContextObservable context)
+        public void ObserveContext(CardContextObservable context)
         {
-            context.AfterEstablishEvent += notifyEstablish;
-            context.AfterGetStatusChangeEvent += notifyGetStatusChange;
-            context.AfterListReaderGroupsEvent += notifyListReaderGroups;
-            context.AfterListReadersEvent += notifyListReaders;
-            context.AfterReleaseEvent += notifyRelease;
+            context.AfterEstablishEvent += NotifyEstablish;
+            context.AfterGetStatusChangeEvent += NotifyGetStatusChange;
+            context.AfterListReaderGroupsEvent += NotifyListReaderGroups;
+            context.AfterListReadersEvent += NotifyListReaders;
+            context.AfterReleaseEvent += NotifyRelease;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        public void observeChannel(CardChannelObservable channel)
+        public void ObserveChannel(CardChannelObservable channel)
         {
-            channel.BeforeConnectEvent += beforeConnect;
-            channel.AfterConnectEvent += notifyConnect;
+            channel.BeforeConnectEvent += BeforeConnect;
+            channel.AfterConnectEvent += NotifyConnect;
 
-            channel.BeforeDisconnectEvent += beforeDisconnect;
-            channel.AfterDisconnectEvent += notifyDisconnect;
+            channel.BeforeDisconnectEvent += BeforeDisconnect;
+            channel.AfterDisconnectEvent += NotifyDisconnect;
 
-            channel.BeforeGetAttribEvent += beforeGetAttrib;
-            channel.AfterGetAttribEvent += notifyGetAttrib;
+            channel.BeforeGetAttribEvent += BeforeGetAttrib;
+            channel.AfterGetAttribEvent += NotifyGetAttrib;
 
-            channel.BeforeReconnectEvent += beforeReconnect;
-            channel.AfterReconnectEvent += notifyReconnect;
+            channel.BeforeReconnectEvent += BeforeReconnect;
+            channel.AfterReconnectEvent += NotifyReconnect;
 
-            channel.BeforeTransmitEvent += beforeTransmit;
-            channel.AfterTransmitEvent += notifyTransmit;
+            channel.BeforeTransmitEvent += BeforeTransmit;
+            channel.AfterTransmitEvent += NotifyTransmit;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="monitor"></param>
-        public void observeMonitor(StatusChangeMonitor monitor)
+        public void ObserveMonitor(StatusChangeMonitor monitor)
         {
-            monitor.OnCardInsertionEvent += onCardInsertionEvent;
-            monitor.OnCardRemovalEvent += onCardRemovalEvent;
+            monitor.OnCardInsertionEvent += OnCardInsertionEvent;
+            monitor.OnCardRemovalEvent += OnCardRemovalEvent;
+        }
+
+        void WriteWarning(object sender, string message)
+        {
+            WriteLine(LogLevel.Warning, sender, message);
+        }
+
+        void WriteInfo(object sender, string message)
+        {
+            WriteLine(LogLevel.Info, sender, message);
+        }
+
+        void WriteError(object sender, string message)
+        {
+            WriteLine(LogLevel.Error, sender, message);
+        }
+
+        void WriteLine(LogLevel level, object sender, string message)
+        {
+            var channelLayer = sender as ICardChannelLayerObservable;
+            if (channelLayer != null)
+            {
+                Console.WriteLine(Header, level, channelLayer.LayerId, message);
+                return;
+            }
+
+            var channel = sender as ICardChannelObservable;
+            if (channel != null)
+            {
+                Console.WriteLine(Header, level, "", message);
+            }
+
+            var contextLayer = sender as ICardContextLayerObservable;
+            if (contextLayer != null)
+            {
+                Console.WriteLine(Header, level, contextLayer.LayerId, message);
+                return;
+            }
+
+            var context = sender as ICardContextObservable;
+            if (context != null)
+            {
+                Console.WriteLine(Header, level, "", message);
+            }
         }
 
         #region >> CardChannelObservable delegates
 
-        public void notifyConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, ErrorCode errorCode)
+        public void NotifyConnect(object sender, AfterConnectEventArgs eventArgs)
         {
-            if (errorCode == ErrorCode.Success)
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+                WriteInfo(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
             else
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+                WriteWarning(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
         }
 
-        public void notifyDisconnect(ICardChannel cardChannel, Disposition disposition, ErrorCode errorCode)
+        public void NotifyDisconnect(object sender, AfterDisconnectEventArgs eventArgs)
         {
-            if (errorCode == ErrorCode.Success)
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+                WriteInfo(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
             else
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+                WriteWarning(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
         }
 
-        public void notifyGetAttrib(ICardChannel cardChannel, Attrib attrib, byte[] buffer, ErrorCode errorCode)
+        public void NotifyGetAttrib(object sender, AfterGetAttribEventArgs eventArgs)
         {
-            if (errorCode == ErrorCode.Success)
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
-                Console.WriteLine(header + ">> byte[]: [{1}]", LogLevel.Info, buffer.ToHexa());
-                Console.WriteLine(header + ">> string: \"{1}\"", LogLevel.Info, buffer.ToAsciiString());
+                WriteInfo(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
+                WriteInfo(sender, String.Format(">> byte[]: [{0}]", eventArgs.Buffer.ToHexa()));
+                WriteInfo(sender, String.Format(">> string: \"{0}\"", eventArgs.Buffer.ToAsciiString()));
             }
             else
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+                WriteWarning(sender, String.Format(Header + ">> Error: {0}", LogLevel.Warning, eventArgs.ReturnValue));
             }
         }
 
-        public void notifyReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization, ErrorCode errorCode)
+        public void NotifyReconnect(object sender, AfterReconnectEventArgs eventArgs)
         {
-            if (errorCode == ErrorCode.Success)
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
+                WriteInfo(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
             else
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+                WriteWarning(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
         }
 
-        public void notifyTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse, ErrorCode errorCode)
+        public void NotifyTransmit(object sender, AfterTransmitEventArgs eventArgs)
         {
-            if (errorCode == ErrorCode.Success)
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Info, errorCode);
-                Console.WriteLine(header + ">> RAPDU: [{1}]", LogLevel.Info, cardResponse);
+                WriteInfo(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
+                WriteInfo(sender, String.Format(">> RAPDU: [{0}]", eventArgs.Response));
             }
             else
             {
-                Console.WriteLine(header + ">> Error: {1}", LogLevel.Warning, errorCode);
+                WriteWarning(sender, String.Format(">> Error: {0}", eventArgs.ReturnValue));
             }
         }
 
-        public void beforeConnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol)
+        public void BeforeConnect(object sender, BeforeConnectEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "connect(\"{1}\",{2},{3})", LogLevel.Info, cardChannel.ReaderName, shareMode, preferedProtocol);
-            Console.ForegroundColor = standardColor;
+            var cardChannel = (ICardChannel)sender;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Connect(\"{0}\",{1},{2})", cardChannel.ReaderName, eventArgs.ShareMode, eventArgs.PreferedProtocol));
+            Console.ForegroundColor = StandardColor;
         }
 
-        public void beforeDisconnect(ICardChannel cardChannel, Disposition disposition)
+        public void BeforeDisconnect(object sender, BeforeDisconnectEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "disconnect({1})", LogLevel.Info, disposition);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Disconnect({0})", eventArgs.Disposition));
+            Console.ForegroundColor = StandardColor;
         }
 
-        public void beforeGetAttrib(ICardChannel channel, Attrib attrib, byte[] buffer)
+        public void BeforeGetAttrib(object sender, BeforeGetAttribEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "getAttrib({1})", LogLevel.Info, attrib);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("GetAttrib({0})", eventArgs.Attrib));
+            Console.ForegroundColor = StandardColor;
         }
 
-        public void beforeReconnect(ICardChannel cardChannel, ShareMode shareMode, Protocol preferedProtocol, Disposition initialization)
+        public void BeforeReconnect(object sender, BeforeReconnectEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "reconnect({1},{2},{3})", LogLevel.Info, shareMode, preferedProtocol, initialization);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Reconnect({0},{1},{2})", eventArgs.ShareMode, eventArgs.PreferedProtocol, eventArgs.Initialization));
+            Console.ForegroundColor = StandardColor;
         }
 
-        public void beforeTransmit(ICardChannel cardChannel, ICardCommand cardCommand, ICardResponse cardResponse)
+        public void BeforeTransmit(object sender, BeforeTransmitEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "transmit({1})", LogLevel.Info, cardCommand);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Transmit({0})", eventArgs.Command));
+            Console.ForegroundColor = StandardColor;
         }
 
         #endregion
 
         #region >> CardContextObservable delegates
 
-        public void notifyEstablish(ICardContext cardContext, ErrorCode errorCode)
+        public void NotifyEstablish(object sender, AfterEstablishEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "establish(): {1}", LogLevel.Info, errorCode);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Establish(): {0}", eventArgs.ReturnValue));
+            Console.ForegroundColor = StandardColor;
         }
 
-        private void notifyGetStatusChange(ICardContext cardContext, UInt32 timeout, AbstractReaderState[] readerStates, ErrorCode errorCode)
+        private void NotifyGetStatusChange(object sender, AfterGetStatusChangeEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "getStatusChange(): {1}", LogLevel.Info, errorCode);
-            Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.Success)
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("GetStatusChange(): {0}", eventArgs.ReturnValue));
+            Console.ForegroundColor = StandardColor;
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
-                foreach (var readerState in readerStates)
+                foreach (var readerState in eventArgs.ReaderStates)
                 {
-                    Console.WriteLine(header + ">> {2}", LogLevel.Info, readerState.EventState, readerState);
+                    WriteInfo(sender, String.Format(">> {0}", readerState));
                 }
             }
         }
 
-        public void notifyListReaders(ICardContext cardContext, string group, ErrorCode errorCode)
+        public void NotifyListReaders(object sender, AfterListReadersEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "listReaders({2}): {1}", LogLevel.Info, errorCode, @group);
-            Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.Success)
+            var cardContext = (ICardContext)sender;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("ListReaders({1}): {0}", eventArgs.ReturnValue, eventArgs.Group));
+            Console.ForegroundColor = StandardColor;
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
                 foreach (var reader in cardContext.Readers)
                 {
-                    Console.WriteLine(header + ">> Reader found: {1}", LogLevel.Info, reader);
+                    WriteInfo(sender, String.Format(">> Reader found: {0}", reader));
                 }
             }
         }
 
-        public void notifyListReaderGroups(ICardContext cardContext, ErrorCode errorCode)
+        public void NotifyListReaderGroups(object sender, AfterListReaderGroupsEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "listReaderGroups(): {1}", LogLevel.Info, errorCode);
-            Console.ForegroundColor = standardColor;
-            if (errorCode == ErrorCode.Success)
+            var cardContext = (ICardContext)sender;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("ListReaderGroups(): {0}", eventArgs.ReturnValue));
+            Console.ForegroundColor = StandardColor;
+            if (eventArgs.ReturnValue == ErrorCode.Success)
             {
                 foreach (var group in cardContext.Groups)
                 {
-                    Console.WriteLine(header + ">> Reader groups found: {1}", LogLevel.Info, @group);
+                    WriteInfo(sender, String.Format(">> Reader groups found: {0}", group));
                 }
             }
         }
 
-        public void notifyRelease(ICardContext cardContext, ErrorCode errorCode)
+        public void NotifyRelease(object sender, AfterReleaseEventArgs eventArgs)
         {
-            Console.ForegroundColor = highlightColor;
-            Console.WriteLine(header + "release(): {1}", LogLevel.Info, errorCode);
-            Console.ForegroundColor = standardColor;
+            Console.ForegroundColor = HighlightColor;
+            WriteInfo(sender, String.Format("Release(): {0}", eventArgs.ReturnValue));
+            Console.ForegroundColor = StandardColor;
         }
 
         #endregion
 
         #region >> StatusChangeMonitor delegates
 
-        private void onCardInsertionEvent(AbstractReaderState readerState)
+        private void OnCardInsertionEvent(object sender, OnCardInsertionEventArgs eventArgs)
         {
-            Console.ForegroundColor = standardColor;
-            Console.WriteLine(header + ">> Card insertion detected on reader {1}", LogLevel.Info, readerState.ReaderName);
+            Console.ForegroundColor = StandardColor;
+            WriteInfo(sender, String.Format(">> Card insertion detected on reader {0}", eventArgs.ReaderState.ReaderName));
         }
 
-        private void onCardRemovalEvent(AbstractReaderState readerState)
+        private void OnCardRemovalEvent(object sender, OnCardRemovalEventArgs eventArgs)
         {
-            Console.ForegroundColor = standardColor;
-            Console.WriteLine(header + ">> Card removal detected on reader {1}", LogLevel.Info, readerState.ReaderName);
+            Console.ForegroundColor = StandardColor;
+            WriteInfo(sender, String.Format(">> Card removal detected on reader {0}", eventArgs.ReaderState.ReaderName));
         }
 
         #endregion

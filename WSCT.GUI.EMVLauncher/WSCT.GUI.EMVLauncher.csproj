@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{81ED588E-1FA0-4A55-BD7B-25A4552FB669}</ProjectGuid>
+    <ProjectGuid>{8EB311E3-B783-4D33-987D-DE455CAD626B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>

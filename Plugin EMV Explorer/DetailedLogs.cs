@@ -409,7 +409,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             gui.guiDetailedLogs.AppendText(String.Format("  >> TLV {0:X2}: [ {1} ]\n", tagId, tlv.GetTag(tagId)));
 
-            if (!tlv.HasTag(tagId) || ((tagsManager.CreateInstance(tlv.GetTag(tagId))) == null))
+            if (!tlv.HasTag(tagId) || (tagsManager.CreateInstance(tlv.GetTag(tagId)) == null))
             {
                 return;
             }
