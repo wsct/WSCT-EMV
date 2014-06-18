@@ -45,6 +45,7 @@
     <Compile Include="Card\CardChannelTerminalTransportLayer.cs" />
     <Compile Include="Card\EMVApplication.cs" />
     <Compile Include="Card\EMVDefinitionFile.cs" />
+    <Compile Include="Card\EmvEventArgs.cs" />
     <Compile Include="Card\PaymentSystemEnvironment.cs" />
     <Compile Include="Card\PINBlock.cs" />
     <Compile Include="Card\PlaintextPINBlock.cs" />

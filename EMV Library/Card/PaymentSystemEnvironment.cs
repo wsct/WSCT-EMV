@@ -4,6 +4,7 @@ using WSCT.Core;
 using WSCT.EMV.Commands;
 using WSCT.EMV.Objects;
 using WSCT.Helpers.BasicEncodingRules;
+using WSCT.Helpers.Events;
 using WSCT.ISO7816;
 
 namespace WSCT.EMV.Card
@@ -26,7 +27,7 @@ namespace WSCT.EMV.Card
     /// pse.read();
     ///     </code>
     /// </example>
-    public class PaymentSystemEnvironment : EMVDefinitionFile
+    public class PaymentSystemEnvironment : EmvDefinitionFile
     {
         #region >> Fields
 
@@ -55,29 +56,17 @@ namespace WSCT.EMV.Card
 
         #endregion
 
-        #region >> Delegates
-
-        /// <summary>
-        /// Delegate for event sent after execution of a <see cref="PaymentSystemEnvironment.Read"/>.
-        /// </summary>
-        /// <param name="pse">Caller instance.</param>
-        public delegate void AfterReadEventHandler(PaymentSystemEnvironment pse);
-
-        /// <summary>
-        /// Delegate for event sent before execution of a <see cref="PaymentSystemEnvironment.Read"/>.
-        /// </summary>
-        /// <param name="pse">Caller instance.</param>
-        public delegate void BeforeReadEventHandler(PaymentSystemEnvironment pse);
+        #region >> events
 
         /// <summary>
         /// Event sent before execution of a <see cref="Read"/>.
         /// </summary>
-        public event BeforeReadEventHandler BeforeReadEvent;
+        public event EventHandler<EmvEventArgs> BeforeReadEvent;
 
         /// <summary>
         /// Event sent after execution of a <see cref="Read"/>.
         /// </summary>
-        public event AfterReadEventHandler AfterReadEvent;
+        public event EventHandler<EmvEventArgs> AfterReadEvent;
 
         #endregion
 
@@ -100,17 +89,17 @@ namespace WSCT.EMV.Card
         #region >> Methods
 
         /// <summary>
-        /// Enumerates <see cref="EMVApplication">EMVApplication</see>s discovered by reading the PSE.
+        /// Enumerates <see cref="EmvApplication">EMVApplication</see>s discovered by reading the PSE.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<EMVApplication> GetApplications()
+        public IEnumerable<EmvApplication> GetApplications()
         {
             // Enumerate AID indicated in the records
             foreach (var tlvRecord in TlvRecords)
             {
                 foreach (var tlvData in tlvRecord.GetTags(0x61))
                 {
-                    var emv = new EMVApplication(_cardChannel, tlvData);
+                    var emv = new EmvApplication(_cardChannel, tlvData);
                     yield return emv;
                 }
             }
@@ -120,7 +109,7 @@ namespace WSCT.EMV.Card
             {
                 foreach (var tlvData in TlvFci.GetTags(0x61))
                 {
-                    var emv = new EMVApplication(_cardChannel, tlvData);
+                    var emv = new EmvApplication(_cardChannel, tlvData);
                     yield return emv;
                 }
             }
@@ -132,10 +121,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 Read()
         {
-            if (BeforeReadEvent != null)
-            {
-                BeforeReadEvent(this);
-            }
+            BeforeReadEvent.Raise(this, new EmvEventArgs());
 
             var tlvSfi = TlvFci.GetTag(0x88);
             if (tlvSfi == null)
@@ -157,10 +143,7 @@ namespace WSCT.EMV.Card
                 }
             } while (_lastStatusWord == 0x9000);
 
-            if (AfterReadEvent != null)
-            {
-                AfterReadEvent(this);
-            }
+            AfterReadEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }

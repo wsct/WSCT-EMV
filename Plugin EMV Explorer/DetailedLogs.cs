@@ -35,7 +35,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> observe*
 
-        public void ObserveEMV(EMVApplication emv)
+        public void ObserveEmv(EmvApplication emv)
         {
             emv.BeforeSelectEvent += BeforeApplicationSelection;
             emv.AfterSelectEvent += AfterApplicationSelection;
@@ -61,17 +61,17 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             emv.BeforeGetChallengeEvent += BeforeGetChallenge;
             emv.AfterGetChallengeEvent += AfterGetChallenge;
 
-            emv.BeforeGenerateAC1Event += BeforeGenerateAC1;
-            emv.AfterGenerateAC1Event += AfterGenerateAC1;
+            emv.BeforeGenerateAC1Event += BeforeGenerateAc1;
+            emv.AfterGenerateAC1Event += AfterGenerateAc1;
         }
 
-        public void ObservePSE(PaymentSystemEnvironment pse)
+        public void ObservePse(PaymentSystemEnvironment pse)
         {
-            pse.BeforeSelectEvent += BeforePSESelection;
-            pse.AfterSelectEvent += AfterPSESelection;
+            pse.BeforeSelectEvent += BeforePseSelection;
+            pse.AfterSelectEvent += AfterPseSelection;
 
-            pse.BeforeReadEvent += BeforePSERead;
-            pse.AfterReadEvent += AfterPSERead;
+            pse.BeforeReadEvent += BeforePseRead;
+            pse.AfterReadEvent += AfterPseRead;
         }
 
         #endregion
@@ -160,15 +160,21 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> EMV Event Handlers
 
-        public void BeforePSESelection(EMVDefinitionFile df)
+        public void BeforePseSelection(Object sender, EmvEventArgs eventArgs)
         {
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText("P S E   S e l e c t i o n\n");
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterPSESelection(EMVDefinitionFile df)
+        public void AfterPseSelection(Object sender, EmvEventArgs eventArgs)
         {
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
+
             if (df.TlvFci != null)
             {
                 gui.guiDetailedLogs.AppendText("  >> TLV: " + df.TlvFci + "\n");
@@ -183,15 +189,21 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforePSERead(PaymentSystemEnvironment pse)
+        public void BeforePseRead(Object sender, EmvEventArgs eventArgs)
         {
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText("P S E   R e a d\n");
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterPSERead(PaymentSystemEnvironment pse)
+        public void AfterPseRead(Object sender, EmvEventArgs eventArgs)
         {
+            var pse = sender as PaymentSystemEnvironment;
+            if (pse == null)
+            {
+                throw new ArgumentException("sender is not a PaymentSystemEnvironment");
+            }
+
             foreach (var record in pse.TlvRecords)
             {
                 foreach (TlvData tlv in record.GetTags())
@@ -209,15 +221,27 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeApplicationSelection(EMVDefinitionFile df)
+        public void BeforeApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   A I D   S e l e c t i o n   {0}\n", df.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterApplicationSelection(EMVDefinitionFile df)
+        public void AfterApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
+
             if (df.TlvFci != null)
             {
                 gui.guiDetailedLogs.AppendText(String.Format("  >> TLV: {0}\n", df.TlvFci));
@@ -232,15 +256,27 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeGetProcessingOptions(EMVApplication emv)
+        public void BeforeGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   G e t P r o c e s s i n g O p t i o n s   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterGetProcessingOptions(EMVApplication emv)
+        public void AfterGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             if (emv.TlvProcessingOptions == null)
             {
                 return;
@@ -257,15 +293,27 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeReadApplicationData(EMVApplication emv)
+        public void BeforeReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   R e a d A p p l i c a t i o n D a t a   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterReadApplicationData(EMVApplication emv)
+        public void AfterReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             // dump all records
             foreach (var record in emv.TlvRecords)
             {
@@ -286,15 +334,27 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeGetData(EMVApplication emv)
+        public void BeforeGetData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   G e t D a t a   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterGetData(EMVApplication emv)
+        public void AfterGetData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             if (emv.TlvATC != null)
             {
                 WriteTlv(emv.TlvATC.Tag, emv.TlvATC, TlvDictionary);
@@ -313,37 +373,61 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeReadLogFile(EMVApplication emv)
+        public void BeforeReadLogFile(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   R e a d L o g F i l e   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterReadLogFile(EMVApplication emv)
+        public void AfterReadLogFile(Object sender, EmvEventArgs eventArgs)
         {
         }
 
-        public void BeforeVerifyPin(EMVApplication emv)
+        public void BeforeVerifyPin(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   V e r i f y P i n   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterVerifyPin(EMVApplication emv)
+        public void AfterVerifyPin(Object sender, EmvEventArgs eventArgs)
         {
         }
 
-        public void BeforeInternalAuthenticate(EMVApplication emv)
+        public void BeforeInternalAuthenticate(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   I n t e r n a l A u t h e n t i c a t e   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterInternalAuthenticate(EMVApplication emv)
+        public void AfterInternalAuthenticate(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             if (emv.TlvSignedDynamicApplicationResponse != null)
             {
                 WriteTlv(emv.TlvSignedDynamicApplicationResponse.Tag, emv.TlvSignedDynamicApplicationResponse, TlvDictionary);
@@ -360,23 +444,41 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        public void BeforeGetChallenge(EMVApplication emv)
+        public void BeforeGetChallenge(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   G e t C h a l l e n g e   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
         }
 
-        public void AfterGetChallenge(EMVApplication emv)
+        public void AfterGetChallenge(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             if (emv.IccChallenge != null)
             {
                 gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.IccChallenge.ToHexa()));
             }
         }
 
-        public void BeforeGenerateAC1(EMVApplication emv)
+        public void BeforeGenerateAc1(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             gui.guiDetailedLogs.AppendText("\n");
             gui.guiDetailedLogs.AppendText(String.Format("E M V   G e n e r a t e A C 1   {0}\n", emv.Aid));
             gui.guiDetailedLogs.AppendText("\n");
@@ -385,8 +487,14 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             gui.guiDetailedLogs.AppendText(String.Format("    >> Unpredictable Number: {0}\n", emv.TlvGenerateAC1UnpredictableNumber));
         }
 
-        public void AfterGenerateAC1(EMVApplication emv)
+        public void AfterGenerateAc1(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             if (emv.TlvGenerateAC1Response == null)
             {
                 return;

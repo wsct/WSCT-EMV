@@ -3,6 +3,7 @@ using WSCT.Core;
 using WSCT.EMV.Commands;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
+using WSCT.Helpers.Events;
 using WSCT.ISO7816;
 
 namespace WSCT.EMV.Card
@@ -23,7 +24,7 @@ namespace WSCT.EMV.Card
     /// Console.WriteLine(df.tlvFCI);
     ///     </code>
     /// </example>
-    public class EMVDefinitionFile
+    public class EmvDefinitionFile
     {
         #region >> Fields
 
@@ -88,43 +89,27 @@ namespace WSCT.EMV.Card
 
         #endregion
 
-        #region >> Delegates
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVDefinitionFile.Select"/>.
-        /// </summary>
-        /// <param name="df">Caller instance</param>
-        public delegate void AfterSelectEventHandler(EMVDefinitionFile df);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVDefinitionFile.Select"/>.
-        /// </summary>
-        /// <param name="df">Caller instance</param>
-        public delegate void BeforeSelectEventHandler(EMVDefinitionFile df);
-
-        #endregion
-
         #region >> Events
 
         /// <summary>
         /// Event sent before execution of <see cref="Select"/>.
         /// </summary>
-        public event BeforeSelectEventHandler BeforeSelectEvent;
+        public event EventHandler<EmvEventArgs> BeforeSelectEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="Select"/>.
         /// </summary>
-        public event AfterSelectEventHandler AfterSelectEvent;
+        public event EventHandler<EmvEventArgs> AfterSelectEvent;
 
         #endregion
 
         #region >> Constructors
 
         /// <summary>
-        /// Creates a new <see cref="EMVDefinitionFile"/> instance.
+        /// Creates a new <see cref="EmvDefinitionFile"/> instance.
         /// </summary>
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
-        public EMVDefinitionFile(ICardChannel cardChannel)
+        public EmvDefinitionFile(ICardChannel cardChannel)
         {
             _cardChannel = new CardChannelIso7816(new CardChannelTerminalTransportLayer(cardChannel, false));
             TlvFci = null;
@@ -140,10 +125,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word</returns>
         public UInt16 Select()
         {
-            if (BeforeSelectEvent != null)
-            {
-                BeforeSelectEvent(this);
-            }
+            BeforeSelectEvent.Raise(this, new EmvEventArgs());
 
             // Execute the SELECT
             var crp = new CommandResponsePair(new EMVSelectByNameCommand(_adfName, 0));
@@ -156,10 +138,7 @@ namespace WSCT.EMV.Card
                 TlvFci = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterSelectEvent != null)
-            {
-                AfterSelectEvent(this);
-            }
+            AfterSelectEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }

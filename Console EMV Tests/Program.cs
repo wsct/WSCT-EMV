@@ -16,7 +16,7 @@ namespace WSCT.ConsoleEMVTests
 {
     internal class Program
     {
-        private List<EMVApplication> emvApplications;
+        private List<EmvApplication> emvApplications;
         private TlvDictionary tagsManager;
         private XDocument xmlDoc;
         private XElement xmlRoot;
@@ -36,10 +36,10 @@ namespace WSCT.ConsoleEMVTests
 
             RegisterPcl.Register();
 
-            new Program().Run(args);
+            new Program().Run();
         }
 
-        private void Run(string[] args)
+        private void Run()
         {
             Console.WriteLine("=========== S o m e   T L V D a t a   e x a m p l e s");
 
@@ -158,10 +158,10 @@ namespace WSCT.ConsoleEMVTests
 
             var pse = new PaymentSystemEnvironment(cardChannel);
 
-            pse.BeforeSelectEvent += beforePSESelection;
-            pse.AfterSelectEvent += afterPSESelection;
-            pse.BeforeReadEvent += beforePSERead;
-            pse.AfterReadEvent += afterPSERead;
+            pse.BeforeSelectEvent += BeforePseSelection;
+            pse.AfterSelectEvent += AfterPseSelection;
+            pse.BeforeReadEvent += BeforePseRead;
+            pse.AfterReadEvent += AfterPseRead;
 
             if (pse.Select() == 0x9000)
             {
@@ -173,7 +173,7 @@ namespace WSCT.ConsoleEMVTests
 
             #endregion
 
-            emvApplications = new List<EMVApplication>();
+            emvApplications = new List<EmvApplication>();
             foreach (var emvFound in pse.GetApplications())
             {
                 emvApplications.Add(emvFound);
@@ -183,14 +183,14 @@ namespace WSCT.ConsoleEMVTests
 
             foreach (var emv in emvApplications)
             {
-                emv.BeforeSelectEvent += beforeApplicationSelection;
-                emv.AfterSelectEvent += afterApplicationSelection;
-                emv.BeforeGetProcessingOptionsEvent += beforeGetProcessingOptions;
-                emv.AfterGetProcessingOptionsEvent += afterGetProcessingOptions;
-                emv.BeforeReadApplicationDataEvent += beforeReadApplicationData;
-                emv.AfterReadApplicationDataEvent += afterReadApplicationData;
-                emv.BeforeGetDataEvent += beforeGetData;
-                emv.AfterGetDataEvent += afterGetData;
+                emv.BeforeSelectEvent += BeforeApplicationSelection;
+                emv.AfterSelectEvent += AfterApplicationSelection;
+                emv.BeforeGetProcessingOptionsEvent += BeforeGetProcessingOptions;
+                emv.AfterGetProcessingOptionsEvent += AfterGetProcessingOptions;
+                emv.BeforeReadApplicationDataEvent += BeforeReadApplicationData;
+                emv.AfterReadApplicationDataEvent += AfterReadApplicationData;
+                emv.BeforeGetDataEvent += BeforeGetData;
+                emv.AfterGetDataEvent += AfterGetData;
 
                 if (emv.Select() == 0x9000)
                 {
@@ -240,9 +240,8 @@ namespace WSCT.ConsoleEMVTests
         /// <param name="tagsManager"></param>
         private static void WriteTlv(UInt32 tagId, TlvData tlv, TlvDictionary tagsManager)
         {
-            AbstractTlvObject tagObject = null;
             Console.WriteLine("  >> Contains tag {0:X2}: {1} [ {2} ]", tagId, tlv.HasTag(tagId), tlv.GetTag(tagId));
-            if (tlv.HasTag(tagId) && ((tagObject = tagsManager.CreateInstance(tlv.GetTag(tagId))) != null))
+            if (tlv.HasTag(tagId) && (tagsManager.CreateInstance(tlv.GetTag(tagId)) != null))
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("     >> {0:N}: {0}", tagsManager.CreateInstance(tlv.GetTag(tagId)));
@@ -252,7 +251,7 @@ namespace WSCT.ConsoleEMVTests
 
         #region >> EMV Event Handlers
 
-        private void beforePSESelection(EMVDefinitionFile df)
+        private void BeforePseSelection(Object sender, EmvEventArgs eventArgs)
         {
             Console.WriteLine();
             Console.WriteLine("=========== P S E   S e l e c t i o n");
@@ -261,11 +260,17 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Add(new XElement("PSESelection"));
         }
 
-        private void afterPSESelection(EMVDefinitionFile df)
+        private void AfterPseSelection(Object sender, EmvEventArgs eventArgs)
         {
             Console.WriteLine();
             Console.WriteLine("= = = = = = P S E   S e l e c t i o n");
             Console.WriteLine();
+
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
 
             if (df.TlvFci != null)
             {
@@ -278,7 +283,7 @@ namespace WSCT.ConsoleEMVTests
             }
         }
 
-        private void beforePSERead(PaymentSystemEnvironment pse)
+        private void BeforePseRead(Object sender, EmvEventArgs eventArgs)
         {
             Console.WriteLine();
             Console.WriteLine("=========== P S E   R e a d");
@@ -287,8 +292,14 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Add(new XElement("PSERead"));
         }
 
-        private void afterPSERead(PaymentSystemEnvironment pse)
+        private void AfterPseRead(Object sender, EmvEventArgs eventArgs)
         {
+            var pse = sender as PaymentSystemEnvironment;
+            if (pse == null)
+            {
+                throw new ArgumentException("sender is not a PaymentSystemEnvironment");
+            }
+
             Console.WriteLine();
             Console.WriteLine("= = = = = = P S E   R e a d");
             Console.WriteLine();
@@ -312,8 +323,14 @@ namespace WSCT.ConsoleEMVTests
             }
         }
 
-        private void beforeApplicationSelection(EMVDefinitionFile df)
+        private void BeforeApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
+
             Console.WriteLine();
             Console.WriteLine("=========== E M V   A I D   S e l e c t i o n   {0}", df.Aid);
             Console.WriteLine();
@@ -321,8 +338,14 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Add(new XElement("ApplicationSelection"));
         }
 
-        private void afterApplicationSelection(EMVDefinitionFile df)
+        private void AfterApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
+            var df = sender as EmvDefinitionFile;
+            if (df == null)
+            {
+                throw new ArgumentException("sender is not an EmvDefinitionFile");
+            }
+
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   A I D   S e l e c t i o n   {0}", df.Aid);
             Console.WriteLine();
@@ -338,8 +361,14 @@ namespace WSCT.ConsoleEMVTests
             }
         }
 
-        private void beforeGetProcessingOptions(EMVApplication emv)
+        private void BeforeGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("=========== E M V   G e t P r o c e s s i n g O p t i o n s   {0}", emv.Aid);
             Console.WriteLine();
@@ -347,8 +376,14 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Elements().Last().Add(new XElement("GetProcessingOptions"));
         }
 
-        private void afterGetProcessingOptions(EMVApplication emv)
+        private void AfterGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   G e t P r o c e s s i n g O p t i o n s   {0}", emv.Aid);
             Console.WriteLine();
@@ -366,8 +401,14 @@ namespace WSCT.ConsoleEMVTests
             }
         }
 
-        private void beforeReadApplicationData(EMVApplication emv)
+        private void BeforeReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("=========== E M V   R e a d A p p l i c a t i o n D a t a   {0}", emv.Aid);
             Console.WriteLine();
@@ -375,8 +416,14 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Add(new XElement("ReadApplicationData"));
         }
 
-        private void afterReadApplicationData(EMVApplication emv)
+        private void AfterReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   R e a d A p p l i c a t i o n D a t a   {0}", emv.Aid);
             Console.WriteLine();
@@ -391,8 +438,14 @@ namespace WSCT.ConsoleEMVTests
             }
         }
 
-        private void beforeGetData(EMVApplication emv)
+        private void BeforeGetData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("=========== E M V   G e t D a t a   {0}", emv.Aid);
             Console.WriteLine();
@@ -400,8 +453,14 @@ namespace WSCT.ConsoleEMVTests
             xmlRoot.Add(new XElement("GetData"));
         }
 
-        private void afterGetData(EMVApplication emv)
+        private void AfterGetData(Object sender, EmvEventArgs eventArgs)
         {
+            var emv = sender as EmvApplication;
+            if (emv == null)
+            {
+                throw new ArgumentException("sender is not an EMVApplication");
+            }
+
             Console.WriteLine();
             Console.WriteLine("= = = = = = E M V   G e t D a t a   {0}", emv.Aid);
             Console.WriteLine();

@@ -6,9 +6,9 @@ using WSCT.EMV.Security;
 namespace WSCT.EMV.Card
 {
     /// <summary>
-    /// Specialized <see cref="EMVApplication"/> for Visa contactless application.
+    /// Specialized <see cref="EmvApplication"/> for Visa contactless application.
     /// </summary>
-    public class VisaContactlessApplication : EMVApplication
+    public class VisaContactlessApplication : EmvApplication
     {
         #region >> Fields
 

@@ -8,6 +8,7 @@ using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
+using WSCT.Helpers.Events;
 using WSCT.ISO7816;
 using WSCT.ISO7816.Commands;
 
@@ -27,7 +28,7 @@ namespace WSCT.EMV.Card
     /// emvApp.getProcessingOptions();
     ///     </code>
     /// </example>
-    public class EMVApplication : EMVDefinitionFile
+    public class EmvApplication : EmvDefinitionFile
     {
         #region >> Fields
 
@@ -689,219 +690,107 @@ namespace WSCT.EMV.Card
 
         #endregion
 
-        #region >> Delegates
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="ComputeCryptographicChecksum()"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterComputeCryptographicChecksumEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GenerateAc1"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGenerateAC1EventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GetChallenge"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGetChallengeEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GetData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGetDataEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.GetProcessingOptions"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterGetProcessingOptionsEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.InternalAuthenticate"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterInternalAuthenticateEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadApplicationData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterReadApplicationDataEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.ReadLogFile"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterReadLogFileEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent after execution of <see cref="EMVApplication.VerifyPin"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void AfterVerifyPinEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.ComputeCryptographicChecksum"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeComputeCryptographicChecksumEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GenerateAc1"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGenerateAC1EventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetChallenge"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetChallengeEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetDataEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.GetProcessingOptions"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeGetProcessingOptionsEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.InternalAuthenticate"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeInternalAuthenticateEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadApplicationData"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeReadApplicationDataEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.ReadLogFile"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeReadLogFileEventHandler(EMVApplication emv);
-
-        /// <summary>
-        /// Delegate for event sent before execution of <see cref="EMVApplication.VerifyPin"/>.
-        /// </summary>
-        /// <param name="emv">Caller instance.</param>
-        public delegate void BeforeVerifyPinEventHandler(EMVApplication emv);
-
-        #endregion
-
         #region >> Events
 
         /// <summary>
         /// Event sent before execution of <see cref="GetData"/>.
         /// </summary>
-        public event BeforeGetDataEventHandler BeforeGetDataEvent;
+        public event EventHandler<EmvEventArgs> BeforeGetDataEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="GetData"/>.
         /// </summary>
-        public event AfterGetDataEventHandler AfterGetDataEvent;
+        public event EventHandler<EmvEventArgs> AfterGetDataEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="GetProcessingOptions"/>.
         /// </summary>
-        public event BeforeGetProcessingOptionsEventHandler BeforeGetProcessingOptionsEvent;
+        public event EventHandler<EmvEventArgs> BeforeGetProcessingOptionsEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="GetProcessingOptions"/>.
         /// </summary>
-        public event AfterGetProcessingOptionsEventHandler AfterGetProcessingOptionsEvent;
+        public event EventHandler<EmvEventArgs> AfterGetProcessingOptionsEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="ReadApplicationData"/>.
         /// </summary>
-        public event BeforeReadApplicationDataEventHandler BeforeReadApplicationDataEvent;
+        public event EventHandler<EmvEventArgs> BeforeReadApplicationDataEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="ReadApplicationData"/>.
         /// </summary>
-        public event AfterReadApplicationDataEventHandler AfterReadApplicationDataEvent;
+        public event EventHandler<EmvEventArgs> AfterReadApplicationDataEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="ReadLogFile"/>.
         /// </summary>
-        public event BeforeGetDataEventHandler BeforeReadLogFileEvent;
+        public event EventHandler<EmvEventArgs> BeforeReadLogFileEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="ReadLogFile"/>.
         /// </summary>
-        public event AfterGetDataEventHandler AfterReadLogFileEvent;
+        public event EventHandler<EmvEventArgs> AfterReadLogFileEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="VerifyPin"/>.
         /// </summary>
-        public event BeforeVerifyPinEventHandler BeforeVerifyPinEvent;
+        public event EventHandler<EmvEventArgs> BeforeVerifyPinEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="VerifyPin"/>.
         /// </summary>
-        public event AfterVerifyPinEventHandler AfterVerifyPinEvent;
+        public event EventHandler<EmvEventArgs> AfterVerifyPinEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="InternalAuthenticate"/>.
         /// </summary>
-        public event BeforeInternalAuthenticateEventHandler BeforeInternalAuthenticateEvent;
+        public event EventHandler<EmvEventArgs> BeforeInternalAuthenticateEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="InternalAuthenticate"/>.
         /// </summary>
-        public event AfterInternalAuthenticateEventHandler AfterInternalAuthenticateEvent;
+        public event EventHandler<EmvEventArgs> AfterInternalAuthenticateEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="GetChallenge"/>.
         /// </summary>
-        public event BeforeGetChallengeEventHandler BeforeGetChallengeEvent;
+        public event EventHandler<EmvEventArgs> BeforeGetChallengeEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="GetChallenge"/>.
         /// </summary>
-        public event AfterGetChallengeEventHandler AfterGetChallengeEvent;
+        public event EventHandler<EmvEventArgs> AfterGetChallengeEvent;
 
         /// <summary>
         /// Event sent before execution of <see cref="GenerateAc1"/>.
         /// </summary>
-        public event BeforeGenerateAC1EventHandler BeforeGenerateAC1Event;
+        public event EventHandler<EmvEventArgs> BeforeGenerateAC1Event;
 
         /// <summary>
         /// Event sent after execution of <see cref="GenerateAc1"/>.
         /// </summary>
-        public event AfterGenerateAC1EventHandler AfterGenerateAC1Event;
+        public event EventHandler<EmvEventArgs> AfterGenerateAC1Event;
 
         /// <summary>
         /// Event sent before execution of <see cref="ComputeCryptographicChecksum()"/>.
         /// </summary>
-        public event BeforeComputeCryptographicChecksumEventHandler BeforeComputeCryptographicChecksumEvent;
+        public event EventHandler<EmvEventArgs> BeforeComputeCryptographicChecksumEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="ComputeCryptographicChecksum()"/>.
         /// </summary>
-        public event AfterComputeCryptographicChecksumEventHandler AfterComputeCryptographicChecksumEvent;
+        public event EventHandler<EmvEventArgs> AfterComputeCryptographicChecksumEvent;
 
         #endregion
 
         #region >> Constructors
 
         /// <summary>
-        /// Initializes a new <see cref="EMVApplication"/> instance.
+        /// Initializes a new <see cref="EmvApplication"/> instance.
         /// </summary>
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
-        public EMVApplication(ICardChannel cardChannel)
+        public EmvApplication(ICardChannel cardChannel)
             : base(cardChannel)
         {
             _tlvRecords = new List<TlvData>();
@@ -909,11 +798,11 @@ namespace WSCT.EMV.Card
         }
 
         /// <summary>
-        /// Initializes a new <see cref="EMVApplication"/> instance.
+        /// Initializes a new <see cref="EmvApplication"/> instance.
         /// </summary>
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
         /// <param name="tlvFromPSE"><see cref="TlvData">TLVData</see> object coming from PSE records for this application</param>
-        public EMVApplication(ICardChannel cardChannel, TlvData tlvFromPSE)
+        public EmvApplication(ICardChannel cardChannel, TlvData tlvFromPSE)
             : this(cardChannel)
         {
             _tlvFromPSE = tlvFromPSE;
@@ -933,10 +822,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetProcessingOptions()
         {
-            if (BeforeGetProcessingOptionsEvent != null)
-            {
-                BeforeGetProcessingOptionsEvent(this);
-            }
+            BeforeGetProcessingOptionsEvent.Raise(this, new EmvEventArgs());
 
             // If PDOL 9F38 is not supplied in FCI, then used 8300 as UDC; if supplied: build the PDOL in tag 83 L V
             byte[] pdolDataValue;
@@ -978,10 +864,7 @@ namespace WSCT.EMV.Card
                 _tlvProcessingOptions = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterGetProcessingOptionsEvent != null)
-            {
-                AfterGetProcessingOptionsEvent(this);
-            }
+            AfterGetProcessingOptionsEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1020,7 +903,7 @@ namespace WSCT.EMV.Card
                                 _tlvOfflineRecords.Add(tlvData);
                             }
                         }
-                            //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
+                        //For files with SFI in the range 11 to 30, the record tag ('70') and the record length are not excluded from the offline data authentication process.
                         else
                         {
                             _tlvOfflineRecords.Add(tlv);
@@ -1038,20 +921,14 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ReadApplicationData()
         {
-            if (BeforeReadApplicationDataEvent != null)
-            {
-                BeforeReadApplicationDataEvent(this);
-            }
+            BeforeReadApplicationDataEvent.Raise(this, new EmvEventArgs());
 
             foreach (var file in Afl.GetFiles())
             {
                 ReadDataFile(file);
             }
 
-            if (AfterReadApplicationDataEvent != null)
-            {
-                AfterReadApplicationDataEvent(this);
-            }
+            AfterReadApplicationDataEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1062,20 +939,14 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetData()
         {
-            if (BeforeGetDataEvent != null)
-            {
-                BeforeGetDataEvent(this);
-            }
+            BeforeGetDataEvent.Raise(this, new EmvEventArgs());
 
             GetData(0x9F36, ref _tlvATC);
             GetData(0x9F13, ref _tlvLastOnlineATCRegister);
             GetData(0x9F17, ref _tlvPINTryCounter);
             GetData(0x9F4F, ref _tlvLogFormat);
 
-            if (AfterGetDataEvent != null)
-            {
-                AfterGetDataEvent(this);
-            }
+            AfterGetDataEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1096,7 +967,7 @@ namespace WSCT.EMV.Card
         protected UInt16 GetData(UInt32 tag, ref TlvData tlv)
         {
             // Execute GET DATA instruction
-            var cAPDU = new CommandAPDU(0x80, 0xCA, (byte)(tag/0x100), (byte)(tag%0x100), 0);
+            var cAPDU = new CommandAPDU(0x80, 0xCA, (byte)(tag / 0x100), (byte)(tag % 0x100), 0);
             var crp = new CommandResponsePair(cAPDU);
             crp.Transmit(_cardChannel);
             _lastStatusWord = crp.RApdu.StatusWord;
@@ -1116,10 +987,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ReadLogFile()
         {
-            if (BeforeReadLogFileEvent != null)
-            {
-                BeforeReadLogFileEvent(this);
-            }
+            BeforeReadLogFileEvent.Raise(this, new EmvEventArgs());
 
             if (LogEntry == null)
             {
@@ -1149,10 +1017,7 @@ namespace WSCT.EMV.Card
                 }
             } while (_lastStatusWord == 0x9000 && recordNumber < _logEntry.CyclicFileSize);
 
-            if (AfterReadLogFileEvent != null)
-            {
-                AfterReadLogFileEvent(this);
-            }
+            AfterReadLogFileEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1164,10 +1029,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 VerifyPin(PINBlock pinBlock)
         {
-            if (BeforeVerifyPinEvent != null)
-            {
-                BeforeVerifyPinEvent(this);
-            }
+            BeforeVerifyPinEvent.Raise(this, new EmvEventArgs());
 
             byte p2 = 0x00;
             if (pinBlock is PlaintextPINBlock)
@@ -1187,10 +1049,7 @@ namespace WSCT.EMV.Card
                 Tvr.CardholderVerificationFailed = true;
             }
 
-            if (AfterVerifyPinEvent != null)
-            {
-                AfterVerifyPinEvent(this);
-            }
+            AfterVerifyPinEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1202,12 +1061,9 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 InternalAuthenticate(byte[] unpredictableNumber)
         {
-            _tlvInternalAuthenticateUnpredictableNumber = new TlvData(0x9F37, 0x04, unpredictableNumber);
+            BeforeInternalAuthenticateEvent.Raise(this, new EmvEventArgs());
 
-            if (BeforeInternalAuthenticateEvent != null)
-            {
-                BeforeInternalAuthenticateEvent(this);
-            }
+            _tlvInternalAuthenticateUnpredictableNumber = new TlvData(0x9F37, 0x04, unpredictableNumber);
 
             // Build DDOL data
             byte[] ddolDataValue;
@@ -1250,10 +1106,7 @@ namespace WSCT.EMV.Card
                 _tlvSignedDynamicApplicationResponse = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterInternalAuthenticateEvent != null)
-            {
-                AfterInternalAuthenticateEvent(this);
-            }
+            AfterInternalAuthenticateEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1264,10 +1117,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GetChallenge()
         {
-            if (BeforeGetChallengeEvent != null)
-            {
-                BeforeGetChallengeEvent(this);
-            }
+            BeforeGetChallengeEvent.Raise(this, new EmvEventArgs());
 
             // Clear previous challenge
             _iccChallenge = null;
@@ -1291,10 +1141,7 @@ namespace WSCT.EMV.Card
                 _iccChallenge = crp.RApdu.Udr;
             }
 
-            if (AfterGetChallengeEvent != null)
-            {
-                AfterGetChallengeEvent(this);
-            }
+            AfterGetChallengeEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1307,14 +1154,11 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 GenerateAc1(CryptogramType cryptogramType, byte[] unpredictableNumber)
         {
+            BeforeGenerateAC1Event.Raise(this, new EmvEventArgs());
+
             _tlvGenerateAC1UnpredictableNumber = new TlvData(0x9F37, (uint)unpredictableNumber.Length, unpredictableNumber);
 
             _requestedAC1Type = cryptogramType;
-
-            if (BeforeGenerateAC1Event != null)
-            {
-                BeforeGenerateAC1Event(this);
-            }
 
             byte referenceControlParameter;
             switch (cryptogramType)
@@ -1372,10 +1216,7 @@ namespace WSCT.EMV.Card
                 _tlvGenerateAC1Response = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterGenerateAC1Event != null)
-            {
-                AfterGenerateAC1Event(this);
-            }
+            AfterGenerateAC1Event.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
@@ -1387,10 +1228,7 @@ namespace WSCT.EMV.Card
         /// <returns>Last status word.</returns>
         public UInt16 ComputeCryptographicChecksum()
         {
-            if (BeforeComputeCryptographicChecksumEvent != null)
-            {
-                BeforeComputeCryptographicChecksumEvent(this);
-            }
+            BeforeComputeCryptographicChecksumEvent.Raise(this, new EmvEventArgs());
 
             // If UDOL 9F69 is not supplied in records, then use default UDOL = 9F6A04
             byte[] udolDataValue = null;
@@ -1440,10 +1278,7 @@ namespace WSCT.EMV.Card
                 _tlvCryptographicChecksum = new TlvData(crp.RApdu.Udr);
             }
 
-            if (AfterComputeCryptographicChecksumEvent != null)
-            {
-                AfterComputeCryptographicChecksumEvent(this);
-            }
+            AfterComputeCryptographicChecksumEvent.Raise(this, new EmvEventArgs());
 
             return _lastStatusWord;
         }
