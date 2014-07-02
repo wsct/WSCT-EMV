@@ -61,8 +61,6 @@ namespace WSCT.EMV.Card
         /// <returns></returns>
         public Boolean VerifiesFastDda()
         {
-            var cryptography = new Cryptography();
-
             // Check that READ APPLICATION DATA has been performed
             if (TlvRecords.Count == 0)
             {
@@ -104,7 +102,7 @@ namespace WSCT.EMV.Card
                             Array.Copy(TlvDataTerminalData.GetTag(0x9F37).Value, 0, data, offset, length9F37);
                             // offset += length9F37;
 
-                            var hash = cryptography.ComputeHash(data);
+                            var hash = Cryptography.ComputeHashSha1(data);
                             if (hash.SequenceEqual(_dda.HashResult))
                             {
                                 return true;
@@ -161,7 +159,7 @@ namespace WSCT.EMV.Card
                             Array.Copy(TlvDataRecords.GetTag(0x9F69).Value, 0, data, offset, length9F69);
                             // offset += length9F69;
 
-                            var hash = cryptography.ComputeHash(data);
+                            var hash = Cryptography.ComputeHashSha1(data);
                             if (hash.SequenceEqual(_dda.HashResult))
                             {
                                 return true;

@@ -9,47 +9,17 @@ namespace WSCT.EMV.Security
     /// </summary>
     public class StaticDataAuthentication : AbstractDataAuthenticationFormat03
     {
-        #region >> Fields
-
-        private byte[] _dataAuthenticationCode;
-
-        private byte[] _padPattern;
-
-        #endregion
-
         #region >> Properties
 
         /// <summary>
         /// Data Authentication Code (2): Issuer-assigned code.
         /// </summary>
-        public byte[] DataAuthenticationCode
-        {
-            get
-            {
-                if (_dataAuthenticationCode == null)
-                {
-                    _dataAuthenticationCode = new byte[2];
-                    Array.Copy(_recovered, 2, _dataAuthenticationCode, 0, 2);
-                }
-                return _dataAuthenticationCode;
-            }
-        }
+        public byte[] DataAuthenticationCode { get; set; }
 
         /// <summary>
         /// Pad Pattern (NI - 26): (NI - 26) padding bytes of value 'BB'.
         /// </summary>
-        public byte[] PadPattern
-        {
-            get
-            {
-                if (_padPattern == null)
-                {
-                    _padPattern = new byte[KeyLength - 26];
-                    Array.Copy(_recovered, 5, _padPattern, 0, KeyLength - 26);
-                }
-                return _padPattern;
-            }
-        }
+        public byte[] PadPattern { get; set; }
 
         #endregion
 
@@ -68,6 +38,28 @@ namespace WSCT.EMV.Security
             s.AppendFormat("Trailer:[{0:X2}] ", DataTrailer);
 
             return s.ToString();
+        }
+
+        #endregion
+
+        #region >> AbstractSignatureContainer
+
+        /// <param name="privateKeyLength"></param>
+        /// <inheritdoc />
+        protected override byte[] GetDataToSign(int privateKeyLength)
+        {
+            // TODO : Build data to sign
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        protected override void OnRecoverFromSignature()
+        {
+            DataAuthenticationCode = new byte[2];
+            Array.Copy(Recovered, 2, DataAuthenticationCode, 0, 2);
+
+            PadPattern = new byte[KeyLength - 26];
+            Array.Copy(Recovered, 5, PadPattern, 0, KeyLength - 26);
         }
 
         #endregion

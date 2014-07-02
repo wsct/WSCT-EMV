@@ -1,4 +1,6 @@
-﻿namespace WSCT.EMV.Security
+﻿using System;
+
+namespace WSCT.EMV.Security
 {
     // TODO: implement CDA
     /// <summary>
@@ -6,5 +8,16 @@
     /// </summary>
     public class CombinedDataAuthentication : AbstractDataAuthenticationFormat05
     {
+        #region >> AbstractSignatureContainer
+
+        /// <param name="privateKeyLength"></param>
+        /// <inheritdoc />
+        protected override byte[] GetDataToSign(int privateKeyLength)
+        {
+            // TODO : Build data to sign
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

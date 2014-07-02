@@ -40,6 +40,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="crypto, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -69,7 +73,10 @@
     <Compile Include="Objects\DataObjectListUnitTest.cs" />
     <Compile Include="Objects\LogEntryUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CryptographyUnitTest.cs" />
     <Compile Include="Security\IssuerPublicKeyCertificateUnitTest.cs" />
+    <Compile Include="Security\StaticDataAuthenticationUnitTest.cs" />
+    <Compile Include="Security\Sha1HashAlgorithmProviderUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
@@ -84,6 +91,9 @@
       <Project>{162e1cb7-03f5-4f2a-9dee-0feaf07ef4ce}</Project>
       <Name>EMV Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

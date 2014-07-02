@@ -12,7 +12,7 @@
         /// <returns>Instance of hash algorithm provider.</returns>
         public IHashAlgorithmProvider GetProvider(byte hashIndicator)
         {
-            // TODO: use an xml file to define hash providers
+            // TODO: use an external configuration file to define hash providers
             IHashAlgorithmProvider hashProvider;
             switch (hashIndicator)
             {

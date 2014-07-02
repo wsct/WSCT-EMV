@@ -20,7 +20,7 @@ namespace WSCT.EMV.Security
     /// Annex A2. The only values allowed for the public key exponent are 3 and 2 16  + 1.</para>
     /// <para>Hashing Algorithms: This algorithm is standardised in ISO/IEC 10118-3.  SHA-1 takes as input messages of arbitrary length and produces a 20-byte hash value.</para>
     /// </remarks>
-    public class Cryptography
+    public static class Cryptography
     {
         // The digital signature scheme and offline PIN encryption use the RSA transform (see RSA digital signature scheme) as defined in ISO/IEC CD 18033-2 [6]. 
         //            RSAParameters rsaParameters = new RSAParameters();
@@ -31,36 +31,45 @@ namespace WSCT.EMV.Security
         /// 
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="hash"></param>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public byte[] GenerateSignature(byte[] data, AsymmetricKeyParameter privateKey)
+        public static byte[] GenerateSignature(this byte[] data, AsymmetricKeyParameter privateKey)
         {
-            var n = ((RsaKeyParameters)privateKey).Modulus.BitLength/8;
+            var n = ((RsaKeyParameters)privateKey).Modulus.BitLength / 8;
+
             // L = Length(MSG)
             var l = data.Length;
+
             // Compute H = Hash(MSG)
-            var h = ComputeHash(data);
+            var h = ComputeHashSha1(data);
+
             // MSG = MSG1 || MSG2 where MSG1 = N-22 leftmost bytes of MSG & MSG2 = remaining L-N+22 bytes of MSG
             var msg1 = new byte[n - 22];
             Array.Copy(data, 0, msg1, 0, n - 22);
             var msg2 = new byte[l - n + 22];
-            Array.Copy(data, 0, msg2, n - 22, l - n + 22);
+            Array.Copy(data, 0, msg2, 0, l - n + 22);
+
             // B = '6A'
             const byte b = 0x6A;
+
             // E = 'BC'
             const byte e = 0xBC;
+
             // X = ( B || MSG1 || H || E )
             var x = new byte[n];
             x[0] = b;
             msg1.CopyTo(x, 1);
-            h.CopyTo(x, n - 22);
+            h.CopyTo(x, n - 21);
             x[n - 1] = e;
-            // S = Sign(Sk)[X]
-            // TODO
-            // byte[] s = null;
-            // return s;
 
-            throw new NotImplementedException();
+            // S = Sign(Sk)[X]
+            var engine = new RsaEngine();
+
+            engine.Init(true, privateKey);
+            var s = engine.ProcessBlock(x, 0, x.Length);
+
+            return s;
         }
 
         /// <summary>
@@ -69,12 +78,10 @@ namespace WSCT.EMV.Security
         /// <param name="signature">EMV certificate to recover data from.</param>
         /// <param name="publicKey">Public Key to use.</param>
         /// <returns>Data recovered from the certificate.</returns>
-        public byte[] RecoverMessage(byte[] signature, AsymmetricKeyParameter publicKey)
+        public static byte[] RecoverMessage(byte[] signature, AsymmetricKeyParameter publicKey)
         {
             IAsymmetricBlockCipher engine = new RsaEngine();
-
             engine.Init(false, publicKey);
-
             var x = engine.ProcessBlock(signature, 0, signature.Length);
 
             return x;
@@ -95,9 +102,9 @@ namespace WSCT.EMV.Security
         /// <param name="message"></param>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public Boolean VerifySignature(byte[] signature, byte[] message, AsymmetricKeyParameter publicKey)
+        public static Boolean VerifySignature(byte[] signature, byte[] message, AsymmetricKeyParameter publicKey)
         {
-            var n = ((RsaKeyParameters)publicKey).Modulus.BitLength/8;
+            var n = ((RsaKeyParameters)publicKey).Modulus.BitLength / 8;
 
             // Check Length(S) = N
             if (signature.Length != n)
@@ -140,12 +147,14 @@ namespace WSCT.EMV.Security
         /// <remarks>The approved algorithm for hashing is SHA-1 as specified in ISO/IEC 10118-3 [5].</remarks>
         /// <param name="data">Data to hash.</param>
         /// <returns>Hash value.</returns>
-        public byte[] ComputeHash(byte[] data)
+        public static byte[] ComputeHashSha1(byte[] data)
         {
             IDigest sha1 = new Sha1Digest();
             var h = new byte[sha1.GetDigestSize()];
+
             sha1.BlockUpdate(data, 0, data.Length);
             sha1.DoFinal(h, 0);
+
             return h;
         }
 
@@ -155,7 +164,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] ComputePayPassMac(byte[] data, KeyParameter key)
+        public static byte[] ComputePayPassMac(byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new CbcBlockCipherMac(cipher, 64, new ISO7816d4Padding());
@@ -175,7 +184,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] ComputeMacForPersoCryptogram(byte[] data, KeyParameter key)
+        public static byte[] ComputeMacForPersoCryptogram(byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new ISO9797Alg3Mac(cipher, 64, new ISO7816d4Padding());
@@ -195,7 +204,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] ComputeMacForIntegrity(byte[] data, KeyParameter key)
+        public static byte[] ComputeMacForIntegrity(byte[] data, KeyParameter key)
         {
             /*
              *  The computation of an s-byte MAC (4 ≤ s ≤ 8; see MAC algorithms) is according to ISO/IEC 9797-1 [2] using a 64-bit block cipher ALG in CBC mode as specified in ISO/IEC 10116. More precisely, the computation of a MAC S over a message MSG consisting of an arbitrary number of bytes with a MAC Session Key K$$_{{\rm S}}$$ takes place in the following steps:
@@ -233,7 +242,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] ComputeCbc3Des(byte[] data, KeyParameter key)
+        public static byte[] ComputeCbc3Des(byte[] data, KeyParameter key)
         {
             IBlockCipher engine = new DesEdeEngine();
             var cipher = new BufferedBlockCipher(new CbcBlockCipher(engine));
@@ -254,7 +263,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public byte[] ComputeEcb3Des(byte[] data, KeyParameter key)
+        public static byte[] ComputeEcb3Des(byte[] data, KeyParameter key)
         {
             IBlockCipher engine = new DesEdeEngine();
             BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine);

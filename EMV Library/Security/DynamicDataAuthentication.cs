@@ -1,4 +1,6 @@
-﻿namespace WSCT.EMV.Security
+﻿using System;
+
+namespace WSCT.EMV.Security
 {
     /// <summary>
     /// Represents an EMV Dynamic Data Authentication certificate (DDA).

@@ -9,32 +9,12 @@ namespace WSCT.EMV.Security
     /// </summary>
     public class IccPublicKeyCertificate : AbstractPublicKeyCertificate
     {
-        #region >> Fields
-
-        /// <summary>
-        /// Application PAN (10): PAN (padded to the right with Hex 'F's) .
-        /// </summary>
-        private byte[] applicationPan;
-
-        #endregion
-
         #region >> Properties
 
         /// <summary>
         /// Application PAN (10): PAN (padded to the right with Hex 'F's).
         /// </summary>
-        public byte[] ApplicationPan
-        {
-            get
-            {
-                if (applicationPan == null)
-                {
-                    applicationPan = new byte[10];
-                    Array.Copy(_recovered, 2, applicationPan, 0, 10);
-                }
-                return applicationPan;
-            }
-        }
+        public byte[] ApplicationPan { get; set; }
 
         #endregion
 
@@ -46,6 +26,27 @@ namespace WSCT.EMV.Security
         public IccPublicKeyCertificate()
             : base(10)
         {
+        }
+
+        #endregion
+
+        #region >> AbstractSignatureContainer
+
+        /// <param name="privateKeyLength"></param>
+        /// <inheritdoc />
+        protected override byte[] GetDataToSign(int privateKeyLength)
+        {
+            // TODO : Build data to sign
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        protected override void OnRecoverFromSignature()
+        {
+            base.OnRecoverFromSignature();
+
+            ApplicationPan = new byte[10];
+            Array.Copy(Recovered, 2, ApplicationPan, 0, 10);
         }
 
         #endregion

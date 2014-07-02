@@ -32,13 +32,13 @@
             System.Windows.Forms.GroupBox groupBox9;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.GroupBox groupBox8;
-            System.Windows.Forms.GroupBox groupBox1;
-            System.Windows.Forms.GroupBox groupBox2;
-            System.Windows.Forms.GroupBox groupBox3;
-            System.Windows.Forms.GroupBox groupBox4;
-            System.Windows.Forms.GroupBox groupBox10;
-            System.Windows.Forms.GroupBox groupBox11;
-            System.Windows.Forms.GroupBox groupBox12;
+            System.Windows.Forms.GroupBox groupActionsApplicationSelection;
+            System.Windows.Forms.GroupBox groupActionsInitiateApplicationProcessing;
+            System.Windows.Forms.GroupBox groupActionsReadApplicationData;
+            System.Windows.Forms.GroupBox groupActionsCardholderVerification;
+            System.Windows.Forms.GroupBox groupActionsOfflineDataAuthentication;
+            System.Windows.Forms.GroupBox groupActionsCardActionAnalysis;
+            System.Windows.Forms.GroupBox groupActionsIssuerAuthentication;
             System.Windows.Forms.GroupBox groupBox13;
             System.Windows.Forms.TabPage guiTabDetailedLogs;
             System.Windows.Forms.TabPage guiTabPSE;
@@ -86,6 +86,7 @@
             System.Windows.Forms.GroupBox groupBox20;
             System.Windows.Forms.GroupBox groupBox21;
             System.Windows.Forms.GroupBox groupBox22;
+            System.Windows.Forms.TabControl tabControlMain;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Gui));
             this.guiParamsTagAIDInFCI = new System.Windows.Forms.CheckBox();
             this.guiDoExplicitDiscoveryOfAID = new System.Windows.Forms.Button();
@@ -197,20 +198,19 @@
             this.guiTVR5_3 = new System.Windows.Forms.CheckBox();
             this.guiTVR5_2 = new System.Windows.Forms.CheckBox();
             this.guiTVR5_1 = new System.Windows.Forms.CheckBox();
-            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabTVR = new System.Windows.Forms.TabPage();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             guiTabParameters = new System.Windows.Forms.TabPage();
             groupBox9 = new System.Windows.Forms.GroupBox();
             label3 = new System.Windows.Forms.Label();
             groupBox8 = new System.Windows.Forms.GroupBox();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            groupBox2 = new System.Windows.Forms.GroupBox();
-            groupBox3 = new System.Windows.Forms.GroupBox();
-            groupBox4 = new System.Windows.Forms.GroupBox();
-            groupBox10 = new System.Windows.Forms.GroupBox();
-            groupBox11 = new System.Windows.Forms.GroupBox();
-            groupBox12 = new System.Windows.Forms.GroupBox();
+            groupActionsApplicationSelection = new System.Windows.Forms.GroupBox();
+            groupActionsInitiateApplicationProcessing = new System.Windows.Forms.GroupBox();
+            groupActionsReadApplicationData = new System.Windows.Forms.GroupBox();
+            groupActionsCardholderVerification = new System.Windows.Forms.GroupBox();
+            groupActionsOfflineDataAuthentication = new System.Windows.Forms.GroupBox();
+            groupActionsCardActionAnalysis = new System.Windows.Forms.GroupBox();
+            groupActionsIssuerAuthentication = new System.Windows.Forms.GroupBox();
             groupBox13 = new System.Windows.Forms.GroupBox();
             guiTabDetailedLogs = new System.Windows.Forms.TabPage();
             guiTabPSE = new System.Windows.Forms.TabPage();
@@ -258,16 +258,17 @@
             groupBox20 = new System.Windows.Forms.GroupBox();
             groupBox21 = new System.Windows.Forms.GroupBox();
             groupBox22 = new System.Windows.Forms.GroupBox();
+            tabControlMain = new System.Windows.Forms.TabControl();
             guiTabParameters.SuspendLayout();
             groupBox9.SuspendLayout();
             groupBox8.SuspendLayout();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
-            groupBox10.SuspendLayout();
-            groupBox11.SuspendLayout();
-            groupBox12.SuspendLayout();
+            groupActionsApplicationSelection.SuspendLayout();
+            groupActionsInitiateApplicationProcessing.SuspendLayout();
+            groupActionsReadApplicationData.SuspendLayout();
+            groupActionsCardholderVerification.SuspendLayout();
+            groupActionsOfflineDataAuthentication.SuspendLayout();
+            groupActionsCardActionAnalysis.SuspendLayout();
+            groupActionsIssuerAuthentication.SuspendLayout();
             groupBox13.SuspendLayout();
             guiTabDetailedLogs.SuspendLayout();
             guiTabPSE.SuspendLayout();
@@ -292,7 +293,7 @@
             groupBox20.SuspendLayout();
             groupBox21.SuspendLayout();
             groupBox22.SuspendLayout();
-            this.tabControlMain.SuspendLayout();
+            tabControlMain.SuspendLayout();
             this.tabTVR.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -310,8 +311,8 @@
             // 
             // groupBox9
             // 
-            groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             groupBox9.Controls.Add(label3);
             groupBox9.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             groupBox9.Location = new System.Drawing.Point(6, 619);
@@ -330,7 +331,7 @@
             label3.Size = new System.Drawing.Size(424, 13);
             label3.TabIndex = 0;
             label3.Text = "Note that modifying these parameters will break conformity with base EMV specific" +
-                "ations.";
+    "ations.";
             // 
             // groupBox8
             // 
@@ -353,18 +354,18 @@
             this.guiParamsTagAIDInFCI.Text = "Search for AID in FCI";
             this.guiParamsTagAIDInFCI.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupActionsApplicationSelection
             // 
-            groupBox1.AutoSize = true;
-            groupBox1.Controls.Add(this.guiDoExplicitDiscoveryOfAID);
-            groupBox1.Controls.Add(this.guiPSEName);
-            groupBox1.Controls.Add(this.guiDoSelectPSE);
-            groupBox1.Location = new System.Drawing.Point(12, 12);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(300, 90);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Application Selection";
+            groupActionsApplicationSelection.AutoSize = true;
+            groupActionsApplicationSelection.Controls.Add(this.guiDoExplicitDiscoveryOfAID);
+            groupActionsApplicationSelection.Controls.Add(this.guiPSEName);
+            groupActionsApplicationSelection.Controls.Add(this.guiDoSelectPSE);
+            groupActionsApplicationSelection.Location = new System.Drawing.Point(12, 12);
+            groupActionsApplicationSelection.Name = "groupActionsApplicationSelection";
+            groupActionsApplicationSelection.Size = new System.Drawing.Size(300, 90);
+            groupActionsApplicationSelection.TabIndex = 0;
+            groupActionsApplicationSelection.TabStop = false;
+            groupActionsApplicationSelection.Text = "Application Selection";
             // 
             // guiDoExplicitDiscoveryOfAID
             // 
@@ -395,18 +396,18 @@
             this.guiDoSelectPSE.UseVisualStyleBackColor = true;
             this.guiDoSelectPSE.Click += new System.EventHandler(this.guiDoSelectPSE_Click);
             // 
-            // groupBox2
+            // groupActionsInitiateApplicationProcessing
             // 
-            groupBox2.AutoSize = true;
-            groupBox2.Controls.Add(this.guiApplicationAID);
-            groupBox2.Controls.Add(this.guiDoSelectAID);
-            groupBox2.Controls.Add(this.guiDoGetProcessingOptions);
-            groupBox2.Location = new System.Drawing.Point(12, 108);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(300, 90);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Initiate Application Processing";
+            groupActionsInitiateApplicationProcessing.AutoSize = true;
+            groupActionsInitiateApplicationProcessing.Controls.Add(this.guiApplicationAID);
+            groupActionsInitiateApplicationProcessing.Controls.Add(this.guiDoSelectAID);
+            groupActionsInitiateApplicationProcessing.Controls.Add(this.guiDoGetProcessingOptions);
+            groupActionsInitiateApplicationProcessing.Location = new System.Drawing.Point(12, 108);
+            groupActionsInitiateApplicationProcessing.Name = "groupActionsInitiateApplicationProcessing";
+            groupActionsInitiateApplicationProcessing.Size = new System.Drawing.Size(300, 90);
+            groupActionsInitiateApplicationProcessing.TabIndex = 1;
+            groupActionsInitiateApplicationProcessing.TabStop = false;
+            groupActionsInitiateApplicationProcessing.Text = "Initiate Application Processing";
             // 
             // guiApplicationAID
             // 
@@ -440,17 +441,17 @@
             this.guiDoGetProcessingOptions.UseVisualStyleBackColor = true;
             this.guiDoGetProcessingOptions.Click += new System.EventHandler(this.guiDoGetProcessingOptions_Click);
             // 
-            // groupBox3
+            // groupActionsReadApplicationData
             // 
-            groupBox3.AutoSize = true;
-            groupBox3.Controls.Add(this.guiDoGetData);
-            groupBox3.Controls.Add(this.guiDoReadRecords);
-            groupBox3.Location = new System.Drawing.Point(12, 204);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(300, 90);
-            groupBox3.TabIndex = 2;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Read Application Data";
+            groupActionsReadApplicationData.AutoSize = true;
+            groupActionsReadApplicationData.Controls.Add(this.guiDoGetData);
+            groupActionsReadApplicationData.Controls.Add(this.guiDoReadRecords);
+            groupActionsReadApplicationData.Location = new System.Drawing.Point(12, 204);
+            groupActionsReadApplicationData.Name = "groupActionsReadApplicationData";
+            groupActionsReadApplicationData.Size = new System.Drawing.Size(300, 90);
+            groupActionsReadApplicationData.TabIndex = 2;
+            groupActionsReadApplicationData.TabStop = false;
+            groupActionsReadApplicationData.Text = "Read Application Data";
             // 
             // guiDoGetData
             // 
@@ -474,20 +475,20 @@
             this.guiDoReadRecords.UseVisualStyleBackColor = true;
             this.guiDoReadRecords.Click += new System.EventHandler(this.guiDoReadRecords_Click);
             // 
-            // groupBox4
+            // groupActionsCardholderVerification
             // 
-            groupBox4.AutoSize = true;
-            groupBox4.Controls.Add(this.guiDoGetChallenge);
-            groupBox4.Controls.Add(this.guiPINEntryUsed);
-            groupBox4.Controls.Add(this.guiPINEntry);
-            groupBox4.Controls.Add(this.guiCVMList);
-            groupBox4.Controls.Add(this.guiDoVerifyCardholder);
-            groupBox4.Location = new System.Drawing.Point(12, 365);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new System.Drawing.Size(300, 116);
-            groupBox4.TabIndex = 4;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Cardholder Verification";
+            groupActionsCardholderVerification.AutoSize = true;
+            groupActionsCardholderVerification.Controls.Add(this.guiDoGetChallenge);
+            groupActionsCardholderVerification.Controls.Add(this.guiPINEntryUsed);
+            groupActionsCardholderVerification.Controls.Add(this.guiPINEntry);
+            groupActionsCardholderVerification.Controls.Add(this.guiCVMList);
+            groupActionsCardholderVerification.Controls.Add(this.guiDoVerifyCardholder);
+            groupActionsCardholderVerification.Location = new System.Drawing.Point(12, 365);
+            groupActionsCardholderVerification.Name = "groupActionsCardholderVerification";
+            groupActionsCardholderVerification.Size = new System.Drawing.Size(300, 116);
+            groupActionsCardholderVerification.TabIndex = 4;
+            groupActionsCardholderVerification.TabStop = false;
+            groupActionsCardholderVerification.Text = "Cardholder Verification";
             // 
             // guiDoGetChallenge
             // 
@@ -544,18 +545,18 @@
             this.guiDoVerifyCardholder.UseVisualStyleBackColor = true;
             this.guiDoVerifyCardholder.Click += new System.EventHandler(this.guiDoVerifyCardholder_Click);
             // 
-            // groupBox10
+            // groupActionsOfflineDataAuthentication
             // 
-            groupBox10.AutoSize = true;
-            groupBox10.Controls.Add(this.label4);
-            groupBox10.Controls.Add(this.guiInternalAuthenticateUnpredictableNumber);
-            groupBox10.Controls.Add(this.guiDoInternalAuthenticate);
-            groupBox10.Location = new System.Drawing.Point(12, 300);
-            groupBox10.Name = "groupBox10";
-            groupBox10.Size = new System.Drawing.Size(300, 59);
-            groupBox10.TabIndex = 3;
-            groupBox10.TabStop = false;
-            groupBox10.Text = "Offline Data Authentication";
+            groupActionsOfflineDataAuthentication.AutoSize = true;
+            groupActionsOfflineDataAuthentication.Controls.Add(this.label4);
+            groupActionsOfflineDataAuthentication.Controls.Add(this.guiInternalAuthenticateUnpredictableNumber);
+            groupActionsOfflineDataAuthentication.Controls.Add(this.guiDoInternalAuthenticate);
+            groupActionsOfflineDataAuthentication.Location = new System.Drawing.Point(12, 300);
+            groupActionsOfflineDataAuthentication.Name = "groupActionsOfflineDataAuthentication";
+            groupActionsOfflineDataAuthentication.Size = new System.Drawing.Size(300, 59);
+            groupActionsOfflineDataAuthentication.TabIndex = 3;
+            groupActionsOfflineDataAuthentication.TabStop = false;
+            groupActionsOfflineDataAuthentication.Text = "Offline Data Authentication";
             // 
             // label4
             // 
@@ -587,19 +588,19 @@
             this.guiDoInternalAuthenticate.UseVisualStyleBackColor = true;
             this.guiDoInternalAuthenticate.Click += new System.EventHandler(this.guiDoInternalAuthenticate_Click);
             // 
-            // groupBox11
+            // groupActionsCardActionAnalysis
             // 
-            groupBox11.AutoSize = true;
-            groupBox11.Controls.Add(this.label24);
-            groupBox11.Controls.Add(this.guiAC1UnpredictableNumber);
-            groupBox11.Controls.Add(this.guiAC1Type);
-            groupBox11.Controls.Add(this.guiDoGenerateAC1);
-            groupBox11.Location = new System.Drawing.Point(12, 487);
-            groupBox11.Name = "groupBox11";
-            groupBox11.Size = new System.Drawing.Size(300, 85);
-            groupBox11.TabIndex = 5;
-            groupBox11.TabStop = false;
-            groupBox11.Text = "Card Action Analysis";
+            groupActionsCardActionAnalysis.AutoSize = true;
+            groupActionsCardActionAnalysis.Controls.Add(this.label24);
+            groupActionsCardActionAnalysis.Controls.Add(this.guiAC1UnpredictableNumber);
+            groupActionsCardActionAnalysis.Controls.Add(this.guiAC1Type);
+            groupActionsCardActionAnalysis.Controls.Add(this.guiDoGenerateAC1);
+            groupActionsCardActionAnalysis.Location = new System.Drawing.Point(12, 487);
+            groupActionsCardActionAnalysis.Name = "groupActionsCardActionAnalysis";
+            groupActionsCardActionAnalysis.Size = new System.Drawing.Size(300, 85);
+            groupActionsCardActionAnalysis.TabIndex = 5;
+            groupActionsCardActionAnalysis.TabStop = false;
+            groupActionsCardActionAnalysis.Text = "Card Action Analysis";
             // 
             // label24
             // 
@@ -641,16 +642,16 @@
             this.guiDoGenerateAC1.UseVisualStyleBackColor = true;
             this.guiDoGenerateAC1.Click += new System.EventHandler(this.guiDoGenerateAC1_Click);
             // 
-            // groupBox12
+            // groupActionsIssuerAuthentication
             // 
-            groupBox12.AutoSize = true;
-            groupBox12.Controls.Add(this.guiDoExternalAuthenticate);
-            groupBox12.Location = new System.Drawing.Point(12, 578);
-            groupBox12.Name = "groupBox12";
-            groupBox12.Size = new System.Drawing.Size(300, 61);
-            groupBox12.TabIndex = 6;
-            groupBox12.TabStop = false;
-            groupBox12.Text = "Issuer Authentication";
+            groupActionsIssuerAuthentication.AutoSize = true;
+            groupActionsIssuerAuthentication.Controls.Add(this.guiDoExternalAuthenticate);
+            groupActionsIssuerAuthentication.Location = new System.Drawing.Point(12, 578);
+            groupActionsIssuerAuthentication.Name = "groupActionsIssuerAuthentication";
+            groupActionsIssuerAuthentication.Size = new System.Drawing.Size(300, 61);
+            groupActionsIssuerAuthentication.TabIndex = 6;
+            groupActionsIssuerAuthentication.TabStop = false;
+            groupActionsIssuerAuthentication.Text = "Issuer Authentication";
             // 
             // guiDoExternalAuthenticate
             // 
@@ -721,9 +722,9 @@
             // 
             // guiDetailedLogs
             // 
-            this.guiDetailedLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiDetailedLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDetailedLogs.Location = new System.Drawing.Point(6, 6);
             this.guiDetailedLogs.Name = "guiDetailedLogs";
             this.guiDetailedLogs.ReadOnly = true;
@@ -745,9 +746,9 @@
             // 
             // guiPSEContent
             // 
-            this.guiPSEContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPSEContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPSEContent.Location = new System.Drawing.Point(6, 6);
             this.guiPSEContent.Name = "guiPSEContent";
             this.guiPSEContent.Size = new System.Drawing.Size(668, 651);
@@ -766,9 +767,9 @@
             // 
             // guiEMVApplicationsContent
             // 
-            this.guiEMVApplicationsContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiEMVApplicationsContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiEMVApplicationsContent.Location = new System.Drawing.Point(6, 6);
             this.guiEMVApplicationsContent.Name = "guiEMVApplicationsContent";
             this.guiEMVApplicationsContent.Size = new System.Drawing.Size(668, 651);
@@ -788,9 +789,9 @@
             // 
             // guiLogRecords
             // 
-            this.guiLogRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiLogRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiLogRecords.FullRowSelect = true;
             this.guiLogRecords.Location = new System.Drawing.Point(6, 217);
             this.guiLogRecords.Name = "guiLogRecords";
@@ -801,8 +802,8 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.guiDoCardLogSave);
             this.groupBox5.Controls.Add(this.guiDoCardLogRead);
             this.groupBox5.Controls.Add(this.groupBox7);
@@ -930,8 +931,8 @@
             // 
             // groupBox18
             // 
-            groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             groupBox18.Controls.Add(label15);
             groupBox18.Controls.Add(this.guiPublicKeysICCPKModulus);
             groupBox18.Controls.Add(label16);
@@ -958,8 +959,8 @@
             // 
             // guiPublicKeysICCPKModulus
             // 
-            this.guiPublicKeysICCPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPublicKeysICCPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysICCPKModulus.Location = new System.Drawing.Point(67, 156);
             this.guiPublicKeysICCPKModulus.Multiline = true;
             this.guiPublicKeysICCPKModulus.Name = "guiPublicKeysICCPKModulus";
@@ -1012,8 +1013,8 @@
             // 
             // guiPublicKeysICCPKRecoveredData
             // 
-            this.guiPublicKeysICCPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPublicKeysICCPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysICCPKRecoveredData.Location = new System.Drawing.Point(6, 38);
             this.guiPublicKeysICCPKRecoveredData.Multiline = true;
             this.guiPublicKeysICCPKRecoveredData.Name = "guiPublicKeysICCPKRecoveredData";
@@ -1023,8 +1024,8 @@
             // 
             // groupBox16
             // 
-            groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             groupBox16.Controls.Add(label11);
             groupBox16.Controls.Add(this.guiPublicKeysIssuerPKModulus);
             groupBox16.Controls.Add(label12);
@@ -1051,8 +1052,8 @@
             // 
             // guiPublicKeysIssuerPKModulus
             // 
-            this.guiPublicKeysIssuerPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPublicKeysIssuerPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysIssuerPKModulus.Location = new System.Drawing.Point(67, 156);
             this.guiPublicKeysIssuerPKModulus.Multiline = true;
             this.guiPublicKeysIssuerPKModulus.Name = "guiPublicKeysIssuerPKModulus";
@@ -1105,8 +1106,8 @@
             // 
             // guiPublicKeysIssuerPKRecoveredData
             // 
-            this.guiPublicKeysIssuerPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPublicKeysIssuerPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysIssuerPKRecoveredData.Location = new System.Drawing.Point(6, 38);
             this.guiPublicKeysIssuerPKRecoveredData.Multiline = true;
             this.guiPublicKeysIssuerPKRecoveredData.Name = "guiPublicKeysIssuerPKRecoveredData";
@@ -1116,8 +1117,8 @@
             // 
             // groupBox14
             // 
-            groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             groupBox14.Controls.Add(label9);
             groupBox14.Controls.Add(this.guiPublicKeysCertificationAuthorityPKModulus);
             groupBox14.Controls.Add(label8);
@@ -1146,8 +1147,8 @@
             // 
             // guiPublicKeysCertificationAuthorityPKModulus
             // 
-            this.guiPublicKeysCertificationAuthorityPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiPublicKeysCertificationAuthorityPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysCertificationAuthorityPKModulus.Location = new System.Drawing.Point(67, 71);
             this.guiPublicKeysCertificationAuthorityPKModulus.Multiline = true;
             this.guiPublicKeysCertificationAuthorityPKModulus.Name = "guiPublicKeysCertificationAuthorityPKModulus";
@@ -1260,8 +1261,8 @@
             // 
             // guiSDAAuthenticationData
             // 
-            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDAAuthenticationData.Controls.Add(this.guiSDADataAuthenticationCode);
             this.guiSDAAuthenticationData.Controls.Add(label23);
             this.guiSDAAuthenticationData.Controls.Add(this.guiSDAHashResult);
@@ -1320,8 +1321,8 @@
             // 
             // guiSDARecoveredData
             // 
-            this.guiSDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiSDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDARecoveredData.Location = new System.Drawing.Point(6, 32);
             this.guiSDARecoveredData.Multiline = true;
             this.guiSDARecoveredData.Name = "guiSDARecoveredData";
@@ -1331,8 +1332,8 @@
             // 
             // guiSDASignedData
             // 
-            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.guiSDASignedDataColumnId,
             this.guiSDASignedDataTag,
@@ -1391,8 +1392,8 @@
             // 
             // guiDDASignedData
             // 
-            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -1429,8 +1430,8 @@
             // 
             // groupBox15
             // 
-            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox15.Controls.Add(this.guiDDAICCDynamicData);
             this.groupBox15.Controls.Add(guiDDALabel_ICCDynamicNumber);
             this.groupBox15.Controls.Add(this.guiDDAHashResult);
@@ -1489,8 +1490,8 @@
             // 
             // guiDDARecoveredData
             // 
-            this.guiDDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiDDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDDARecoveredData.Location = new System.Drawing.Point(6, 32);
             this.guiDDARecoveredData.Multiline = true;
             this.guiDDARecoveredData.Name = "guiDDARecoveredData";
@@ -1520,8 +1521,8 @@
             // 
             // guiCDASignedData
             // 
-            this.guiCDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.guiCDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guiCDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5,
             this.columnHeader6,
@@ -2057,22 +2058,22 @@
             // 
             // tabControlMain
             // 
-            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlMain.Controls.Add(guiTabEMVApplications);
-            this.tabControlMain.Controls.Add(guiTabPSE);
-            this.tabControlMain.Controls.Add(guiTabPublicKeys);
-            this.tabControlMain.Controls.Add(guiTabAuthentication);
-            this.tabControlMain.Controls.Add(this.tabTVR);
-            this.tabControlMain.Controls.Add(guiTabEMVCardLog);
-            this.tabControlMain.Controls.Add(guiTabDetailedLogs);
-            this.tabControlMain.Controls.Add(guiTabParameters);
-            this.tabControlMain.Location = new System.Drawing.Point(318, 12);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(690, 725);
-            this.tabControlMain.TabIndex = 8;
+            tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            tabControlMain.Controls.Add(guiTabEMVApplications);
+            tabControlMain.Controls.Add(guiTabPSE);
+            tabControlMain.Controls.Add(guiTabPublicKeys);
+            tabControlMain.Controls.Add(guiTabAuthentication);
+            tabControlMain.Controls.Add(this.tabTVR);
+            tabControlMain.Controls.Add(guiTabEMVCardLog);
+            tabControlMain.Controls.Add(guiTabDetailedLogs);
+            tabControlMain.Controls.Add(guiTabParameters);
+            tabControlMain.Location = new System.Drawing.Point(318, 12);
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new System.Drawing.Size(690, 725);
+            tabControlMain.TabIndex = 8;
             // 
             // tabTVR
             // 
@@ -2097,23 +2098,23 @@
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // GUI
+            // Gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 762);
             this.Controls.Add(groupBox13);
-            this.Controls.Add(groupBox12);
-            this.Controls.Add(groupBox11);
-            this.Controls.Add(groupBox10);
-            this.Controls.Add(groupBox4);
-            this.Controls.Add(groupBox3);
-            this.Controls.Add(groupBox2);
-            this.Controls.Add(groupBox1);
+            this.Controls.Add(groupActionsIssuerAuthentication);
+            this.Controls.Add(groupActionsCardActionAnalysis);
+            this.Controls.Add(groupActionsOfflineDataAuthentication);
+            this.Controls.Add(groupActionsCardholderVerification);
+            this.Controls.Add(groupActionsReadApplicationData);
+            this.Controls.Add(groupActionsInitiateApplicationProcessing);
+            this.Controls.Add(groupActionsApplicationSelection);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "GUI";
+            this.Name = "Gui";
             this.Text = "EMV Explorer";
             guiTabParameters.ResumeLayout(false);
             guiTabParameters.PerformLayout();
@@ -2121,16 +2122,16 @@
             groupBox9.PerformLayout();
             groupBox8.ResumeLayout(false);
             groupBox8.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
-            groupBox10.ResumeLayout(false);
-            groupBox10.PerformLayout();
-            groupBox11.ResumeLayout(false);
-            groupBox11.PerformLayout();
-            groupBox12.ResumeLayout(false);
+            groupActionsApplicationSelection.ResumeLayout(false);
+            groupActionsInitiateApplicationProcessing.ResumeLayout(false);
+            groupActionsReadApplicationData.ResumeLayout(false);
+            groupActionsCardholderVerification.ResumeLayout(false);
+            groupActionsCardholderVerification.PerformLayout();
+            groupActionsOfflineDataAuthentication.ResumeLayout(false);
+            groupActionsOfflineDataAuthentication.PerformLayout();
+            groupActionsCardActionAnalysis.ResumeLayout(false);
+            groupActionsCardActionAnalysis.PerformLayout();
+            groupActionsIssuerAuthentication.ResumeLayout(false);
             groupBox13.ResumeLayout(false);
             guiTabDetailedLogs.ResumeLayout(false);
             guiTabPSE.ResumeLayout(false);
@@ -2171,7 +2172,7 @@
             groupBox21.PerformLayout();
             groupBox22.ResumeLayout(false);
             groupBox22.PerformLayout();
-            this.tabControlMain.ResumeLayout(false);
+            tabControlMain.ResumeLayout(false);
             this.tabTVR.ResumeLayout(false);
             this.tabTVR.PerformLayout();
             this.ResumeLayout(false);
@@ -2182,7 +2183,6 @@
         #endregion
 
         public System.Windows.Forms.RichTextBox guiDetailedLogs;
-        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ComboBox guiPSEName;
         private System.Windows.Forms.Button guiDoSelectPSE;

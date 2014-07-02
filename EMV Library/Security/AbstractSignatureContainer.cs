@@ -20,13 +20,6 @@ namespace WSCT.EMV.Security
         /// </summary>
         protected Int32 KeyLength;
 
-        private byte[] _hashResult;
-
-        /// <summary>
-        /// Recovered data from certificate.
-        /// </summary>
-        protected byte[] _recovered;
-
         #endregion
 
         #region >> Properties
@@ -34,58 +27,32 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Accessor to raw recovered data from the EMV signature.
         /// </summary>
-        public byte[] Recovered
-        {
-            get { return _recovered; }
-        }
+        public byte[] Recovered { get; private set; }
 
         /// <summary>
         /// Recovered Data Header (1): Hex value '6A'.
         /// </summary>
-        public byte DataHeader
-        {
-            get { return _recovered[0]; }
-        }
+        public byte DataHeader { get; private set; }
 
         /// <summary>
         /// Certificate Format (1).
         /// </summary>
-        public byte DataFormat
-        {
-            get { return _recovered[1]; }
-        }
+        public byte DataFormat { get; set; }
 
         /// <summary>
         /// Hash Algorithm Indicator (1): Identifies the hash algorithm used to produce the Hash Result in the digital signature scheme.
         /// </summary>
-        public byte HashAlgorithmIndicator
-        {
-            get { return _recovered[_hashAlgorithmIndicatorOffset]; }
-        }
+        public byte HashAlgorithmIndicator { get; set; }
 
         /// <summary>
         /// Hash Result: Hash of the Public Key and its related information.
         /// </summary>
-        public byte[] HashResult
-        {
-            get
-            {
-                if (_hashResult == null)
-                {
-                    _hashResult = new byte[20];
-                    Array.Copy(_recovered, _recovered.Length - 21, _hashResult, 0, 20);
-                }
-                return _hashResult;
-            }
-        }
+        public byte[] HashResult { get; private set; }
 
         /// <summary>
         /// Recovered Data Trailer: Hex value 'BC'.
         /// </summary>
-        public byte DataTrailer
-        {
-            get { return _recovered[_recovered.Length - 1]; }
-        }
+        public byte DataTrailer { get; private set; }
 
         #endregion
 
@@ -104,52 +71,12 @@ namespace WSCT.EMV.Security
         #region >> Methods
 
         /// <summary>
-        /// EMV recovery function: recovers data contained in the signature.
-        /// </summary>
-        /// <param name="signature">Signature to recover data from.</param>
-        /// <param name="publicKey">Public key of the signing authority (see Bouncy Castle for details).</param>
-        public void RecoverFromSignature(byte[] signature, RsaKeyParameters publicKey)
-        {
-            var cryptography = new Cryptography();
-            KeyLength = signature.Length;
-
-            // recover data from the certificate
-            _recovered = cryptography.RecoverMessage(signature, publicKey);
-
-            // extract and check data recovered
-            if (DataHeader != 0x6A)
-            {
-                throw new EMVBadRecoveredDataException(String.Format("recoverFromCertificate: Recovered Data Header incorrect [{0:X2}]\n", DataHeader));
-            }
-
-            if (DataTrailer != 0xBC)
-            {
-                throw new EMVBadRecoveredDataException(String.Format("recoverFromCertificate: Recovered Data Trailer incorrect [{0:X2}]\n", DataTrailer));
-            }
-        }
-
-        /// <summary>
-        /// EMV recovery function: recovers data contained in the certificate.
-        /// </summary>
-        /// <param name="signature">Certificate to recover data from.</param>
-        /// <param name="modulus">Modulus of the public key of the signing authority.</param>
-        /// <param name="exponent">Exponent of the public key of the signing authority.</param>
-        public void RecoverFromSignature(string signature, string modulus, string exponent)
-        {
-            // get the signing public key
-            var publicKey = new RsaKeyParameters(false, new BigInteger(modulus, 16), new BigInteger(exponent, 16));
-
-            RecoverFromSignature(signature.FromHexa(), publicKey);
-        }
-
-        /// <summary>
         /// EMV recovery funcntion: recovers data contained in the certificate.
         /// </summary>
         /// <param name="signature">Certificate to recover data from.</param>
         /// <param name="publicKey">Public key of the signing authority.</param>
         public void RecoverFromSignature(byte[] signature, PublicKey publicKey)
         {
-            // get the signing public key
             var rsaPublicKey = new RsaKeyParameters(false, new BigInteger(publicKey.Modulus, 16), new BigInteger(publicKey.Exponent, 16));
 
             RecoverFromSignature(signature, rsaPublicKey);
@@ -164,9 +91,65 @@ namespace WSCT.EMV.Security
         {
             var hashFactory = new HashAlgorithmFactory();
             var hashProvider = hashFactory.GetProvider(HashAlgorithmIndicator);
+
             return hashProvider.ComputeHash(data);
         }
 
+        /// <summary>
+        /// Compute the signed certificate.
+        /// </summary>
+        /// <param name="privateKey"></param>
+        /// <returns></returns>
+        public byte[] GenerateCertificate(RsaKeyParameters privateKey)
+        {
+            return GetDataToSign(privateKey.Modulus.BitLength / 8).GenerateSignature(privateKey);
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="privateKeyLength"></param>
+        /// <returns></returns>
+        protected abstract byte[] GetDataToSign(int privateKeyLength);
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        protected abstract void OnRecoverFromSignature();
+
         #endregion
+
+        /// <summary>
+        /// EMV recovery function: recovers data contained in the signature.
+        /// </summary>
+        /// <param name="signature">Signature to recover data from.</param>
+        /// <param name="publicKey">Public key of the signing authority (see Bouncy Castle for details).</param>
+        private void RecoverFromSignature(byte[] signature, RsaKeyParameters publicKey)
+        {
+            KeyLength = signature.Length;
+
+            // recovered data from the certificate
+            Recovered = Cryptography.RecoverMessage(signature, publicKey);
+
+            // extract and check data recovered
+            DataHeader = Recovered[0];
+            if (DataHeader != 0x6A)
+            {
+                throw new EMVBadRecoveredDataException(String.Format("RecoverFromCertificate: Recovered Data Header incorrect [{0:X2}]\n", DataHeader));
+            }
+
+            DataTrailer = Recovered[Recovered.Length - 1];
+            if (DataTrailer != 0xBC)
+            {
+                throw new EMVBadRecoveredDataException(String.Format("RecoverFromCertificate: Recovered Data Trailer incorrect [{0:X2}]\n", DataTrailer));
+            }
+
+            HashAlgorithmIndicator = Recovered[_hashAlgorithmIndicatorOffset];
+            DataFormat = Recovered[1];
+            HashResult = new byte[20];
+            Array.Copy(Recovered, Recovered.Length - 21, HashResult, 0, 20);
+
+            OnRecoverFromSignature();
+        }
     }
 }

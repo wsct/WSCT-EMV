@@ -1,9 +1,9 @@
 ﻿namespace WSCT.EMV.Security
 {
     /// <summary>
-    /// Represents an EMV Data Authentication (Data Format: 03)
+    /// Represents an EMV Data Authentication (Data Format: 03).
     /// </summary>
-    /// <remarks>Format used for SDA</remarks>
+    /// <remarks>Format used for SDA.</remarks>
     public abstract class AbstractDataAuthenticationFormat03 : AbstractSignatureContainer
     {
         #region >> Constructors
