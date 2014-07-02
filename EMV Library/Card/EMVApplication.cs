@@ -36,7 +36,7 @@ namespace WSCT.EMV.Card
         protected ApplicationInterchangeProfile _aip;
         protected ApplicationCryptogram _applicationCryptogram1;
         protected ApplicationTransactionCounter _atcFromAC1;
-        protected CombinedDataAuthentication _cda;
+        protected SignedCombinedApplicationData _cda;
         protected DataObjectList _cdol1;
         protected DataObjectList _cdol2;
 
@@ -44,7 +44,7 @@ namespace WSCT.EMV.Card
         protected CertificationAuthorityRepository _certificationAuthorityRepository;
         protected CryptogramInformationData _cid1;
         protected CardholderVerificationMethodList _cvmList;
-        protected DynamicDataAuthentication _dda;
+        protected SignedDynamicApplicationData _dda;
         protected DataObjectList _ddol;
         protected byte[] _iccChallenge;
         protected PublicKey _iccPublicKey;
@@ -57,7 +57,7 @@ namespace WSCT.EMV.Card
         protected CryptogramType _requestedAC1Type;
         protected CryptogramType _requestedAC2Type;
 
-        protected StaticDataAuthentication _sda;
+        protected SignedStaticApplicationData _sda;
         protected TlvData _tlvATC;
         protected TlvData _tlvCryptographicChecksum;
         protected TlvData _tlvFromPSE;
@@ -389,7 +389,7 @@ namespace WSCT.EMV.Card
                     var aidObject = new ApplicationIdentifier(Aid);
                     try
                     {
-                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.Get(aidObject.StrRid, caPublicKeyIndex.Tlv.Value.ToHexa());
+                        _certificationAuthorityPublicKey = CertificationAuthorityRepository.Get(aidObject.Rid, caPublicKeyIndex.Tlv.Value.ToHexa());
                     }
                     catch (EMVCertificationAuthorityNotFoundException)
                     {
@@ -483,13 +483,13 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to SDA data.
         /// </summary>
-        public StaticDataAuthentication Sda
+        public SignedStaticApplicationData Sda
         {
             get
             {
                 if (_sda == null && TlvDataRecords.HasTag(0x93) && IssuerPublicKeyCertificate != null)
                 {
-                    _sda = new StaticDataAuthentication();
+                    _sda = new SignedStaticApplicationData();
                     _sda.RecoverFromSignature(TlvDataRecords.GetTag(0x93).Value, IssuerPublicKey);
                 }
                 return _sda;
@@ -499,7 +499,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to DDA data.
         /// </summary>
-        public virtual DynamicDataAuthentication Dda
+        public virtual SignedDynamicApplicationData Dda
         {
             get
             {
@@ -518,7 +518,7 @@ namespace WSCT.EMV.Card
                             // Format 2
                             signature = TlvSignedDynamicApplicationResponse.GetTag(0x9F4B).Value;
                         }
-                        _dda = new DynamicDataAuthentication();
+                        _dda = new SignedDynamicApplicationData();
                         _dda.RecoverFromSignature(signature, IccPublicKey);
                     }
                 }
@@ -529,7 +529,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to CDA data.
         /// </summary>
-        public CombinedDataAuthentication Cda
+        public SignedCombinedApplicationData Cda
         {
             get { throw new NotImplementedException(); }
         }
@@ -873,7 +873,7 @@ namespace WSCT.EMV.Card
         /// Reads the file pointed by the SFI found in the FCI of the application.
         /// </summary>
         /// <returns>Last status word.</returns>
-        public UInt16 ReadDataFile(ApplicationFileLocator.FileIdentification file)
+        public UInt16 ReadDataFile(AflEntry file)
         {
             for (var recordNumber = file.FirstRecord; recordNumber <= file.LastRecord; recordNumber++)
             {
@@ -923,7 +923,7 @@ namespace WSCT.EMV.Card
         {
             BeforeReadApplicationDataEvent.Raise(this, new EmvEventArgs());
 
-            foreach (var file in Afl.GetFiles())
+            foreach (var file in Afl.Files)
             {
                 ReadDataFile(file);
             }

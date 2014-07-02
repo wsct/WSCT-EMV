@@ -41,6 +41,8 @@ namespace WSCT.EMV.Security
             var issuerPublicKeyModulus = IssuerPublicKey.Modulus.FromHexa();
             var issuerPublicKeyExponent = IssuerPublicKey.Exponent.FromHexa();
 
+            DataFormat = 0x02;
+
             PublicKeyLength = (byte)issuerPublicKeyModulus.Length;
             PublicKeyExponentLength = (byte)issuerPublicKeyExponent.Length;
 

@@ -54,6 +54,7 @@
     <Compile Include="Commands\EMVSelectByNameCommand.cs" />
     <Compile Include="Exceptions\LogEntryNotFoundException.cs" />
     <Compile Include="Exceptions\LogFormatNotFoundException.cs" />
+    <Compile Include="Objects\AflEntry.cs" />
     <Compile Include="Objects\ApplicationCryptogram.cs" />
     <Compile Include="Objects\ApplicationFileLocator.cs" />
     <Compile Include="Objects\ApplicationIdentifier.cs" />
@@ -81,10 +82,10 @@
     <Compile Include="Security\AbstractSignatureContainer.cs" />
     <Compile Include="Security\CertificationAuthority.cs" />
     <Compile Include="Security\CertificationAuthorityRepository.cs" />
-    <Compile Include="Security\CombinedDataAuthentication.cs" />
+    <Compile Include="Security\SignedCombinedApplicationData.cs" />
     <Compile Include="Security\CryptogramType.cs" />
     <Compile Include="Security\Cryptography.cs" />
-    <Compile Include="Security\DynamicDataAuthentication.cs" />
+    <Compile Include="Security\SignedDynamicApplicationData.cs" />
     <Compile Include="Security\EMVBadRecoveredDataException.cs" />
     <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
     <Compile Include="Security\HashAlgorithmFactory.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Security\IssuerPublicKeyCertificate.cs" />
     <Compile Include="Security\PublicKey.cs" />
     <Compile Include="Security\SHA1HashAlgorithmProvider.cs" />
-    <Compile Include="Security\StaticDataAuthentication.cs" />
+    <Compile Include="Security\SignedStaticApplicationData.cs" />
     <Compile Include="Tags\DateFormattedTag.cs" />
     <Compile Include="Terminal\TerminalCapabilities.cs" />
     <Compile Include="Terminal\TerminalConfiguration.cs" />

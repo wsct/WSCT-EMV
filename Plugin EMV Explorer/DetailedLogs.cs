@@ -287,7 +287,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
 
             gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", emv.Aip));
-            foreach (var file in emv.Afl.GetFiles())
+            foreach (var file in emv.Afl.Files)
             {
                 gui.guiDetailedLogs.AppendText(String.Format("    >> {0}\n", file));
             }

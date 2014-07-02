@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
-using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
 {
@@ -37,7 +36,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Certificate Format (1).
         /// </summary>
-        public byte DataFormat { get; set; }
+        public byte DataFormat { get; protected set; }
 
         /// <summary>
         /// Hash Algorithm Indicator (1): Identifies the hash algorithm used to produce the Hash Result in the digital signature scheme.
@@ -145,7 +144,9 @@ namespace WSCT.EMV.Security
             }
 
             HashAlgorithmIndicator = Recovered[_hashAlgorithmIndicatorOffset];
+
             DataFormat = Recovered[1];
+
             HashResult = new byte[20];
             Array.Copy(Recovered, Recovered.Length - 21, HashResult, 0, 20);
 

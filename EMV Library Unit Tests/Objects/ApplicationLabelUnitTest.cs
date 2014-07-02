@@ -3,7 +3,7 @@
 namespace WSCT.EMV.Objects
 {
     [TestFixture]
-    internal class ApplicationLabelUnitTest
+    public class ApplicationLabelUnitTest
     {
         [Test]
         public void Constructor()
@@ -14,16 +14,29 @@ namespace WSCT.EMV.Objects
             Assert.AreEqual(0x50, label.Tlv.Tag);
             Assert.AreEqual(0, label.Tlv.Length);
             Assert.AreEqual(0, label.Tlv.Value.Length);
+            Assert.AreEqual("", label.Text);
         }
 
         [Test]
-        public void ToStringTest()
+        public void ConstructorString()
         {
-            var label = new ApplicationLabel("VISA");
+            var label = new ApplicationLabel("ENSIBANK");
 
             Assert.AreEqual(0x50, label.Tlv.Tag);
-            Assert.AreEqual(4, label.Tlv.Length);
-            Assert.AreEqual("VISA", label.ToString());
+            Assert.AreEqual(8, label.Tlv.Length);
+
+            Assert.AreEqual("ENSIBANK", label.Text);
+        }
+
+        [Test]
+        public void SetText()
+        {
+            var label = new ApplicationLabel { Text = "ENSIBANK" };
+
+            Assert.AreEqual(0x50, label.Tlv.Tag);
+            Assert.AreEqual(8, label.Tlv.Length);
+
+            Assert.AreEqual("ENSIBANK", label.Text);
         }
     }
 }

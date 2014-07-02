@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -28,5 +30,30 @@ namespace WSCT.EMV.Objects
         }
 
         #endregion
+
+        public IEnumerable<string> Languages
+        {
+            get
+            {
+                var length = Tlv.Value.Length;
+                for (var i = 0; i + 1 < length; i += 2)
+                {
+                    yield return new[] { Tlv.Value[i], Tlv.Value[i + 1] }.ToAsciiString();
+                }
+
+                if (length % 2 == 1)
+                {
+                    yield return new[] { Tlv.Value[length - 1] }.ToAsciiString();
+                }
+            }
+            set
+            {
+                Text = string.Empty;
+                foreach (var s in value)
+                {
+                    Text += s;
+                }
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     [TestFixture]
-    internal class LogEntryUnitTest
+    public class LogEntryUnitTest
     {
         [Test]
         public void Constructor()

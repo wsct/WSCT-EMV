@@ -35,7 +35,7 @@ namespace WSCT.EMV.Card
         #region >> Properties
 
         /// <inheritdoc />
-        public override DynamicDataAuthentication Dda
+        public override SignedDynamicApplicationData Dda
         {
             get
             {
@@ -44,7 +44,7 @@ namespace WSCT.EMV.Card
                     var signature = TlvProcessingOptions.GetTag(0x9F4B).Value;
                     _nic = signature.Length;
 
-                    _dda = new DynamicDataAuthentication();
+                    _dda = new SignedDynamicApplicationData();
                     _dda.RecoverFromSignature(signature, IccPublicKey);
                 }
                 return _dda;

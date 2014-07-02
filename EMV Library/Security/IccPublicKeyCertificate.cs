@@ -32,21 +32,13 @@ namespace WSCT.EMV.Security
 
         #region >> AbstractSignatureContainer
 
-        /// <param name="privateKeyLength"></param>
         /// <inheritdoc />
         protected override byte[] GetDataToSign(int privateKeyLength)
         {
+            DataFormat = 0x04;
+
             // TODO : Build data to sign
             throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override void OnRecoverFromSignature()
-        {
-            base.OnRecoverFromSignature();
-
-            ApplicationPan = new byte[10];
-            Array.Copy(Recovered, 2, ApplicationPan, 0, 10);
         }
 
         #endregion

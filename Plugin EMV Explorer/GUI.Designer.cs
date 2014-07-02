@@ -1261,7 +1261,8 @@
             // 
             // guiSDAAuthenticationData
             // 
-            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDAAuthenticationData.Controls.Add(this.guiSDADataAuthenticationCode);
             this.guiSDAAuthenticationData.Controls.Add(label23);
@@ -1269,7 +1270,7 @@
             this.guiSDAAuthenticationData.Controls.Add(label22);
             this.guiSDAAuthenticationData.Controls.Add(label21);
             this.guiSDAAuthenticationData.Controls.Add(this.guiSDARecoveredData);
-            this.guiSDAAuthenticationData.Location = new System.Drawing.Point(6, 185);
+            this.guiSDAAuthenticationData.Location = new System.Drawing.Point(6, 504);
             this.guiSDAAuthenticationData.Name = "guiSDAAuthenticationData";
             this.guiSDAAuthenticationData.Size = new System.Drawing.Size(662, 163);
             this.guiSDAAuthenticationData.TabIndex = 2;
@@ -1332,7 +1333,8 @@
             // 
             // guiSDASignedData
             // 
-            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.guiSDASignedDataColumnId,
@@ -1343,7 +1345,7 @@
             this.guiSDASignedData.Location = new System.Drawing.Point(6, 19);
             this.guiSDASignedData.MultiSelect = false;
             this.guiSDASignedData.Name = "guiSDASignedData";
-            this.guiSDASignedData.Size = new System.Drawing.Size(662, 160);
+            this.guiSDASignedData.Size = new System.Drawing.Size(662, 479);
             this.guiSDASignedData.TabIndex = 1;
             this.guiSDASignedData.UseCompatibleStateImageBehavior = false;
             this.guiSDASignedData.View = System.Windows.Forms.View.Details;
@@ -1392,7 +1394,8 @@
             // 
             // guiDDASignedData
             // 
-            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -1403,7 +1406,7 @@
             this.guiDDASignedData.Location = new System.Drawing.Point(6, 19);
             this.guiDDASignedData.MultiSelect = false;
             this.guiDDASignedData.Name = "guiDDASignedData";
-            this.guiDDASignedData.Size = new System.Drawing.Size(662, 160);
+            this.guiDDASignedData.Size = new System.Drawing.Size(662, 478);
             this.guiDDASignedData.TabIndex = 1;
             this.guiDDASignedData.UseCompatibleStateImageBehavior = false;
             this.guiDDASignedData.View = System.Windows.Forms.View.Details;
@@ -1430,7 +1433,8 @@
             // 
             // groupBox15
             // 
-            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox15.Controls.Add(this.guiDDAICCDynamicData);
             this.groupBox15.Controls.Add(guiDDALabel_ICCDynamicNumber);
@@ -1438,7 +1442,7 @@
             this.groupBox15.Controls.Add(label25);
             this.groupBox15.Controls.Add(label26);
             this.groupBox15.Controls.Add(this.guiDDARecoveredData);
-            this.groupBox15.Location = new System.Drawing.Point(6, 185);
+            this.groupBox15.Location = new System.Drawing.Point(6, 504);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(662, 163);
             this.groupBox15.TabIndex = 2;

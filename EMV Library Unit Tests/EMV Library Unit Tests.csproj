@@ -66,6 +66,7 @@
     <Compile Include="Commands\EMVSelectByNameCommandUnitTest.cs" />
     <Compile Include="Objects\ApplicationFileLocatorUnitTest.cs" />
     <Compile Include="Objects\ApplicationIdentifierUnitTest.cs" />
+    <Compile Include="Objects\ApplicationUsageControlUnitTest.cs" />
     <Compile Include="Objects\ApplicationInterchangeProfileUnitTest.cs" />
     <Compile Include="Objects\ApplicationTransactionCounterUnitTest.cs" />
     <Compile Include="Objects\LanguagePreferenceUnitTest.cs" />
@@ -75,7 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CryptographyUnitTest.cs" />
     <Compile Include="Security\IssuerPublicKeyCertificateUnitTest.cs" />
-    <Compile Include="Security\StaticDataAuthenticationUnitTest.cs" />
+    <Compile Include="Security\SignedStaticApplicationDataUnitTest.cs" />
     <Compile Include="Security\Sha1HashAlgorithmProviderUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

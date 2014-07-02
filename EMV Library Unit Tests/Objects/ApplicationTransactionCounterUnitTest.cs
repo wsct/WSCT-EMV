@@ -4,7 +4,7 @@ using WSCT.Helpers.BasicEncodingRules;
 namespace WSCT.EMV.Objects
 {
     [TestFixture]
-    internal class ApplicationTransactionCounterUnitTest
+    public class ApplicationTransactionCounterUnitTest
     {
         [Test]
         public void Constructor()

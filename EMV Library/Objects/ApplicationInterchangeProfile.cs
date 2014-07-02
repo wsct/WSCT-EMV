@@ -1,4 +1,5 @@
 using System;
+using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -16,6 +17,7 @@ namespace WSCT.EMV.Objects
         public Boolean Cda
         {
             get { return (Tlv.Value[0] & 0x01) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x01, value); }
         }
 
         /// <summary>
@@ -24,6 +26,7 @@ namespace WSCT.EMV.Objects
         public Boolean Dda
         {
             get { return (Tlv.Value[0] & 0x20) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x20, value); }
         }
 
         /// <summary>
@@ -32,6 +35,7 @@ namespace WSCT.EMV.Objects
         public Boolean Sda
         {
             get { return (Tlv.Value[0] & 0x40) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x40, value); }
         }
 
         /// <summary>
@@ -40,6 +44,7 @@ namespace WSCT.EMV.Objects
         public Boolean CardholderVerification
         {
             get { return (Tlv.Value[0] & 0x10) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x10, value); }
         }
 
         /// <summary>
@@ -48,6 +53,7 @@ namespace WSCT.EMV.Objects
         public Boolean IssuerAuthentication
         {
             get { return (Tlv.Value[0] & 0x04) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x04, value); }
         }
 
         /// <summary>
@@ -56,6 +62,7 @@ namespace WSCT.EMV.Objects
         public Boolean TerminalRiskManagement
         {
             get { return (Tlv.Value[0] & 0x08) != 0x00; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(0x08, value); }
         }
 
         #endregion

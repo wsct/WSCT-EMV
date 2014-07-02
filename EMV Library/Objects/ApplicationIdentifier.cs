@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
@@ -14,26 +15,51 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Accessor to the RID part of the AID.
         /// </summary>
-        public string StrRid
+        public string Rid
         {
-            get { return (Tlv != null && Tlv.Value != null ? Tlv.Value.ToHexa(5) : String.Empty); }
+            get { return Tlv.Value != null ? Tlv.Value.ToHexa(5) : String.Empty; }
+            set
+            {
+                if (Tlv.Value == null)
+                {
+                    Tlv.Value = value.FromHexa();
+                }
+                else
+                {
+                    Tlv.Value = value.FromHexa()
+                        .Concat(Tlv.Value.Skip(5))
+                        .ToArray();
+                }
+            }
         }
 
         /// <summary>
         /// Accessor to PIX part of the AID.
         /// </summary>
-        public string StrPix
+        public string Pix
         {
             get
             {
-                if (Tlv != null && Tlv.Value != null)
+                if (Tlv == null || Tlv.Value == null)
                 {
-                    var pix = new byte[Tlv.Value.Length - 5];
-                    Array.Copy(Tlv.Value, 5, pix, 0, pix.Length);
-                    return pix.ToHexa();
+                    return String.Empty;
                 }
 
-                return String.Empty;
+                return Tlv.Value.Skip(5).ToArray().ToHexa();
+            }
+            set
+            {
+                if (Tlv.Value == null)
+                {
+                    Tlv.Value = new byte[] { 0, 0, 0, 0, 0 }.Concat(value.FromHexa()).ToArray();
+                }
+                else
+                {
+                    Tlv.Value = Tlv.Value
+                        .Take(5)
+                        .Concat(value.FromHexa())
+                        .ToArray();
+                }
             }
         }
 
@@ -46,6 +72,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public ApplicationIdentifier()
         {
+            Tlv = new TlvData { Tag = 0x4F };
         }
 
         /// <summary>
@@ -54,7 +81,6 @@ namespace WSCT.EMV.Objects
         /// </summary>
         /// <param name="tlvAid">TLVData containing AID.</param>
         public ApplicationIdentifier(TlvData tlvAid)
-            : this()
         {
             Tlv = tlvAid;
         }

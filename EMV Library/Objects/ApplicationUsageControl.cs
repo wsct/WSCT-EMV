@@ -1,4 +1,5 @@
 using System;
+using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -32,6 +33,7 @@ namespace WSCT.EMV.Objects
         public Boolean DomesticCash
         {
             get { return (Tlv.Value[0] & DomesticCashBit) == DomesticCashBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(DomesticCashBit, value); }
         }
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace WSCT.EMV.Objects
         public Boolean InternationalCash
         {
             get { return (Tlv.Value[0] & InternationalCashBit) == InternationalCashBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(InternationalCashBit, value); }
         }
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace WSCT.EMV.Objects
         public Boolean DomesticGoods
         {
             get { return (Tlv.Value[0] & DomesticGoodsBit) == DomesticGoodsBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(DomesticGoodsBit, value); }
         }
 
         /// <summary>
@@ -56,6 +60,7 @@ namespace WSCT.EMV.Objects
         public Boolean InternationalGoods
         {
             get { return (Tlv.Value[0] & InternationalGoodsBit) == InternationalGoodsBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(InternationalGoodsBit, value); }
         }
 
         /// <summary>
@@ -64,6 +69,7 @@ namespace WSCT.EMV.Objects
         public Boolean DomesticServices
         {
             get { return (Tlv.Value[0] & DomesticServicesBit) == DomesticServicesBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(DomesticServicesBit, value); }
         }
 
         /// <summary>
@@ -72,6 +78,7 @@ namespace WSCT.EMV.Objects
         public Boolean InternationalServices
         {
             get { return (Tlv.Value[0] & InternationalServicesBit) == InternationalServicesBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(InternationalServicesBit, value); }
         }
 
         /// <summary>
@@ -80,6 +87,7 @@ namespace WSCT.EMV.Objects
         public Boolean Atm
         {
             get { return (Tlv.Value[0] & AtmBit) == AtmBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(AtmBit, value); }
         }
 
         /// <summary>
@@ -88,6 +96,7 @@ namespace WSCT.EMV.Objects
         public Boolean OtherThanAtm
         {
             get { return (Tlv.Value[0] & OtherThanAtmBit) == OtherThanAtmBit; }
+            set { Tlv.Value[0] = Tlv.Value[0].SetBits(OtherThanAtmBit, value); }
         }
 
         /// <summary>
@@ -96,6 +105,7 @@ namespace WSCT.EMV.Objects
         public Boolean DomesticCashback
         {
             get { return (Tlv.Value[1] & DomesticCashbackBit) == DomesticCashbackBit; }
+            set { Tlv.Value[1] = Tlv.Value[1].SetBits(DomesticCashbackBit, value); }
         }
 
         /// <summary>
@@ -104,6 +114,7 @@ namespace WSCT.EMV.Objects
         public Boolean InternationalCashBack
         {
             get { return (Tlv.Value[1] & InternationalCashbackBit) == InternationalCashbackBit; }
+            set { Tlv.Value[1] = Tlv.Value[1].SetBits(InternationalCashbackBit, value); }
         }
 
         #endregion
@@ -115,6 +126,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public ApplicationUsageControl()
         {
+            Tlv = new TlvData { Tag = 0x9F07, Value = new byte[2] };
         }
 
         /// <summary>
@@ -140,13 +152,11 @@ namespace WSCT.EMV.Objects
             }
             if (DomesticGoods || InternationalGoods)
             {
-                s += "[goods: " + (DomesticGoods ? "domestic " : "") + (InternationalGoods ? "international" : "") +
-                     "] ";
+                s += "[goods: " + (DomesticGoods ? "domestic " : "") + (InternationalGoods ? "international" : "") + "] ";
             }
             if (DomesticServices || InternationalServices)
             {
-                s += "[services: " + (DomesticServices ? "domestic " : "") +
-                     (InternationalServices ? "international" : "") + "] ";
+                s += "[services: " + (DomesticServices ? "domestic " : "") + (InternationalServices ? "international" : "") + "] ";
             }
             if (Atm || OtherThanAtm)
             {
@@ -154,9 +164,9 @@ namespace WSCT.EMV.Objects
             }
             if (DomesticCashback || InternationalCashBack)
             {
-                s += "[cashback: " + (DomesticCashback ? "domestic " : "") +
-                     (InternationalCashBack ? "international" : "") + "]";
+                s += "[cashback: " + (DomesticCashback ? "domestic " : "") + (InternationalCashBack ? "international" : "") + "]";
             }
+
             return s;
         }
 

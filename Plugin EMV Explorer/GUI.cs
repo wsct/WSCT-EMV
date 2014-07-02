@@ -439,7 +439,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Afl != null)
             {
-                foreach (var file in emv.Afl.GetFiles())
+                foreach (var file in emv.Afl.Files)
                 {
                     aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
                 }
@@ -543,7 +543,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Afl != null)
             {
-                foreach (var file in emv.Afl.GetFiles())
+                foreach (var file in emv.Afl.Files)
                 {
                     aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
                 }
@@ -759,7 +759,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             // Certification Authority Public Key
             var aidObject = new ApplicationIdentifier(emv.Aid);
             guiPublicKeysAID.Text = emv.Aid;
-            guiPublicKeysRID.Text = aidObject.StrRid;
+            guiPublicKeysRID.Text = aidObject.Rid;
 
             if (emv.TlvDataRecords.HasTag(0x8F))
             {
@@ -1049,7 +1049,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(()=>afterPSEReadEventHandler(sender,eventArgs)));
+                Invoke(new MethodInvoker(() => afterPSEReadEventHandler(sender, eventArgs)));
                 return;
             }
 
