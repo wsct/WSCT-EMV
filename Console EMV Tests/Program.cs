@@ -395,7 +395,7 @@ namespace WSCT.ConsoleEMVTests
             }
 
             Console.WriteLine("    >> {0}", emv.Aip);
-            foreach (var file in emv.Afl.GetFiles())
+            foreach (var file in emv.Afl.Files)
             {
                 Console.WriteLine("    >> {0}", file);
             }

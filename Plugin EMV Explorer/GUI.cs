@@ -69,7 +69,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             {
                 tlvNode = new TreeNode(String.Format("T:{0:T} L:{0:L} V:{0:Vh}", tlv));
             }
-            foreach (var subTLV in tlv.SubFields)
+            foreach (var subTLV in tlv.InnerTlvs)
             {
                 tlvNode.Nodes.Add(ConvertTlvDataToTreeNode(subTLV, tlvManager));
             }
@@ -604,7 +604,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
             else
             {
-                var errorNode = new TreeNode("Internal authenticate APDU not done of failed.");
+                var errorNode = new TreeNode("Internal authenticate APDU not done or failed.");
                 internalAuthenticateNode.Nodes.Add(errorNode);
             }
 

@@ -111,7 +111,7 @@ namespace WSCT.EMV.Card
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
         public EmvDefinitionFile(ICardChannel cardChannel)
         {
-            _cardChannel = new CardChannelIso7816(new CardChannelTerminalTransportLayer(cardChannel, false));
+            _cardChannel = new CardChannelIso7816(new CardChannelTerminalTransportLayer(cardChannel));
             TlvFci = null;
         }
 

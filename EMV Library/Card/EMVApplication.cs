@@ -119,7 +119,7 @@ namespace WSCT.EMV.Card
         /// </summary>
         public TlvData TlvDataTerminalData
         {
-            get { return new TlvData(0x00, 0x00, null) { SubFields = _tlvTerminalData }; }
+            get { return new TlvData(0x00, 0x00, null) { InnerTlvs = _tlvTerminalData }; }
         }
 
         /// <summary>
@@ -884,13 +884,14 @@ namespace WSCT.EMV.Card
                 if (crp.RApdu.StatusWord == 0x9000)
                 {
                     var tlv = new TlvData(crp.RApdu.Udr);
-                    // Store data in list
-                    _tlvRecords.Add(tlv);
 
                     if (tlv.Tag != 0x70)
                     {
                         throw new Exception(String.Format("EMVApplication.readData(): record is not TLV-coded with tag 70 [{0}]", tlv));
                     }
+
+                    // Store data in list
+                    _tlvRecords.Add(tlv);
 
                     // If used for offline, store it in dedicated list
                     if (recordNumber - file.FirstRecord < file.OfflineNumberOfRecords)
@@ -898,7 +899,7 @@ namespace WSCT.EMV.Card
                         // For files with SFI in the range 1 to 10, the record tag ('70') and the record length are excluded from the offline data authentication process.
                         if (file.Sfi <= 10)
                         {
-                            foreach (var tlvData in tlv.SubFields)
+                            foreach (var tlvData in tlv.InnerTlvs)
                             {
                                 _tlvOfflineRecords.Add(tlvData);
                             }
