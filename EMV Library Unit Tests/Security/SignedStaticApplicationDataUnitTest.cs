@@ -36,7 +36,7 @@ namespace WSCT.EMV.Security
                 StaticDataToBeAuthenticated = "F04341454E 01".FromHexa()
             };
 
-            var bytes = certificate.GenerateCertificate(new RsaKeyParameters(true, new BigInteger(IssuerModulus, 16), new BigInteger(IssuerPrivateExponent, 16)));
+            var bytes = certificate.GenerateCertificate(new PublicKey(IssuerModulus, IssuerPrivateExponent));
 
             Console.WriteLine(bytes.ToHexa('\0'));
 

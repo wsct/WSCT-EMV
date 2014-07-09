@@ -99,9 +99,11 @@ namespace WSCT.EMV.Security
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public byte[] GenerateCertificate(RsaKeyParameters privateKey)
+        public byte[] GenerateCertificate(PublicKey privateKey)
         {
-            return GetDataToSign(privateKey.Modulus.BitLength / 8).GenerateSignature(privateKey);
+            var rsaPrivateKey = new RsaKeyParameters(false, new BigInteger(privateKey.Modulus, 16), new BigInteger(privateKey.Exponent, 16));
+
+            return GetDataToSign(rsaPrivateKey.Modulus.BitLength / 8).GenerateSignature(rsaPrivateKey);
         }
 
         /// <summary>

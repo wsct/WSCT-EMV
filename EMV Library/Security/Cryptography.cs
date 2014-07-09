@@ -31,7 +31,6 @@ namespace WSCT.EMV.Security
         /// 
         /// </summary>
         /// <param name="data"></param>
-        /// <param name="hash"></param>
         /// <param name="privateKey"></param>
         /// <returns></returns>
         public static byte[] GenerateSignature(this byte[] data, AsymmetricKeyParameter privateKey)
@@ -78,7 +77,7 @@ namespace WSCT.EMV.Security
         /// <param name="signature">EMV certificate to recover data from.</param>
         /// <param name="publicKey">Public Key to use.</param>
         /// <returns>Data recovered from the certificate.</returns>
-        public static byte[] RecoverMessage(byte[] signature, AsymmetricKeyParameter publicKey)
+        public static byte[] RecoverMessage(this byte[] signature, AsymmetricKeyParameter publicKey)
         {
             IAsymmetricBlockCipher engine = new RsaEngine();
             engine.Init(false, publicKey);
@@ -147,7 +146,7 @@ namespace WSCT.EMV.Security
         /// <remarks>The approved algorithm for hashing is SHA-1 as specified in ISO/IEC 10118-3 [5].</remarks>
         /// <param name="data">Data to hash.</param>
         /// <returns>Hash value.</returns>
-        public static byte[] ComputeHashSha1(byte[] data)
+        public static byte[] ComputeHashSha1(this byte[] data)
         {
             IDigest sha1 = new Sha1Digest();
             var h = new byte[sha1.GetDigestSize()];
@@ -164,7 +163,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] ComputePayPassMac(byte[] data, KeyParameter key)
+        public static byte[] ComputePayPassMac(this byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new CbcBlockCipherMac(cipher, 64, new ISO7816d4Padding());
@@ -184,7 +183,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] ComputeMacForPersoCryptogram(byte[] data, KeyParameter key)
+        public static byte[] ComputeMacForPersoCryptogram(this byte[] data, KeyParameter key)
         {
             IBlockCipher cipher = new DesEdeEngine();
             IMac mac = new ISO9797Alg3Mac(cipher, 64, new ISO7816d4Padding());
@@ -204,7 +203,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] ComputeMacForIntegrity(byte[] data, KeyParameter key)
+        public static byte[] ComputeMacForIntegrity(this byte[] data, KeyParameter key)
         {
             /*
              *  The computation of an s-byte MAC (4 ≤ s ≤ 8; see MAC algorithms) is according to ISO/IEC 9797-1 [2] using a 64-bit block cipher ALG in CBC mode as specified in ISO/IEC 10116. More precisely, the computation of a MAC S over a message MSG consisting of an arbitrary number of bytes with a MAC Session Key K$$_{{\rm S}}$$ takes place in the following steps:
@@ -242,7 +241,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] ComputeCbc3Des(byte[] data, KeyParameter key)
+        public static byte[] ComputeCbc3Des(this byte[] data, KeyParameter key)
         {
             IBlockCipher engine = new DesEdeEngine();
             var cipher = new BufferedBlockCipher(new CbcBlockCipher(engine));
@@ -263,7 +262,7 @@ namespace WSCT.EMV.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] ComputeEcb3Des(byte[] data, KeyParameter key)
+        public static byte[] ComputeEcb3Des(this byte[] data, KeyParameter key)
         {
             IBlockCipher engine = new DesEdeEngine();
             BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine);

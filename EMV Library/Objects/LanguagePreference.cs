@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
@@ -26,6 +27,15 @@ namespace WSCT.EMV.Objects
         /// <param name="langs">Prefered languages of the application.</param>
         public LanguagePreference(string langs)
             : base(0x5F2D, langs)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="LanguagePreference"/> instance.
+        /// </summary>
+        /// <param name="langs">Prefered languages of the application.</param>
+        public LanguagePreference(IEnumerable<string> langs)
+            : base(0x5F2D, langs.Aggregate(String.Empty, (l, c) => c + l))
         {
         }
 

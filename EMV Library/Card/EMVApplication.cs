@@ -11,6 +11,7 @@ using WSCT.Helpers.BasicEncodingRules;
 using WSCT.Helpers.Events;
 using WSCT.ISO7816;
 using WSCT.ISO7816.Commands;
+using WSCT.Wrapper;
 
 namespace WSCT.EMV.Card
 {
@@ -968,9 +969,14 @@ namespace WSCT.EMV.Card
         protected UInt16 GetData(UInt32 tag, ref TlvData tlv)
         {
             // Execute GET DATA instruction
-            var cAPDU = new CommandAPDU(0x80, 0xCA, (byte)(tag / 0x100), (byte)(tag % 0x100), 0);
+            var cAPDU = new GetDataCommand(tag, 0) { Cla = 0x80 };
             var crp = new CommandResponsePair(cAPDU);
-            crp.Transmit(_cardChannel);
+
+            if (crp.Transmit(_cardChannel) != ErrorCode.Success)
+            {
+                return _lastStatusWord;
+            }
+
             _lastStatusWord = crp.RApdu.StatusWord;
 
             // Finally store rAPDU

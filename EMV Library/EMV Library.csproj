@@ -75,6 +75,15 @@
     <Compile Include="Objects\LogEntry.cs" />
     <Compile Include="Objects\ShortFileIdentifier.cs" />
     <Compile Include="Objects\TerminalVerificationResult.cs" />
+    <Compile Include="Personalization\FciModel.cs" />
+    <Compile Include="Personalization\DgiBuilder.cs" />
+    <Compile Include="Personalization\EmvPersonalizationData.cs" />
+    <Compile Include="Personalization\EmvPersonalizationModel.cs" />
+    <Compile Include="Personalization\TagModel.cs" />
+    <Compile Include="Personalization\GpoModel.cs" />
+    <Compile Include="Personalization\LogColumnModel.cs" />
+    <Compile Include="Personalization\LogModel.cs" />
+    <Compile Include="Personalization\RecordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat03.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
@@ -124,7 +133,12 @@
     <Reference Include="crypto">
       <HintPath>..\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
