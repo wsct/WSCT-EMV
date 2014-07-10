@@ -13,7 +13,7 @@ namespace WSCT.EMV.Personalization
         public byte Index { get; set; }
 
         [DataMember]
-        public string Signed { get; set; }
+        public bool Signed { get; set; }
 
         [DataMember]
         public IEnumerable<string> Fields { get; set; }

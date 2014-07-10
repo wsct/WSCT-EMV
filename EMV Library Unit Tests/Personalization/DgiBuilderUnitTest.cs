@@ -10,10 +10,12 @@ namespace WSCT.EMV.Personalization
         private readonly RecordModel recordModel;
         private readonly EmvPersonalizationData data;
         private readonly TagModel tagModel;
+        private readonly GpoModel gpoModel;
+        private readonly EmvPersonalizationModel model;
 
         #region >> Const
 
-        private const string ModelJson = @"{
+        private const string RecordModelJson = @"{
             ""sfi"": 2,
             ""index"": 3,
             ""signed"": true,
@@ -24,12 +26,16 @@ namespace WSCT.EMV.Personalization
             ""5A"": ""4970000000"",
             ""5F25"": ""0714"",
             ""84"": ""F0 43 41 45 4E 42 01"",
-            ""50"": ""45 4E 53 49 42 41 4E 4B"",
+            ""50"": ""ENSIBANK"",
+            ""82"": [ ""sda"", ""issuer-authentication"" ],
             ""87"": ""01"",
-            ""5F2D"": ""66 72 65 6E"",
+            ""5F2D"": [ ""fr"", ""en"" ],
             ""9F11"": ""01"",
-            ""9F12"": ""42 41 4E 4B 20 4F 46 20 45 4E 53 49 43 41 45 4E"",
-            ""9F4D"": ""9F 02 06 9F 27 01 9F 1A 02 5F 2A 02 9A 03 9C 01""
+            ""9F12"": ""BANK OF ENSICAEN"",
+            ""9F4D"": {
+                ""sfi"": 11,
+                ""size"": 64
+            }
         }";
 
         private const string TagJson = @"{
@@ -55,21 +61,63 @@ namespace WSCT.EMV.Personalization
             ]
         }";
 
+        private const string GpoJson = @"{
+            ""dgi"": ""9104"",
+            ""fields"": [ ""82"", ""94"" ]
+        }";
+
+        private const string RecordsJson = @"[
+            {
+                ""sfi"": 1,
+                ""index"": 1,
+                ""signed"": true,
+                ""fields"": [ ""57"", ""5F20"", ""8C"", ""8D"" ]
+            },
+            {
+                ""sfi"": 2,
+                ""index"": 1,
+                ""signed"": false,
+                ""fields"": [ ""5A"", ""5F34"", ""5F25"", ""5F24"", ""5F28"" ]
+            },
+            {
+                ""sfi"": 3,
+                ""index"": 1,
+                ""signed"": true,
+                ""fields"": [ ""9F07"", ""8E"", ""9F0D"", ""9F0E"", ""9F0F"" ]
+            },
+            {
+                ""sfi"": 3,
+                ""index"": 2,
+                ""signed"": false,
+                ""fields"": [ ""93"", ""9F4A"", ""9F44"", ""9F08"" ]
+            },
+            {
+                ""sfi"": 3,
+                ""index"": 3,
+                ""signed"": false,
+                ""fields"": [ ""90"", ""8F"", ""9F32"", ""92"" ]
+            }
+        ]";
+
         #endregion
 
         public DgiBuilderUnitTest()
         {
             RegisterPcl.Register();
 
-            recordModel = ModelJson.CreateFromJsonString<RecordModel>();
+            recordModel = RecordModelJson.CreateFromJsonString<RecordModel>();
             data = DataJson.CreateFromJsonString<EmvPersonalizationData>();
             tagModel = TagJson.CreateFromJsonString<TagModel>();
+            gpoModel = GpoJson.CreateFromJsonString<GpoModel>();
+
+            var recordsModel = RecordsJson.CreateFromJsonString<RecordModel[]>();
+            model = new EmvPersonalizationModel { Gpo = gpoModel, Records = recordsModel };
         }
 
         [Test]
         public void GetCommandForRecordModel()
         {
-            var builder = new DgiBuilder(data);
+            var builder = new DgiBuilder(model, data);
             var command = builder.GetCommand(recordModel);
 
             Assert.AreEqual("02030E700C5A0549700000005F25020714", command);
@@ -78,10 +126,19 @@ namespace WSCT.EMV.Personalization
         [Test]
         public void GetCommandForTagModel()
         {
-            var builder = new DgiBuilder(data);
+            var builder = new DgiBuilder(model, data);
             var command = builder.GetCommand(tagModel);
 
-            Assert.AreEqual("6F4C8407F04341454E4201A5415008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C139F4D109F02069F27019F1A025F2A029A039C01", command);
+            Assert.AreEqual("6F3E8407F04341454E4201A5335008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C059F4D020B40", command);
+        }
+
+        [Test]
+        public void GetCommandForGpoModel()
+        {
+            var builder = new DgiBuilder(model, data);
+            var command = builder.GetCommand(gpoModel);
+
+            Assert.AreEqual("91041282024400940C080101011001010018010301", command);
         }
     }
 }

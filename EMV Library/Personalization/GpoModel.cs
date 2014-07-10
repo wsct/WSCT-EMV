@@ -6,6 +6,9 @@ namespace WSCT.EMV.Personalization
     public class GpoModel
     {
         [DataMember]
-        public string Aip { get; set; }
+        public string Dgi { get; set; }
+
+        [DataMember]
+        public string[] Fields { get; set; }
     }
 }

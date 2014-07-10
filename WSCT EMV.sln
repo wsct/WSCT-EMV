@@ -223,6 +223,9 @@ Global
 		{4EABE8DA-0BCB-4BC6-A571-7618AC0EC4B6} = {510720A5-63D5-4425-9557-9344990FDDF4}
 		{A3EEF6F2-8509-4EB2-A8B3-B31786EBB248} = {510720A5-63D5-4425-9557-9344990FDDF4}
 	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Console Tests\Console Tests.csproj
 	EndGlobalSection

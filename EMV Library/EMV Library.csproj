@@ -81,9 +81,10 @@
     <Compile Include="Personalization\EmvPersonalizationModel.cs" />
     <Compile Include="Personalization\TagModel.cs" />
     <Compile Include="Personalization\GpoModel.cs" />
-    <Compile Include="Personalization\LogColumnModel.cs" />
+    <Compile Include="Personalization\TagLengthModel.cs" />
     <Compile Include="Personalization\LogModel.cs" />
     <Compile Include="Personalization\RecordModel.cs" />
+    <Compile Include="Personalization\Track2EquivalentDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat03.cs" />
     <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
