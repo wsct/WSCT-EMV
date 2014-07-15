@@ -76,7 +76,14 @@ namespace WSCT.EMV.Personalization
         /// <returns></returns>
         public string GetCommand(FciModel fciModel)
         {
-            var tagModel = new TagModel { Tag = "6F", Fields = fciModel.Tags };
+            var fields = new List<TagModel>();
+
+            if (fciModel.Tags != null)
+            {
+                fields.AddRange(fciModel.Tags);
+            }
+
+            var tagModel = new TagModel { Tag = "A5", Fields = fields };
             var command = GetCommand(tagModel);
 
             return String.Format("{0}{1}{2}", fciModel.Dgi, TlvDataHelper.ToBerEncodedL((uint)command.Length / 2).ToHexa('\0'), command);
@@ -188,7 +195,10 @@ namespace WSCT.EMV.Personalization
                 last = record;
             }
 
-            aflEntries.Add(new AflEntry(last.Sfi, firstRecord, last.Index, signedCount));
+            if (last != null)
+            {
+                aflEntries.Add(new AflEntry(last.Sfi, firstRecord, last.Index, signedCount));
+            }
 
             var afl = new ApplicationFileLocator { Files = aflEntries };
 
