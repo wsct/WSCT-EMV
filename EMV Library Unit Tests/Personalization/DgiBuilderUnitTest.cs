@@ -51,17 +51,17 @@ namespace WSCT.EMV.Personalization
         [Test]
         public void GetCommandForFciModel()
         {
-            var builder = new DgiBuilder(model, data);
-            var command = builder.GetCommand(model.Fci);
+            var builder = new DgiBuilder(model, data, null /*TODO*/);
+            var command = builder.GetDgi(model.Fci);
 
-            Assert.AreEqual("910235A5335008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C059F4D020B40", command);
+            Assert.AreEqual("910235A5335008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C059F4D020B05", command);
         }
 
         [Test]
         public void GetCommandForGpoModel()
         {
-            var builder = new DgiBuilder(model, data);
-            var command = builder.GetCommand(model.Gpo);
+            var builder = new DgiBuilder(model, data, null /*TODO*/);
+            var command = builder.GetDgi(model.Gpo);
 
             Assert.AreEqual("91041282024400940C080101011001010018010301", command);
         }
@@ -69,8 +69,8 @@ namespace WSCT.EMV.Personalization
         [Test]
         public void GetCommandForRecordModel()
         {
-            var builder = new DgiBuilder(model, data);
-            var command = builder.GetCommand(model.Records.Skip(1).First());
+            var builder = new DgiBuilder(model, data, null /*TODO*/);
+            var command = builder.GetDgi(model.Records.Skip(1).First());
 
             Assert.AreEqual("020121701F5A0898765432105432105F3401015F25031407015F24031806305F28020250", command);
         }
@@ -78,10 +78,10 @@ namespace WSCT.EMV.Personalization
         [Test]
         public void GetCommandForTagModel()
         {
-            var builder = new DgiBuilder(model, data);
-            var command = builder.GetCommand(tagModel);
+            var builder = new DgiBuilder(model, data, null /*TODO*/);
+            var command = builder.GetDgi(tagModel);
 
-            Assert.AreEqual("6F3E8407F04341454E4201A5335008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C059F4D020B40", command);
+            Assert.AreEqual("6F3E8407F04341454E4201A5335008454E534942414E4B8701015F2D046672656E9F1101019F121042414E4B204F4620454E53494341454EBF0C059F4D020B05", command);
         }
     }
 }

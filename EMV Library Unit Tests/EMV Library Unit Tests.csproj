@@ -74,6 +74,7 @@
     <Compile Include="Objects\DataObjectListUnitTest.cs" />
     <Compile Include="Objects\LogEntryUnitTest.cs" />
     <Compile Include="Personalization\DgiBuilderUnitTest.cs" />
+    <Compile Include="Personalization\EmvIssuerContextUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CryptographyUnitTest.cs" />
     <Compile Include="Security\IssuerPublicKeyCertificateUnitTest.cs" />
@@ -106,6 +107,7 @@
     <None Include="Personalization\emv-card-model.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Personalization\emv-issuer-context.json" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -75,6 +75,7 @@
     <Compile Include="Objects\LogEntry.cs" />
     <Compile Include="Objects\ShortFileIdentifier.cs" />
     <Compile Include="Objects\TerminalVerificationResult.cs" />
+    <Compile Include="Personalization\EmvIssuerContext.cs" />
     <Compile Include="Personalization\FciModel.cs" />
     <Compile Include="Personalization\DgiBuilder.cs" />
     <Compile Include="Personalization\EmvPersonalizationData.cs" />
