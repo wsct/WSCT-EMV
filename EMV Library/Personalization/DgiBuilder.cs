@@ -39,7 +39,7 @@ namespace WSCT.EMV.Personalization
         /// </summary>
         /// <param name="recordModel"></param>
         /// <returns></returns>
-        public string GetDgi(RecordModel recordModel)
+        public string BuildDgi(RecordModel recordModel)
         {
             var fields = new List<TagModel>();
 
@@ -49,36 +49,36 @@ namespace WSCT.EMV.Personalization
             }
 
             var tagModel = new TagModel { Tag = "70", Fields = fields };
-            var command = GetDgi(tagModel);
+            var command = BuildDgi(tagModel);
 
             return String.Format("{0:X2}{1:X2}{2}{3}", recordModel.Sfi, recordModel.Index, TlvDataHelper.ToBerEncodedL((uint)command.Length / 2).ToHexa('\0'), command);
         }
 
         /// <summary>
-        /// Builds UDR to be used with PUT DATA command for given processing options.
+        /// Builds UDR to be used with STORE DATA command for given processing options.
         /// </summary>
-        /// <param name="gpoModel"></param>
+        /// <param name="sequenceModel"></param>
         /// <returns></returns>
-        public string GetDgi(GpoModel gpoModel)
+        public string BuildDgi(TagValuesSequenceModel sequenceModel)
         {
             var command = String.Empty;
 
-            if (gpoModel.Fields != null)
+            if (sequenceModel.Fields != null)
             {
-                command = gpoModel.Fields
-                    .Select(t => GetDgi(new TagModel { Tag = t }))
+                command = sequenceModel.Fields
+                    .Select(t => BuildDgi(new TagModel { Tag = t }))
                     .Aggregate(String.Empty, (c, s) => c + s);
             }
 
-            return String.Format("{0}{1}{2}", gpoModel.Dgi, TlvDataHelper.ToBerEncodedL((uint)command.Length / 2).ToHexa('\0'), command);
+            return String.Format("{0}{1}{2}", sequenceModel.Dgi, TlvDataHelper.ToBerEncodedL((uint)command.Length / 2).ToHexa('\0'), command);
         }
 
         /// <summary>
-        /// Builds UDR to be used with PUT DATA command for given FCI .
+        /// Builds UDR to be used with STORE DATA command for given FCI .
         /// </summary>
         /// <param name="fciModel"></param>
         /// <returns></returns>
-        public string GetDgi(FciModel fciModel)
+        public string BuildDgi(FciModel fciModel)
         {
             var fields = new List<TagModel>();
 
@@ -88,17 +88,17 @@ namespace WSCT.EMV.Personalization
             }
 
             var tagModel = new TagModel { Tag = "A5", Fields = fields };
-            var command = GetDgi(tagModel);
+            var command = BuildDgi(tagModel);
 
             return String.Format("{0}{1}{2}", fciModel.Dgi, TlvDataHelper.ToBerEncodedL((uint)command.Length / 2).ToHexa('\0'), command);
         }
 
         /// <summary>
-        /// Builds UDR to be used with PUT DATA command for given tag.
+        /// Builds UDR to be used with STORE DATA command for given tag.
         /// </summary>
         /// <param name="tagModel"></param>
         /// <returns></returns>
-        public string GetDgi(TagModel tagModel)
+        public string BuildDgi(TagModel tagModel)
         {
             return BuildTlv(tagModel)
                 .ToByteArray()

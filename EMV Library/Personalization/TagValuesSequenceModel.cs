@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace WSCT.EMV.Personalization
 {
     [DataContract]
-    public class GpoModel
+    public class TagValuesSequenceModel
     {
         [DataMember]
         public string Dgi { get; set; }

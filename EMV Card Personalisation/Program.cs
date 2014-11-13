@@ -26,7 +26,7 @@ namespace WSCT.EMV.CardPersonalisationConsole
             try
             {
                 Console.WriteLine("Building DGI for FCI");
-                var dgiFci = builder.GetDgi(model.Fci);
+                var dgiFci = builder.BuildDgi(model.Fci);
                 Console.WriteLine("FCI: {0}", dgiFci);
                 container.Fci = dgiFci;
             }
@@ -38,7 +38,7 @@ namespace WSCT.EMV.CardPersonalisationConsole
             try
             {
                 Console.WriteLine("Building DGI for GPO");
-                var dgiGpo = builder.GetDgi(model.Gpo);
+                var dgiGpo = builder.BuildDgi(model.Gpo);
                 Console.WriteLine("GPO: {0}", dgiGpo);
                 container.Gpo = dgiGpo;
             }
@@ -46,13 +46,25 @@ namespace WSCT.EMV.CardPersonalisationConsole
             {
                 Console.WriteLine(e);
             }
+            try
+            {
+                Console.WriteLine("Building DGI for ACID");
+                var dgiAcid = builder.BuildDgi(model.Acid);
+                Console.WriteLine("ACID: {0}", dgiAcid);
+                container.Acid = dgiAcid;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
 
             foreach (var record in model.Records)
             {
                 try
                 {
                     Console.WriteLine("Building DGI for Record {0}.{1}", record.Sfi, record.Index);
-                    var dgiRecord = builder.GetDgi(record);
+                    var dgiRecord = builder.BuildDgi(record);
                     Console.WriteLine("DGI for Record {0}.{1}: {2}", record.Sfi, record.Index, dgiRecord);
                     container.Records.Add(dgiRecord);
                 }

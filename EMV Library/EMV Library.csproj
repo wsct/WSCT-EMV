@@ -75,13 +75,14 @@
     <Compile Include="Objects\LogEntry.cs" />
     <Compile Include="Objects\ShortFileIdentifier.cs" />
     <Compile Include="Objects\TerminalVerificationResult.cs" />
+    <Compile Include="Personalization\AcidModel.cs" />
     <Compile Include="Personalization\EmvIssuerContext.cs" />
     <Compile Include="Personalization\FciModel.cs" />
     <Compile Include="Personalization\DgiBuilder.cs" />
     <Compile Include="Personalization\EmvPersonalizationData.cs" />
     <Compile Include="Personalization\EmvPersonalizationModel.cs" />
     <Compile Include="Personalization\TagModel.cs" />
-    <Compile Include="Personalization\GpoModel.cs" />
+    <Compile Include="Personalization\TagValuesSequenceModel.cs" />
     <Compile Include="Personalization\TagLengthModel.cs" />
     <Compile Include="Personalization\LogModel.cs" />
     <Compile Include="Personalization\RecordModel.cs" />

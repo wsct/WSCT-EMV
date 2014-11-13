@@ -7,6 +7,9 @@ namespace WSCT.EMV.CardPersonalisationConsole
     class DgiContainer
     {
         [DataMember]
+        public string Acid { get; set; }
+
+        [DataMember]
         public string Fci { get; set; }
 
         [DataMember]
