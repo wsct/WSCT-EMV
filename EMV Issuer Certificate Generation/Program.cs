@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using WSCT.EMV.Personalization;
 using WSCT.EMV.Security;
 using WSCT.Helpers.Desktop;
@@ -8,6 +9,7 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
 {
     class Program
     {
+        private static ConsoleColor defaultColor;
         private const string CertificateAuthorityFileName = @"certificate-authority.json";
         private const string IssuerCertificateDataFileName = @"issuer-certificate-data.json";
         private const string OutputJsonFileName = @"emv-issuer-context.json";
@@ -16,37 +18,17 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
         {
             RegisterPcl.Register();
 
-            var defaultColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("wsct-emvissuer :: EMV Issuer Certificate");
-            Console.WriteLine();
-            Console.ForegroundColor = defaultColor;
+            ShowHeader();
 
-            PrivateKey caKey;
-            try
+            var caKey = LoadFile<PrivateKey>(CertificateAuthorityFileName);
+            if (caKey == null)
             {
-                caKey = CertificateAuthorityFileName.CreateFromJsonFile<PrivateKey>();
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error reading file '{0}':", CertificateAuthorityFileName);
-                Console.ForegroundColor = defaultColor;
-                Console.WriteLine(e);
                 return;
             }
 
-            IssuerCertificateData issuerCertificateData;
-            try
+            var issuerCertificateData = LoadFile<IssuerCertificateData>(IssuerCertificateDataFileName);
+            if (issuerCertificateData == null)
             {
-                issuerCertificateData = IssuerCertificateDataFileName.CreateFromJsonFile<IssuerCertificateData>();
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error reading file '{0}':", IssuerCertificateDataFileName);
-                Console.ForegroundColor = defaultColor;
-                Console.WriteLine(e);
                 return;
             }
 
@@ -68,6 +50,52 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
 
             Console.WriteLine("Saving issuer context in {0} file", OutputJsonFileName);
             issuerCertificateBuilder.IssuerContext.WriteToJsonFile(OutputJsonFileName, true);
+        }
+
+        private static T LoadFile<T>(string fileName)
+        {
+            try
+            {
+                return fileName.CreateFromJsonFile<T>();
+            }
+            catch (FileNotFoundException)
+            {
+                ShowFileNotFound(fileName);
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                ShowReadError(fileName, e);
+                return default(T);
+            }
+        }
+
+        private static void ShowReadError(string fileName, Exception e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error reading file '{0}':", fileName);
+            Console.ForegroundColor = defaultColor;
+            Console.WriteLine(e);
+        }
+
+        private static void ShowFileNotFound(string fileName)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("File not found: '{0}'", fileName);
+            Console.ForegroundColor = defaultColor;
+        }
+
+        private static void ShowHeader()
+        {
+            defaultColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("wsct-emvissuer :: EMV Issuer Data Preparation");
+            Console.WriteLine("  input files: {0}, {1}", CertificateAuthorityFileName, IssuerCertificateDataFileName);
+            Console.WriteLine("  output file: {0}", OutputJsonFileName);
+            Console.WriteLine();
+
+            Console.ForegroundColor = defaultColor;
         }
     }
 }

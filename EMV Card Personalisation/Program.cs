@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using WSCT.EMV.Personalization;
 using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
@@ -7,17 +8,35 @@ namespace WSCT.EMV.CardPersonalisationConsole
 {
     class Program
     {
-        private const string OutputJsonFileName = "emv-cardpersonalisation-dgi.json";
+        private static ConsoleColor defaultColor;
+        private const string EmvCardModelFileName = @"emv-card-model.json";
+        private const string EmvCardDataFileName = @"emv-card-data.json";
+        private const string EmvIssuerContextFileName = @"emv-issuer-context.json";
+        private const string OutputJsonFileName = @"emv-cardpersonalisation-dgi.json";
 
         static void Main(/*string[] args*/)
         {
             RegisterPcl.Register();
 
-            Console.WriteLine("wsct-emvcp :: EMV Card Personalisation");
+            ShowHeader();
 
-            var model = @"emv-card-model.json".CreateFromJsonFile<EmvPersonalizationModel>();
-            var data = @"emv-card-data.json".CreateFromJsonFile<EmvPersonalizationData>();
-            var context = @"emv-issuer-context.json".CreateFromJsonFile<EmvIssuerContext>();
+            var model = LoadFile<EmvPersonalizationModel>(EmvCardModelFileName);
+            if (model == null)
+            {
+                return;
+            }
+
+            var data = LoadFile<EmvPersonalizationData>(EmvCardDataFileName);
+            if (data == null)
+            {
+                return;
+            }
+
+            var context = LoadFile<EmvIssuerContext>(EmvIssuerContextFileName);
+            if (context == null)
+            {
+                return;
+            }
 
             var builder = new DgiBuilder(model, data, context);
 
@@ -76,6 +95,52 @@ namespace WSCT.EMV.CardPersonalisationConsole
 
             Console.WriteLine("Saving DGI in {0} file", OutputJsonFileName);
             container.WriteToJsonFile(OutputJsonFileName, true);
+        }
+
+        private static T LoadFile<T>(string fileName)
+        {
+            try
+            {
+                return fileName.CreateFromJsonFile<T>();
+            }
+            catch (FileNotFoundException)
+            {
+                ShowFileNotFound(fileName);
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                ShowReadError(fileName, e);
+                return default(T);
+            }
+        }
+
+        private static void ShowReadError(string fileName, Exception e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error reading file '{0}':", fileName);
+            Console.ForegroundColor = defaultColor;
+            Console.WriteLine(e);
+        }
+
+        private static void ShowFileNotFound(string fileName)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("File not found: '{0}'", fileName);
+            Console.ForegroundColor = defaultColor;
+        }
+
+        private static void ShowHeader()
+        {
+            defaultColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("wsct-emvcp :: EMV Card Personalisation");
+            Console.WriteLine("  input files: {0}, {1}, {2}", EmvCardModelFileName, EmvCardDataFileName, EmvIssuerContextFileName);
+            Console.WriteLine("  output file: {0}", OutputJsonFileName);
+            Console.WriteLine();
+
+            Console.ForegroundColor = defaultColor;
         }
     }
 }
