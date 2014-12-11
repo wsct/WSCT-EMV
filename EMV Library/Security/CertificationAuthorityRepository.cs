@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -12,10 +13,9 @@ namespace WSCT.EMV.Security
     [XmlRoot("certificationAuthorities")]
     public class CertificationAuthorityRepository : IXmlSerializable
     {
-        #region >> Fields
+        #region >> Properties
 
-        private List<CertificationAuthority> _certificationAuthorities;
-        private Dictionary<string, PublicKey> _keys;
+        public List<CertificationAuthority> CertificationAuthorities;
 
         #endregion
 
@@ -26,17 +26,7 @@ namespace WSCT.EMV.Security
         /// </summary>
         public CertificationAuthorityRepository()
         {
-            _keys = new Dictionary<string, PublicKey>();
-            _certificationAuthorities = new List<CertificationAuthority>();
-        }
-
-        #endregion
-
-        #region >> Internal Methods
-
-        private string GetIdentifier(string rid, string index)
-        {
-            return (rid + index).Replace(" ", "");
+            CertificationAuthorities = new List<CertificationAuthority>();
         }
 
         #endregion
@@ -51,7 +41,7 @@ namespace WSCT.EMV.Security
         /// <param name="publicKey">The Public Key of the Certificate Authority.</param>
         public void Add(string rid, string index, PublicKey publicKey)
         {
-            _keys.Add(GetIdentifier(rid, index), publicKey);
+            CertificationAuthorities.Add(new CertificationAuthority() { Rid = rid, Index = index, PublicKey = publicKey });
         }
 
         /// <summary>
@@ -63,10 +53,10 @@ namespace WSCT.EMV.Security
         /// <exception cref="Exception">If no public key found.</exception>
         public PublicKey Get(string rid, string index)
         {
-            PublicKey publicKey;
-            if (_keys.TryGetValue(GetIdentifier(rid, index), out publicKey))
+            var caFound = CertificationAuthorities.FirstOrDefault(ca => (ca.Rid == rid) && (ca.Index == index));
+            if (caFound != null)
             {
-                return publicKey;
+                return caFound.PublicKey;
             }
 
             throw new EMVCertificationAuthorityNotFoundException(String.Format("CertificateAuthorityRepository: no Certificate Authority found for RID+index [{0}+{1}]", rid, index));
@@ -94,8 +84,7 @@ namespace WSCT.EMV.Security
                 {
                     case XmlNodeType.Element:
                         var ca = (CertificationAuthority)serializer.Deserialize(reader);
-                        _certificationAuthorities.Add(ca);
-                        _keys.Add(GetIdentifier(ca.Rid, ca.Index), ca.PublicKey);
+                        CertificationAuthorities.Add(ca);
                         break;
                     case XmlNodeType.Comment:
                         reader.Read();
@@ -112,7 +101,7 @@ namespace WSCT.EMV.Security
         public void WriteXml(XmlWriter writer)
         {
             var serializer = new XmlSerializer(typeof(CertificationAuthority));
-            foreach (var ca in _certificationAuthorities)
+            foreach (var ca in CertificationAuthorities)
             {
                 serializer.Serialize(writer, ca);
             }

@@ -22,8 +22,17 @@ namespace WSCT.EMV.Personalization
         [DataMember]
         public string IssuerPrivateKeyExponent { get; set; }
 
+        /// <summary>
+        /// Modulus of of Issuer Public Key.
+        /// </summary>
         [DataMember]
         public string IssuerPublicKeyModulus { get; set; }
+
+        /// <summary>
+        /// Exponent of Issuer Public Key.
+        /// </summary>
+        [DataMember]
+        public string IssuerPublicKeyExponent { get; set; }
 
         /// <summary>
         /// EMV certificate of Issuer Public Key.
@@ -36,12 +45,6 @@ namespace WSCT.EMV.Personalization
         /// </summary>
         [DataMember]
         public string IssuerPublicKeyRemainder { get; set; }
-
-        /// <summary>
-        /// Exponent of Issuer Public Key.
-        /// </summary>
-        [DataMember]
-        public string IssuerPublicKeyExponent { get; set; }
 
         /// <summary>
         /// Builds the list of TlvData based on context data.

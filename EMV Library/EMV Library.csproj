@@ -81,6 +81,9 @@
     <Compile Include="Personalization\DgiBuilder.cs" />
     <Compile Include="Personalization\EmvPersonalizationData.cs" />
     <Compile Include="Personalization\EmvPersonalizationModel.cs" />
+    <Compile Include="Personalization\IssuerCertificateBuilder.cs" />
+    <Compile Include="Personalization\IssuerCertificateData.cs" />
+    <Compile Include="Personalization\CertificationAuthorityPrivateKey.cs" />
     <Compile Include="Personalization\TagModel.cs" />
     <Compile Include="Personalization\TagValuesSequenceModel.cs" />
     <Compile Include="Personalization\TagLengthModel.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Security\AbstractSignatureContainer.cs" />
     <Compile Include="Security\CertificationAuthority.cs" />
     <Compile Include="Security\CertificationAuthorityRepository.cs" />
+    <Compile Include="Security\PrivateKey.cs" />
     <Compile Include="Security\SignedCombinedApplicationData.cs" />
     <Compile Include="Security\CryptogramType.cs" />
     <Compile Include="Security\Cryptography.cs" />

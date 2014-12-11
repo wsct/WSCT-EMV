@@ -1,0 +1,58 @@
+{
+    "fci": {
+        "dgi": "9102",
+        "tags": [
+            { "tag": "50" },
+            { "tag": "87" },
+            { "tag": "5F2D" },
+            { "tag": "9F11" },
+            { "tag": "9F12" },
+            {
+                "tag": "BF0C",
+                "fields": [
+                    { "tag": "9F4D" }
+                ]
+            }
+        ]
+    },
+    "gpo": {
+        "dgi": "9104",
+        "fields": [ "82", "94" ]
+    },
+    "acid": {
+        "dgi": "3000",
+        "fields": [ "9F36", "9F4F" ]
+    },
+    "records": [
+        {
+            "sfi": 1,
+            "index": 1,
+            "signed": true,
+            "fields": [ "57", "5F20", "8C", "8D" ]
+        },
+        {
+            "sfi": 2,
+            "index": 1,
+            "signed": false,
+            "fields": [ "5A", "5F34", "5F25", "5F24", "5F28" ]
+        },
+        {
+            "sfi": 3,
+            "index": 1,
+            "signed": true,
+            "fields": [ "9F07", "8E", "9F0D", "9F0E", "9F0F" ]
+        },
+        {
+            "sfi": 3,
+            "index": 2,
+            "signed": false,
+            "fields": [ "93", "9F4A", "9F44", "9F08" ]
+        },
+        {
+            "sfi": 3,
+            "index": 3,
+            "signed": false,
+            "fields": [ "90", "8F", "9F32", "92" ]
+        }
+    ]
+}
