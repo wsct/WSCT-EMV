@@ -24,7 +24,7 @@ namespace WSCT.EMV.Security
                 offset += d.Length;
             }
 
-            return Cryptography.ComputeHashSha1(bytes);
+            return bytes.ComputeHashSha1();
         }
 
         #endregion

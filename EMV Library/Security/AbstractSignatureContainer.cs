@@ -130,7 +130,7 @@ namespace WSCT.EMV.Security
             KeyLength = signature.Length;
 
             // recovered data from the certificate
-            Recovered = Cryptography.RecoverMessage(signature, publicKey);
+            Recovered = signature.RecoverMessage(publicKey);
 
             // extract and check data recovered
             DataHeader = Recovered[0];
