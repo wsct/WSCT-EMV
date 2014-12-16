@@ -12,3 +12,4 @@ obj
 /.nuget
 /packages
 /binaries
+*.user

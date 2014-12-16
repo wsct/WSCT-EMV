@@ -15,7 +15,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public byte Sfi
         {
-            get { return (byte)(Tlv.Value[0] & 0x8F); }
+            get { return (byte)(Tlv.Value[0] & 0x1F); }
             set { Tlv.Value[0] = value; }
         }
 
