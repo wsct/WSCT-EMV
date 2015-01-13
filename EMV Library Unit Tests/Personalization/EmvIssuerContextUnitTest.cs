@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using WSCT.EMV.Security;
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Personalization
@@ -14,7 +15,7 @@ namespace WSCT.EMV.Personalization
             emvIssuerContext.CaPublicKeyIndex = "01";
             emvIssuerContext.IssuerPublicKeyCertificate = "0203";
             emvIssuerContext.IssuerPublicKeyRemainder = "040506";
-            emvIssuerContext.IssuerPublicKeyExponent = "07080900";
+            emvIssuerContext.IssuerPrivateKey = new PrivateKey { PublicExponent = "07080900" };
             var tlv = emvIssuerContext.BuildTlvData();
 
             Assert.AreEqual(4, tlv.Count);

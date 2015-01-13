@@ -12,6 +12,7 @@ namespace WSCT.EMV.CardPersonalisationConsole
         private const string EmvCardModelFileName = @"emv-card-model.json";
         private const string EmvCardDataFileName = @"emv-card-data.json";
         private const string EmvIssuerContextFileName = @"emv-issuer-context.json";
+        private const string EmvIccContextFileName = @"emv-icc-context.json";
         private const string OutputJsonFileName = @"emv-cardpersonalisation-dgi.json";
 
         static void Main(/*string[] args*/)
@@ -32,13 +33,19 @@ namespace WSCT.EMV.CardPersonalisationConsole
                 return;
             }
 
-            var context = LoadFile<EmvIssuerContext>(EmvIssuerContextFileName);
-            if (context == null)
+            var issuerContext = LoadFile<EmvIssuerContext>(EmvIssuerContextFileName);
+            if (issuerContext == null)
             {
                 return;
             }
 
-            var builder = new DgiBuilder(model, data, context);
+            var iccContext = LoadFile<EmvIccContext>(EmvIccContextFileName);
+            if (iccContext == null)
+            {
+                return;
+            }
+
+            var builder = new DgiBuilder(model, data, issuerContext, iccContext);
 
             var container = new DgiContainer();
 
@@ -76,7 +83,6 @@ namespace WSCT.EMV.CardPersonalisationConsole
             {
                 Console.WriteLine(e);
             }
-
 
             foreach (var record in model.Records)
             {
@@ -136,7 +142,7 @@ namespace WSCT.EMV.CardPersonalisationConsole
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("wsct-emvcp :: EMV Card Personalisation");
-            Console.WriteLine("  input files: {0}, {1}, {2}", EmvCardModelFileName, EmvCardDataFileName, EmvIssuerContextFileName);
+            Console.WriteLine("  input files: {0}, {1}, {2}, {3}", EmvCardModelFileName, EmvCardDataFileName, EmvIssuerContextFileName, EmvIccContextFileName);
             Console.WriteLine("  output file: {0}", OutputJsonFileName);
             Console.WriteLine();
 

@@ -5,14 +5,14 @@ using WSCT.EMV.Security;
 using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
-namespace WSCT.EMV.IssuerCertificateGenerationConsole
+namespace WSCT.EMV.IccCertificateGenerationConsole
 {
     class Program
     {
         private static ConsoleColor defaultColor;
-        private const string CertificateAuthorityFileName = @"certificate-authority.json";
         private const string IssuerCertificateDataFileName = @"issuer-certificate-data.json";
-        private const string OutputJsonFileName = @"emv-issuer-context.json";
+        private const string IccCertificateDataFileName = @"icc-certificate-data.json";
+        private const string OutputJsonFileName = @"emv-icc-context.json";
 
         private static void Main( /*string[] args*/)
         {
@@ -20,8 +20,8 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
 
             ShowHeader();
 
-            var caKey = LoadFile<PrivateKey>(CertificateAuthorityFileName);
-            if (caKey == null)
+            var iccCertificateData = LoadFile<IccCertificateData>(IccCertificateDataFileName);
+            if (iccCertificateData == null)
             {
                 return;
             }
@@ -32,24 +32,24 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
                 return;
             }
 
-            Console.WriteLine("Building Issuer Public Key Certificate");
+            Console.WriteLine("Building ICC Public Key Certificate");
 
-            IssuerCertificateBuilder issuerCertificateBuilder;
+            IccCertificateBuilder iccCertificateBuilder;
             try
             {
-                issuerCertificateBuilder = new IssuerCertificateBuilder(issuerCertificateData, caKey);
+                iccCertificateBuilder = new IccCertificateBuilder(iccCertificateData, issuerCertificateData.IssuerPrivateKey);
             }
             catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error building Issuer Public Key Certificate:");
+                Console.WriteLine("Error building ICC Public Key Certificate:");
                 Console.ForegroundColor = defaultColor;
                 Console.WriteLine(e);
                 return;
             }
 
-            Console.WriteLine("Saving issuer context in {0} file", OutputJsonFileName);
-            issuerCertificateBuilder.IssuerContext.WriteToJsonFile(OutputJsonFileName, true);
+            Console.WriteLine("Saving ICC context in {0} file", OutputJsonFileName);
+            iccCertificateBuilder.IccContext.WriteToJsonFile(OutputJsonFileName, true);
         }
 
         private static T LoadFile<T>(string fileName)
@@ -90,8 +90,8 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
             defaultColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.WriteLine("wsct-emvissuer :: EMV Issuer Certificate Generation");
-            Console.WriteLine("  input files: {0}, {1}", CertificateAuthorityFileName, IssuerCertificateDataFileName);
+            Console.WriteLine("wsct-emvicc :: EMV ICC Certificate Generation");
+            Console.WriteLine("  input files: {0}, {1}", IssuerCertificateDataFileName, IccCertificateDataFileName);
             Console.WriteLine("  output file: {0}", OutputJsonFileName);
             Console.WriteLine();
 

@@ -4,36 +4,35 @@ using System.Runtime.Serialization;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
-using WSCT.ISO7816.Commands;
 
 namespace WSCT.EMV.Personalization
 {
     [DataContract]
-    public class EmvIssuerContext
+    public class EmvIccContext
     {
         /// <summary>
-        /// Index of Certification Authority that signed the Issuer Public Key Certificate.
+        /// Application PAN.
         /// </summary>
         [DataMember]
-        public string CaPublicKeyIndex { get; set; }
+        public string ApplicationPan { get; set; }
 
         /// <summary>
-        /// Issuer private key.
+        /// ICC private key.
         /// </summary>
         [DataMember]
-        public PrivateKey IssuerPrivateKey { get; set; }
+        public PrivateKey IccPrivateKey { get; set; }
 
         /// <summary>
-        /// EMV certificate of Issuer Public Key.
+        /// EMV certificate of ICC Public Key.
         /// </summary>
         [DataMember]
-        public string IssuerPublicKeyCertificate { get; set; }
+        public string IccPublicKeyCertificate { get; set; }
 
         /// <summary>
-        /// Remainder of Issuer Public Key.
+        /// Remainder of ICC Public Key.
         /// </summary>
         [DataMember]
-        public string IssuerPublicKeyRemainder { get; set; }
+        public string IccPublicKeyRemainder { get; set; }
 
         /// <summary>
         /// Builds the list of TlvData based on context data.
@@ -43,14 +42,12 @@ namespace WSCT.EMV.Personalization
         {
             var dictionary = new Dictionary<uint, string>
             {
-                { 0x8F, CaPublicKeyIndex },
-                { 0x90, IssuerPublicKeyCertificate },
-                { 0x92, IssuerPublicKeyRemainder }
+                { 0x90, IccPublicKeyCertificate },
+                { 0x92, IccPublicKeyRemainder }
             };
-
-            if (IssuerPrivateKey != null)
+            if (IccPrivateKey != null)
             {
-                dictionary.Add(0x9F32, IssuerPrivateKey.PublicExponent);
+                dictionary.Add(0x9F32, IccPrivateKey.PublicExponent);
             }
 
             return dictionary

@@ -76,12 +76,15 @@
     <Compile Include="Objects\ShortFileIdentifier.cs" />
     <Compile Include="Objects\TerminalVerificationResult.cs" />
     <Compile Include="Personalization\AcidModel.cs" />
+    <Compile Include="Personalization\EmvIccContext.cs" />
     <Compile Include="Personalization\EmvIssuerContext.cs" />
     <Compile Include="Personalization\FciModel.cs" />
     <Compile Include="Personalization\DgiBuilder.cs" />
     <Compile Include="Personalization\EmvPersonalizationData.cs" />
     <Compile Include="Personalization\EmvPersonalizationModel.cs" />
+    <Compile Include="Personalization\IccCertificateBuilder.cs" />
     <Compile Include="Personalization\IssuerCertificateBuilder.cs" />
+    <Compile Include="Personalization\IccCertificateData.cs" />
     <Compile Include="Personalization\IssuerCertificateData.cs" />
     <Compile Include="Personalization\CertificationAuthorityPrivateKey.cs" />
     <Compile Include="Personalization\TagModel.cs" />

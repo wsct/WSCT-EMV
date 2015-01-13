@@ -53,6 +53,12 @@
             "index": 3,
             "signed": false,
             "fields": [ "90", "8F", "9F32", "92" ]
+        },
+        {
+            "sfi": 4,
+            "index": 1,
+            "signed": true,
+            "fields": [ "9F46", "9F47", "9F48" ]
         }
     ]
 }

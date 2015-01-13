@@ -55,9 +55,7 @@ namespace WSCT.EMV.Personalization
             IssuerContext = new EmvIssuerContext()
             {
                 CaPublicKeyIndex = certificateData.CaPublicKeyIndex,
-                IssuerPublicKeyModulus = certificateData.IssuerPrivateKey.Modulus,
-                IssuerPrivateKeyExponent = certificateData.IssuerPrivateKey.PrivateExponent,
-                IssuerPublicKeyExponent = certificateData.IssuerPrivateKey.PublicExponent
+                IssuerPrivateKey = certificateData.IssuerPrivateKey
             };
 
             // 90   Issuer Public Key Certificate (Nca)
@@ -70,7 +68,7 @@ namespace WSCT.EMV.Personalization
             }
 
             // 9F32 Issuer Public Key Exponent (1 or 3)
-            IssuerContext.IssuerPublicKeyExponent = issuerPublicKey.Exponent.FromHexa().ToHexa();
+            IssuerContext.IssuerPrivateKey.PublicExponent = issuerPublicKey.Exponent.FromHexa().ToHexa();
         }
     }
 }

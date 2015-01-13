@@ -16,6 +16,7 @@ namespace WSCT.EMV.Personalization
         private readonly EmvPersonalizationData data;
         private readonly EmvPersonalizationModel model;
         private readonly EmvIssuerContext issuerContext;
+        private readonly EmvIccContext iccContext;
 
         #region >> Constructors
 
@@ -25,11 +26,13 @@ namespace WSCT.EMV.Personalization
         /// <param name="model">Card DGI model.</param>
         /// <param name="data">Card data.</param>
         /// <param name="issuerContext"></param>
-        public DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext)
+        /// <param name="iccContext"></param>
+        public DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext, EmvIccContext iccContext)
         {
             this.data = data;
             this.model = model;
             this.issuerContext = issuerContext;
+            this.iccContext = iccContext;
         }
 
         #endregion
@@ -144,7 +147,16 @@ namespace WSCT.EMV.Personalization
                         tlv.Value = GetAflTlv().Value;
                         break;
                     case "9F32": // Issuer Public Key Exponent
-                        tlv.Value = issuerContext.IssuerPublicKeyExponent.FromHexa();
+                        tlv.Value = issuerContext.IssuerPrivateKey.PublicExponent.FromHexa();
+                        break;
+                    case "9F46": // ICC Public Key Certificate 
+                        tlv.Value = iccContext.IccPublicKeyCertificate.FromHexa();
+                        break;
+                    case "9F47": // ICC Public Key Exponent 
+                        tlv.Value = iccContext.IccPrivateKey.PublicExponent.FromHexa();
+                        break;
+                    case "9F48": // ICC Public Key Remainder 
+                        tlv.Value = iccContext.IccPublicKeyRemainder.FromHexa();
                         break;
                     case "8C": // CDOL1
                     case "8D": // CDOL2
@@ -277,7 +289,7 @@ namespace WSCT.EMV.Personalization
                 StaticDataToBeAuthenticated = dataEnumerable.ToArray()
             };
 
-            var issuerPrivateKey = new PublicKey(issuerContext.IssuerPublicKeyModulus, issuerContext.IssuerPrivateKeyExponent);
+            var issuerPrivateKey = new PublicKey(issuerContext.IssuerPrivateKey.Modulus, issuerContext.IssuerPrivateKey.PrivateExponent);
 
             // 93   Signed Static Application Data (Nca)
             return new TlvData { Tag = 0x93, Value = signedStaticApplicationData.GenerateCertificate(issuerPrivateKey) };
