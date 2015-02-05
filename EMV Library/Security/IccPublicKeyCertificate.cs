@@ -65,10 +65,16 @@ namespace WSCT.EMV.Security
             {
                 PublicKeyorLeftmostDigitsofthePublicKey = iccPublicKeyModulus.Take(privateKeyLength - 42).ToArray();
                 iccPublicKeyRemainder = new byte[iccPublicKeyModulus.Length - privateKeyLength + 42];
+                // TODO Set a correct value !!
             }
 
+            var applicationPan = ApplicationPan
+                .ToHexa('\0')
+                .PadRight(20, 'F')
+                .FromHexa();
+
             return DataFormat.ToByteArray()
-                .Concat(ApplicationPan)
+                .Concat(applicationPan)
                 .Concat(CertificateExpirationDate)
                 .Concat(CertificateSerialNumber)
                 .Concat(HashAlgorithmIndicator.ToByteArray())
@@ -78,6 +84,7 @@ namespace WSCT.EMV.Security
                 .Concat(PublicKeyorLeftmostDigitsofthePublicKey)
                 .Concat(iccPublicKeyRemainder)
                 .Concat(iccPublicKeyExponent)
+                // TODO Add Static Data to be authenticated
                 .ToArray();
         }
 
