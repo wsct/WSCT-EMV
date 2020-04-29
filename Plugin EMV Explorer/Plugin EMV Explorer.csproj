@@ -1,122 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{82E61FBB-4DA3-4048-A94B-80E06E1AF942}</ProjectGuid>
+    <TargetFrameworks>net462;netcoreapp3.1</TargetFrameworks>
+    <Version>3.1.0.0</Version>
+    <Copyright>Copyright © Sylvain Vernois 2010-2020</Copyright>
+    <Product>WSCT</Product>
+    <Company>ENSICAEN</Company>
+    <Authors>Sylvain Vernois</Authors>
+    <PackageId>WSCT.GUI.Plugins.EMVExplorer</PackageId>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/wsct/WSCT-GUI</PackageProjectUrl>
+    <Description>EMV Explorer Plugin for WinSCard GUI.</Description>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Plugins.EMVExplorer</AssemblyName>
     <RootNamespace>WSCT.GUI.Plugins.EMVExplorer</RootNamespace>
-    <AssemblyName>Plugin.EMVExplorer</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Resources\%24this.Icon.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="WSCT.GUI" Version="6.1.0.1" />
+    <PackageReference Include="WSCT.GUI.Resources" Version="1.1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailedLogs.cs" />
-    <Compile Include="Gui.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Gui.Designer.cs">
-      <DependentUpon>Gui.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PluginConfiguration.cs" />
-    <Compile Include="PluginEntry.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Gui.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>Gui.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="Config.EMVExplorer.xsd" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
-      <Project>{b95b0e58-9296-4a15-aa69-10a7b6dc2267}</Project>
-      <Name>WSCT.Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT\WSCT.csproj">
-      <Project>{4eabe8da-0bcb-4bc6-a571-7618ac0ec4b6}</Project>
-      <Name>WSCT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT GUI\WSCT.Plugins\WSCT.GUI.Plugins.csproj">
-      <Project>{44d12c6f-7d70-40ec-864a-01202928d159}</Project>
-      <Name>WSCT.GUI.Plugins</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EMV Library\EMV Library.csproj">
-      <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
-      <Name>EMV Library</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\%24this.Icon.ico" />
-    <Content Include="Plugin.EMVExplorer.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Config.EMVExplorer.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Compile Update="Gui.cs" SubType="Form" />
+    <Compile Update="Gui.Designer.cs" SubType="Form" DependentUpon="Gui.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Lang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

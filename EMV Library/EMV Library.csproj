@@ -18,6 +18,14 @@
     <AssemblyName>WSCT.EMV</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Dictionary.EMVTag.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dictionary.EMVTag.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
     <PackageReference Include="WSCT.Core" Version="6.1.1" />
     <PackageReference Include="WSCT.Helpers" Version="4.1.0" />

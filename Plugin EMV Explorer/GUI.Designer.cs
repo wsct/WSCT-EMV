@@ -2117,7 +2117,6 @@
             this.Controls.Add(groupActionsApplicationSelection);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(tabControlMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Gui";
             this.Text = "EMV Explorer";
             guiTabParameters.ResumeLayout(false);
