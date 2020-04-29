@@ -1,4 +1,4 @@
-namespace WSCT.ConsoleEMVTests
+namespace WSCT.EMV.ConsoleTests
 {
     /// <summary>
     /// Enumeration describing the level of the data to be logged

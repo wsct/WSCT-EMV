@@ -1,102 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4963702E-B3E4-4D18-9F9C-0106B3A4E757}</ProjectGuid>
+    <TargetFrameworks>netcoreapp3.1;net462</TargetFrameworks>
+    <Product>WSCT Console EMV Tests</Product>
+    <Description>Test Console of EMV Library for WSCT.</Description>
+    <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
+    <Authors>Sylvain Vernois</Authors>
+    <Company>ENSICAEN</Company>
+    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
+    <PackageTags>wsct, emv</PackageTags>
+    <Version>3.1.0</Version>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <PackageId>WSCT.EMV.ConsoleTests</PackageId>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyName>WSCT.EMV.ConsoleTests</AssemblyName>
+    <RootNamespace>WSCT.EMV.ConsoleTests</RootNamespace>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WSCT.ConsoleEMVTests</RootNamespace>
-    <AssemblyName>WSCT.ConsoleEMVTests</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
+    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleObserver.cs" />
-    <Compile Include="LogLevel.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers.Desktop\WSCT.Helpers.Desktop.csproj">
-      <Project>{a3eef6f2-8509-4eb2-a8b3-b31786ebb248}</Project>
-      <Name>WSCT.Helpers.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
-      <Project>{b95b0e58-9296-4a15-aa69-10a7b6dc2267}</Project>
-      <Name>WSCT.Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.Desktop\WSCT.Wrapper.Desktop.csproj">
-      <Project>{19b66e6e-7e5e-481a-8718-3f9c44212ad6}</Project>
-      <Name>WSCT.Wrapper.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.MacOSX\WSCT.Wrapper.MacOSX.csproj">
-      <Project>{0f6f8081-b090-4505-9fbc-f127aa18806f}</Project>
-      <Name>WSCT.Wrapper.MacOSX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.PCSCLite32\WSCT.Wrapper.PCSCLite32.csproj">
-      <Project>{8aae3e6a-d6fe-4b35-af27-731ce1996106}</Project>
-      <Name>WSCT.Wrapper.PCSCLite32</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.PCSCLite64\WSCT.Wrapper.PCSCLite64.csproj">
-      <Project>{796a4ce8-2724-43c9-bcd8-5cfd331aa541}</Project>
-      <Name>WSCT.Wrapper.PCSCLite64</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Wrapper.WinSCard\WSCT.Wrapper.WinSCard.csproj">
-      <Project>{651952e8-6d49-44e6-ab52-3c4bd78255fa}</Project>
-      <Name>WSCT.Wrapper.WinSCard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT\WSCT.csproj">
-      <Project>{4eabe8da-0bcb-4bc6-a571-7618ac0ec4b6}</Project>
-      <Name>WSCT</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EMV Library\EMV Library.csproj">
-      <Project>{162e1cb7-03f5-4f2a-9dee-0feaf07ef4ce}</Project>
-      <Name>EMV Library</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

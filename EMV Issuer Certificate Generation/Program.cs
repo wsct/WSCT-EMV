@@ -2,7 +2,6 @@
 using System.IO;
 using WSCT.EMV.Personalization;
 using WSCT.EMV.Security;
-using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
 namespace WSCT.EMV.IssuerCertificateGenerationConsole
@@ -16,8 +15,6 @@ namespace WSCT.EMV.IssuerCertificateGenerationConsole
 
         private static void Main( /*string[] args*/)
         {
-            RegisterPcl.Register();
-
             ShowHeader();
 
             var caKey = LoadFile<PrivateKey>(CertificateAuthorityFileName);

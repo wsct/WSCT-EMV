@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
-using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
 namespace WSCT.EMV.Personalization
@@ -41,10 +42,9 @@ namespace WSCT.EMV.Personalization
 
         public DgiBuilderUnitTest()
         {
-            RegisterPcl.Register();
-
-            model = @"Personalization\emv-card-model.json".CreateFromJsonFile<EmvPersonalizationModel>();
-            data = @"Personalization\emv-card-data.json".CreateFromJsonFile<EmvPersonalizationData>();
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            model = Path.Combine(path, @"Personalization\emv-card-model.json").CreateFromJsonFile<EmvPersonalizationModel>();
+            data = Path.Combine(path, @"Personalization\emv-card-data.json").CreateFromJsonFile<EmvPersonalizationData>();
             tagModel = TagJson.CreateFromJsonString<TagModel>();
         }
 

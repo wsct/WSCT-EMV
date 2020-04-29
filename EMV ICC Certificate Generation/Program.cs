@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using WSCT.EMV.Personalization;
-using WSCT.EMV.Security;
-using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
 namespace WSCT.EMV.IccCertificateGenerationConsole
@@ -16,8 +14,6 @@ namespace WSCT.EMV.IccCertificateGenerationConsole
 
         private static void Main( /*string[] args*/)
         {
-            RegisterPcl.Register();
-
             ShowHeader();
 
             var iccCertificateData = LoadFile<IccCertificateData>(IccCertificateDataFileName);

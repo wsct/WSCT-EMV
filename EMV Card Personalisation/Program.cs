@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using WSCT.EMV.Personalization;
-using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
 namespace WSCT.EMV.CardPersonalisationConsole
@@ -17,8 +16,6 @@ namespace WSCT.EMV.CardPersonalisationConsole
 
         static void Main(/*string[] args*/)
         {
-            RegisterPcl.Register();
-
             ShowHeader();
 
             var model = LoadFile<EmvPersonalizationModel>(EmvCardModelFileName);
