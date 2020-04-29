@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSCT.GUI.EMVLauncher", "WSCT.GUI.EMVLauncher\WSCT.GUI.EMVLauncher.csproj", "{8EB311E3-B783-4D33-987D-DE455CAD626B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console EMV Tests", "Console EMV Tests\Console EMV Tests.csproj", "{4963702E-B3E4-4D18-9F9C-0106B3A4E757}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console EMV Tests", "Console EMV Tests\Console EMV Tests.csproj", "{4963702E-B3E4-4D18-9F9C-0106B3A4E757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV Library", "EMV Library\EMV Library.csproj", "{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Library", "EMV Library\EMV Library.csproj", "{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin EMV Explorer", "Plugin EMV Explorer\Plugin EMV Explorer.csproj", "{82E61FBB-4DA3-4048-A94B-80E06E1AF942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV Library Unit Tests", "EMV Library Unit Tests\EMV Library Unit Tests.csproj", "{FC8BC7B1-1E3E-4E61-BA15-EB013719B8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Library Unit Tests", "EMV Library Unit Tests\EMV Library Unit Tests.csproj", "{FC8BC7B1-1E3E-4E61-BA15-EB013719B8E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{74CA6C28-9DAA-4D52-8FAB-384620D390EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,13 +20,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{74CA6C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV Card Personalisation", "EMV Card Personalisation\EMV Card Personalisation.csproj", "{D2A34CFC-E2AA-473C-A153-24A91FFFC93C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Card Personalisation", "EMV Card Personalisation\EMV Card Personalisation.csproj", "{D2A34CFC-E2AA-473C-A153-24A91FFFC93C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV Issuer Certificate Generation", "EMV Issuer Certificate Generation\EMV Issuer Certificate Generation.csproj", "{CEF13D63-352E-46A5-AA35-603D1B004FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Issuer Certificate Generation", "EMV Issuer Certificate Generation\EMV Issuer Certificate Generation.csproj", "{CEF13D63-352E-46A5-AA35-603D1B004FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV ICC Certificate Generation", "EMV ICC Certificate Generation\EMV ICC Certificate Generation.csproj", "{663DC825-C512-49C9-8B6E-3757E74B3551}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV ICC Certificate Generation", "EMV ICC Certificate Generation\EMV ICC Certificate Generation.csproj", "{663DC825-C512-49C9-8B6E-3757E74B3551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMV RSA Key Generation", "EMV RSA Key Generation\EMV RSA Key Generation.csproj", "{CB07EDEA-7451-455A-850A-F877A74DF63F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV RSA Key Generation", "EMV RSA Key Generation\EMV RSA Key Generation.csproj", "{CB07EDEA-7451-455A-850A-F877A74DF63F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{107917D7-C1EC-4FD3-8578-A89A71B4DD55}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

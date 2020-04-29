@@ -11,7 +11,7 @@
     <PackageTags>wsct, emv</PackageTags>
     <Version>1.1.0</Version>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <AssemblyName>wsct-emvicc</AssemblyName>
+    <AssemblyName>wsct-emvissuer</AssemblyName>
     <RootNamespace>WSCT.EMV.IssuerCertificateGenerationConsole</RootNamespace>
     <OutputType>Exe</OutputType>
     <OutputPath>..\binaries</OutputPath>
