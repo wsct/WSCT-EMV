@@ -3,7 +3,7 @@ using System.IO;
 using WSCT.EMV.Personalization;
 using WSCT.Helpers.Json;
 
-namespace WSCT.EMV.CardPersonalisationConsole
+namespace WSCT.EMV.CardPersonalizationConsole
 {
     class Program
     {
