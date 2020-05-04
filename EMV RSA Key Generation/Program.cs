@@ -4,10 +4,8 @@ using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
-using WSCT.EMV.Personalization;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
-using WSCT.Helpers.Desktop;
 using WSCT.Helpers.Json;
 
 namespace WSCT.EMV.IccCertificateGenerationConsole
@@ -20,8 +18,6 @@ namespace WSCT.EMV.IccCertificateGenerationConsole
 
         private static void Main( /*string[] args*/)
         {
-            RegisterPcl.Register();
-
             ShowHeader();
 
             Console.WriteLine("Computing a new RSA Key");

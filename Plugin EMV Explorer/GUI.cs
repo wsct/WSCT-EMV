@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using WSCT.EMV.Card;
 using WSCT.EMV.Objects;
@@ -33,6 +31,8 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         public Gui()
         {
             InitializeComponent();
+
+            Icon = Common.Resources.Icons.WSCT;
 
             _pluginConfiguration = SerializedObject<PluginConfiguration>.LoadFromXml(@"Config.EMVExplorer.xml");
 

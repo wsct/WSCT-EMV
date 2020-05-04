@@ -1,113 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8EB311E3-B783-4D33-987D-DE455CAD626B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
+    <TargetFrameworks>net462;netcoreapp3.1</TargetFrameworks>
+    <PackageId>WSCT.GUI.EMVLauncher</PackageId>
+    <Authors>Sylvain Vernois</Authors>
+    <Company>ENSICAEN</Company>
+    <Product>WSCT</Product>
+    <Copyright>Copyright © Sylvain Vernois / ENSICAEN 2007-2020</Copyright>
     <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>WSCT.GUI.EMVLauncher.Program</StartupObject>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>bin\Debug\</OutputPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>bin\Release\</OutputPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>chip2.ico</ApplicationIcon>
+    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
+    <Description>Launcher of WSCT GUI configured with EMV plugins.</Description>
+    <ApplicationIcon></ApplicationIcon>
+    <Version>6.3.0</Version>
+    <Win32Resource />
+    <OutputType>WinExe</OutputType>
+    <StartupObject />
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="WSCT.GUI" Version="6.1.0.1" />
+    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.1.0.1" />
+    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Stack.Channel.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <None Update="Stack.Context.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WSCT GUI\Layer Interactive\Layer Interactive.csproj">
-      <Project>{8843a8de-b802-4049-84ca-7eab27bcd39f}</Project>
-      <Name>Layer Interactive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT GUI\Plugin Interactive Layer\Plugin Interactive Layer.csproj">
-      <Project>{4ba36ce0-8ffa-401f-b630-a25eac2aaddf}</Project>
-      <Name>Plugin Interactive Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT GUI\Plugin ISO7816 Tools\Plugin ISO7816 Tools.csproj">
-      <Project>{b2f69421-36d1-40e2-b36c-165a622b810c}</Project>
-      <Name>Plugin ISO7816 Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT GUI\WSCT.GUI\WSCT.GUI.csproj">
-      <Project>{ad3f035d-2806-4f94-8c29-09e5e183c36d}</Project>
-      <Name>WSCT.GUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EMV Library\EMV Library.csproj">
-      <Project>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</Project>
-      <Name>EMV Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj">
-      <Project>{82E61FBB-4DA3-4048-A94B-80E06E1AF942}</Project>
-      <Name>Plugin EMV Explorer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="chip2.ico" />
-    <Content Include="Stack.Channel.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Stack.Context.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

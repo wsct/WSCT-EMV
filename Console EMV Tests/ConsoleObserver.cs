@@ -1,13 +1,12 @@
 using System;
 using WSCT.Core;
-using WSCT.Core.APDU;
 using WSCT.Core.Events;
 using WSCT.Helpers;
 using WSCT.Stack;
 using WSCT.Wrapper;
 using WSCT.Wrapper.Desktop.Core;
 
-namespace WSCT.ConsoleEMVTests
+namespace WSCT.EMV.ConsoleTests
 {
     internal class ConsoleObserver
     {

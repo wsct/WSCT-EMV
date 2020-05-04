@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace WSCT.EMV.CardPersonalisationConsole
+namespace WSCT.EMV.CardPersonalizationConsole
 {
     [DataContract]
     class DgiContainer

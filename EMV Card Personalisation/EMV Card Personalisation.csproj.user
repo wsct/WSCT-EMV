@@ -9,5 +9,6 @@
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ActiveDebugFramework>netcoreapp3.1</ActiveDebugFramework>
   </PropertyGroup>
 </Project>

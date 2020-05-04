@@ -1,167 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Product>WSCT.EMV</Product>
+    <Description>EMV Library implementation for WSCT.</Description>
+    <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
+    <Authors>Sylvain Vernois</Authors>
+    <Company>ENSICAEN</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
+    <PackageTags>wsct, emv</PackageTags>
+    <PackageReleaseNotes>Creation of the nuget package.</PackageReleaseNotes>
+    <Version>3.1.0</Version>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <PackageId>WSCT.EMV</PackageId>
     <RootNamespace>WSCT.EMV</RootNamespace>
     <AssemblyName>WSCT.EMV</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Remove="Dictionary.EMVTag.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Dictionary.EMVTag.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card\CardChannelTerminalTransportLayer.cs" />
-    <Compile Include="Card\EMVApplication.cs" />
-    <Compile Include="Card\EMVDefinitionFile.cs" />
-    <Compile Include="Card\EmvEventArgs.cs" />
-    <Compile Include="Card\PaymentSystemEnvironment.cs" />
-    <Compile Include="Card\PINBlock.cs" />
-    <Compile Include="Card\PlaintextPINBlock.cs" />
-    <Compile Include="Card\VisaContactlessApplication.cs" />
-    <Compile Include="Commands\EMVReadRecordCommand.cs" />
-    <Compile Include="Commands\EMVSelectByNameCommand.cs" />
-    <Compile Include="Exceptions\LogEntryNotFoundException.cs" />
-    <Compile Include="Exceptions\LogFormatNotFoundException.cs" />
-    <Compile Include="Objects\AflEntry.cs" />
-    <Compile Include="Objects\ApplicationCryptogram.cs" />
-    <Compile Include="Objects\ApplicationFileLocator.cs" />
-    <Compile Include="Objects\ApplicationIdentifier.cs" />
-    <Compile Include="Objects\ApplicationInterchangeProfile.cs" />
-    <Compile Include="Objects\ApplicationLabel.cs" />
-    <Compile Include="Objects\ApplicationTemplate.cs" />
-    <Compile Include="Objects\ApplicationTransactionCounter.cs" />
-    <Compile Include="Objects\ApplicationUsageControl.cs" />
-    <Compile Include="Objects\CardholderVerificationMethodList.cs" />
-    <Compile Include="Objects\CertificationAuthorityPublicKeyIndex.cs" />
-    <Compile Include="Objects\CryptogramInformationData.cs" />
-    <Compile Include="Objects\DataObjectList.cs" />
-    <Compile Include="Objects\DedicatedFileName.cs" />
-    <Compile Include="Objects\FileControlInformationIssuer.cs" />
-    <Compile Include="Objects\FileControlInformationProprietary.cs" />
-    <Compile Include="Objects\FileControlInformationTemplate.cs" />
-    <Compile Include="Objects\LanguagePreference.cs" />
-    <Compile Include="Objects\LogEntry.cs" />
-    <Compile Include="Objects\ShortFileIdentifier.cs" />
-    <Compile Include="Objects\TerminalVerificationResult.cs" />
-    <Compile Include="Personalization\AcidModel.cs" />
-    <Compile Include="Personalization\EmvIccContext.cs" />
-    <Compile Include="Personalization\EmvIssuerContext.cs" />
-    <Compile Include="Personalization\FciModel.cs" />
-    <Compile Include="Personalization\DgiBuilder.cs" />
-    <Compile Include="Personalization\EmvPersonalizationData.cs" />
-    <Compile Include="Personalization\EmvPersonalizationModel.cs" />
-    <Compile Include="Personalization\IccCertificateBuilder.cs" />
-    <Compile Include="Personalization\IssuerCertificateBuilder.cs" />
-    <Compile Include="Personalization\IccCertificateData.cs" />
-    <Compile Include="Personalization\IssuerCertificateData.cs" />
-    <Compile Include="Personalization\CertificationAuthorityPrivateKey.cs" />
-    <Compile Include="Personalization\TagModel.cs" />
-    <Compile Include="Personalization\TagValuesSequenceModel.cs" />
-    <Compile Include="Personalization\TagLengthModel.cs" />
-    <Compile Include="Personalization\LogModel.cs" />
-    <Compile Include="Personalization\RecordModel.cs" />
-    <Compile Include="Personalization\Track2EquivalentDataModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AbstractDataAuthenticationFormat03.cs" />
-    <Compile Include="Security\AbstractDataAuthenticationFormat05.cs" />
-    <Compile Include="Security\AbstractPublicKeyCertificate.cs" />
-    <Compile Include="Security\AbstractSignatureContainer.cs" />
-    <Compile Include="Security\CertificationAuthority.cs" />
-    <Compile Include="Security\CertificationAuthorityRepository.cs" />
-    <Compile Include="Security\PrivateKey.cs" />
-    <Compile Include="Security\SignedCombinedApplicationData.cs" />
-    <Compile Include="Security\CryptogramType.cs" />
-    <Compile Include="Security\Cryptography.cs" />
-    <Compile Include="Security\SignedDynamicApplicationData.cs" />
-    <Compile Include="Security\EMVBadRecoveredDataException.cs" />
-    <Compile Include="Security\EMVCertificationAuthorityNotFoundException.cs" />
-    <Compile Include="Security\HashAlgorithmFactory.cs" />
-    <Compile Include="Security\HashAlgorithmUnknownException.cs" />
-    <Compile Include="Security\IccPublicKeyCertificate.cs" />
-    <Compile Include="Security\IHashAlgorithmProvider.cs" />
-    <Compile Include="Security\IssuerPublicKeyCertificate.cs" />
-    <Compile Include="Security\PublicKey.cs" />
-    <Compile Include="Security\SHA1HashAlgorithmProvider.cs" />
-    <Compile Include="Security\SignedStaticApplicationData.cs" />
-    <Compile Include="Tags\DateFormattedTag.cs" />
-    <Compile Include="Terminal\TerminalCapabilities.cs" />
-    <Compile Include="Terminal\TerminalConfiguration.cs" />
-    <Compile Include="Transaction\TransactionContext.cs" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
+    <PackageReference Include="WSCT.Core" Version="6.1.1" />
+    <PackageReference Include="WSCT.Helpers" Version="4.1.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Dictionary.EMVTag.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Dictionary.EMVTag.xsx">
-      <DependentUpon>Dictionary.EMVTag.xsd</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WSCT Core\WSCT.Helpers\WSCT.Helpers.csproj">
-      <Project>{b95b0e58-9296-4a15-aa69-10a7b6dc2267}</Project>
-      <Name>WSCT.Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WSCT Core\WSCT\WSCT.csproj">
-      <Project>{4eabe8da-0bcb-4bc6-a571-7618ac0ec4b6}</Project>
-      <Name>WSCT</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="crypto">
-      <HintPath>..\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Activez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est le suivant : {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

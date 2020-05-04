@@ -7,12 +7,11 @@ using WSCT.Core;
 using WSCT.EMV.Card;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
-using WSCT.Helpers.Desktop;
 using WSCT.ISO7816;
 using WSCT.Wrapper;
 using WSCT.Wrapper.Desktop.Core;
 
-namespace WSCT.ConsoleEMVTests
+namespace WSCT.EMV.ConsoleTests
 {
     internal class Program
     {
@@ -33,8 +32,6 @@ namespace WSCT.ConsoleEMVTests
             {
             }
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            RegisterPcl.Register();
 
             new Program().Run();
         }
