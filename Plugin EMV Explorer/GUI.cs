@@ -128,6 +128,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             // Set the Certification Authorities
             _emv.CertificationAuthorityRepository = _certificationAuthorityRepository;
 
+            // Add default terminal data
+            _emv.TlvTerminalData.AddRange(_pluginConfiguration.transactionContext.TlvDatas);
+
             // Select the PSE
             _emv.Select();
 
@@ -313,9 +316,6 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
             else
             {
-                // Add default terminal data
-                _emv.TlvTerminalData.AddRange(_pluginConfiguration.transactionContext.TlvDatas);
-
                 byte[] unpredictableNumber;
                 try
                 {
