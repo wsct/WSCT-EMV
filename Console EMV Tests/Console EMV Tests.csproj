@@ -17,7 +17,7 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.2.1" />
+    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.2.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

@@ -17,9 +17,9 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.GUI" Version="6.1.0.1" />
-    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.1.0.1" />
-    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.1.0.1" />
+    <PackageReference Include="WSCT.GUI" Version="6.1.1" />
+    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.1.1" />
+    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
