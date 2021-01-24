@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net462</TargetFrameworks>
+    <TargetFrameworks>net5.0;net462</TargetFrameworks>
     <Product>EMV RSA Key Generation</Product>
     <Description>EMV RSA Key Generation Console for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
@@ -9,12 +9,11 @@
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
-    <Version>1.1.0</Version>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <AssemblyName>wsct-emvrsa</AssemblyName>
     <RootNamespace>WSCT.EMV.IccCertificateGenerationConsole</RootNamespace>
     <OutputType>Exe</OutputType>
     <OutputPath>..\binaries</OutputPath>
+    <Version>1.1.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

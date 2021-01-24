@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net462</TargetFrameworks>
+    <TargetFrameworks>net5.0;net462</TargetFrameworks>
     <Product>WSCT Console EMV Tests</Product>
     <Description>Test Console of EMV Library for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
@@ -9,8 +9,7 @@
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
-    <Version>3.1.0</Version>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <Version>3.1.1</Version>
     <PackageId>WSCT.EMV.ConsoleTests</PackageId>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AssemblyName>WSCT.EMV.ConsoleTests</AssemblyName>
@@ -18,7 +17,7 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.2.0" />
+    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

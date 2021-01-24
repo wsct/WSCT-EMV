@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
     <PackageId>WSCT.GUI.EMVLauncher</PackageId>
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
@@ -10,7 +10,7 @@
     <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
     <Description>Launcher of WSCT GUI configured with EMV plugins.</Description>
     <ApplicationIcon></ApplicationIcon>
-    <Version>6.3.0</Version>
+    <Version>6.3.1</Version>
     <Win32Resource />
     <OutputType>WinExe</OutputType>
     <StartupObject />

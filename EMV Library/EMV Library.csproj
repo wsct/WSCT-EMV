@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <Product>WSCT.EMV</Product>
     <Description>EMV Library implementation for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
@@ -10,9 +10,8 @@
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
-    <PackageReleaseNotes>Creation of the nuget package.</PackageReleaseNotes>
-    <Version>3.1.0</Version>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <PackageReleaseNotes>Targets net 5.0</PackageReleaseNotes>
+    <Version>3.1.1</Version>
     <PackageId>WSCT.EMV</PackageId>
     <RootNamespace>WSCT.EMV</RootNamespace>
     <AssemblyName>WSCT.EMV</AssemblyName>
@@ -27,7 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
-    <PackageReference Include="WSCT.Core" Version="6.1.1" />
-    <PackageReference Include="WSCT.Helpers" Version="4.1.0" />
+    <PackageReference Include="WSCT.Core" Version="6.1.2" />
+    <PackageReference Include="WSCT.Helpers" Version="5.0.1" />
   </ItemGroup>
 </Project>
