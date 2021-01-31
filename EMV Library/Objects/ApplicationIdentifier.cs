@@ -17,7 +17,7 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public string Rid
         {
-            get { return Tlv.Value != null ? Tlv.Value.ToHexa(5) : String.Empty; }
+            get { return Tlv.Value != null && Tlv.Value.Length >= 5 ? Tlv.Value.ToHexa(5) : String.Empty; }
             set
             {
                 if (Tlv.Value == null)
