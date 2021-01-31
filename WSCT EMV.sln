@@ -3,22 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSCT.GUI.EMVLauncher", "WSCT.GUI.EMVLauncher\WSCT.GUI.EMVLauncher.csproj", "{8EB311E3-B783-4D33-987D-DE455CAD626B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSCT.GUI.EMVLauncher", "WSCT.GUI.EMVLauncher\WSCT.GUI.EMVLauncher.csproj", "{8EB311E3-B783-4D33-987D-DE455CAD626B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console EMV Tests", "Console EMV Tests\Console EMV Tests.csproj", "{4963702E-B3E4-4D18-9F9C-0106B3A4E757}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Library", "EMV Library\EMV Library.csproj", "{162E1CB7-03F5-4F2A-9DEE-0FEAF07EF4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin EMV Explorer", "Plugin EMV Explorer\Plugin EMV Explorer.csproj", "{82E61FBB-4DA3-4048-A94B-80E06E1AF942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin EMV Explorer", "Plugin EMV Explorer\Plugin EMV Explorer.csproj", "{82E61FBB-4DA3-4048-A94B-80E06E1AF942}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Library Unit Tests", "EMV Library Unit Tests\EMV Library Unit Tests.csproj", "{FC8BC7B1-1E3E-4E61-BA15-EB013719B8E5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{74CA6C28-9DAA-4D52-8FAB-384620D390EA}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMV Card Personalisation", "EMV Card Personalisation\EMV Card Personalisation.csproj", "{D2A34CFC-E2AA-473C-A153-24A91FFFC93C}"
 EndProject
