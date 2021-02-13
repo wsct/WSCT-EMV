@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
-    <Version>3.1.0.0</Version>
+    <Version>3.2.0.0</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>WSCT.GUI.Plugins.EMVExplorer</RootNamespace>
     <AssemblyName>Plugins.EMVExplorer</AssemblyName>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <Copyright>Copyright © Sylvain Vernois 2010-2020</Copyright>
     <Product>WSCT</Product>
     <Company>ENSICAEN</Company>
     <Authors>Sylvain Vernois</Authors>
     <PackageId>WSCT.GUI.Plugins.EMVExplorer</PackageId>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageProjectUrl>https://github.com/wsct/WSCT-GUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <Description>EMV Explorer Plugin for WinSCard GUI.</Description>
     <OutputType>Library</OutputType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>3.1.1.0</AssemblyVersion>
-    <FileVersion>3.1.1.0</FileVersion>
+    <PackageTags>wsct, emv, plugin</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WSCT.GUI" Version="6.1.1" />
