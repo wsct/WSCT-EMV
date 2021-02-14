@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFrameworks>net462;net5.0-windows</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <Version>0.9.0.1</Version>
+
+    <UseWindowsForms>true</UseWindowsForms>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <LangVersion>9.0</LangVersion>
+
+    <Copyright>Copyright © Sylvain Vernois / ENSICAEN 2021</Copyright>
+    <Product>WSCT</Product>
+    <Company>ENSICAEN</Company>
+    <Authors>Sylvain Vernois</Authors>
+    <PackageId>WSCT.GUI.Plugins.EMV.Personalization</PackageId>
+    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
+    <Description>Plugin allowing the personalization of an EMV card (especially the EMV Applet made for ENSICAEN practice work).</Description>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Plugin.EMV.Personalization</AssemblyName>
+    <RootNamespace>WSCT.GUI.Plugins.EMV.Personalization</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>wsct, emv, plugin</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Personalization\emv-card-data.json" />
+    <None Remove="Personalization\emv-card-model.json" />
+    <None Remove="Personalization\emv-icc-context.json" />
+    <None Remove="Personalization\emv-issuer-context.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Personalization\emv-card-data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Personalization\emv-card-model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Personalization\emv-icc-context.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Personalization\emv-issuer-context.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WSCT.Core" Version="6.1.3" />
+    <PackageReference Include="WSCT.GUI.Plugins" Version="5.1.1" />
+    <PackageReference Include="WSCT.GUI.Resources" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Gui.cs" SubType="Form" />
+    <Compile Update="Gui.designer.cs" SubType="Form" DependentUpon="Gui.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Lang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Dictionary.StatusWord.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Plugin.ISO7816Tools.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

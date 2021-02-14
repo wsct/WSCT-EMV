@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
+    <ProjectReference Include="..\Plugin EMV Personalizarion\Plugin EMV Personalizarion.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Stack.Channel.xml">
