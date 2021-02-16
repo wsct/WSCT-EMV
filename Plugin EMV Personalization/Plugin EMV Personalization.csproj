@@ -2,11 +2,15 @@
   <PropertyGroup>
     <TargetFrameworks>net462;net5.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>0.9.0.1</Version>
+    <Version>0.9.0.2</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>WSCT.GUI.Plugins.EMV.Personalization</PackageId>
+
+    <AssemblyName>Plugin.EMV.Personalization</AssemblyName>
+    <RootNamespace>WSCT.GUI.Plugins.EMV.Personalization</RootNamespace>
 
     <LangVersion>9.0</LangVersion>
 
@@ -14,34 +18,36 @@
     <Product>WSCT</Product>
     <Company>ENSICAEN</Company>
     <Authors>Sylvain Vernois</Authors>
-    <PackageId>WSCT.GUI.Plugins.EMV.Personalization</PackageId>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <Description>Plugin allowing the personalization of an EMV card (especially the EMV Applet made for ENSICAEN practice work).</Description>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Plugin.EMV.Personalization</AssemblyName>
-    <RootNamespace>WSCT.GUI.Plugins.EMV.Personalization</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>wsct, emv, plugin</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Personalization\emv-card-data.json" />
-    <None Remove="Personalization\emv-card-model.json" />
-    <None Remove="Personalization\emv-icc-context.json" />
-    <None Remove="Personalization\emv-issuer-context.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Personalization\emv-card-data.json">
+      <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
     <Content Include="Personalization\emv-card-model.json">
+      <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
     <Content Include="Personalization\emv-icc-context.json">
+      <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
     <Content Include="Personalization\emv-issuer-context.json">
+      <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -68,13 +74,5 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Dictionary.StatusWord.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Plugin.ISO7816Tools.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

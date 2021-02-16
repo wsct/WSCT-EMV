@@ -1,28 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <Version>3.2.0</Version>
-    <RootNamespace>WSCT.EMV</RootNamespace>
+    <OutputType>Library</OutputType>
+    <Version>3.2.0.1</Version>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PackageId>WSCT.EMV</PackageId>
+
     <AssemblyName>WSCT.EMV</AssemblyName>
+    <RootNamespace>WSCT.EMV</RootNamespace>
 
     <Product>WSCT.EMV</Product>
     <Description>EMV Library implementation for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
     <PackageReleaseNotes>Targets net 5.0</PackageReleaseNotes>
-    <PackageId>WSCT.EMV</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Dictionary.EMVTag.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Dictionary.EMVTag.xml">
+      <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

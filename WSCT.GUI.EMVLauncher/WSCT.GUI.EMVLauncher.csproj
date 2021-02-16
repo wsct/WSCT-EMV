@@ -1,29 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <Version>6.3.2</Version>
+
+    <UseWindowsForms>true</UseWindowsForms>
+
     <PackageId>WSCT.GUI.EMVLauncher</PackageId>
+
+    <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
+    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
+
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
     <Product>WSCT</Product>
     <Copyright>Copyright © Sylvain Vernois / ENSICAEN 2007-2020</Copyright>
-    <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
-    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
     <Description>Launcher of WSCT GUI configured with EMV plugins.</Description>
     <ApplicationIcon></ApplicationIcon>
-    <Version>6.3.1</Version>
     <Win32Resource />
-    <OutputType>WinExe</OutputType>
     <StartupObject />
-    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
     <PackageReference Include="WSCT.GUI" Version="6.1.1" />
     <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.1.1" />
     <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
-    <ProjectReference Include="..\Plugin EMV Personalizarion\Plugin EMV Personalizarion.csproj" />
+    <ProjectReference Include="..\Plugin EMV Personalization\Plugin EMV Personalization.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Stack.Channel.xml">
