@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net462;net5.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>0.9.0.2</Version>
+    <Version>0.9.1.0</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -25,29 +25,45 @@
     <PackageTags>wsct, emv, plugin</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Personalization\emv-card-data.json">
+    <None Remove="pse-personalization\pse-card-data.json" />
+    <None Remove="pse-personalization\pse-card-model.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="emv-personalization\emv-card-data.json">
       <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>True</Pack>
       <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
-    <Content Include="Personalization\emv-card-model.json">
+    <Content Include="emv-personalization\emv-card-model.json">
       <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>True</Pack>
       <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
-    <Content Include="Personalization\emv-icc-context.json">
+    <Content Include="emv-personalization\emv-icc-context.json">
       <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>True</Pack>
       <PackageCopyToOutput>True</PackageCopyToOutput>
     </Content>
-    <Content Include="Personalization\emv-issuer-context.json">
+    <Content Include="emv-personalization\emv-issuer-context.json">
       <Visible>True</Visible>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>True</Pack>
       <PackageCopyToOutput>True</PackageCopyToOutput>
+    </Content>
+    <Content Include="pse-personalization\pse-card-data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>True</Visible>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
+      <Pack>True</Pack>
+    </Content>
+    <Content Include="pse-personalization\pse-card-model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>True</Visible>
+      <PackageCopyToOutput>True</PackageCopyToOutput>
+      <Pack>True</Pack>
     </Content>
   </ItemGroup>
   <ItemGroup>

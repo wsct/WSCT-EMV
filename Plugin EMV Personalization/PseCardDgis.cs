@@ -2,5 +2,5 @@
 
 namespace WSCT.GUI.Plugins.EMV.Personalization
 {
-    internal record CardDgis(string Fci, string Gpo, string Acid, List<string> Records);
+    internal record PseCardDgis(string Fci, List<string> Records);
 }

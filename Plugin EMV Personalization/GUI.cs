@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WSCT.EMV.Card;
 using WSCT.EMV.Commands;
 using WSCT.EMV.Personalization;
 using WSCT.Helpers;
@@ -18,8 +21,10 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
     /// </summary>
     public partial class Gui : Form
     {
-        private const string DefaultFolder = "Personalization";
-        private string PersonalizationFolder { get => guiFolderBrowserDialog.SelectedPath; }
+        private const string DefaultEmvFolder = "emv-personalization";
+        private const string DefaultPseFolder = "pse-personalization";
+        private string EmvPersonalizationFolder => guiEmvFolderBrowserDialog.SelectedPath;
+        private string PsePersonalizationFolder => guiPseFolderBrowserDialog.SelectedPath;
 
         #region >> Constructor
 
@@ -30,10 +35,14 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
             Icon = Common.Resources.Icons.WSCT;
 
-            guiFolderBrowserDialog.SelectedPath = Directory.GetCurrentDirectory();
-            if (Directory.Exists(DefaultFolder))
+            guiEmvFolderBrowserDialog.SelectedPath = Directory.GetCurrentDirectory();
+            if (Directory.Exists(DefaultEmvFolder))
             {
-                guiFolderBrowserDialog.SelectedPath = Path.Combine(Directory.GetCurrentDirectory(), DefaultFolder);
+                guiEmvFolderBrowserDialog.SelectedPath = Path.Combine(Directory.GetCurrentDirectory(), DefaultEmvFolder);
+            }
+            if (Directory.Exists(DefaultPseFolder))
+            {
+                guiPseFolderBrowserDialog.SelectedPath = Path.Combine(Directory.GetCurrentDirectory(), DefaultPseFolder);
             }
         }
 
@@ -41,7 +50,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
         #region >> gui * Click
 
-        private async void guiDoRunPersonalization_Click(object sender, EventArgs e)
+        private async void guiDoRunEmvPersonalization_Click(object sender, EventArgs e)
         {
             guiLogs.Clear();
 
@@ -63,33 +72,80 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             }
 
 
-            var cardData = await Task.Run(LoadPersonalizationFolder);
+            var emvData = await Task.Run(LoadEmvPersonalizationFolder);
 
-            var cardDgis = await Task.Run(() => BuildDgi(cardData));
+            var emvDgis = await Task.Run(() => BuildDgi(emvData));
 
-            await Task.Run(() => TransmitToApplet(cardDgis, emvAid));
+            await Task.Run(() => TransmitToEmvApplet(emvDgis, emvAid));
         }
 
-        private void guiDoSelectPersonalizationFolder_ClickAsync(object sender, EventArgs e)
+        private async void guiDoRunPsePersonalization_Click(object sender, EventArgs e)
         {
-            if (guiFolderBrowserDialog.ShowDialog() == DialogResult.OK && guiFolderBrowserDialog.SelectedPath != "")
+            guiLogs.Clear();
+
+            var pseNameAsString = guiPSEAppletName.Text;
+            byte[] emvAid;
+
+            LogActionStart($"Verifying AID: {pseNameAsString}");
+
+            try
             {
+                emvAid = pseNameAsString.FromString();
+
+                LogSuccess();
+            }
+            catch (Exception _)
+            {
+                LogFailure("The DF Name is malformed");
+                return;
+            }
+
+
+            var pseData = await Task.Run(LoadPsePersonalizationFolder);
+
+            var pseDgis = await Task.Run(() => BuildDgi(pseData));
+
+            await Task.Run(() => TransmitToPseApplet(pseDgis, emvAid));
+        }
+
+        private void guiDoSelectEmvPersonalizationFolder_ClickAsync(object sender, EventArgs e)
+        {
+            if (guiEmvFolderBrowserDialog.ShowDialog() == DialogResult.OK && guiEmvFolderBrowserDialog.SelectedPath != "")
+            {
+                // TODO
+            }
+        }
+
+        private void guiDoSelectPsePersonalizationFolder_Click(object sender, EventArgs e)
+        {
+            if (guiPseFolderBrowserDialog.ShowDialog() == DialogResult.OK && guiPseFolderBrowserDialog.SelectedPath != "")
+            {
+                // TODO
             }
         }
 
         #endregion
 
-        private CardData LoadPersonalizationFolder()
+        private EmvPersonalizationData LoadEmvPersonalizationFolder()
         {
-            var model = LoadDataFromFile<EmvPersonalizationModel>(@"emv-card-model.json");
-            var data = LoadDataFromFile<EmvPersonalizationData>(@"emv-card-data.json");
-            var issuerContext = LoadDataFromFile<EmvIssuerContext>(@"emv-issuer-context.json");
-            var iccContext = LoadDataFromFile<EmvIccContext>(@"emv-icc-context.json");
+            var model = LoadDataFromFile<EmvPersonalizationModel>(EmvPersonalizationFolder, @"emv-card-model.json");
+            var data = LoadDataFromFile<WSCT.EMV.Personalization.EmvPersonalizationData>(EmvPersonalizationFolder, @"emv-card-data.json");
+            var issuerContext = LoadDataFromFile<EmvIssuerContext>(EmvPersonalizationFolder, @"emv-issuer-context.json");
+            var iccContext = LoadDataFromFile<EmvIccContext>(EmvPersonalizationFolder, @"emv-icc-context.json");
+            var pinBlock = LoadPinBlockFromString(guiAppletPin.Text);
 
-            return new CardData(model, data, issuerContext, iccContext);
+            return new EmvPersonalizationData(model, data, issuerContext, iccContext, pinBlock);
         }
 
-        private CardDgis BuildDgi(CardData cardData)
+        private PsePersonalizationData LoadPsePersonalizationFolder()
+        {
+            var model = LoadDataFromFile<PsePersonalizationModel>(PsePersonalizationFolder, @"pse-card-model.json");
+            var data = LoadDataFromFile<WSCT.EMV.Personalization.PsePersonalizationData>(PsePersonalizationFolder, @"pse-card-data.json");
+
+            return new PsePersonalizationData(model, data);
+        }
+
+        private EmvCardDgis BuildDgi(EmvPersonalizationData cardData)
         {
             var builder = new DgiBuilder(cardData.Model, cardData.Data, cardData.IssuerContext, cardData.IccContext);
 
@@ -114,10 +170,50 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
                 }
             }
 
-            return new CardDgis(fci, gpo, acid, records);
+            LogActionStart($"Building DGI PINBlock '{guiAppletPin.Text}': ");
+
+            string pin = default;
+            try
+            {
+                pin = $"8010{cardData.PinBlock.PinBlock.Length:X2}{cardData.PinBlock.PinBlock.ToHexa('\0')}";
+
+                LogSuccess();
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+            }
+
+            return new EmvCardDgis(fci, gpo, acid, records, pin);
         }
 
-        private T LoadDataFromFile<T>(string fileName)
+        private PseCardDgis BuildDgi(PsePersonalizationData cardData)
+        {
+            var builder = new PseDgiBuilder(cardData.Model, cardData.Data);
+
+            var fci = builder.BuildDgi(cardData.Model.Fci);
+
+            var records = new List<string>();
+            foreach (var pseRecords in cardData.Data.Records.GroupBy(r => r.Index))
+            {
+                LogActionStart($"Building DGI Record '0x01.{pseRecords.Key}': ");
+
+                try
+                {
+                    records.Add(builder.BuildDgi(0x01, pseRecords.Key, pseRecords));
+
+                    LogSuccess();
+                }
+                catch (Exception exception)
+                {
+                    LogException(exception);
+                }
+            }
+
+            return new PseCardDgis(fci, records);
+        }
+
+        private T LoadDataFromFile<T>(string path, string fileName)
         {
             T result = default;
 
@@ -125,7 +221,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
             try
             {
-                result = Path.Combine(PersonalizationFolder, fileName).CreateFromJsonFile<T>();
+                result = Path.Combine(path, fileName).CreateFromJsonFile<T>();
 
                 LogSuccess();
             }
@@ -137,9 +233,29 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             return result;
         }
 
-        private void TransmitToApplet(CardDgis cardDgis, byte[] emvAid)
+        private PINBlock LoadPinBlockFromString(string pinAsString)
         {
-            LogActionStart($"SELECT {emvAid}");
+            PINBlock result = default;
+
+            LogActionStart($"Loading PIN '{pinAsString}': ");
+
+            try
+            {
+                result = new PlaintextPINBlock { ClearPIN = pinAsString.FromBcd() };
+
+                LogSuccess();
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+            }
+
+            return result;
+        }
+
+        private void TransmitToEmvApplet(EmvCardDgis cardDgis, byte[] emvAid)
+        {
+            LogActionStart($"SELECT {emvAid.ToHexa('\0')}");
             TransmitToCard(new EMVSelectByNameCommand(emvAid));
 
             LogActionStart($"STORE DATA (FCI)");
@@ -161,13 +277,31 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             }
 
             LogActionStart($"STORE DATA (PIN)");
-            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, "8010021234"));
+            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, cardDgis.Pin));
 
             LogActionStart($"STORE DATA (KEY1)");
             TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, "810181801B7275A03FD397B2E5B14E4E9ADFBB491AA2F2CD28F55E623FEED0E564576351157EAE3E94505999DF9E6AA457B977F4A36AFA54FB52ECA0FB373608E48E545B716C25DCC8CF4343490A500A8DF26A2D81777969D4F584842E771BA36563EB63B7EBC87AEA35FC3A208D6A1D01795E326873597FCFD0CB7339A889A3075EF921"));
 
             LogActionStart($"STORE DATA (KEY2)");
             TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, "81038180986965A7274E4165C127C6847AF8EA7ED5CBDAA10F46BF192C70BEB5B83B355A70E7FFB941BCE0440C7A7E552D4256F8B427C0F7395A9301D8841FBC6186CD087F44AD46BC322811ECD90A5FF1B9F93229BA8F85F9C1C5B791DC02073034853D1F89B9E3D9543C1803EAFF85C340AB6C0A352D626B56B961DC88A41FF6E1562D"));
+        }
+
+        private void TransmitToPseApplet(PseCardDgis cardDgis, byte[] dfName)
+        {
+            LogActionStart($"SELECT {Encoding.UTF8.GetString(dfName)}");
+            TransmitToCard(new EMVSelectByNameCommand(dfName));
+
+            LogActionStart($"STORE DATA (FCI)");
+            TransmitToCard(new EMVStoreDataCommand(0, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, cardDgis.Fci));
+
+            // Records
+            byte dgiId = 0;
+            foreach (var record in cardDgis.Records)
+            {
+                dgiId++;
+                LogActionStart($"STORE DATA (Record {record.Substring(0, 4)}");
+                TransmitToCard(new EMVStoreDataCommand(dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, record));
+            }
         }
 
         private void TransmitToCard(CommandAPDU command)
