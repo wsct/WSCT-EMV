@@ -410,6 +410,7 @@
 
   <transactionContext id="1" name="default">
     <tlvDataList>
+      <!-- The coding of primitive context-specific class data objects in the ranges '80' to '9E' and '9F00' to '9F4F' is reserved for this specification. -->
       <!-- Amount, Authorised: Authorised amount of the transaction (excluding adjustments) -->
       <tlvData tag="9F02" value="000000001000" />
       <!-- Amount, Other: Secondary amount associated with the transaction representing a cashback amount -->
@@ -423,6 +424,17 @@
       <!-- Transaction Type: Indicates the type of financial transaction, represented by the first two digits of the ISO 8583:1987 Processing Code. The actual values to be used for the Transaction Type data element are defined by the relevant payment system
 			00: Purchase of goods and services - 01: Cash (ATM) - 20: Purchase return -->
       <tlvData tag="9C" value="00" />
+
+      <!-- The coding of tag 'BF0C' and constructed context-specific class data objects in the range 'BF20' to 'BF4F' is reserved for this specification -->
+
+      <!-- The coding of primitive context-specific class data objects in the range '9F50' to '9F7F' is reserved for the payment systems -->
+      <!-- Needed in GPO for some Mastercard cards (9F5C/08) -->
+      <tlvData tag="9F5C" value="0000000000000000" />
+
+      <!-- The coding of constructed context-specific class data objects in the ranges 'BF10' to 'BF1F' and 'BF50' to 'BF6F' is reserved for the payment systems -->
+
+      <!-- The coding of constructed context-specific class data objects in the ranges 'BF01' to 'BF0B', 'BF0D' to 'BF0F', and 'BF70' to 'BF7F' is left to the discretion of the issuer -->
+      
     </tlvDataList>
   </transactionContext>
 
