@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <Version>6.3.2</Version>
+    <Version>6.3.2.1</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 

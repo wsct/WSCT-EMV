@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>3.2.0.1</Version>
+    <Version>3.2.0.2</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
