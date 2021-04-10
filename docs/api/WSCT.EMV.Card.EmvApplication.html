@@ -1,0 +1,3446 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class EmvApplication
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class EmvApplication
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/wsct-logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WSCT.EMV.Card.EmvApplication">
+  
+  
+  <h1 id="WSCT_EMV_Card_EmvApplication" data-uid="WSCT.EMV.Card.EmvApplication" class="text-break">Class EmvApplication
+  </h1>
+  <div class="markdown level0 summary"><p>An <code>EMVApplication</code> instance represents an EMV application.
+Allows selection and use of the application.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html">EmvDefinitionFile</a></div>
+    <div class="level2"><span class="xref">EmvApplication</span></div>
+      <div class="level3"><a class="xref" href="WSCT.EMV.Card.VisaContactlessApplication.html">VisaContactlessApplication</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_LastStatusWord">EmvDefinitionFile.LastStatusWord</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_Name">EmvDefinitionFile.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_Aid">EmvDefinitionFile.Aid</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_TlvFci">EmvDefinitionFile.TlvFci</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_BeforeSelectEvent">EmvDefinitionFile.BeforeSelectEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_AfterSelectEvent">EmvDefinitionFile.AfterSelectEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_Select">EmvDefinitionFile.Select()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="WSCT.EMV.Card.html">WSCT.EMV.Card</a></h6>
+  <h6><strong>Assembly</strong>: WSCT.EMV.dll</h6>
+  <h5 id="WSCT_EMV_Card_EmvApplication_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EmvApplication : EmvDefinitionFile</code></pre>
+  </div>
+  <h5 id="WSCT_EMV_Card_EmvApplication_examples"><strong>Examples</strong></h5>
+  <pre><code>ICardChannel cardChannel;
+// ... acquire here a valid cardChannel instance ...
+EMVApplication emvApp = new EMVApplication(cardChannel);
+emvApp.aid = &quot;A0 00 00 00 03 10 10&quot;;
+emvApp.select();
+emvApp.getProcessingOptions();</code></pre>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=794">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication__ctor_" data-uid="WSCT.EMV.Card.EmvApplication.#ctor*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication__ctor_WSCT_Core_ICardChannel_" data-uid="WSCT.EMV.Card.EmvApplication.#ctor(WSCT.Core.ICardChannel)">EmvApplication(ICardChannel)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new <a class="xref" href="WSCT.EMV.Card.EmvApplication.html">EmvApplication</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EmvApplication(ICardChannel cardChannel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Core.ICardChannel</span></td>
+        <td><span class="parametername">cardChannel</span></td>
+        <td><p><span class="xref">WSCT.Core.ICardChannel</span> object to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=806">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication__ctor_" data-uid="WSCT.EMV.Card.EmvApplication.#ctor*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication__ctor_WSCT_Core_ICardChannel_WSCT_Helpers_BasicEncodingRules_TlvData_" data-uid="WSCT.EMV.Card.EmvApplication.#ctor(WSCT.Core.ICardChannel,WSCT.Helpers.BasicEncodingRules.TlvData)">EmvApplication(ICardChannel, TlvData)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new <a class="xref" href="WSCT.EMV.Card.EmvApplication.html">EmvApplication</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EmvApplication(ICardChannel cardChannel, TlvData tlvFromPSE)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Core.ICardChannel</span></td>
+        <td><span class="parametername">cardChannel</span></td>
+        <td><p><span class="xref">WSCT.Core.ICardChannel</span> object to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td><span class="parametername">tlvFromPSE</span></td>
+        <td><p><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> object coming from PSE records for this application</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=36">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__afl" data-uid="WSCT.EMV.Card.EmvApplication._afl">_afl</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ApplicationFileLocator _afl</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationFileLocator.html">ApplicationFileLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=37">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__aip" data-uid="WSCT.EMV.Card.EmvApplication._aip">_aip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ApplicationInterchangeProfile _aip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationInterchangeProfile.html">ApplicationInterchangeProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=38">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__applicationCryptogram1" data-uid="WSCT.EMV.Card.EmvApplication._applicationCryptogram1">_applicationCryptogram1</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ApplicationCryptogram _applicationCryptogram1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationCryptogram.html">ApplicationCryptogram</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=39">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__atcFromAC1" data-uid="WSCT.EMV.Card.EmvApplication._atcFromAC1">_atcFromAC1</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ApplicationTransactionCounter _atcFromAC1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationTransactionCounter.html">ApplicationTransactionCounter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=40">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__cda" data-uid="WSCT.EMV.Card.EmvApplication._cda">_cda</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SignedCombinedApplicationData _cda</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedCombinedApplicationData.html">SignedCombinedApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=41">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__cdol1" data-uid="WSCT.EMV.Card.EmvApplication._cdol1">_cdol1</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DataObjectList _cdol1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=42">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__cdol2" data-uid="WSCT.EMV.Card.EmvApplication._cdol2">_cdol2</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DataObjectList _cdol2</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=44">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__certificationAuthorityPublicKey" data-uid="WSCT.EMV.Card.EmvApplication._certificationAuthorityPublicKey">_certificationAuthorityPublicKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected PublicKey _certificationAuthorityPublicKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=45">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__certificationAuthorityRepository" data-uid="WSCT.EMV.Card.EmvApplication._certificationAuthorityRepository">_certificationAuthorityRepository</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CertificationAuthorityRepository _certificationAuthorityRepository</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CertificationAuthorityRepository.html">CertificationAuthorityRepository</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=46">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__cid1" data-uid="WSCT.EMV.Card.EmvApplication._cid1">_cid1</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CryptogramInformationData _cid1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.CryptogramInformationData.html">CryptogramInformationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=47">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__cvmList" data-uid="WSCT.EMV.Card.EmvApplication._cvmList">_cvmList</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CardholderVerificationMethodList _cvmList</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.CardholderVerificationMethodList.html">CardholderVerificationMethodList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=48">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__dda" data-uid="WSCT.EMV.Card.EmvApplication._dda">_dda</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SignedDynamicApplicationData _dda</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedDynamicApplicationData.html">SignedDynamicApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=49">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__ddol" data-uid="WSCT.EMV.Card.EmvApplication._ddol">_ddol</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DataObjectList _ddol</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=50">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__iccChallenge" data-uid="WSCT.EMV.Card.EmvApplication._iccChallenge">_iccChallenge</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected byte[] _iccChallenge</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=51">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__iccPublicKey" data-uid="WSCT.EMV.Card.EmvApplication._iccPublicKey">_iccPublicKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected PublicKey _iccPublicKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=52">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__iccPublicKeyCertificate" data-uid="WSCT.EMV.Card.EmvApplication._iccPublicKeyCertificate">_iccPublicKeyCertificate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IccPublicKeyCertificate _iccPublicKeyCertificate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.IccPublicKeyCertificate.html">IccPublicKeyCertificate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=53">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__issuerPublicKey" data-uid="WSCT.EMV.Card.EmvApplication._issuerPublicKey">_issuerPublicKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected PublicKey _issuerPublicKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=54">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__issuerPublicKeyCertificate" data-uid="WSCT.EMV.Card.EmvApplication._issuerPublicKeyCertificate">_issuerPublicKeyCertificate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IssuerPublicKeyCertificate _issuerPublicKeyCertificate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.IssuerPublicKeyCertificate.html">IssuerPublicKeyCertificate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=55">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__logEntry" data-uid="WSCT.EMV.Card.EmvApplication._logEntry">_logEntry</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected LogEntry _logEntry</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.LogEntry.html">LogEntry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=56">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__logFormat" data-uid="WSCT.EMV.Card.EmvApplication._logFormat">_logFormat</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DataObjectList _logFormat</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=57">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__logRecords" data-uid="WSCT.EMV.Card.EmvApplication._logRecords">_logRecords</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;List&lt;TlvData&gt;&gt; _logRecords</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=58">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__requestedAC1Type" data-uid="WSCT.EMV.Card.EmvApplication._requestedAC1Type">_requestedAC1Type</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CryptogramType _requestedAC1Type</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CryptogramType.html">CryptogramType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=59">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__requestedAC2Type" data-uid="WSCT.EMV.Card.EmvApplication._requestedAC2Type">_requestedAC2Type</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CryptogramType _requestedAC2Type</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CryptogramType.html">CryptogramType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=61">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__sda" data-uid="WSCT.EMV.Card.EmvApplication._sda">_sda</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SignedStaticApplicationData _sda</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedStaticApplicationData.html">SignedStaticApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=62">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvATC" data-uid="WSCT.EMV.Card.EmvApplication._tlvATC">_tlvATC</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvATC</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=63">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvCryptographicChecksum" data-uid="WSCT.EMV.Card.EmvApplication._tlvCryptographicChecksum">_tlvCryptographicChecksum</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvCryptographicChecksum</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=64">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvFromPSE" data-uid="WSCT.EMV.Card.EmvApplication._tlvFromPSE">_tlvFromPSE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvFromPSE</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=65">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvGenerateAC1Response" data-uid="WSCT.EMV.Card.EmvApplication._tlvGenerateAC1Response">_tlvGenerateAC1Response</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvGenerateAC1Response</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=66">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvGenerateAC1UnpredictableNumber" data-uid="WSCT.EMV.Card.EmvApplication._tlvGenerateAC1UnpredictableNumber">_tlvGenerateAC1UnpredictableNumber</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvGenerateAC1UnpredictableNumber</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=67">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvGenerateAC2Response" data-uid="WSCT.EMV.Card.EmvApplication._tlvGenerateAC2Response">_tlvGenerateAC2Response</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvGenerateAC2Response</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=68">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvInternalAuthenticateUnpredictableNumber" data-uid="WSCT.EMV.Card.EmvApplication._tlvInternalAuthenticateUnpredictableNumber">_tlvInternalAuthenticateUnpredictableNumber</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvInternalAuthenticateUnpredictableNumber</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=69">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvLastOnlineATCRegister" data-uid="WSCT.EMV.Card.EmvApplication._tlvLastOnlineATCRegister">_tlvLastOnlineATCRegister</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvLastOnlineATCRegister</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=70">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvLogFormat" data-uid="WSCT.EMV.Card.EmvApplication._tlvLogFormat">_tlvLogFormat</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvLogFormat</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=71">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvOfflineRecords" data-uid="WSCT.EMV.Card.EmvApplication._tlvOfflineRecords">_tlvOfflineRecords</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;TlvData&gt; _tlvOfflineRecords</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=72">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvPINTryCounter" data-uid="WSCT.EMV.Card.EmvApplication._tlvPINTryCounter">_tlvPINTryCounter</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvPINTryCounter</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=73">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvProcessingOptions" data-uid="WSCT.EMV.Card.EmvApplication._tlvProcessingOptions">_tlvProcessingOptions</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvProcessingOptions</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=74">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvRecords" data-uid="WSCT.EMV.Card.EmvApplication._tlvRecords">_tlvRecords</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;TlvData&gt; _tlvRecords</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=75">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvSignedDynamicApplicationResponse" data-uid="WSCT.EMV.Card.EmvApplication._tlvSignedDynamicApplicationResponse">_tlvSignedDynamicApplicationResponse</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TlvData _tlvSignedDynamicApplicationResponse</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=76">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tlvTerminalData" data-uid="WSCT.EMV.Card.EmvApplication._tlvTerminalData">_tlvTerminalData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;TlvData&gt; _tlvTerminalData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=78">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__tvr" data-uid="WSCT.EMV.Card.EmvApplication._tvr">_tvr</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TerminalVerificationResult _tvr</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.TerminalVerificationResult.html">TerminalVerificationResult</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=80">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication__verifyPinStatusWord" data-uid="WSCT.EMV.Card.EmvApplication._verifyPinStatusWord">_verifyPinStatusWord</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ushort _verifyPinStatusWord</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=153">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Afl_" data-uid="WSCT.EMV.Card.EmvApplication.Afl*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Afl" data-uid="WSCT.EMV.Card.EmvApplication.Afl">Afl</h4>
+  <div class="markdown level1 summary"><p>Accessor to the AFL of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationFileLocator Afl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationFileLocator.html">ApplicationFileLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=178">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Aip_" data-uid="WSCT.EMV.Card.EmvApplication.Aip*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Aip" data-uid="WSCT.EMV.Card.EmvApplication.Aip">Aip</h4>
+  <div class="markdown level1 summary"><p>Accessor to the AIP of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationInterchangeProfile Aip { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationInterchangeProfile.html">ApplicationInterchangeProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=662">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_ApplicationCryptogram_" data-uid="WSCT.EMV.Card.EmvApplication.ApplicationCryptogram*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_ApplicationCryptogram" data-uid="WSCT.EMV.Card.EmvApplication.ApplicationCryptogram">ApplicationCryptogram</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Application Cryptogram obtained by GENERATE AC 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationCryptogram ApplicationCryptogram { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationCryptogram.html">ApplicationCryptogram</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=637">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_AtcFromAC1_" data-uid="WSCT.EMV.Card.EmvApplication.AtcFromAC1*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AtcFromAC1" data-uid="WSCT.EMV.Card.EmvApplication.AtcFromAC1">AtcFromAC1</h4>
+  <div class="markdown level1 summary"><p>Accessor to the ATC obtained by GENERATE AC 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationTransactionCounter AtcFromAC1 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.ApplicationTransactionCounter.html">ApplicationTransactionCounter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=533">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Cda_" data-uid="WSCT.EMV.Card.EmvApplication.Cda*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Cda" data-uid="WSCT.EMV.Card.EmvApplication.Cda">Cda</h4>
+  <div class="markdown level1 summary"><p>Accessor to CDA data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SignedCombinedApplicationData Cda { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedCombinedApplicationData.html">SignedCombinedApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=353">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Cdol1_" data-uid="WSCT.EMV.Card.EmvApplication.Cdol1*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Cdol1" data-uid="WSCT.EMV.Card.EmvApplication.Cdol1">Cdol1</h4>
+  <div class="markdown level1 summary"><p>Accessor to CDOL1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataObjectList Cdol1 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=368">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Cdol2_" data-uid="WSCT.EMV.Card.EmvApplication.Cdol2*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Cdol2" data-uid="WSCT.EMV.Card.EmvApplication.Cdol2">Cdol2</h4>
+  <div class="markdown level1 summary"><p>Accessor to CDOL2.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataObjectList Cdol2 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=383">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_CertificationAuthorityPublicKey_" data-uid="WSCT.EMV.Card.EmvApplication.CertificationAuthorityPublicKey*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_CertificationAuthorityPublicKey" data-uid="WSCT.EMV.Card.EmvApplication.CertificationAuthorityPublicKey">CertificationAuthorityPublicKey</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Certification Authority Public Key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PublicKey CertificationAuthorityPublicKey { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=89">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_CertificationAuthorityRepository_" data-uid="WSCT.EMV.Card.EmvApplication.CertificationAuthorityRepository*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_CertificationAuthorityRepository" data-uid="WSCT.EMV.Card.EmvApplication.CertificationAuthorityRepository">CertificationAuthorityRepository</h4>
+  <div class="markdown level1 summary"><p>Accessor to the certification authority public key repository.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CertificationAuthorityRepository CertificationAuthorityRepository { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CertificationAuthorityRepository.html">CertificationAuthorityRepository</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=612">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Cid1_" data-uid="WSCT.EMV.Card.EmvApplication.Cid1*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Cid1" data-uid="WSCT.EMV.Card.EmvApplication.Cid1">Cid1</h4>
+  <div class="markdown level1 summary"><p>Accessor to the CID obtained by GENERATE AC 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CryptogramInformationData Cid1 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.CryptogramInformationData.html">CryptogramInformationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=202">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_CvmList_" data-uid="WSCT.EMV.Card.EmvApplication.CvmList*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_CvmList" data-uid="WSCT.EMV.Card.EmvApplication.CvmList">CvmList</h4>
+  <div class="markdown level1 summary"><p>Accessor to the CVM list of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CardholderVerificationMethodList CvmList { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.CardholderVerificationMethodList.html">CardholderVerificationMethodList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=503">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Dda_" data-uid="WSCT.EMV.Card.EmvApplication.Dda*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Dda" data-uid="WSCT.EMV.Card.EmvApplication.Dda">Dda</h4>
+  <div class="markdown level1 summary"><p>Accessor to DDA data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SignedDynamicApplicationData Dda { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedDynamicApplicationData.html">SignedDynamicApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=338">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Ddol_" data-uid="WSCT.EMV.Card.EmvApplication.Ddol*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Ddol" data-uid="WSCT.EMV.Card.EmvApplication.Ddol">Ddol</h4>
+  <div class="markdown level1 summary"><p>Accessor to DDOL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataObjectList Ddol { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=588">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_IccChallenge_" data-uid="WSCT.EMV.Card.EmvApplication.IccChallenge*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_IccChallenge" data-uid="WSCT.EMV.Card.EmvApplication.IccChallenge">IccChallenge</h4>
+  <div class="markdown level1 summary"><p>Accessor to last GET CHALLENGE rAPDU.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] IccChallenge { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=463">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_IccPublicKey_" data-uid="WSCT.EMV.Card.EmvApplication.IccPublicKey*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_IccPublicKey" data-uid="WSCT.EMV.Card.EmvApplication.IccPublicKey">IccPublicKey</h4>
+  <div class="markdown level1 summary"><p>Accessor to the ICC Public Key (recovered from ICC Public Key Certificate).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PublicKey IccPublicKey { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=447">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_IccPublicKeyCertificate_" data-uid="WSCT.EMV.Card.EmvApplication.IccPublicKeyCertificate*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_IccPublicKeyCertificate" data-uid="WSCT.EMV.Card.EmvApplication.IccPublicKeyCertificate">IccPublicKeyCertificate</h4>
+  <div class="markdown level1 summary"><p>Accessor to the ICC Public Key Certificate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IccPublicKeyCertificate IccPublicKeyCertificate { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.IccPublicKeyCertificate.html">IccPublicKeyCertificate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=423">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_IssuerPublicKey_" data-uid="WSCT.EMV.Card.EmvApplication.IssuerPublicKey*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_IssuerPublicKey" data-uid="WSCT.EMV.Card.EmvApplication.IssuerPublicKey">IssuerPublicKey</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Issuer Public Key (recovered from Issuer Public Key Certificate).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PublicKey IssuerPublicKey { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=407">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_IssuerPublicKeyCertificate_" data-uid="WSCT.EMV.Card.EmvApplication.IssuerPublicKeyCertificate*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_IssuerPublicKeyCertificate" data-uid="WSCT.EMV.Card.EmvApplication.IssuerPublicKeyCertificate">IssuerPublicKeyCertificate</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Issuer Public Key Certificate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IssuerPublicKeyCertificate IssuerPublicKeyCertificate { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.IssuerPublicKeyCertificate.html">IssuerPublicKeyCertificate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=224">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_LogEntry_" data-uid="WSCT.EMV.Card.EmvApplication.LogEntry*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_LogEntry" data-uid="WSCT.EMV.Card.EmvApplication.LogEntry">LogEntry</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Log Entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LogEntry LogEntry { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.LogEntry.html">LogEntry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=239">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_LogFormat_" data-uid="WSCT.EMV.Card.EmvApplication.LogFormat*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_LogFormat" data-uid="WSCT.EMV.Card.EmvApplication.LogFormat">LogFormat</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Log Format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataObjectList LogFormat { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.DataObjectList.html">DataObjectList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=254">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_LogRecords_" data-uid="WSCT.EMV.Card.EmvApplication.LogRecords*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_LogRecords" data-uid="WSCT.EMV.Card.EmvApplication.LogRecords">LogRecords</h4>
+  <div class="markdown level1 summary"><p>Accessor to the records read from log file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;List&lt;TlvData&gt;&gt; LogRecords { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=604">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_RequestedAC1Type_" data-uid="WSCT.EMV.Card.EmvApplication.RequestedAC1Type*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_RequestedAC1Type" data-uid="WSCT.EMV.Card.EmvApplication.RequestedAC1Type">RequestedAC1Type</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Cryptogram Type used for GENERATE AC 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CryptogramType RequestedAC1Type { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CryptogramType.html">CryptogramType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=687">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_RequestedAC2Type_" data-uid="WSCT.EMV.Card.EmvApplication.RequestedAC2Type*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_RequestedAC2Type" data-uid="WSCT.EMV.Card.EmvApplication.RequestedAC2Type">RequestedAC2Type</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Cryptogram Type used for GENERATE AC 2.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CryptogramType RequestedAC2Type { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CryptogramType.html">CryptogramType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=487">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Sda_" data-uid="WSCT.EMV.Card.EmvApplication.Sda*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Sda" data-uid="WSCT.EMV.Card.EmvApplication.Sda">Sda</h4>
+  <div class="markdown level1 summary"><p>Accessor to SDA data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SignedStaticApplicationData Sda { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.SignedStaticApplicationData.html">SignedStaticApplicationData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=303">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvATC_" data-uid="WSCT.EMV.Card.EmvApplication.TlvATC*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvATC" data-uid="WSCT.EMV.Card.EmvApplication.TlvATC">TlvATC</h4>
+  <div class="markdown level1 summary"><p>Accessor to ATC (obtained by GET DATA) in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvATC { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=129">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvCryptographicChecksum_" data-uid="WSCT.EMV.Card.EmvApplication.TlvCryptographicChecksum*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvCryptographicChecksum" data-uid="WSCT.EMV.Card.EmvApplication.TlvCryptographicChecksum">TlvCryptographicChecksum</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Cryptographic Checksum generated by the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvCryptographicChecksum { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=295">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvDataRecords_" data-uid="WSCT.EMV.Card.EmvApplication.TlvDataRecords*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvDataRecords" data-uid="WSCT.EMV.Card.EmvApplication.TlvDataRecords">TlvDataRecords</h4>
+  <div class="markdown level1 summary"><p>Accessor to the data read in a fictive <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvDataRecords { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=121">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvDataTerminalData_" data-uid="WSCT.EMV.Card.EmvApplication.TlvDataTerminalData*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvDataTerminalData" data-uid="WSCT.EMV.Card.EmvApplication.TlvDataTerminalData">TlvDataTerminalData</h4>
+  <div class="markdown level1 summary"><p>Accessor to the data read in a fictive <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvDataTerminalData { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=262">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvFromPSE_" data-uid="WSCT.EMV.Card.EmvApplication.TlvFromPSE*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvFromPSE" data-uid="WSCT.EMV.Card.EmvApplication.TlvFromPSE">TlvFromPSE</h4>
+  <div class="markdown level1 summary"><p>Accessor to the informations coming from PSE in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format (if available).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvFromPSE { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=572">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC1Response_" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC1Response*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC1Response" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC1Response">TlvGenerateAC1Response</h4>
+  <div class="markdown level1 summary"><p>Accessor to the rAPDU obtained by GENERATE AC1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvGenerateAC1Response { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=564">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC1UnpredictableNumber_" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC1UnpredictableNumber*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC1UnpredictableNumber" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC1UnpredictableNumber">TlvGenerateAC1UnpredictableNumber</h4>
+  <div class="markdown level1 summary"><p>Accessor to the unpredictable number used for GENERATE AC 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvGenerateAC1UnpredictableNumber { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=580">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC2Response_" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC2Response*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvGenerateAC2Response" data-uid="WSCT.EMV.Card.EmvApplication.TlvGenerateAC2Response">TlvGenerateAC2Response</h4>
+  <div class="markdown level1 summary"><p>Accessor to the rAPDU obtained by GENERATE AC2.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvGenerateAC2Response { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=541">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvInternalAuthenticateUnpredictableNumber_" data-uid="WSCT.EMV.Card.EmvApplication.TlvInternalAuthenticateUnpredictableNumber*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvInternalAuthenticateUnpredictableNumber" data-uid="WSCT.EMV.Card.EmvApplication.TlvInternalAuthenticateUnpredictableNumber">TlvInternalAuthenticateUnpredictableNumber</h4>
+  <div class="markdown level1 summary"><p>Accessor to the unpredictable number used for INTERNAL AUTHENTICATE (DDA).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvInternalAuthenticateUnpredictableNumber { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=311">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvLastOnlineATCRegister_" data-uid="WSCT.EMV.Card.EmvApplication.TlvLastOnlineATCRegister*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvLastOnlineATCRegister" data-uid="WSCT.EMV.Card.EmvApplication.TlvLastOnlineATCRegister">TlvLastOnlineATCRegister</h4>
+  <div class="markdown level1 summary"><p>Accessor to Last Online ATC Register (obtained by GET DATA) in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvLastOnlineATCRegister { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=329">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvLogFormat_" data-uid="WSCT.EMV.Card.EmvApplication.TlvLogFormat*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvLogFormat" data-uid="WSCT.EMV.Card.EmvApplication.TlvLogFormat">TlvLogFormat</h4>
+  <div class="markdown level1 summary"><p>Accessor to Log Format (obtained by GET DATA) in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvLogFormat { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=287">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvOfflineRecords_" data-uid="WSCT.EMV.Card.EmvApplication.TlvOfflineRecords*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvOfflineRecords" data-uid="WSCT.EMV.Card.EmvApplication.TlvOfflineRecords">TlvOfflineRecords</h4>
+  <div class="markdown level1 summary"><p>Accessor to the offline signed data in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;TlvData&gt; TlvOfflineRecords { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=320">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvPINTryCounter_" data-uid="WSCT.EMV.Card.EmvApplication.TlvPINTryCounter*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvPINTryCounter" data-uid="WSCT.EMV.Card.EmvApplication.TlvPINTryCounter">TlvPINTryCounter</h4>
+  <div class="markdown level1 summary"><p>Accessor to PIN Try Counter (obtained by GET DATA) in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvPINTryCounter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=270">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvProcessingOptions_" data-uid="WSCT.EMV.Card.EmvApplication.TlvProcessingOptions*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvProcessingOptions" data-uid="WSCT.EMV.Card.EmvApplication.TlvProcessingOptions">TlvProcessingOptions</h4>
+  <div class="markdown level1 summary"><p>Accessor to the processing options in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvProcessingOptions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=278">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvRecords_" data-uid="WSCT.EMV.Card.EmvApplication.TlvRecords*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvRecords" data-uid="WSCT.EMV.Card.EmvApplication.TlvRecords">TlvRecords</h4>
+  <div class="markdown level1 summary"><p>Accessor to the data read in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;TlvData&gt; TlvRecords { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=556">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvSignedDynamicApplicationResponse_" data-uid="WSCT.EMV.Card.EmvApplication.TlvSignedDynamicApplicationResponse*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvSignedDynamicApplicationResponse" data-uid="WSCT.EMV.Card.EmvApplication.TlvSignedDynamicApplicationResponse">TlvSignedDynamicApplicationResponse</h4>
+  <div class="markdown level1 summary"><p>Accessor to the Signed Dynamic Application rAPDU obtained by INTERNAL AUTHENTICATE.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvSignedDynamicApplicationResponse { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="WSCT_EMV_Card_EmvApplication_TlvSignedDynamicApplicationResponse_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>From EMV book 3:</p>
+<p>Format 1: The data object returned in the rAPDU message is a primitive data object with tag equal to &apos;80&apos;.
+The value field consists of the value field of the Signed Dynamic Application Data as specified in Book 2</p>
+<p>Format 2: The data object returned in the rAPDU message is a constructed data object with tag equal to &apos;77&apos;.
+The value field may contain several BER-TLV coded objects, but shall always include the Signed Dynamic Application Data as specified in Book 2.</p>
+</div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=105">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_TlvTerminalData_" data-uid="WSCT.EMV.Card.EmvApplication.TlvTerminalData*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_TlvTerminalData" data-uid="WSCT.EMV.Card.EmvApplication.TlvTerminalData">TlvTerminalData</h4>
+  <div class="markdown level1 summary"><p>Accessor to public terminal data in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;TlvData&gt; TlvTerminalData { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=137">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_Tvr_" data-uid="WSCT.EMV.Card.EmvApplication.Tvr*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_Tvr" data-uid="WSCT.EMV.Card.EmvApplication.Tvr">Tvr</h4>
+  <div class="markdown level1 summary"><p>Accessor to the TVR of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerminalVerificationResult Tvr { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.TerminalVerificationResult.html">TerminalVerificationResult</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=596">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_VerifyPinStatusWord_" data-uid="WSCT.EMV.Card.EmvApplication.VerifyPinStatusWord*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_VerifyPinStatusWord" data-uid="WSCT.EMV.Card.EmvApplication.VerifyPinStatusWord">VerifyPinStatusWord</h4>
+  <div class="markdown level1 summary"><p>Accessor to the rAPDU obtained by VERIFY PIN.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort VerifyPinStatusWord { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=1236">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_ComputeCryptographicChecksum_" data-uid="WSCT.EMV.Card.EmvApplication.ComputeCryptographicChecksum*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_ComputeCryptographicChecksum" data-uid="WSCT.EMV.Card.EmvApplication.ComputeCryptographicChecksum">ComputeCryptographicChecksum()</h4>
+  <div class="markdown level1 summary"><p>MasterCard cAPDU.
+Process the COMPUTE CRYPTOGRAPHIC CHECKSUM phase of a MasterCard transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ComputeCryptographicChecksum()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=1162">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_GenerateAc1_" data-uid="WSCT.EMV.Card.EmvApplication.GenerateAc1*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_GenerateAc1_WSCT_EMV_Security_CryptogramType_System_Byte___" data-uid="WSCT.EMV.Card.EmvApplication.GenerateAc1(WSCT.EMV.Security.CryptogramType,System.Byte[])">GenerateAc1(CryptogramType, Byte[])</h4>
+  <div class="markdown level1 summary"><p>Process the GENERATE APPLICATION CRYPTOGRAM 1 of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort GenerateAc1(CryptogramType cryptogramType, byte[] unpredictableNumber)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.CryptogramType.html">CryptogramType</a></td>
+        <td><span class="parametername">cryptogramType</span></td>
+        <td><p>Type of the cryptogram to be generated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">unpredictableNumber</span></td>
+        <td><p>Unpredictable number.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=1125">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_GetChallenge_" data-uid="WSCT.EMV.Card.EmvApplication.GetChallenge*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_GetChallenge" data-uid="WSCT.EMV.Card.EmvApplication.GetChallenge">GetChallenge()</h4>
+  <div class="markdown level1 summary"><p>Process the GET CHALLENGE of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort GetChallenge()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=942">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_GetData_" data-uid="WSCT.EMV.Card.EmvApplication.GetData*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_GetData" data-uid="WSCT.EMV.Card.EmvApplication.GetData">GetData()</h4>
+  <div class="markdown level1 summary"><p>Process the GET DATA phase of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort GetData()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=969">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_GetData_" data-uid="WSCT.EMV.Card.EmvApplication.GetData*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_GetData_System_UInt32_WSCT_Helpers_BasicEncodingRules_TlvData__" data-uid="WSCT.EMV.Card.EmvApplication.GetData(System.UInt32,WSCT.Helpers.BasicEncodingRules.TlvData@)">GetData(UInt32, ref TlvData)</h4>
+  <div class="markdown level1 summary"><p>Process a GET DATA to retrieve one EMV information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ushort GetData(uint tag, ref TlvData tlv)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td><span class="parametername">tag</span></td>
+        <td><ul><li></li><li></li><li></li><li></li></ul>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td><span class="parametername">tlv</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=824">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_GetProcessingOptions_" data-uid="WSCT.EMV.Card.EmvApplication.GetProcessingOptions*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_GetProcessingOptions" data-uid="WSCT.EMV.Card.EmvApplication.GetProcessingOptions">GetProcessingOptions()</h4>
+  <div class="markdown level1 summary"><p>Process the GET PROCESSING OPTIONS phase of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort GetProcessingOptions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=1069">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_InternalAuthenticate_" data-uid="WSCT.EMV.Card.EmvApplication.InternalAuthenticate*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_InternalAuthenticate_System_Byte___" data-uid="WSCT.EMV.Card.EmvApplication.InternalAuthenticate(System.Byte[])">InternalAuthenticate(Byte[])</h4>
+  <div class="markdown level1 summary"><p>Process the INTERNAL AUTHENTICATION of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort InternalAuthenticate(byte[] unpredictableNumber)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">unpredictableNumber</span></td>
+        <td><p>Unpredictable number.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=924">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_ReadApplicationData_" data-uid="WSCT.EMV.Card.EmvApplication.ReadApplicationData*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_ReadApplicationData" data-uid="WSCT.EMV.Card.EmvApplication.ReadApplicationData">ReadApplicationData()</h4>
+  <div class="markdown level1 summary"><p>Process the READ APPLICATION DATA phase of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ReadApplicationData()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=877">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_ReadDataFile_" data-uid="WSCT.EMV.Card.EmvApplication.ReadDataFile*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_ReadDataFile_WSCT_EMV_Objects_AflEntry_" data-uid="WSCT.EMV.Card.EmvApplication.ReadDataFile(WSCT.EMV.Objects.AflEntry)">ReadDataFile(AflEntry)</h4>
+  <div class="markdown level1 summary"><p>Reads the file pointed by the SFI found in the FCI of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ReadDataFile(AflEntry file)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Objects.AflEntry.html">AflEntry</a></td>
+        <td><span class="parametername">file</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=995">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_ReadLogFile_" data-uid="WSCT.EMV.Card.EmvApplication.ReadLogFile*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_ReadLogFile" data-uid="WSCT.EMV.Card.EmvApplication.ReadLogFile">ReadLogFile()</h4>
+  <div class="markdown level1 summary"><p>Reads log file of the EMV application. Records are stored.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ReadLogFile()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=1037">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvApplication_VerifyPin_" data-uid="WSCT.EMV.Card.EmvApplication.VerifyPin*"></a>
+  <h4 id="WSCT_EMV_Card_EmvApplication_VerifyPin_WSCT_EMV_Card_PINBlock_" data-uid="WSCT.EMV.Card.EmvApplication.VerifyPin(WSCT.EMV.Card.PINBlock)">VerifyPin(PINBlock)</h4>
+  <div class="markdown level1 summary"><p>Process the VERIFY PIN phase of an EMV transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort VerifyPin(PINBlock pinBlock)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Card.PINBlock.html">PINBlock</a></td>
+        <td><span class="parametername">pinBlock</span></td>
+        <td><p>PIN Block.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=784">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterComputeCryptographicChecksumEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterComputeCryptographicChecksumEvent">AfterComputeCryptographicChecksumEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ComputeCryptographicChecksum">ComputeCryptographicChecksum()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterComputeCryptographicChecksumEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=774">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterGenerateAC1Event" data-uid="WSCT.EMV.Card.EmvApplication.AfterGenerateAC1Event">AfterGenerateAC1Event</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GenerateAc1_WSCT_EMV_Security_CryptogramType_System_Byte___">GenerateAc1(CryptogramType, Byte[])</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterGenerateAC1Event</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=764">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterGetChallengeEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterGetChallengeEvent">AfterGetChallengeEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetChallenge">GetChallenge()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterGetChallengeEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=704">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterGetDataEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterGetDataEvent">AfterGetDataEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetData">GetData()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterGetDataEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=714">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterGetProcessingOptionsEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterGetProcessingOptionsEvent">AfterGetProcessingOptionsEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetProcessingOptions">GetProcessingOptions()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterGetProcessingOptionsEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=754">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterInternalAuthenticateEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterInternalAuthenticateEvent">AfterInternalAuthenticateEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_InternalAuthenticate_System_Byte___">InternalAuthenticate(Byte[])</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterInternalAuthenticateEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=724">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterReadApplicationDataEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterReadApplicationDataEvent">AfterReadApplicationDataEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ReadApplicationData">ReadApplicationData()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterReadApplicationDataEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=734">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterReadLogFileEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterReadLogFileEvent">AfterReadLogFileEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ReadLogFile">ReadLogFile()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterReadLogFileEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=744">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_AfterVerifyPinEvent" data-uid="WSCT.EMV.Card.EmvApplication.AfterVerifyPinEvent">AfterVerifyPinEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_VerifyPin_WSCT_EMV_Card_PINBlock_">VerifyPin(PINBlock)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterVerifyPinEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=779">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeComputeCryptographicChecksumEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeComputeCryptographicChecksumEvent">BeforeComputeCryptographicChecksumEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ComputeCryptographicChecksum">ComputeCryptographicChecksum()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeComputeCryptographicChecksumEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=769">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeGenerateAC1Event" data-uid="WSCT.EMV.Card.EmvApplication.BeforeGenerateAC1Event">BeforeGenerateAC1Event</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GenerateAc1_WSCT_EMV_Security_CryptogramType_System_Byte___">GenerateAc1(CryptogramType, Byte[])</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeGenerateAC1Event</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=759">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeGetChallengeEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeGetChallengeEvent">BeforeGetChallengeEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetChallenge">GetChallenge()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeGetChallengeEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=699">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeGetDataEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeGetDataEvent">BeforeGetDataEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetData">GetData()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeGetDataEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=709">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeGetProcessingOptionsEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeGetProcessingOptionsEvent">BeforeGetProcessingOptionsEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_GetProcessingOptions">GetProcessingOptions()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeGetProcessingOptionsEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=749">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeInternalAuthenticateEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeInternalAuthenticateEvent">BeforeInternalAuthenticateEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_InternalAuthenticate_System_Byte___">InternalAuthenticate(Byte[])</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeInternalAuthenticateEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=719">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeReadApplicationDataEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeReadApplicationDataEvent">BeforeReadApplicationDataEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ReadApplicationData">ReadApplicationData()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeReadApplicationDataEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=729">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeReadLogFileEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeReadLogFileEvent">BeforeReadLogFileEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_ReadLogFile">ReadLogFile()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeReadLogFileEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=739">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvApplication_BeforeVerifyPinEvent" data-uid="WSCT.EMV.Card.EmvApplication.BeforeVerifyPinEvent">BeforeVerifyPinEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvApplication.html#WSCT_EMV_Card_EmvApplication_VerifyPin_WSCT_EMV_Card_PINBlock_">VerifyPin(PINBlock)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeVerifyPinEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVApplication.cs&amp;version=GBmaster&amp;line=32" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

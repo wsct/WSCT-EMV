@@ -1,0 +1,409 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class EmvDefinitionFile
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class EmvDefinitionFile
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/wsct-logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WSCT.EMV.Card.EmvDefinitionFile">
+  
+  
+  <h1 id="WSCT_EMV_Card_EmvDefinitionFile" data-uid="WSCT.EMV.Card.EmvDefinitionFile" class="text-break">Class EmvDefinitionFile
+  </h1>
+  <div class="markdown level0 summary"><p>An <code>EMVDefinitionFile</code> instance represents a PSE, ADF or DDF.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">EmvDefinitionFile</span></div>
+      <div class="level2"><a class="xref" href="WSCT.EMV.Card.EmvApplication.html">EmvApplication</a></div>
+      <div class="level2"><a class="xref" href="WSCT.EMV.Card.PaymentSystemEnvironment.html">PaymentSystemEnvironment</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="WSCT.EMV.Card.html">WSCT.EMV.Card</a></h6>
+  <h6><strong>Assembly</strong>: WSCT.EMV.dll</h6>
+  <h5 id="WSCT_EMV_Card_EmvDefinitionFile_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EmvDefinitionFile</code></pre>
+  </div>
+  <h5 id="WSCT_EMV_Card_EmvDefinitionFile_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>FCI is stored when obtained in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <h5 id="WSCT_EMV_Card_EmvDefinitionFile_examples"><strong>Examples</strong></h5>
+  <pre><code>ICardChannel cardChannel;
+// ... acquire here a valid cardChannel instance ...
+EMVDefinitionFile df = new EMVApplication(cardChannel);
+df.aid = &quot;A0 00 00 00 03 10 10&quot;;
+df.select();
+Console.WriteLine(df.tlvFCI);</code></pre>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=112">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile__ctor_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.#ctor*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile__ctor_WSCT_Core_ICardChannel_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.#ctor(WSCT.Core.ICardChannel)">EmvDefinitionFile(ICardChannel)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html">EmvDefinitionFile</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EmvDefinitionFile(ICardChannel cardChannel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Core.ICardChannel</span></td>
+        <td><span class="parametername">cardChannel</span></td>
+        <td><p><span class="xref">WSCT.Core.ICardChannel</span> object to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=79">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile_Aid_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Aid*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_Aid" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Aid">Aid</h4>
+  <div class="markdown level1 summary"><p>Accessor to the AID of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Aid { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>string interpretable as hexa numbers, for example <code>&quot;A0 00 00 00 03 10 10&quot;</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="WSCT_EMV_Card_EmvDefinitionFile_Aid_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code>name</code> and <code>aid</code> are two ways to set the same internal field</p>
+</div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=53">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile_LastStatusWord_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.LastStatusWord*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_LastStatusWord" data-uid="WSCT.EMV.Card.EmvDefinitionFile.LastStatusWord">LastStatusWord</h4>
+  <div class="markdown level1 summary"><p>Accessor to the last usefull status word.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint LastStatusWord { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=68">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile_Name_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Name*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_Name" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Accessor to the name of the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>string composed of printable characters, for example <code>&quot;1PAY.SYS.DDF01&quot;</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="WSCT_EMV_Card_EmvDefinitionFile_Name_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code>name</code> and <code>aid</code> properties are two ways to access the same internal field:
+don't use both without care.</p>
+</div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=88">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile_TlvFci_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.TlvFci*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_TlvFci" data-uid="WSCT.EMV.Card.EmvDefinitionFile.TlvFci">TlvFci</h4>
+  <div class="markdown level1 summary"><p>Accessor to the FCI in <span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span> format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData TlvFci { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=126">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Card_EmvDefinitionFile_Select_" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Select*"></a>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_Select" data-uid="WSCT.EMV.Card.EmvDefinitionFile.Select">Select()</h4>
+  <div class="markdown level1 summary"><p>Selects the DF by its DF Name or AID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort Select()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>Last status word</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=102">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_AfterSelectEvent" data-uid="WSCT.EMV.Card.EmvDefinitionFile.AfterSelectEvent">AfterSelectEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent after execution of <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_Select">Select()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; AfterSelectEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=97">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Card_EmvDefinitionFile_BeforeSelectEvent" data-uid="WSCT.EMV.Card.EmvDefinitionFile.BeforeSelectEvent">BeforeSelectEvent</h4>
+  <div class="markdown level1 summary"><p>Event sent before execution of <a class="xref" href="WSCT.EMV.Card.EmvDefinitionFile.html#WSCT_EMV_Card_EmvDefinitionFile_Select">Select()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;EmvEventArgs&gt; BeforeSelectEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="WSCT.EMV.Card.EmvEventArgs.html">EmvEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Card/EMVDefinitionFile.cs&amp;version=GBmaster&amp;line=27" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

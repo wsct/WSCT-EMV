@@ -1,0 +1,1344 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/src/WSCT/WSCT-EMV/WSCT.EMV.DocFx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.EmvApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.EmvApplication.html",
+          "hash": "3k7DrA9BPgewRwkdIwlCyg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.EmvDefinitionFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.EmvDefinitionFile.html",
+          "hash": "ePeBHcdbhYPI3cuw1kMm+w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.EmvEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.EmvEventArgs.html",
+          "hash": "6bRi0Q+24hZ9AwkfoQQ9BQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.PINBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.PINBlock.html",
+          "hash": "uCeGc8gOPKVw0NGCqBSUgQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.PaymentSystemEnvironment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.PaymentSystemEnvironment.html",
+          "hash": "PNzxeqd0llcivUU3Q0raGQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.PlaintextPINBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.PlaintextPINBlock.html",
+          "hash": "NxJZsZsvF9QnI2qWa2QAlw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.VisaContactlessApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.VisaContactlessApplication.html",
+          "hash": "IvGpUweTT4i6/YSuVVKDJw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Card.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Card.html",
+          "hash": "Z/mSKLo3iSKd/uE0Px8czw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Commands.EMVReadRecordCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Commands.EMVReadRecordCommand.html",
+          "hash": "K+4tSJIvSlTejikXENOyPw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Commands.EMVSelectByNameCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Commands.EMVSelectByNameCommand.html",
+          "hash": "G/Z05mMV+sZsMbv+nUw+Ug=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Commands.EMVStoreDataCommand.Encryption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Commands.EMVStoreDataCommand.Encryption.html",
+          "hash": "RPEoXsTyCsp3ENe1SnLDgw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Commands.EMVStoreDataCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Commands.EMVStoreDataCommand.html",
+          "hash": "aVzV4Ms6ycEhhmww7gHBhQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Commands.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Commands.html",
+          "hash": "uTxSGAcfpEyoTmgpW4UBFw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Exceptions.LogEntryNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Exceptions.LogEntryNotFoundException.html",
+          "hash": "VoRobaQFaLGpd0xb+PcmsQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Exceptions.LogFormatNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Exceptions.LogFormatNotFoundException.html",
+          "hash": "MHCIFjp+eYynmvnSy7kybw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Exceptions.html",
+          "hash": "EDoVz2KmRUCu8rUl0LB8XA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.AflEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.AflEntry.html",
+          "hash": "wZxPI0uW64Q1sT/6z7otxQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationCryptogram.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationCryptogram.html",
+          "hash": "EoVw6vHvQo2Ix2cMoRumJQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationFileLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationFileLocator.html",
+          "hash": "75RPNvL4qA78OZxg33rjWQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationIdentifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationIdentifier.html",
+          "hash": "+PJue/JDLw9I17DWouBHKQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationInterchangeProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationInterchangeProfile.html",
+          "hash": "oWGQ3mlb91jvwY8RqTyV8g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationLabel.html",
+          "hash": "XOBnHJYN/k00+Gw5vvodfg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationTemplate.html",
+          "hash": "fooKiwhnaEhlLNkzauNxFg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationTransactionCounter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationTransactionCounter.html",
+          "hash": "TrIr2x5Bs7q8f+4VHFX86A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ApplicationUsageControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ApplicationUsageControl.html",
+          "hash": "IasPWnG8GU3Mt0zjtFHFsA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvRule.html",
+          "hash": "PLup3epoLWRYC5USBrVitA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvmCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvmCode.html",
+          "hash": "xyK4Lk672whCRbekQoNNUg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvmCondition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.CvmCondition.html",
+          "hash": "2QVRuF/sXl7/zPKHk4OCKA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CardholderVerificationMethodList.html",
+          "hash": "S/WceMjHSq3m7+T08peKAg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CertificationAuthorityPublicKeyIndex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CertificationAuthorityPublicKeyIndex.html",
+          "hash": "8AMQaiRpPiuHleiZtWeM1w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CryptogramInformationData.Reason.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CryptogramInformationData.Reason.html",
+          "hash": "xivKopVXjrKKOMYaHIr4sg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.CryptogramInformationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.CryptogramInformationData.html",
+          "hash": "mIVH9PkUaCRbJcmraoGvpw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.DataObjectList.DataObjectDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.DataObjectList.DataObjectDefinition.html",
+          "hash": "9DVtrnxTzhB1XgmC7r6tHg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.DataObjectList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.DataObjectList.html",
+          "hash": "LQI60O0OGizEDP9xaQNXZw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.DedicatedFileName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.DedicatedFileName.html",
+          "hash": "7zDQXHY5GpXFThAeuZsFSw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.FileControlInformationIssuer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.FileControlInformationIssuer.html",
+          "hash": "BzgDGGWRfe2VHKYCbc77NA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.FileControlInformationProprietary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.FileControlInformationProprietary.html",
+          "hash": "JI7q3w8JDD5cEL+68ZmqAQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.FileControlInformationTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.FileControlInformationTemplate.html",
+          "hash": "ke1MPzVubFcLdTxfGrNC5g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.LanguagePreference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.LanguagePreference.html",
+          "hash": "I/fkIzHJH3HJ6d8JKGs7xg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.LogEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.LogEntry.html",
+          "hash": "J5dj23w2VP4NDwz/Sh2n4w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.ShortFileIdentifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.ShortFileIdentifier.html",
+          "hash": "jUvBybO694pJhLbvkQQEPw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte1.html",
+          "hash": "zfd/D59nvi4XJHiSCyLAbQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte2.html",
+          "hash": "8UhNaphiXgaND7p+H3bNyA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte3.html",
+          "hash": "xGH0Fs2E11cArs2esiWIkw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte4.html",
+          "hash": "oOspRrXBdjbmOwm/z02bLw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte5.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.Byte5.html",
+          "hash": "AKdyI7qnHqrdikBlbuWPVw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.TerminalVerificationResult.html",
+          "hash": "2zphkUmqTpXKZeCuZbwJWw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Objects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Objects.html",
+          "hash": "kElyH2u8nX6Y3+mFDPOWRA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.AcidModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.AcidModel.html",
+          "hash": "+tsp27tYDr2EYXLua3Z2lg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.CertificationAuthorityPrivate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.CertificationAuthorityPrivate.html",
+          "hash": "JhrKbcTRizeRsk25XE0Z2w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.DgiBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.DgiBuilder.html",
+          "hash": "rfLTUA0zr/ygcRA5UDJChQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.EmvIccContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.EmvIccContext.html",
+          "hash": "Y1GDA2FlHVfGPBUuv6dG4A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.EmvIssuerContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.EmvIssuerContext.html",
+          "hash": "Kj6CxXwjk0qq8/bQ+Ynk4w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.EmvPersonalizationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.EmvPersonalizationData.html",
+          "hash": "NFoy5Klg9h6NVDNu0eER/w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.EmvPersonalizationModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.EmvPersonalizationModel.html",
+          "hash": "OUMqNkzM8fRJwpa5juoerg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.FciModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.FciModel.html",
+          "hash": "fyEWMnrqe+y1ACrpGJRiGA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.IccCertificateBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.IccCertificateBuilder.html",
+          "hash": "GzCNxuYqC9aMKB5R+xBtbQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.IccCertificateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.IccCertificateData.html",
+          "hash": "ZpvIWHZ17snbSf+6ER8gOw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.IssuerCertificateBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.IssuerCertificateBuilder.html",
+          "hash": "ejA8a3xs8+TbgwdJffvR2Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.IssuerCertificateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.IssuerCertificateData.html",
+          "hash": "uRCOr8+7ePEDLqf/zZV1uA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.LogModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.LogModel.html",
+          "hash": "CPShJccBCt1PopwYnN/7Rg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.PseDgiBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.PseDgiBuilder.html",
+          "hash": "QrKqJno6PQ5CCz7GTz6e/Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.PsePersonalizationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.PsePersonalizationData.html",
+          "hash": "NdP/+b19iXrdmko2nlLEmg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.PsePersonalizationModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.PsePersonalizationModel.html",
+          "hash": "EpNhA7PCxPsY9L+ert27Bw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.RecordModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.RecordModel.html",
+          "hash": "K0HtDP/PxehUiGukKH8Q1Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.TagLengthModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.TagLengthModel.html",
+          "hash": "BtWviAhU6V4xoQ8tqF9rAQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.TagModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.TagModel.html",
+          "hash": "IbGkCazedyOCrpGE1Dekgg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.TagValuesSequenceModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.TagValuesSequenceModel.html",
+          "hash": "xhzkEieG33lyNXUjL52ukQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.Track2EquivalentDataModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.Track2EquivalentDataModel.html",
+          "hash": "AU1wi+MnXz8E8m5hRsMB2g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Personalization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Personalization.html",
+          "hash": "hWDKxImBqwjM0bwcJPO7tw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.AbstractDataAuthenticationFormat03.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.AbstractDataAuthenticationFormat03.html",
+          "hash": "SlQVfY9Vtq8yBZ/Bg0dFMw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.AbstractDataAuthenticationFormat05.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.AbstractDataAuthenticationFormat05.html",
+          "hash": "FGGQNWnPzmWxaXk0XqSoJw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.AbstractPublicKeyCertificate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.AbstractPublicKeyCertificate.html",
+          "hash": "rYQWF0XSj1iMOq/StZ6ZAA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.AbstractSignatureContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.AbstractSignatureContainer.html",
+          "hash": "2Mq/YKQzwinmCLV6GZ7+NQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.CertificationAuthority.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.CertificationAuthority.html",
+          "hash": "l1QuCjnKnM0rd7+j/iPfMw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.CertificationAuthorityRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.CertificationAuthorityRepository.html",
+          "hash": "wJiQihD0MvvjjOCCg0Yl4Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.CryptogramType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.CryptogramType.html",
+          "hash": "ZOE7El9821vxPwzJQURRnw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.Cryptography.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.Cryptography.html",
+          "hash": "UeHWjo2LJSuw/uGyLyWebA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.EMVCertificationAuthorityNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.EMVCertificationAuthorityNotFoundException.html",
+          "hash": "F7yMsiYRTXTdndJE64XqzQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.HashAlgorithmFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.HashAlgorithmFactory.html",
+          "hash": "DznRbY+4D0fexc4bZjQlUg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.HashAlgorithmUnknownException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.HashAlgorithmUnknownException.html",
+          "hash": "wrJXU4r5Wbl88D/tMkg4Vg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.IHashAlgorithmProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.IHashAlgorithmProvider.html",
+          "hash": "A4IjkQHA3NhUih4VqSDcng=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.IccPublicKeyCertificate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.IccPublicKeyCertificate.html",
+          "hash": "rxMN4M43IuHgqeYDvGmOpA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.IssuerPublicKeyCertificate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.IssuerPublicKeyCertificate.html",
+          "hash": "saVz4uGQg165NwHFV09XjA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.PrivateKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.PrivateKey.html",
+          "hash": "BpLV8erC8J2jw9aCXNHUYQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.PublicKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.PublicKey.html",
+          "hash": "OhntZwPK7rYkJ2jCGfciGw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.Sha1HashAlgorithmProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.Sha1HashAlgorithmProvider.html",
+          "hash": "ArqiiA6OzsxDzfQ9MPUvQg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.SignedCombinedApplicationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.SignedCombinedApplicationData.html",
+          "hash": "ONJHyQYGHGH+f/+yVPGe5Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.SignedDynamicApplicationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.SignedDynamicApplicationData.html",
+          "hash": "IQqbNyJzNY9RSTrqgHIHGQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.SignedStaticApplicationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.SignedStaticApplicationData.html",
+          "hash": "GsiKWC/AxFzosx+iNx6vkA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Security.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Security.html",
+          "hash": "S+ydMDWtjktOR5QxtugUdA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Tags.DateFormattedTag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Tags.DateFormattedTag.html",
+          "hash": "7LZA/Gy2CIEk23n5jVShLA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Tags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Tags.html",
+          "hash": "UCRwLeYoZUiioTnWAyP4hg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.SupportedApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.SupportedApplication.html",
+          "hash": "/9vNXtSWh1KUT83t5yjckg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.SupportedPSE.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.SupportedPSE.html",
+          "hash": "KE1VjakC7gQ7qR9exgp9Aw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Terminal.TerminalCapabilities.html",
+          "hash": "vFtYvd4fUT1HrgKDxARhDg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Terminal.TerminalConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Terminal.TerminalConfiguration.html",
+          "hash": "GQ82XG0/HYB0uAAhSQfwWg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Terminal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Terminal.html",
+          "hash": "giABuJO285FV8mgMzUhI6A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Transaction.TransactionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Transaction.TransactionContext.html",
+          "hash": "OAKUR++jDxgcXCbA5VugrA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/WSCT.EMV.Transaction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/WSCT.EMV.Transaction.html",
+          "hash": "G3uT9XJqYhHmvz7hTiXiSA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "mksShG+tIZfuXBtoN6TaFQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "Ci9WUH1ANNjAOyWGoHZGew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "Vzau1ge3i83HbyKzacBsrg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/wsct-logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/wsct-logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "kzzYNhyZDY+q5Bsl4GApmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 2
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 100,
+          "skipped_file_count": 100
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

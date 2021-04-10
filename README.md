@@ -3,7 +3,7 @@ WSCT-EMV
 
 Public repository for WSCT EMV project.
 
-Developped by S.Vernois @ ENSICAEN / GREYC, with the help of some students.
+Developed by S.Vernois @ ENSICAEN / GREYC, with the help of some students.
 
 # EMV Library
 

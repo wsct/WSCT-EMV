@@ -1,0 +1,948 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TerminalVerificationResult
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TerminalVerificationResult
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/wsct-logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WSCT.EMV.Objects.TerminalVerificationResult">
+  
+  
+  <h1 id="WSCT_EMV_Objects_TerminalVerificationResult" data-uid="WSCT.EMV.Objects.TerminalVerificationResult" class="text-break">Class TerminalVerificationResult
+  </h1>
+  <div class="markdown level0 summary"><p>Represents the Terminal Verification Result, Issuer Action Code or Terminal Action Code of an EMV application.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">WSCT.Helpers.BasicEncodingRules.AbstractTlvObject</span></div>
+    <div class="level2"><span class="xref">WSCT.Helpers.BasicEncodingRules.BinaryTlvObject</span></div>
+    <div class="level3"><span class="xref">TerminalVerificationResult</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IFormattable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">WSCT.Helpers.BasicEncodingRules.BinaryTlvObject.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">WSCT.Helpers.BasicEncodingRules.AbstractTlvObject.ToString(System.String, System.IFormatProvider)</span>
+    </div>
+    <div>
+      <span class="xref">WSCT.Helpers.BasicEncodingRules.AbstractTlvObject.TlvDescription</span>
+    </div>
+    <div>
+      <span class="xref">WSCT.Helpers.BasicEncodingRules.AbstractTlvObject.Tlv</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="WSCT.EMV.Objects.html">WSCT.EMV.Objects</a></h6>
+  <h6><strong>Assembly</strong>: WSCT.EMV.dll</h6>
+  <h5 id="WSCT_EMV_Objects_TerminalVerificationResult_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerminalVerificationResult : BinaryTlvObject, IFormattable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=418">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult__ctor_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.#ctor*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult__ctor" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.#ctor">TerminalVerificationResult()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new <a class="xref" href="WSCT.EMV.Objects.TerminalVerificationResult.html">TerminalVerificationResult</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerminalVerificationResult()</code></pre>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=427">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult__ctor_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.#ctor*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult__ctor_WSCT_Helpers_BasicEncodingRules_TlvData_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.#ctor(WSCT.Helpers.BasicEncodingRules.TlvData)">TerminalVerificationResult(TlvData)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new <a class="xref" href="WSCT.EMV.Objects.TerminalVerificationResult.html">TerminalVerificationResult</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerminalVerificationResult(TlvData tlvTvr)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td><span class="parametername">tlvTvr</span></td>
+        <td><p>TLV TVR data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=279">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_CardholderVerificationFailed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.CardholderVerificationFailed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_CardholderVerificationFailed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.CardholderVerificationFailed">CardholderVerificationFailed</h4>
+  <div class="markdown level1 summary"><p>TVR: Cardholder verification was not successful.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CardholderVerificationFailed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=225">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_CdaFailed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.CdaFailed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_CdaFailed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.CdaFailed">CdaFailed</h4>
+  <div class="markdown level1 summary"><p>TVR: CDA failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CdaFailed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=216">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_DdaFailed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.DdaFailed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_DdaFailed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.DdaFailed">DdaFailed</h4>
+  <div class="markdown level1 summary"><p>TVR: DDA failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DdaFailed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=378">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_DefaultTdolUsed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.DefaultTdolUsed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_DefaultTdolUsed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.DefaultTdolUsed">DefaultTdolUsed</h4>
+  <div class="markdown level1 summary"><p>TVR: Default TDOL used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DefaultTdolUsed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=243">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_ExpiredApplication_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ExpiredApplication*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_ExpiredApplication" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ExpiredApplication">ExpiredApplication</h4>
+  <div class="markdown level1 summary"><p>TVR: Expired application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ExpiredApplication { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=234">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_IccAndTerminalVersionsDifferent_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IccAndTerminalVersionsDifferent*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_IccAndTerminalVersionsDifferent" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IccAndTerminalVersionsDifferent">IccAndTerminalVersionsDifferent</h4>
+  <div class="markdown level1 summary"><p>TVR: ICC and terminal have different application versions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IccAndTerminalVersionsDifferent { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=198">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_IccDataMissing_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IccDataMissing*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_IccDataMissing" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IccDataMissing">IccDataMissing</h4>
+  <div class="markdown level1 summary"><p>TVR: ICC data missing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IccDataMissing { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=387">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_IssuerAuthenticationFailed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IssuerAuthenticationFailed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_IssuerAuthenticationFailed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.IssuerAuthenticationFailed">IssuerAuthenticationFailed</h4>
+  <div class="markdown level1 summary"><p>Issuer authentication failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IssuerAuthenticationFailed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=342">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_LowerConsecutiveOfflineLimitExceeded_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.LowerConsecutiveOfflineLimitExceeded*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_LowerConsecutiveOfflineLimitExceeded" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.LowerConsecutiveOfflineLimitExceeded">LowerConsecutiveOfflineLimitExceeded</h4>
+  <div class="markdown level1 summary"><p>TVR: Lower consecutive offline limit exceeded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool LowerConsecutiveOfflineLimitExceeded { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=369">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_MerchantForcedTransactionOnline_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.MerchantForcedTransactionOnline*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_MerchantForcedTransactionOnline" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.MerchantForcedTransactionOnline">MerchantForcedTransactionOnline</h4>
+  <div class="markdown level1 summary"><p>TVR: Merchant forced transaction online.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MerchantForcedTransactionOnline { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=270">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_NewCard_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.NewCard*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_NewCard" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.NewCard">NewCard</h4>
+  <div class="markdown level1 summary"><p>TVR: New card.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool NewCard { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=252">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_NotYetEffectiveApplication_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.NotYetEffectiveApplication*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_NotYetEffectiveApplication" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.NotYetEffectiveApplication">NotYetEffectiveApplication</h4>
+  <div class="markdown level1 summary"><p>TVR: Application not yet effective.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool NotYetEffectiveApplication { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=180">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_OfflineDataAuthenticationNotPerformed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.OfflineDataAuthenticationNotPerformed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_OfflineDataAuthenticationNotPerformed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.OfflineDataAuthenticationNotPerformed">OfflineDataAuthenticationNotPerformed</h4>
+  <div class="markdown level1 summary"><p>TVR: Offline data authentication was not performed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool OfflineDataAuthenticationNotPerformed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=324">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_OnlinePinEntered_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.OnlinePinEntered*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_OnlinePinEntered" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.OnlinePinEntered">OnlinePinEntered</h4>
+  <div class="markdown level1 summary"><p>TVR: Online PIN entered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool OnlinePinEntered { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=315">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_PINNotEntered_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PINNotEntered*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_PINNotEntered" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PINNotEntered">PINNotEntered</h4>
+  <div class="markdown level1 summary"><p>TVR: PIN entry required, PIN pad present, but PIN was not entered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool PINNotEntered { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=306">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_PinpadError_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PinpadError*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_PinpadError" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PinpadError">PinpadError</h4>
+  <div class="markdown level1 summary"><p>TVR: PIN entry required and PIN pad not present or not working.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool PinpadError { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=297">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_PINTryLimitExceeded_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PINTryLimitExceeded*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_PINTryLimitExceeded" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.PINTryLimitExceeded">PINTryLimitExceeded</h4>
+  <div class="markdown level1 summary"><p>TVR: PIN Try limit exceeded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool PINTryLimitExceeded { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=405">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_ScriptProcessingFailedAfterGenerateAC_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ScriptProcessingFailedAfterGenerateAC*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_ScriptProcessingFailedAfterGenerateAC" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ScriptProcessingFailedAfterGenerateAC">ScriptProcessingFailedAfterGenerateAC</h4>
+  <div class="markdown level1 summary"><p>Script processing failed after final GENERATE AC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ScriptProcessingFailedAfterGenerateAC { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=396">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_ScriptProcessingFailedBeforeGenerateAC_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ScriptProcessingFailedBeforeGenerateAC*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_ScriptProcessingFailedBeforeGenerateAC" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ScriptProcessingFailedBeforeGenerateAC">ScriptProcessingFailedBeforeGenerateAC</h4>
+  <div class="markdown level1 summary"><p>Script processing failed before final GENERATE AC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ScriptProcessingFailedBeforeGenerateAC { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=189">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_SdaFailed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.SdaFailed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_SdaFailed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.SdaFailed">SdaFailed</h4>
+  <div class="markdown level1 summary"><p>TVR: SDA failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SdaFailed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=261">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_ServiceNotAllowed_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ServiceNotAllowed*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_ServiceNotAllowed" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.ServiceNotAllowed">ServiceNotAllowed</h4>
+  <div class="markdown level1 summary"><p>TVR: Requested service not allowed for card product.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ServiceNotAllowed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=207">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_TerminalExceptionFile_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TerminalExceptionFile*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_TerminalExceptionFile" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TerminalExceptionFile">TerminalExceptionFile</h4>
+  <div class="markdown level1 summary"><p>TVR: Card appears on terminal exception file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TerminalExceptionFile { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=333">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_TransactionExceedFloorLimit_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TransactionExceedFloorLimit*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_TransactionExceedFloorLimit" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TransactionExceedFloorLimit">TransactionExceedFloorLimit</h4>
+  <div class="markdown level1 summary"><p>TVR: Transaction exceeds floor limit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TransactionExceedFloorLimit { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=360">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_TransactionRandomlySelectedOnline_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TransactionRandomlySelectedOnline*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_TransactionRandomlySelectedOnline" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.TransactionRandomlySelectedOnline">TransactionRandomlySelectedOnline</h4>
+  <div class="markdown level1 summary"><p>TVR: Transaction selected randomly for online processing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TransactionRandomlySelectedOnline { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=288">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_UnrecognisedCvm_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.UnrecognisedCvm*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_UnrecognisedCvm" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.UnrecognisedCvm">UnrecognisedCvm</h4>
+  <div class="markdown level1 summary"><p>TVR: Unrecognised CVM.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UnrecognisedCvm { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=351">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Objects_TerminalVerificationResult_UpperConsecutiveOfflineLimitExceeded_" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.UpperConsecutiveOfflineLimitExceeded*"></a>
+  <h4 id="WSCT_EMV_Objects_TerminalVerificationResult_UpperConsecutiveOfflineLimitExceeded" data-uid="WSCT.EMV.Objects.TerminalVerificationResult.UpperConsecutiveOfflineLimitExceeded">UpperConsecutiveOfflineLimitExceeded</h4>
+  <div class="markdown level1 summary"><p>TVR: Upper consecutive offline limite exceeded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UpperConsecutiveOfflineLimitExceeded { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IFormattable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Objects/TerminalVerificationResult.cs&amp;version=GBmaster&amp;line=9" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

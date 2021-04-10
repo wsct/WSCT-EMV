@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DgiBuilder
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DgiBuilder
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/wsct-logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WSCT.EMV.Personalization.DgiBuilder">
+  
+  
+  <h1 id="WSCT_EMV_Personalization_DgiBuilder" data-uid="WSCT.EMV.Personalization.DgiBuilder" class="text-break">Class DgiBuilder
+  </h1>
+  <div class="markdown level0 summary"><p>Builder of EMV DGI based on personalization models and data.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DgiBuilder</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="WSCT.EMV.Personalization.html">WSCT.EMV.Personalization</a></h6>
+  <h6><strong>Assembly</strong>: WSCT.EMV.dll</h6>
+  <h5 id="WSCT_EMV_Personalization_DgiBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DgiBuilder</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=30">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder__ctor_" data-uid="WSCT.EMV.Personalization.DgiBuilder.#ctor*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder__ctor_WSCT_EMV_Personalization_EmvPersonalizationModel_WSCT_EMV_Personalization_EmvPersonalizationData_WSCT_EMV_Personalization_EmvIssuerContext_WSCT_EMV_Personalization_EmvIccContext_" data-uid="WSCT.EMV.Personalization.DgiBuilder.#ctor(WSCT.EMV.Personalization.EmvPersonalizationModel,WSCT.EMV.Personalization.EmvPersonalizationData,WSCT.EMV.Personalization.EmvIssuerContext,WSCT.EMV.Personalization.EmvIccContext)">DgiBuilder(EmvPersonalizationModel, EmvPersonalizationData, EmvIssuerContext, EmvIccContext)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext, EmvIccContext iccContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.EmvPersonalizationModel.html">EmvPersonalizationModel</a></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>Card DGI model.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.EmvPersonalizationData.html">EmvPersonalizationData</a></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>Card data.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.EmvIssuerContext.html">EmvIssuerContext</a></td>
+        <td><span class="parametername">issuerContext</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.EmvIccContext.html">EmvIccContext</a></td>
+        <td><span class="parametername">iccContext</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=84">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_WSCT_EMV_Personalization_FciModel_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi(WSCT.EMV.Personalization.FciModel)">BuildDgi(FciModel)</h4>
+  <div class="markdown level1 summary"><p>Builds UDR to be used with STORE DATA command for given FCI .</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BuildDgi(FciModel fciModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.FciModel.html">FciModel</a></td>
+        <td><span class="parametername">fciModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=45">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_WSCT_EMV_Personalization_RecordModel_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi(WSCT.EMV.Personalization.RecordModel)">BuildDgi(RecordModel)</h4>
+  <div class="markdown level1 summary"><p>Builds UDR to be used with PUT DATA command for given record .</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BuildDgi(RecordModel recordModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.RecordModel.html">RecordModel</a></td>
+        <td><span class="parametername">recordModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=104">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_WSCT_EMV_Personalization_TagModel_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi(WSCT.EMV.Personalization.TagModel)">BuildDgi(TagModel)</h4>
+  <div class="markdown level1 summary"><p>Builds UDR to be used with STORE DATA command for given tag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BuildDgi(TagModel tagModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.TagModel.html">TagModel</a></td>
+        <td><span class="parametername">tagModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=65">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder_BuildDgi_WSCT_EMV_Personalization_TagValuesSequenceModel_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildDgi(WSCT.EMV.Personalization.TagValuesSequenceModel)">BuildDgi(TagValuesSequenceModel)</h4>
+  <div class="markdown level1 summary"><p>Builds UDR to be used with STORE DATA command for given processing options.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BuildDgi(TagValuesSequenceModel sequenceModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.TagValuesSequenceModel.html">TagValuesSequenceModel</a></td>
+        <td><span class="parametername">sequenceModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=111">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Personalization_DgiBuilder_BuildTlv_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildTlv*"></a>
+  <h4 id="WSCT_EMV_Personalization_DgiBuilder_BuildTlv_WSCT_EMV_Personalization_TagModel_" data-uid="WSCT.EMV.Personalization.DgiBuilder.BuildTlv(WSCT.EMV.Personalization.TagModel)">BuildTlv(TagModel)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TlvData BuildTlv(TagModel tagModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Personalization.TagModel.html">TagModel</a></td>
+        <td><span class="parametername">tagModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">WSCT.Helpers.BasicEncodingRules.TlvData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Personalization/DgiBuilder.cs&amp;version=GBmaster&amp;line=14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

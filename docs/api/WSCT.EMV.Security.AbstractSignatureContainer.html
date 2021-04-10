@@ -1,0 +1,576 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AbstractSignatureContainer
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AbstractSignatureContainer
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/wsct-logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WSCT.EMV.Security.AbstractSignatureContainer">
+  
+  
+  <h1 id="WSCT_EMV_Security_AbstractSignatureContainer" data-uid="WSCT.EMV.Security.AbstractSignatureContainer" class="text-break">Class AbstractSignatureContainer
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a container for EMV data signatures (public key certificate, data authentication).</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">AbstractSignatureContainer</span></div>
+      <div class="level2"><a class="xref" href="WSCT.EMV.Security.AbstractDataAuthenticationFormat03.html">AbstractDataAuthenticationFormat03</a></div>
+      <div class="level2"><a class="xref" href="WSCT.EMV.Security.AbstractDataAuthenticationFormat05.html">AbstractDataAuthenticationFormat05</a></div>
+      <div class="level2"><a class="xref" href="WSCT.EMV.Security.AbstractPublicKeyCertificate.html">AbstractPublicKeyCertificate</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="WSCT.EMV.Security.html">WSCT.EMV.Security</a></h6>
+  <h6><strong>Assembly</strong>: WSCT.EMV.dll</h6>
+  <h5 id="WSCT_EMV_Security_AbstractSignatureContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractSignatureContainer</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=63">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer__ctor_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.#ctor*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer__ctor_System_Int32_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.#ctor(System.Int32)">AbstractSignatureContainer(Int32)</h4>
+  <div class="markdown level1 summary"><p>Default constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractSignatureContainer(int hashAlgorithmIndicatorOffset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">hashAlgorithmIndicatorOffset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=20">View Source</a>
+  </span>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_KeyLength" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.KeyLength">KeyLength</h4>
+  <div class="markdown level1 summary"><p>Length of the Key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int KeyLength</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=39">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_DataFormat_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataFormat*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_DataFormat" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataFormat">DataFormat</h4>
+  <div class="markdown level1 summary"><p>Certificate Format (1).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte DataFormat { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=34">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_DataHeader_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataHeader*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_DataHeader" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataHeader">DataHeader</h4>
+  <div class="markdown level1 summary"><p>Recovered Data Header (1): Hex value '6A'.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte DataHeader { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=54">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_DataTrailer_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataTrailer*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_DataTrailer" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.DataTrailer">DataTrailer</h4>
+  <div class="markdown level1 summary"><p>Recovered Data Trailer: Hex value 'BC'.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte DataTrailer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=44">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_HashAlgorithmIndicator_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.HashAlgorithmIndicator*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_HashAlgorithmIndicator" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.HashAlgorithmIndicator">HashAlgorithmIndicator</h4>
+  <div class="markdown level1 summary"><p>Hash Algorithm Indicator (1): Identifies the hash algorithm used to produce the Hash Result in the digital signature scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte HashAlgorithmIndicator { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=49">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_HashResult_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.HashResult*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_HashResult" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.HashResult">HashResult</h4>
+  <div class="markdown level1 summary"><p>Hash Result: Hash of the Public Key and its related information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] HashResult { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=29">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_Recovered_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.Recovered*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_Recovered" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.Recovered">Recovered</h4>
+  <div class="markdown level1 summary"><p>Accessor to raw recovered data from the EMV signature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] Recovered { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=89">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_ComputeHash_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.ComputeHash*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_ComputeHash_System_Collections_Generic_List_System_Byte____" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.ComputeHash(System.Collections.Generic.List{System.Byte[]})">ComputeHash(List&lt;Byte[]&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compute hash value of the certificate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] ComputeHash(List&lt;byte[]&gt; data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Byte</span>[]&gt;</td>
+        <td><span class="parametername">data</span></td>
+        <td><p>List of byte[] to be concatenated sequencially and hashed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><p>Hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=102">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_GenerateCertificate_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.GenerateCertificate*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_GenerateCertificate_WSCT_EMV_Security_PublicKey_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.GenerateCertificate(WSCT.EMV.Security.PublicKey)">GenerateCertificate(PublicKey)</h4>
+  <div class="markdown level1 summary"><p>Compute the signed certificate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GenerateCertificate(PublicKey privateKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td><span class="parametername">privateKey</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=114">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_GetDataToSign_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.GetDataToSign*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_GetDataToSign_System_Int32_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.GetDataToSign(System.Int32)">GetDataToSign(Int32)</h4>
+  <div class="markdown level1 summary"><p>TODO</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract byte[] GetDataToSign(int privateKeyLength)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">privateKeyLength</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=119">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_OnRecoverFromSignature_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.OnRecoverFromSignature*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_OnRecoverFromSignature" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.OnRecoverFromSignature">OnRecoverFromSignature()</h4>
+  <div class="markdown level1 summary"><p>TODO</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void OnRecoverFromSignature()</code></pre>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=77">View Source</a>
+  </span>
+  <a id="WSCT_EMV_Security_AbstractSignatureContainer_RecoverFromSignature_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.RecoverFromSignature*"></a>
+  <h4 id="WSCT_EMV_Security_AbstractSignatureContainer_RecoverFromSignature_System_Byte___WSCT_EMV_Security_PublicKey_" data-uid="WSCT.EMV.Security.AbstractSignatureContainer.RecoverFromSignature(System.Byte[],WSCT.EMV.Security.PublicKey)">RecoverFromSignature(Byte[], PublicKey)</h4>
+  <div class="markdown level1 summary"><p>EMV recovery funcntion: recovers data contained in the certificate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RecoverFromSignature(byte[] signature, PublicKey publicKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">signature</span></td>
+        <td><p>Certificate to recover data from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WSCT.EMV.Security.PublicKey.html">PublicKey</a></td>
+        <td><span class="parametername">publicKey</span></td>
+        <td><p>Public key of the signing authority.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://dev.azure.com/ztn/WSCT%20EMV/_git/WSCT-EMV?path=EMV Library/Security/AbstractSignatureContainer.cs&amp;version=GBmaster&amp;line=11" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
