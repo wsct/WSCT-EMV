@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>3.2.0.2</Version>
+    <Version>3.3.0</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -23,8 +23,8 @@
     <PackageTags>wsct, emv, plugin</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.GUI" Version="6.1.1" />
-    <PackageReference Include="WSCT.GUI.Resources" Version="1.1.1" />
+    <PackageReference Include="WSCT.GUI" Version="6.2.0" />
+    <PackageReference Include="WSCT.GUI.Resources" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

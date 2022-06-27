@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <Version>6.3.2.1</Version>
+    <Version>6.4.0</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -21,10 +21,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
-    <PackageReference Include="WSCT.GUI" Version="6.1.1" />
-    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.1.1" />
-    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.1.1" />
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
+    <PackageReference Include="WSCT.GUI" Version="6.2.0" />
+    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.2.0" />
+    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />

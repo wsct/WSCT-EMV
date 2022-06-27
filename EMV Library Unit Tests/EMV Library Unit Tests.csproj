@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0;net462</TargetFrameworks>
     <Product>WSCT.EMV.UnitTests</Product>
     <Description>EMV Library for WSCT unit tests.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/wsct/WSCT-Core</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
     <PackageReleaseNotes>Creation of the nuget package.</PackageReleaseNotes>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <PackageId>WSCT.EMV.UnitTests</PackageId>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RootNamespace>WSCT.EMV</RootNamespace>

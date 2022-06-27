@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0;net462</TargetFrameworks>
     <Product>EMV ICC Certificate Generation Console</Product>
     <Description>EMV ICC Certificate Generation Console for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <AssemblyName>wsct-emvicc</AssemblyName>
     <RootNamespace>WSCT.EMV.IccCertificateGenerationConsole</RootNamespace>
     <OutputType>Exe</OutputType>

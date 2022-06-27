@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop" ToolsVersion="15.0">
   <PropertyGroup>
-    <TargetFrameworks>net462;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>0.9.1.1</Version>
+    <Version>0.10.0</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -67,9 +67,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.Core" Version="6.1.3" />
-    <PackageReference Include="WSCT.GUI.Plugins" Version="5.1.1" />
-    <PackageReference Include="WSCT.GUI.Resources" Version="1.1.1" />
+    <PackageReference Include="WSCT.Core" Version="6.2.0" />
+    <PackageReference Include="WSCT.GUI.Plugins" Version="5.2.0" />
+    <PackageReference Include="WSCT.GUI.Resources" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
