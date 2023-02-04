@@ -36,7 +36,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// CardChannel used to access the smartcard.
         /// </summary>
-        internal CardChannelIso7816 _cardChannel;
+        internal ICardChannel _cardChannel;
 
         /// <summary>
         /// Status word of the last "usefull" APDU.
@@ -111,7 +111,7 @@ namespace WSCT.EMV.Card
         /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
         public EmvDefinitionFile(ICardChannel cardChannel)
         {
-            _cardChannel = new CardChannelIso7816(new CardChannelTerminalTransportLayer(cardChannel));
+            _cardChannel = new CardChannelTerminalTransportLayer(cardChannel);
             TlvFci = null;
         }
 

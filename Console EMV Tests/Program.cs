@@ -121,10 +121,8 @@ namespace WSCT.EMV.ConsoleTests
 
             #region >> CardChannel
 
-            ICardChannel rawCardChannel = new CardChannel(context, readerState.ReaderName);
-            logger.ObserveChannel((CardChannelObservable)rawCardChannel);
-
-            var cardChannel = new CardChannelIso7816(rawCardChannel);
+            ICardChannel cardChannel = new CardChannel(context, readerState.ReaderName);
+            logger.ObserveChannel((CardChannelObservable)cardChannel);
 
             if (cardChannel.Connect(ShareMode.Shared, Protocol.Any) != ErrorCode.Success)
             {
@@ -132,7 +130,7 @@ namespace WSCT.EMV.ConsoleTests
                 return;
             }
 
-            var buffer = new byte[0];
+            var buffer = Array.Empty<byte>();
             cardChannel.GetAttrib(Attrib.AtrString, ref buffer);
 
             if (cardChannel.Reconnect(ShareMode.Shared, Protocol.Any, Disposition.ResetCard) != ErrorCode.Success)

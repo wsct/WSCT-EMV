@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>3.3.0</Version>
+    <Version>3.3.1</Version>
 
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -23,8 +23,8 @@
     <PackageTags>wsct, emv, plugin</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.GUI" Version="6.2.0" />
-    <PackageReference Include="WSCT.GUI.Resources" Version="1.2.0" />
+    <PackageReference Include="WSCT.GUI" Version="6.2.1" />
+    <PackageReference Include="WSCT.GUI.Resources" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

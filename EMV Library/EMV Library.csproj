@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <Version>3.4.0</Version>
+    <Version>3.4.1</Version>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
@@ -32,8 +32,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.9" />
-    <PackageReference Include="WSCT.Core" Version="6.2.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="WSCT.Core" Version="6.5.1" />
     <PackageReference Include="WSCT.Helpers" Version="5.1.0" />
   </ItemGroup>
 </Project>
