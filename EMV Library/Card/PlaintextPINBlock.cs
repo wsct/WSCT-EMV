@@ -27,7 +27,7 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public override byte ClearPINLength
         {
-            get { return (byte)(_pinBlock[0] & 0x0F); }
+            get => (byte)(_pinBlock[0] & 0x0F);
             set
             {
                 if (value < 4 || value > 12)
@@ -57,8 +57,8 @@ namespace WSCT.EMV.Card
         /// <inheritdoc />
         public override byte[] PinBlock
         {
-            get { return _pinBlock; }
-            set { _pinBlock = value; }
+            get => _pinBlock;
+            set => _pinBlock = value;
         }
 
         #endregion

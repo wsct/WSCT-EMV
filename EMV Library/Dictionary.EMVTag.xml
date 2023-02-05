@@ -257,6 +257,10 @@
     <value format="b" minSize="1" maxSize="3" />
     <className>WSCT.Helpers.BasicEncodingRules.BinaryTlvObject</className>
   </tlvDesc>
+  <tlvDesc hexaValue="9F34" name="CVM Results" longName="Application Transaction Counter" source="Terminal">
+	<value format="b" size="3" />
+	<className>WSCT.Helpers.BasicEncodingRules.BinaryTlvObject</className>
+  </tlvDesc>
   <tlvDesc hexaValue="9F36" name="ATC" longName="Application Transaction Counter" source="ICC">
     <value format="b" size="2" />
     <className>WSCT.Helpers.BasicEncodingRules.BinaryTlvObject</className>
@@ -326,10 +330,13 @@
     <className>WSCT.EMV.Objects.FileControlInformationProprietary</className>
     <dll>WSCT.EMV.dll</dll>
   </tlvDesc>
-  <tlvDesc hexaValue="BF0C" name="FCI Issuer" longName="File Control Information Issuer Discretionary Data"
-           source="ICC">
+  <tlvDesc hexaValue="BF0C" name="FCI Issuer" longName="File Control Information Issuer Discretionary Data" source="ICC">
     <value format="b" maxSize="252" />
     <className>WSCT.EMV.Objects.FileControlInformationIssuer</className>
     <dll>WSCT.EMV.dll</dll>
+  </tlvDesc>
+  <tlvDesc hexaValue="DF60" name="DF60" longName="Visa Log Entry" source="ICC">
+	<value format="b" size="8" />
+	<className>WSCT.Helpers.BasicEncodingRules.BinaryTlvObject</className>
   </tlvDesc>
 </TlvDictionary>

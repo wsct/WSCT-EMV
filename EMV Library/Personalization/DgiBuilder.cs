@@ -13,10 +13,10 @@ namespace WSCT.EMV.Personalization
     /// </summary>
     public class DgiBuilder
     {
-        private readonly EmvPersonalizationData data;
-        private readonly EmvPersonalizationModel model;
-        private readonly EmvIssuerContext issuerContext;
-        private readonly EmvIccContext iccContext;
+        private readonly EmvPersonalizationData _data;
+        private readonly EmvPersonalizationModel _model;
+        private readonly EmvIssuerContext _issuerContext;
+        private readonly EmvIccContext _iccContext;
 
         #region >> Constructors
 
@@ -29,10 +29,10 @@ namespace WSCT.EMV.Personalization
         /// <param name="iccContext"></param>
         public DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext, EmvIccContext iccContext)
         {
-            this.data = data;
-            this.model = model;
-            this.issuerContext = issuerContext;
-            this.iccContext = iccContext;
+            this._data = data;
+            this._model = model;
+            this._issuerContext = issuerContext;
+            this._iccContext = iccContext;
         }
 
         #endregion
@@ -117,13 +117,13 @@ namespace WSCT.EMV.Personalization
                 switch (tagModel.Tag)
                 {
                     case "57": // Track 2 Equivalent Data
-                        tlv.Value = data.UnmanagedAttributes[tagModel.Tag]
+                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<Track2EquivalentDataModel>()
                             .Track2EqDataFormat
                             .FromHexa();
                         break;
                     case "5F2D": // Language Preference
-                        tlv.Value = data.UnmanagedAttributes[tagModel.Tag]
+                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<string[]>()
                             .Aggregate(String.Empty, (c, l) => c + l)
                             .FromString();
@@ -132,13 +132,13 @@ namespace WSCT.EMV.Personalization
                         tlv.Value = GetAipTlv(tagModel).Value;
                         break;
                     case "8F":
-                        tlv.Value = issuerContext.CaPublicKeyIndex.FromHexa();
+                        tlv.Value = _issuerContext.CaPublicKeyIndex.FromHexa();
                         break;
                     case "90": // Issuer Public Key Certificate
-                        tlv.Value = issuerContext.IssuerPublicKeyCertificate.FromHexa();
+                        tlv.Value = _issuerContext.IssuerPublicKeyCertificate.FromHexa();
                         break;
                     case "92": // Issuer Public Key Remainder
-                        tlv.Value = issuerContext.IssuerPublicKeyRemainder.FromHexa();
+                        tlv.Value = _issuerContext.IssuerPublicKeyRemainder.FromHexa();
                         break;
                     case "93": // Signed Static Authentication Data
                         tlv.Value = ComputeSignedStaticApplicationData().Value;
@@ -147,27 +147,27 @@ namespace WSCT.EMV.Personalization
                         tlv.Value = GetAflTlv().Value;
                         break;
                     case "9F32": // Issuer Public Key Exponent
-                        tlv.Value = issuerContext.IssuerPrivateKey.PublicExponent.FromHexa();
+                        tlv.Value = _issuerContext.IssuerPrivateKey.PublicExponent.FromHexa();
                         break;
                     case "9F46": // ICC Public Key Certificate 
-                        tlv.Value = iccContext.IccPublicKeyCertificate.FromHexa();
+                        tlv.Value = _iccContext.IccPublicKeyCertificate.FromHexa();
                         break;
                     case "9F47": // ICC Public Key Exponent 
-                        tlv.Value = iccContext.IccPrivateKey.PublicExponent.FromHexa();
+                        tlv.Value = _iccContext.IccPrivateKey.PublicExponent.FromHexa();
                         break;
                     case "9F48": // ICC Public Key Remainder 
-                        tlv.Value = iccContext.IccPublicKeyRemainder.FromHexa();
+                        tlv.Value = _iccContext.IccPublicKeyRemainder.FromHexa();
                         break;
                     case "8C": // CDOL1
                     case "8D": // CDOL2
                     case "9F4F": // Log Format
-                        tlv.Value = data.UnmanagedAttributes[tagModel.Tag]
+                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<TagLengthModel[]>()
                             .Aggregate(String.Empty, (c, tl) => c + String.Format("{0}{1:X2}", tl.Tag, tl.Length))
                             .FromHexa();
                         break;
                     case "9F4D": // Log Entry
-                        var logModel = data.UnmanagedAttributes[tagModel.Tag]
+                        var logModel = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<LogModel>();
                         tlv.Value = new[] { logModel.Sfi, logModel.Size };
                         break;
@@ -175,12 +175,12 @@ namespace WSCT.EMV.Personalization
                     case "5F20": // Cardholder Name
                     case "9D": // Directory Definition File Name
                     case "9F12": // Application Preferred Name
-                        tlv.Value = data.UnmanagedAttributes[tagModel.Tag]
+                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<string>()
                             .FromString();
                         break;
                     default:
-                        tlv.Value = data.UnmanagedAttributes[tagModel.Tag]
+                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<string>()
                             .FromHexa();
                         break;
@@ -202,7 +202,7 @@ namespace WSCT.EMV.Personalization
             byte firstRecord = 0;
             byte signedCount = 0;
 
-            foreach (var record in model.Records)
+            foreach (var record in _model.Records)
             {
                 if (last == null)
                 {
@@ -220,7 +220,7 @@ namespace WSCT.EMV.Personalization
                         aflEntries.Add(new AflEntry(last.Sfi, firstRecord, last.Index, signedCount));
 
                         firstRecord = record.Index;
-                        signedCount = (record.Signed ? (byte)1 : (byte)0);
+                        signedCount = record.Signed ? (byte)1 : (byte)0;
                     }
                 }
                 last = record;
@@ -238,7 +238,7 @@ namespace WSCT.EMV.Personalization
 
         private TlvData GetAipTlv(TagModel tagModel)
         {
-            var aipStrings = data.UnmanagedAttributes[tagModel.Tag]
+            var aipStrings = _data.UnmanagedAttributes[tagModel.Tag]
                 .ToObject<string[]>();
 
             var aip = new ApplicationInterchangeProfile();
@@ -273,23 +273,23 @@ namespace WSCT.EMV.Personalization
 
         private TlvData ComputeSignedStaticApplicationData()
         {
-            var records = model.Records.Where(r => r.Signed);
+            var records = _model.Records.Where(r => r.Signed);
             var fields = records.SelectMany(r => r.Fields);
             var tlvData = fields.Select(f => BuildTlv(new TagModel { Tag = f }));
 
-            IEnumerable<byte> dataEnumerable = new byte[0];
+            IEnumerable<byte> dataEnumerable = Array.Empty<byte>();
             dataEnumerable = tlvData.Aggregate(dataEnumerable, (current, tlv) => current.Concat(tlv.ToByteArray()));
 
             var signedStaticApplicationData = new SignedStaticApplicationData
             {
                 HashAlgorithmIndicator = 0x01,
-                DataAuthenticationCode = data.UnmanagedAttributes["9F45"]
+                DataAuthenticationCode = _data.UnmanagedAttributes["9F45"]
                     .ToObject<string>()
                     .FromHexa(),
                 StaticDataToBeAuthenticated = dataEnumerable.ToArray()
             };
 
-            var issuerPrivateKey = new PublicKey(issuerContext.IssuerPrivateKey.Modulus, issuerContext.IssuerPrivateKey.PrivateExponent);
+            var issuerPrivateKey = new PublicKey(_issuerContext.IssuerPrivateKey.Modulus, _issuerContext.IssuerPrivateKey.PrivateExponent);
 
             // 93   Signed Static Application Data (Nca)
             return new TlvData { Tag = 0x93, Value = signedStaticApplicationData.GenerateCertificate(issuerPrivateKey) };

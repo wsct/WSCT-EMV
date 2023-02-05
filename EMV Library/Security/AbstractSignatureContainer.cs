@@ -89,7 +89,7 @@ namespace WSCT.EMV.Security
         public byte[] ComputeHash(List<byte[]> data)
         {
             var hashFactory = new HashAlgorithmFactory();
-            var hashProvider = hashFactory.GetProvider(HashAlgorithmIndicator);
+            var hashProvider = HashAlgorithmFactory.GetProvider(HashAlgorithmIndicator);
 
             return hashProvider.ComputeHash(data);
         }

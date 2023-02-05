@@ -10,18 +10,13 @@
         /// </summary>
         /// <param name="hashIndicator">Hash algorithm indicator.</param>
         /// <returns>Instance of hash algorithm provider.</returns>
-        public IHashAlgorithmProvider GetProvider(byte hashIndicator)
+        public static IHashAlgorithmProvider GetProvider(byte hashIndicator)
         {
-            // TODO: use an external configuration file to define hash providers
-            IHashAlgorithmProvider hashProvider;
-            switch (hashIndicator)
+            IHashAlgorithmProvider hashProvider = hashIndicator switch
             {
-                case 1:
-                    hashProvider = new Sha1HashAlgorithmProvider();
-                    break;
-                default:
-                    throw new HashAlgorithmUnknownException(hashIndicator);
-            }
+                1 => new Sha1HashAlgorithmProvider(),
+                _ => throw new HashAlgorithmUnknownException(hashIndicator)
+            };
             return hashProvider;
         }
     }

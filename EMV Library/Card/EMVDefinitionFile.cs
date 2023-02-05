@@ -1,10 +1,10 @@
 using System;
 using WSCT.Core;
+using WSCT.Core.Fluent.Helpers;
 using WSCT.EMV.Commands;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 using WSCT.Helpers.Events;
-using WSCT.ISO7816;
 
 namespace WSCT.EMV.Card
 {
@@ -50,10 +50,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the last usefull status word.
         /// </summary>
-        public UInt32 LastStatusWord
-        {
-            get { return _lastStatusWord; }
-        }
+        public UInt32 LastStatusWord => _lastStatusWord;
 
         /// <summary>
         /// Accessor to the name of the application.
@@ -67,8 +64,8 @@ namespace WSCT.EMV.Card
         /// </remarks>
         public string Name
         {
-            get { return _adfName.ToAsciiString(); }
-            set { _adfName = value.FromString(); }
+            get => _adfName.ToAsciiString();
+            set => _adfName = value.FromString();
         }
 
         /// <summary>
@@ -78,8 +75,8 @@ namespace WSCT.EMV.Card
         /// <remarks><c>name</c> and <c>aid</c> are two ways to set the same internal field</remarks>
         public string Aid
         {
-            get { return _adfName.ToHexa(); }
-            set { _adfName = value.FromHexa(); }
+            get => _adfName.ToHexa();
+            set => _adfName = value.FromHexa();
         }
 
         /// <summary>
@@ -128,15 +125,10 @@ namespace WSCT.EMV.Card
             BeforeSelectEvent.Raise(this, new EmvEventArgs());
 
             // Execute the SELECT
-            var crp = new CommandResponsePair(new EMVSelectByNameCommand(_adfName, 0));
-            crp.Transmit(_cardChannel);
-            _lastStatusWord = crp.RApdu.StatusWord;
-
-            // Finally, store FCI
-            if (crp.RApdu.StatusWord == 0x9000)
-            {
-                TlvFci = new TlvData(crp.RApdu.Udr);
-            }
+            var crp = new EMVSelectByNameCommand(_adfName, 0)
+                .Transmit(_cardChannel)
+                .WithResponse(r => _lastStatusWord = r.StatusWord)
+                .OnStatusWord(0x9000, (c, r) => TlvFci = new TlvData(r.Udr));
 
             AfterSelectEvent.Raise(this, new EmvEventArgs());
 

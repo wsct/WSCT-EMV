@@ -60,7 +60,7 @@ namespace WSCT.EMV.Objects
             }
             set
             {
-                IEnumerable<byte> aflValue = new Byte[0];
+                IEnumerable<byte> aflValue = Array.Empty<byte>();
                 aflValue = value.Aggregate(aflValue, (current, entry) => current.Concat(entry.ToEnumerable()));
                 Tlv.Value = aflValue.ToArray();
             }

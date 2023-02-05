@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using WSCT.Core;
+using WSCT.Core.Fluent.Helpers;
 using WSCT.EMV.Commands;
 using WSCT.EMV.Objects;
 using WSCT.Helpers.BasicEncodingRules;
 using WSCT.Helpers.Events;
-using WSCT.ISO7816;
 
 namespace WSCT.EMV.Card
 {
@@ -40,10 +40,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the records in <c>TLVData</c> format.
         /// </summary>
-        public List<TlvData> TlvRecords
-        {
-            get { return _tlvRecords; }
-        }
+        public List<TlvData> TlvRecords => _tlvRecords;
 
         /// <summary>
         /// Accessor to AID tag location modifier. If set to <c>true</c>, AID are also searched in FCI <b>(not conform with EMV specifications)</b>.
@@ -126,7 +123,7 @@ namespace WSCT.EMV.Card
             var tlvSfi = TlvFci.GetTag(0x88);
             if (tlvSfi == null)
             {
-                throw new Exception(String.Format("PSE: no tag 88 (sfi) found in FCI [{0}]", TlvFci));
+                throw new Exception($"PSE: no tag 88 (sfi) found in FCI [{TlvFci}]");
             }
             var sfi = new ShortFileIdentifier(tlvSfi);
 
@@ -134,13 +131,10 @@ namespace WSCT.EMV.Card
             do
             {
                 recordNumber++;
-                var crp = new CommandResponsePair { CApdu = new EMVReadRecordCommand(recordNumber, sfi.Sfi, 0) };
-                crp.Transmit(_cardChannel);
-                _lastStatusWord = crp.RApdu.StatusWord;
-                if (crp.RApdu.StatusWord == 0x9000)
-                {
-                    _tlvRecords.Add(new TlvData(crp.RApdu.Udr));
-                }
+                var crp = new EMVReadRecordCommand(recordNumber, sfi.Sfi, 0)
+                    .Transmit(_cardChannel)
+                    .WithResponse(r => _lastStatusWord = r.StatusWord)
+                    .OnStatusWord(0x9000, (_, r) => _tlvRecords.Add(new TlvData(r.Udr)));
             } while (_lastStatusWord == 0x9000);
 
             AfterReadEvent.Raise(this, new EmvEventArgs());

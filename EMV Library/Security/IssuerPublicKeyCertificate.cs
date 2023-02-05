@@ -59,7 +59,7 @@ namespace WSCT.EMV.Security
                 {
                     PublicKeyorLeftmostDigitsofthePublicKey[i] = 0xBB;
                 }
-                issuerPublicKeyRemainder = new byte[0];
+                issuerPublicKeyRemainder = Array.Empty<byte>();
             }
             else
             {

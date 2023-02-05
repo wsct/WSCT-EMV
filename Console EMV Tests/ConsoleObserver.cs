@@ -85,28 +85,24 @@ namespace WSCT.EMV.ConsoleTests
 
         void WriteLine(LogLevel level, object sender, string message)
         {
-            var channelLayer = sender as ICardChannelLayerObservable;
-            if (channelLayer != null)
+            if (sender is ICardChannelLayerObservable channelLayer)
             {
                 Console.WriteLine(Header, level, channelLayer.LayerId, message);
                 return;
             }
 
-            var channel = sender as ICardChannelObservable;
-            if (channel != null)
+            if (sender is ICardChannelObservable)
             {
                 Console.WriteLine(Header, level, "", message);
             }
 
-            var contextLayer = sender as ICardContextLayerObservable;
-            if (contextLayer != null)
+            if (sender is ICardContextLayerObservable contextLayer)
             {
                 Console.WriteLine(Header, level, contextLayer.LayerId, message);
                 return;
             }
 
-            var context = sender as ICardContextObservable;
-            if (context != null)
+            if (sender is ICardContextObservable)
             {
                 Console.WriteLine(Header, level, "", message);
             }

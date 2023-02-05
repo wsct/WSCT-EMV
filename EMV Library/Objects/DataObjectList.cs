@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WSCT.EMV.Exceptions;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Objects
@@ -90,7 +91,7 @@ namespace WSCT.EMV.Objects
         /// <summary>
         /// Enumerates DO.
         /// </summary>
-        /// <returns><see cref="DataObjectList.DataObjectDefinition"/> instances.</returns>
+        /// <returns><see cref="DataObjectDefinition"/> instances.</returns>
         public IEnumerable<DataObjectDefinition> GetDataObjectDefinitions()
         {
             UInt32 offset = 0;
@@ -115,8 +116,12 @@ namespace WSCT.EMV.Objects
             var offset = 0;
             foreach (var dod in GetDataObjectDefinitions())
             {
-                var tlvData = new TlvData { Tag = dod.Tag, Length = dod.Length, Value = new byte[dod.Length] };
-                Array.Copy(data, offset, tlvData.Value, 0, (int)dod.Length);
+                var tlvData = new TlvData
+                {
+                    Tag = dod.Tag,
+                    Length = dod.Length,
+                    Value = data.AsSpan(offset, (int)dod.Length).ToArray()
+                };
                 tlvDataList.Add(tlvData);
 
                 offset += (int)dod.Length;
@@ -154,9 +159,9 @@ namespace WSCT.EMV.Objects
                     }
                 }
 
-                if (!tagFound)
+                if (tagFound is false)
                 {
-                    throw new Exception(String.Format("DataObjectList.buildData(): tag '{0:T}' not found in available TLVData (DOL: {1}]", dod, this));
+                    throw new ExpectedTagNotFoundException(dod.Tag);
                 }
 
                 offset += (int)dod.Length;
