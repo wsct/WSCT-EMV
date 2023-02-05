@@ -2,7 +2,7 @@
 
 namespace WSCT.GUI.Plugins.EMV.Personalization
 {
-    internal record PsePersonalizationData(
+    internal record PseApplicationInformation(
         PsePersonalizationModel Model,
-        WSCT.EMV.Personalization.PsePersonalizationData Data);
+        PsePersonalizationData Data);
 }

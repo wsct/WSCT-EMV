@@ -65,7 +65,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
                 LogSuccess();
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 LogFailure("The AID is malformed");
                 return;
@@ -94,7 +94,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
                 LogSuccess();
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 LogFailure("The DF Name is malformed");
                 return;
@@ -126,26 +126,26 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
         #endregion
 
-        private EmvPersonalizationData LoadEmvPersonalizationFolder()
+        private EmvApplicationInformation LoadEmvPersonalizationFolder()
         {
             var model = LoadDataFromFile<EmvPersonalizationModel>(EmvPersonalizationFolder, @"emv-card-model.json");
-            var data = LoadDataFromFile<WSCT.EMV.Personalization.EmvPersonalizationData>(EmvPersonalizationFolder, @"emv-card-data.json");
+            var data = LoadDataFromFile<EmvPersonalizationData>(EmvPersonalizationFolder, @"emv-card-data.json");
             var issuerContext = LoadDataFromFile<EmvIssuerContext>(EmvPersonalizationFolder, @"emv-issuer-context.json");
             var iccContext = LoadDataFromFile<EmvIccContext>(EmvPersonalizationFolder, @"emv-icc-context.json");
             var pinBlock = LoadPinBlockFromString(guiAppletPin.Text);
 
-            return new EmvPersonalizationData(model, data, issuerContext, iccContext, pinBlock);
+            return new EmvApplicationInformation(model, data, issuerContext, iccContext, pinBlock);
         }
 
-        private PsePersonalizationData LoadPsePersonalizationFolder()
+        private PseApplicationInformation LoadPsePersonalizationFolder()
         {
             var model = LoadDataFromFile<PsePersonalizationModel>(PsePersonalizationFolder, @"pse-card-model.json");
-            var data = LoadDataFromFile<WSCT.EMV.Personalization.PsePersonalizationData>(PsePersonalizationFolder, @"pse-card-data.json");
+            var data = LoadDataFromFile<PsePersonalizationData>(PsePersonalizationFolder, @"pse-card-data.json");
 
-            return new PsePersonalizationData(model, data);
+            return new PseApplicationInformation(model, data);
         }
 
-        private EmvCardDgis BuildDgi(EmvPersonalizationData cardData)
+        private EmvCardDgis BuildDgi(EmvApplicationInformation cardData)
         {
             var builder = new DgiBuilder(cardData.Model, cardData.Data, cardData.IssuerContext, cardData.IccContext);
 
@@ -187,7 +187,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             return new EmvCardDgis(fci, gpo, acid, records, pin);
         }
 
-        private PseCardDgis BuildDgi(PsePersonalizationData cardData)
+        private PseCardDgis BuildDgi(PseApplicationInformation cardData)
         {
             var builder = new PseDgiBuilder(cardData.Model, cardData.Data);
 

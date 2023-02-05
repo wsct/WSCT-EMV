@@ -3,9 +3,9 @@ using WSCT.EMV.Personalization;
 
 namespace WSCT.GUI.Plugins.EMV.Personalization
 {
-    internal record EmvPersonalizationData(
+    internal record EmvApplicationInformation(
         EmvPersonalizationModel Model,
-        WSCT.EMV.Personalization.EmvPersonalizationData Data,
+        EmvPersonalizationData Data,
         EmvIssuerContext IssuerContext,
         EmvIccContext IccContext,
         PINBlock PinBlock);
