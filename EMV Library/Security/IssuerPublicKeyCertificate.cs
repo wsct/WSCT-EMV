@@ -63,8 +63,8 @@ namespace WSCT.EMV.Security
             }
             else
             {
-                PublicKeyorLeftmostDigitsofthePublicKey = issuerPublicKeyModulus.Take(privateKeyLength - 36).ToArray();
-                issuerPublicKeyRemainder = new byte[issuerPublicKeyModulus.Length - privateKeyLength + 36];
+                PublicKeyorLeftmostDigitsofthePublicKey = issuerPublicKeyModulus[..(privateKeyLength - 36)];
+                issuerPublicKeyRemainder = issuerPublicKeyModulus[(privateKeyLength - 36)..];
             }
 
             return DataFormat.ToByteArray()

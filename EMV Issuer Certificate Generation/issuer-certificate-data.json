@@ -1,5 +1,4 @@
 ﻿{
-    "RegisteredIdentifier": "9876543210",
     "CaPublicKeyIndex": "01",
 
     "IssuerPrivateKey": {
@@ -9,8 +8,8 @@
     },
 
     "HashAlgorithmIndicator": "01",
-    "IssuerIdentifier": "92500041",
-    "ExpirationDate": "0720",
+    "IssuerIdentifier": "92504220",
+    "ExpirationDate": "0828",
     "SerialNumber": "000001",
     "PublicKeyAlgorithmIndicator": "01"
 }

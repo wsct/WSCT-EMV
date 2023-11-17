@@ -99,7 +99,6 @@ wsct-emvcp
 Files: `issuer-certificate-data.json`.
 ```json
 {
-    "RegisteredIdentifier": "9876543210",
     "CaPublicKeyIndex": "01",
 
     "IssuerPrivateKey": {
@@ -109,7 +108,7 @@ Files: `issuer-certificate-data.json`.
     },
 
     "HashAlgorithmIndicator": "01",
-    "IssuerIdentifier": "92500041",
+    "IssuerIdentifier": "925042",
     "ExpirationDate": "0720",
     "SerialNumber": "000001",
     "PublicKeyAlgorithmIndicator": "01"
@@ -135,7 +134,7 @@ Files: `emv-issuer-context`.
 Files: `emv-icc-context.json`.
 ```json
 {
-  "ApplicationPan": "9876543210000000",
+  "ApplicationPan": "9250 4220 2311 0001",
   "IccPrivateKey": {
     "Modulus": "94...AB",
     "PrivateExponent": "8B...21",

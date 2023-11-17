@@ -7,12 +7,6 @@ namespace WSCT.EMV.Personalization
     public class IssuerCertificateData
     {
         /// <summary>
-        /// RID of issuer.
-        /// </summary>
-        [DataMember]
-        public string RegisteredIdentifier { get; set; }
-
-        /// <summary>
         /// Index of Certification Authority that will sign the Issuer Public Key Certificate.
         /// </summary>
         [DataMember]

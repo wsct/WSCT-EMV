@@ -67,7 +67,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.Core" Version="6.5.1" />
+    <PackageReference Include="WSCT.Core" Version="6.5.4" />
     <PackageReference Include="WSCT.GUI.Plugins" Version="5.2.1" />
     <PackageReference Include="WSCT.GUI.Resources" Version="1.2.1" />
   </ItemGroup>

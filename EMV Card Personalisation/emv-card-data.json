@@ -1,18 +1,18 @@
 {
     "50": "ENSIBANK",
     "57": {
-        "pan": "9876543210543210",
-        "expiration-date": "1807",
+        "pan": "9250 42 2023 11 0001",
+        "expiration-date": "2808",
         "service-code": "101",
         "discretionary-data": ""
     },
-    "5A": "9876543210543210",
+    "5A": "9250 42 2023 11 0001",
     "5F20": "ZAPHOD BEEBLEBROX",
-    "5F24": "180630",
-    "5F25": "140701",
+    "5F24": "280831",
+    "5F25": "230901",
     "5F28": "0250",
     "5F34": "01",
-    "82": [ "sda", "issuer-authentication" ],
+    "82": [ "sda", "dda", "issuer-authentication" ],
     "84": "F0 43 41 45 4E 42 01",
     "87": "01",
     "8C": [

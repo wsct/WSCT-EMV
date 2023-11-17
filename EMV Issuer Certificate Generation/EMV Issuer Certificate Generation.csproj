@@ -14,6 +14,7 @@
     <RootNamespace>WSCT.EMV.IssuerCertificateGenerationConsole</RootNamespace>
     <OutputType>Exe</OutputType>
     <OutputPath>..\binaries</OutputPath>
+	<LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

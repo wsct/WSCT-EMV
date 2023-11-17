@@ -7,12 +7,6 @@ namespace WSCT.EMV.Personalization
     public class IccCertificateData
     {
         /// <summary>
-        /// RID of issuer.
-        /// </summary>
-        [DataMember]
-        public string RegisteredIdentifier { get; set; }
-
-        /// <summary>
         /// Application PAN.
         /// </summary>
         [DataMember]

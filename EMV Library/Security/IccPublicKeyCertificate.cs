@@ -63,9 +63,8 @@ namespace WSCT.EMV.Security
             }
             else
             {
-                PublicKeyorLeftmostDigitsofthePublicKey = iccPublicKeyModulus.Take(privateKeyLength - 42).ToArray();
-                iccPublicKeyRemainder = new byte[iccPublicKeyModulus.Length - privateKeyLength + 42];
-                // TODO Set a correct value !!
+                PublicKeyorLeftmostDigitsofthePublicKey = iccPublicKeyModulus[..(privateKeyLength - 42)];
+                iccPublicKeyRemainder = iccPublicKeyModulus[(privateKeyLength - 42)..];
             }
 
             var applicationPan = ApplicationPan
