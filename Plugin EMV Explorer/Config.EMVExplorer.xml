@@ -21,6 +21,11 @@
         <application aid="A0 00 00 00 42 10 10" label="CB" />
         <application aid="A0 00 00 00 42 20 10" label="CB 20 10" />
         <application aid="A0 00 00 00 42 30 10" label="RETRAIT CB" />
+		  
+        <application aid="A0 00 00 03 33 01 01 01" label="UnionPay Debit" />
+		<application aid="A0 00 00 03 33 01 01 02" label="UnionPay Credit" />
+		<application aid="A0 00 00 03 33 01 01 03" label="UnionPay Quasi Credit" />
+        <application aid="A0 00 00 03 33 01 01 08" label="U.S. UnionPay Common Debit" />
 
         <application aid="A0 00 00 00 69" label="MONEO" />
 
@@ -412,7 +417,7 @@
     <tlvDataList>
       <!-- The coding of primitive context-specific class data objects in the ranges '80' to '9E' and '9F00' to '9F4F' is reserved for this specification. -->
       <!-- Amount, Authorised: Authorised amount of the transaction (excluding adjustments) -->
-      <tlvData tag="9F02" value="000000001000" />
+      <tlvData tag="9F02" value="000000000001" />
       <!-- Amount, Other: Secondary amount associated with the transaction representing a cashback amount -->
       <tlvData tag="9F03" value="000000000000" />
       <!-- Terminal Country Code: Indicates the country of the terminal, represented according to ISO 3166 -->
@@ -420,13 +425,16 @@
       <!-- Transaction Currency Code: Indicates the currency code of the transaction according to ISO 4217 -->
       <tlvData tag="5F2A" value="0978" />
       <!-- Transaction Date: Local date that the transaction was authorised -->
-      <tlvData tag="9A" value="070430" />
+      <tlvData tag="9A" value="010930" />
       <!-- Transaction Type: Indicates the type of financial transaction, represented by the first two digits of the ISO 8583:1987 Processing Code. The actual values to be used for the Transaction Type data element are defined by the relevant payment system
 			00: Purchase of goods and services - 01: Cash (ATM) - 20: Purchase return -->
       <tlvData tag="9C" value="00" />
 
       <!-- The coding of tag 'BF0C' and constructed context-specific class data objects in the range 'BF20' to 'BF4F' is reserved for this specification -->
 
+	  <!-- Terminal capabilities: IC | PlainText ICC, Signature, No CVM | SDA, DDA, CDA -->
+	  <tlvData tag="9F33" value="20B8C8" />
+		
       <!-- The coding of primitive context-specific class data objects in the range '9F50' to '9F7F' is reserved for the payment systems -->
       <!-- Needed in GPO for some Mastercard cards (9F5C/08) -->
       <tlvData tag="9F5C" value="0000000000000000" />

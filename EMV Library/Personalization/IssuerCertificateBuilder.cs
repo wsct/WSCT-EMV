@@ -36,7 +36,7 @@ namespace WSCT.EMV.Personalization
 
         #endregion
 
-        void ComputeIssuerContext()
+        private void ComputeIssuerContext()
         {
             var caModulusLength = new BigInteger(caPrivateKey.Modulus, 16).BitLength / 8;
             var issuerPublicKey = certificateData.IssuerPrivateKey.GetPublicKey();
