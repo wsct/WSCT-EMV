@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <Version>6.4.1</Version>
 
@@ -10,6 +10,8 @@
 
     <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
     <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
+
+    <LangVersion>latest</LangVersion>
 
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>

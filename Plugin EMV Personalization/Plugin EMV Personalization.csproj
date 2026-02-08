@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <Version>0.10.1</Version>
 
@@ -12,7 +12,7 @@
     <AssemblyName>Plugin.EMV.Personalization</AssemblyName>
     <RootNamespace>WSCT.GUI.Plugins.EMV.Personalization</RootNamespace>
 
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
 
     <Copyright>Copyright © Sylvain Vernois / ENSICAEN 2021</Copyright>
     <Product>WSCT</Product>

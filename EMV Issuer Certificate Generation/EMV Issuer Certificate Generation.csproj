@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net462</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <Product>EMV Issuer Certificate Generation Consolen</Product>
     <Description>EMV Issuer Certificate Generation Console for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
@@ -14,7 +14,7 @@
     <RootNamespace>WSCT.EMV.IssuerCertificateGenerationConsole</RootNamespace>
     <OutputType>Exe</OutputType>
     <OutputPath>..\binaries</OutputPath>
-	<LangVersion>8.0</LangVersion>
+	  <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

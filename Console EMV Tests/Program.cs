@@ -22,15 +22,6 @@ namespace WSCT.EMV.ConsoleTests
 
         private static void Main(string[] args)
         {
-            try
-            {
-                Console.WindowWidth = 132;
-                Console.WindowHeight = 50;
-                Console.SetBufferSize(132, 1000);
-            }
-            catch (Exception)
-            {
-            }
             Console.ForegroundColor = ConsoleColor.Gray;
 
             new Program().Run();

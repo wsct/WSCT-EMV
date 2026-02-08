@@ -28,8 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin EMV Personalization", "Plugin EMV Personalization\Plugin EMV Personalization.csproj", "{FDEC05B0-C176-466D-91A8-208AF53331C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSCT.EMV.DocFx", "WSCT.EMV.DocFx\WSCT.EMV.DocFx.csproj", "{AA579C43-BDCC-4E13-891A-807B6481A0C6}"
-EndProject
+# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSCT.EMV.DocFx", "WSCT.EMV.DocFx\WSCT.EMV.DocFx.csproj", "{AA579C43-BDCC-4E13-891A-807B6481A0C6}"
+# EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

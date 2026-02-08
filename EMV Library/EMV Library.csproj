@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <OutputType>Library</OutputType>
     <Version>3.4.1</Version>
 
@@ -11,7 +11,7 @@
     <AssemblyName>WSCT.EMV</AssemblyName>
     <RootNamespace>WSCT.EMV</RootNamespace>
 
-    <LangVersion>9</LangVersion>
+    <LangVersion>latest</LangVersion>
 
     <Product>WSCT.EMV</Product>
     <Description>EMV Library implementation for WSCT.</Description>
@@ -21,7 +21,7 @@
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
     <PackageTags>wsct, emv</PackageTags>
-    <PackageReleaseNotes>Targets net 5.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Targets net 9.0</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Dictionary.EMVTag.xml">

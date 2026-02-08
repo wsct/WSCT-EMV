@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net462</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <Product>EMV RSA Key Generation</Product>
     <Description>EMV RSA Key Generation Console for WSCT.</Description>
     <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
@@ -14,6 +14,7 @@
     <OutputType>Exe</OutputType>
     <OutputPath>..\binaries</OutputPath>
     <Version>1.2.0</Version>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
