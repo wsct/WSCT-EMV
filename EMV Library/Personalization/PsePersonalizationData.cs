@@ -9,9 +9,9 @@ namespace WSCT.EMV.Personalization
     public class PsePersonalizationData
     {
         [DataMember]
-        public PseRecord[] Records { get; set; }
+        public PseRecord[]? Records { get; set; }
 
         [JsonExtensionData]
-        public IDictionary<string, JToken> UnmanagedAttributes;
+        public IDictionary<string, JToken> UnmanagedAttributes { get; set; } = new Dictionary<string, JToken>();
     }
 }

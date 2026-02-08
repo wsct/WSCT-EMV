@@ -12,10 +12,11 @@
     <RootNamespace>WSCT.EMV</RootNamespace>
 
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
 
     <Product>WSCT.EMV</Product>
     <Description>EMV Library implementation for WSCT.</Description>
-    <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
+    <Copyright>Copyright © ENSICAEN / GREYC 2010-2026</Copyright>
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
@@ -33,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="WSCT.Core" Version="6.5.4" />
-    <PackageReference Include="WSCT.Helpers" Version="5.1.0" />
+    <PackageReference Include="WSCT.Core" Version="6.7.1" />
+    <PackageReference Include="WSCT.Helpers" Version="5.2.0" />
   </ItemGroup>
 </Project>

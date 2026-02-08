@@ -6,6 +6,6 @@ namespace WSCT.EMV.Personalization
     public class PsePersonalizationModel
     {
         [DataMember]
-        public FciModel Fci { get; set; }
+        public FciModel? Fci { get; set; }
     }
 }

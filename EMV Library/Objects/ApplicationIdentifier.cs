@@ -17,18 +17,16 @@ namespace WSCT.EMV.Objects
         /// </summary>
         public string Rid
         {
-            get { return Tlv.Value != null && Tlv.Value.Length >= 5 ? Tlv.Value.ToHexa(5) : String.Empty; }
+            get { return Tlv.Value is not null && Tlv.Value.Length >= 5 ? Tlv.Value.ToHexa(5) : String.Empty; }
             set
             {
-                if (Tlv.Value == null)
+                if (Tlv.Value is null)
                 {
                     Tlv.Value = value.FromHexa();
                 }
                 else
                 {
-                    Tlv.Value = value.FromHexa()
-                        .Concat(Tlv.Value.Skip(5))
-                        .ToArray();
+                    Tlv.Value = [.. value.FromHexa(), .. Tlv.Value.Skip(5)];
                 }
             }
         }
@@ -40,25 +38,22 @@ namespace WSCT.EMV.Objects
         {
             get
             {
-                if (Tlv == null || Tlv.Value == null)
+                if (Tlv is null || Tlv.Value is null)
                 {
                     return String.Empty;
                 }
 
-                return Tlv.Value.Skip(5).ToArray().ToHexa();
+                return Tlv.Value[5..].ToHexa();
             }
             set
             {
-                if (Tlv.Value == null)
+                if (Tlv.Value is null)
                 {
-                    Tlv.Value = new byte[] { 0, 0, 0, 0, 0 }.Concat(value.FromHexa()).ToArray();
+                    Tlv.Value = [0, 0, 0, 0, 0, .. value.FromHexa()];
                 }
                 else
                 {
-                    Tlv.Value = Tlv.Value
-                        .Take(5)
-                        .Concat(value.FromHexa())
-                        .ToArray();
+                    Tlv.Value = [.. Tlv.Value[..5], .. value.FromHexa()];
                 }
             }
         }

@@ -7,9 +7,9 @@ namespace WSCT.EMV.Personalization
     public class FciModel
     {
         [DataMember]
-        public string Dgi { get; set; }
+        public string? Dgi { get; set; }
 
         [DataMember]
-        public IEnumerable<TagModel> Tags { get; set; }
+        public IEnumerable<TagModel>? Tags { get; set; }
     }
 }

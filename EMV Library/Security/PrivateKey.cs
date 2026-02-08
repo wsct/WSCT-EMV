@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using WSCT.EMV.Exceptions;
 
 namespace WSCT.EMV.Security
 {
@@ -11,20 +12,20 @@ namespace WSCT.EMV.Security
         /// Modulus of of Issuer Public Key.
         /// </summary>
         [DataMember]
-        public string Modulus { get; set; }
+        public string? Modulus { get; set; }
 
         /// <summary>
         /// Clear issuer private exponent.
         /// Mandatory for SDA only.
         /// </summary>
         [DataMember]
-        public string PrivateExponent { get; set; }
+        public string? PrivateExponent { get; set; }
 
         /// <summary>
         /// Exponent of Issuer Public Key.
         /// </summary>
         [DataMember]
-        public string PublicExponent { get; set; }
+        public string? PublicExponent { get; set; }
 
         #endregion
 
@@ -34,6 +35,9 @@ namespace WSCT.EMV.Security
         /// <returns></returns>
         public PublicKey GetPublicKey()
         {
+            EMVApplicationException.ThrowIfNull(Modulus, "Modulus can't be null");
+            EMVApplicationException.ThrowIfNull(PublicExponent, "PublicExponent can't be null");
+
             return new PublicKey(Modulus, PublicExponent);
         }
 
@@ -43,6 +47,9 @@ namespace WSCT.EMV.Security
         /// <returns></returns>
         public PublicKey GetPrivateKey()
         {
+            EMVApplicationException.ThrowIfNull(Modulus, "Modulus can't be null");
+            EMVApplicationException.ThrowIfNull(PrivateExponent, "PrivateExponent can't be null");
+
             return new PublicKey(Modulus, PrivateExponent);
         }
     }

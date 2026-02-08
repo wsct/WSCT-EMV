@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Product>EMV Card Personalization Console</Product>
     <Description>EMV Card Personalization Console for WSCT.</Description>
-    <Copyright>Copyright © ENSICAEN / GREYC 2014-2020</Copyright>
+    <Copyright>Copyright © ENSICAEN / GREYC 2014-2026</Copyright>
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>

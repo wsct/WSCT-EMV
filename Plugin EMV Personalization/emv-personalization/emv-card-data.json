@@ -1,12 +1,12 @@
 {
     "50": "ENSIBANK",
     "57": {
-        "pan": "9250422023110001",
+        "pan": "9250 42 2023 11 0001",
         "expiration-date": "2808",
         "service-code": "101",
         "discretionary-data": ""
     },
-    "5A": "9250422023110001",
+    "5A": "9250 42 2023 11 0001",
     "5F20": "ZAPHOD BEEBLEBROX",
     "5F24": "280831",
     "5F25": "230901",
@@ -16,76 +16,25 @@
     "84": "F0 43 41 45 4E 42 01",
     "87": "01",
     "8C": [
-        {
-            "tag": "9F02",
-            "length": 6
-        },
-        {
-            "tag": "9F03",
-            "length": 6
-        },
-        {
-            "tag": "9F1A",
-            "length": 2
-        },
-        {
-            "tag": "95",
-            "length": 5
-        },
-        {
-            "tag": "5F2A",
-            "length": 2
-        },
-        {
-            "tag": "9A",
-            "length": 3
-        },
-        {
-            "tag": "9C",
-            "length": 1
-        },
-        {
-            "tag": "9F37",
-            "length": 4
-        }
+        { "tag": "9F02", "length": 6 },
+        { "tag": "9F03", "length": 6 },
+        { "tag": "9F1A", "length": 2 },
+        { "tag": "95", "length": 5 },
+        { "tag": "5F2A", "length": 2 },
+        { "tag": "9A", "length": 3 },
+        { "tag": "9C", "length": 1 },
+        { "tag": "9F37", "length": 4 }
     ],
     "8D": [
-        {
-            "tag": "8A",
-            "length": 2
-        },
-        {
-            "tag": "9F02",
-            "length": 6
-        },
-        {
-            "tag": "9F03",
-            "length": 6
-        },
-        {
-            "tag": "9F1A",
-            "length": 2
-        },
-        {
-            "tag": "95",
-            "length": 5
-        },
-        {
-            "tag": "5F2A",
-            "length": 2
-        },
-        {
-            "tag": "9A",
-            "length": 3
-        },
-        {
-            "tag": "9C",
-            "length": 1
-        },
-        {
-            "tag": "9F37",
-            "length": 4
-        }
+        { "tag": "8A", "length": 2 },
+        { "tag": "9F02", "length": 6 },
+        { "tag": "9F03", "length": 6 },
+        { "tag": "9F1A", "length": 2 },
+        { "tag": "95", "length": 5 },
+        { "tag": "5F2A", "length": 2 },
+        { "tag": "9A", "length": 3 },
+        { "tag": "9C", "length": 1 },
+        { "tag": "9F37", "length": 4 }
     ],
     "8E": "00 00 00 00 00 00 00 00 02 03 01 03",
     "8F": "01",
@@ -105,35 +54,17 @@
     "9F36": "0000",
     "9F44": "02",
     "9F45": "6742",
+    "9F49": [ 
+        { "tag": "9F37", "length": "04"} 
+    ],
     "9F4A": "82",
-    "9F4D": {
-        "sfi": 11,
-        "size": 5
-    },
+    "9F4D": { "sfi": 11, "size": 5 },
     "9F4F": [
-        {
-            "tag": "9F02",
-            "length": 6
-        },
-        {
-            "tag": "9F27",
-            "length": 1
-        },
-        {
-            "tag": "9F1A",
-            "length": 2
-        },
-        {
-            "tag": "5F2A",
-            "length": 2
-        },
-        {
-            "tag": "9A",
-            "length": 3
-        },
-        {
-            "tag": "9C",
-            "length": 1
-        }
+        { "tag": "9F02", "length": 6 },
+        { "tag": "9F27", "length": 1 },
+        { "tag": "9F1A", "length": 2 },
+        { "tag": "5F2A", "length": 2 },
+        { "tag": "9A", "length": 3 },
+        { "tag": "9C", "length": 1 }
     ]
 }

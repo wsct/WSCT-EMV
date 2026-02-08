@@ -12,7 +12,7 @@
     <AssemblyName>Plugins.EMVExplorer</AssemblyName>
     <RootNamespace>WSCT.GUI.Plugins.EMVExplorer</RootNamespace>
 
-    <Copyright>Copyright © Sylvain Vernois 2010-2020</Copyright>
+    <Copyright>Copyright © Sylvain Vernois 2010-2026</Copyright>
     <Product>WSCT</Product>
     <Company>ENSICAEN</Company>
     <Authors>Sylvain Vernois</Authors>

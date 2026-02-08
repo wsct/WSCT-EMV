@@ -12,7 +12,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Default value for undefined clean PIN.
         /// </summary>
-        public byte[] NullClearPIN = { 0, 0, 0, 0 };
+        public byte[] NullClearPIN = [0, 0, 0, 0];
 
         #endregion
 

@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Product>WSCT Console EMV Tests</Product>
     <Description>Test Console of EMV Library for WSCT.</Description>
-    <Copyright>Copyright © ENSICAEN / GREYC 2010-2020</Copyright>
+    <Copyright>Copyright © ENSICAEN / GREYC 2010-2026</Copyright>
     <Authors>Sylvain Vernois</Authors>
     <Company>ENSICAEN</Company>
     <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
@@ -18,7 +18,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.3.3" />
+    <PackageReference Include="WSCT.Wrapper.Desktop" Version="1.5.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMV Library\EMV Library.csproj" />

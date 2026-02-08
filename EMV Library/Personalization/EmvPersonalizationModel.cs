@@ -7,15 +7,15 @@ namespace WSCT.EMV.Personalization
     public class EmvPersonalizationModel
     {
         [DataMember]
-        public TagValuesSequenceModel Acid { get; set; }
+        public TagValuesSequenceModel? Acid { get; set; }
 
         [DataMember]
-        public FciModel Fci { get; set; }
+        public FciModel? Fci { get; set; }
 
         [DataMember]
-        public TagValuesSequenceModel Gpo { get; set; }
+        public TagValuesSequenceModel? Gpo { get; set; }
 
         [DataMember]
-        public IEnumerable<RecordModel> Records { get; set; }
+        public IEnumerable<RecordModel>? Records { get; set; }
     }
 }

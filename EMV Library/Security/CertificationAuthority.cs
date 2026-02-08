@@ -12,18 +12,18 @@ namespace WSCT.EMV.Security
         /// 
         /// </summary>
         [XmlAttribute("rid")]
-        public string Rid { get; set; }
+        public string? Rid { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [XmlAttribute("index")]
-        public string Index { get; set; }
+        public string? Index { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [XmlElement("publicKey")]
-        public PublicKey PublicKey { get; set; }
+        public PublicKey? PublicKey { get; set; }
     }
 }

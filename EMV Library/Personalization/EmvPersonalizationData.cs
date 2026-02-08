@@ -9,6 +9,6 @@ namespace WSCT.EMV.Personalization
     public class EmvPersonalizationData
     {
         [JsonExtensionData]
-        public IDictionary<string, JToken> UnmanagedAttributes;
+        public IDictionary<string, JToken> UnmanagedAttributes { get; set; } = new Dictionary<string, JToken>();
     }
 }

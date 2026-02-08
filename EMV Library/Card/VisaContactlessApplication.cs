@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using WSCT.Core;
+using WSCT.EMV.Exceptions;
 using WSCT.EMV.Security;
 
 namespace WSCT.EMV.Card
@@ -8,7 +9,11 @@ namespace WSCT.EMV.Card
     /// <summary>
     /// Specialized <see cref="EmvApplication"/> for Visa contactless application.
     /// </summary>
-    public class VisaContactlessApplication : EmvApplication
+    /// <remarks>
+    /// Creates a new <see cref="VisaContactlessApplication"/> instance.
+    /// </remarks>
+    /// <param name="cardChannel"></param>
+    public class VisaContactlessApplication(ICardChannel cardChannel) : EmvApplication(cardChannel)
     {
         #region >> Fields
 
@@ -18,17 +23,7 @@ namespace WSCT.EMV.Card
         private int _nic;
 
         #endregion
-
         #region >> Constructors
-
-        /// <summary>
-        /// Creates a new <see cref="VisaContactlessApplication"/> instance.
-        /// </summary>
-        /// <param name="cardChannel"></param>
-        public VisaContactlessApplication(ICardChannel cardChannel)
-            : base(cardChannel)
-        {
-        }
 
         #endregion
 
@@ -39,7 +34,10 @@ namespace WSCT.EMV.Card
         {
             get
             {
-                if (_dda == null && IccPublicKeyCertificate != null)
+                EMVApplicationException.ThrowIfNull(TlvProcessingOptions, "TlvProcessingOptions can't be null");
+                EMVApplicationException.ThrowIfNull(IccPublicKey, "IccPublicKey can't be null");
+
+                if (_dda == null)
                 {
                     var signature = TlvProcessingOptions.GetTag(0x9F4B).Value;
                     _nic = signature.Length;
@@ -77,14 +75,14 @@ namespace WSCT.EMV.Card
                         if (TlvDataTerminalData.HasTag(0x9F37) // Terminal Unpredictable Number
                             && TlvDataRecords.HasTag(0x9F36)) // ATC
                         {
-                            var k = (int)((uint)_nic - _dda.IccDynamicDataLength - 25);
+                            var k = (int)((uint)_nic - Dda.IccDynamicDataLength - 25);
                             var length9F37 = (int)TlvDataTerminalData.GetTag(0x9F37).Length;
                             var length9F36 = (int)TlvDataRecords.GetTag(0x9F36).Length;
 
                             var data = new byte[3 + k + length9F37];
                             data[0] = 0x05; // Signed Data Format
                             data[1] = 0x01; // Hash Algorithm Indicator
-                            data[2] = _dda.IccDynamicDataLength; // ICC Dynamic Data Length
+                            data[2] = Dda.IccDynamicDataLength; // ICC Dynamic Data Length
                             data[3] = (byte)length9F36;
                             var offset = 4;
 
@@ -103,7 +101,7 @@ namespace WSCT.EMV.Card
                             // offset += length9F37;
 
                             var hash = data.ComputeHashSha1();
-                            if (hash.SequenceEqual(_dda.HashResult))
+                            if (hash.SequenceEqual(Dda.HashResult ?? []))
                             {
                                 return true;
                             }
@@ -115,13 +113,15 @@ namespace WSCT.EMV.Card
                         break;
 
                     case 0x01:
+                        EMVApplicationException.ThrowIfNull(TlvProcessingOptions, "TlvProcessingOptions can't be null");
+
                         if (TlvDataTerminalData.HasTag(0x9F37) // Terminal Unpredictable Number
                             && TlvDataTerminalData.HasTag(0x9F02) // Amount Authorised
                             && TlvDataTerminalData.HasTag(0x5F2A) // Transaction Currency Code
                             && TlvProcessingOptions.HasTag(0x9F36) // ATC
                             && TlvDataRecords.HasTag(0x9F69)) // Card Authentication Related Data
                         {
-                            uint iccDynamicDataLength = _dda.IccDynamicDataLength;
+                            uint iccDynamicDataLength = Dda.IccDynamicDataLength;
                             var k = (int)((uint)_nic - iccDynamicDataLength - 25);
                             var length9F37 = (int)TlvDataTerminalData.GetTag(0x9F37).Length;
                             var length9F36 = (int)TlvProcessingOptions.GetTag(0x9F36).Length;
@@ -160,7 +160,7 @@ namespace WSCT.EMV.Card
                             // offset += length9F69;
 
                             var hash = data.ComputeHashSha1();
-                            if (hash.SequenceEqual(_dda.HashResult))
+                            if (hash.SequenceEqual(Dda.HashResult ?? []))
                             {
                                 return true;
                             }

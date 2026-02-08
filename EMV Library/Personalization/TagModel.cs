@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -7,9 +8,9 @@ namespace WSCT.EMV.Personalization
     public class TagModel
     {
         [DataMember]
-        public string Tag { get; set; }
+        public required string Tag { get; set; }
 
         [DataMember]
-        public IEnumerable<TagModel> Fields { get; set; }
+        public IEnumerable<TagModel>? Fields { get; set; }
     }
 }

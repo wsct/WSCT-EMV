@@ -58,12 +58,12 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Event sent before execution of a <see cref="Read"/>.
         /// </summary>
-        public event EventHandler<EmvEventArgs> BeforeReadEvent;
+        public event EventHandler<EmvEventArgs>? BeforeReadEvent;
 
         /// <summary>
         /// Event sent after execution of a <see cref="Read"/>.
         /// </summary>
-        public event EventHandler<EmvEventArgs> AfterReadEvent;
+        public event EventHandler<EmvEventArgs>? AfterReadEvent;
 
         #endregion
 
@@ -77,7 +77,7 @@ namespace WSCT.EMV.Card
             : base(cardChannel)
         {
             SearchTagAidInFci = false;
-            _tlvRecords = new List<TlvData>();
+            _tlvRecords = [];
             Name = "1PAY.SYS.DDF01";
         }
 
@@ -102,9 +102,9 @@ namespace WSCT.EMV.Card
             }
 
             // If AID can also be found in FCI...
-            if (SearchTagAidInFci && TlvFci != null)
+            if (SearchTagAidInFci)
             {
-                foreach (var tlvData in TlvFci.GetTags(0x61))
+                foreach (var tlvData in TlvFci?.GetTags(0x61) ?? [])
                 {
                     var emv = new EmvApplication(_cardChannel, tlvData);
                     yield return emv;
@@ -120,8 +120,8 @@ namespace WSCT.EMV.Card
         {
             BeforeReadEvent.Raise(this, new EmvEventArgs());
 
-            var tlvSfi = TlvFci.GetTag(0x88);
-            if (tlvSfi == null)
+            var tlvSfi = TlvFci?.GetTag(0x88);
+            if (tlvSfi is null)
             {
                 throw new Exception($"PSE: no tag 88 (sfi) found in FCI [{TlvFci}]");
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WSCT.EMV.Exceptions;
 using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
@@ -11,31 +12,19 @@ namespace WSCT.EMV.Personalization
     /// <summary>
     /// Builder of EMV DGI based on personalization models and data.
     /// </summary>
-    public class DgiBuilder
+    /// <remarks>
+    /// Initializes a new instance.
+    /// </remarks>
+    /// <param name="model">Card DGI model.</param>
+    /// <param name="data">Card data.</param>
+    /// <param name="issuerContext"></param>
+    /// <param name="iccContext"></param>
+    public class DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext, EmvIccContext iccContext)
     {
-        private readonly EmvPersonalizationData _data;
-        private readonly EmvPersonalizationModel _model;
-        private readonly EmvIssuerContext _issuerContext;
-        private readonly EmvIccContext _iccContext;
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Initializes a new instance.
-        /// </summary>
-        /// <param name="model">Card DGI model.</param>
-        /// <param name="data">Card data.</param>
-        /// <param name="issuerContext"></param>
-        /// <param name="iccContext"></param>
-        public DgiBuilder(EmvPersonalizationModel model, EmvPersonalizationData data, EmvIssuerContext issuerContext, EmvIccContext iccContext)
-        {
-            this._data = data;
-            this._model = model;
-            this._issuerContext = issuerContext;
-            this._iccContext = iccContext;
-        }
-
-        #endregion
+        private readonly EmvPersonalizationData _data = data;
+        private readonly EmvPersonalizationModel _model = model;
+        private readonly EmvIssuerContext _issuerContext = issuerContext;
+        private readonly EmvIccContext _iccContext = iccContext;
 
         /// <summary>
         /// Builds UDR to be used with PUT DATA command for given record .
@@ -108,6 +97,12 @@ namespace WSCT.EMV.Personalization
                 .ToHexa('\0');
         }
 
+
+        /// <summary>
+        /// Builds TLV to be used in DGI with STORE DATA command for given tag.
+        /// </summary>
+        /// <param name="tagModel"></param>
+        /// <returns></returns>
         public TlvData BuildTlv(TagModel tagModel)
         {
             var tlv = new TlvData { Tag = Convert.ToUInt32(tagModel.Tag, 16) };
@@ -117,16 +112,10 @@ namespace WSCT.EMV.Personalization
                 switch (tagModel.Tag)
                 {
                     case "57": // Track 2 Equivalent Data
-                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
-                            .ToObject<Track2EquivalentDataModel>()
-                            .Track2EqDataFormat
-                            .FromHexa();
+                        tlv.Value = GetTrack2EquivalentData(tagModel);
                         break;
                     case "5F2D": // Language Preference
-                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
-                            .ToObject<string[]>()
-                            .Aggregate(String.Empty, (c, l) => c + l)
-                            .FromString();
+                        tlv.Value = GetLanguagePreference(tagModel);
                         break;
                     case "82": // Application Interchange Profile
                         tlv.Value = GetAipTlv(tagModel).Value;
@@ -147,29 +136,29 @@ namespace WSCT.EMV.Personalization
                         tlv.Value = GetAflTlv().Value;
                         break;
                     case "9F32": // Issuer Public Key Exponent
+                        EMVApplicationException.ThrowIfNull(_issuerContext.IssuerPrivateKey, "Issuer Private Key (9F32) can't be null");
                         tlv.Value = _issuerContext.IssuerPrivateKey.PublicExponent.FromHexa();
                         break;
                     case "9F46": // ICC Public Key Certificate 
+                        EMVApplicationException.ThrowIfNull(_iccContext.IccPublicKeyCertificate, "ICC Public Key Certificate (9F46) can't be null");
                         tlv.Value = _iccContext.IccPublicKeyCertificate.FromHexa();
                         break;
                     case "9F47": // ICC Public Key Exponent 
+                        EMVApplicationException.ThrowIfNull(_iccContext.IccPrivateKey, "ICC Private Key (9F47) can't be null");
                         tlv.Value = _iccContext.IccPrivateKey.PublicExponent.FromHexa();
                         break;
                     case "9F48": // ICC Public Key Remainder 
+                        EMVApplicationException.ThrowIfNull(_iccContext.IccPublicKeyRemainder, "ICC Public Key Remainder (9F48) can't be null");
                         tlv.Value = _iccContext.IccPublicKeyRemainder.FromHexa();
                         break;
                     case "8C": // CDOL1
                     case "8D": // CDOL2
+                    case "9F49": // Dynamic Data Authentication DOL
                     case "9F4F": // Log Format
-                        tlv.Value = _data.UnmanagedAttributes[tagModel.Tag]
-                            .ToObject<TagLengthModel[]>()
-                            .Aggregate(String.Empty, (c, tl) => c + String.Format("{0}{1:X2}", tl.Tag, tl.Length))
-                            .FromHexa();
+                        tlv.Value = GetTagValuesSequence(tagModel);
                         break;
                     case "9F4D": // Log Entry
-                        var logModel = _data.UnmanagedAttributes[tagModel.Tag]
-                            .ToObject<LogModel>();
-                        tlv.Value = new[] { logModel.Sfi, logModel.Size };
+                        tlv.Value = GetLogEntry(tagModel);
                         break;
                     case "50": // Application Label
                     case "5F20": // Cardholder Name
@@ -188,17 +177,48 @@ namespace WSCT.EMV.Personalization
             }
             else
             {
-                tlv.InnerTlvs = tagModel.Fields.Select(BuildTlv).ToList();
+                tlv.InnerTlvs = [.. tagModel.Fields.Select(BuildTlv)];
             }
 
             return tlv;
         }
 
+        private TlvData ComputeSignedStaticApplicationData()
+        {
+            EMVApplicationException.ThrowIfNull(_model.Records, "Records can't be null");
+            EMVApplicationException.ThrowIfNull(_issuerContext.IssuerPrivateKey, "Issuer Private Key (9F32) can't be null");
+            EMVApplicationException.ThrowIfNull(_issuerContext.IssuerPrivateKey.Modulus, "Issuer Private Key Modulus can't be null");
+            EMVApplicationException.ThrowIfNull(_issuerContext.IssuerPrivateKey.PrivateExponent, "Issuer Private Key Private Exponent can't be null");
+
+            var records = _model.Records.Where(r => r.Signed);
+            var fields = records.SelectMany(r => r.Fields ?? []);
+            var tlvData = fields.Select(f => BuildTlv(new TagModel { Tag = f }));
+
+            IEnumerable<byte> dataEnumerable = [];
+            dataEnumerable = tlvData.Aggregate(dataEnumerable, (current, tlv) => current.Concat(tlv.ToByteArray()));
+
+            var signedStaticApplicationData = new SignedStaticApplicationData
+            {
+                HashAlgorithmIndicator = 0x01,
+                DataAuthenticationCode = _data.UnmanagedAttributes["9F45"]
+                    .ToObject<string>()
+                    .FromHexa(),
+                StaticDataToBeAuthenticated = [.. dataEnumerable]
+            };
+
+            var issuerPrivateKey = new PublicKey(_issuerContext.IssuerPrivateKey.Modulus, _issuerContext.IssuerPrivateKey.PrivateExponent);
+
+            // 93   Signed Static Application Data (Nca)
+            return new TlvData { Tag = 0x93, Value = signedStaticApplicationData.GenerateCertificate(issuerPrivateKey) };
+        }
+
         private TlvData GetAflTlv()
         {
+            EMVApplicationException.ThrowIfNull(_model.Records, "Records can't be null");
+
             var aflEntries = new List<AflEntry>();
 
-            RecordModel last = null;
+            RecordModel? last = null;
             byte firstRecord = 0;
             byte signedCount = 0;
 
@@ -207,13 +227,13 @@ namespace WSCT.EMV.Personalization
                 if (last == null)
                 {
                     firstRecord = record.Index;
-                    signedCount = (record.Signed ? (byte)1 : (byte)0);
+                    signedCount = record.Signed ? (byte)1 : (byte)0;
                 }
                 else
                 {
                     if (record.Sfi == last.Sfi && record.Index == last.Index + 1 && (record.Signed == last.Signed || last.Signed))
                     {
-                        signedCount += (record.Signed ? (byte)1 : (byte)0);
+                        signedCount += record.Signed ? (byte)1 : (byte)0;
                     }
                     else
                     {
@@ -240,6 +260,7 @@ namespace WSCT.EMV.Personalization
         {
             var aipStrings = _data.UnmanagedAttributes[tagModel.Tag]
                 .ToObject<string[]>();
+            EMVApplicationException.ThrowIfNull(aipStrings, "Application Interchange Profile (tag 82) can't be null");
 
             var aip = new ApplicationInterchangeProfile();
 
@@ -271,28 +292,47 @@ namespace WSCT.EMV.Personalization
             return aip.Tlv;
         }
 
-        private TlvData ComputeSignedStaticApplicationData()
+        private byte[] GetLanguagePreference(TagModel tagModel)
         {
-            var records = _model.Records.Where(r => r.Signed);
-            var fields = records.SelectMany(r => r.Fields);
-            var tlvData = fields.Select(f => BuildTlv(new TagModel { Tag = f }));
+            var languagePreferenceModel = _data.UnmanagedAttributes[tagModel.Tag]
+                .ToObject<string[]>();
+            EMVApplicationException.ThrowIfNull(languagePreferenceModel, "Language Preference (tag 5F2D) can't be null");
 
-            IEnumerable<byte> dataEnumerable = Array.Empty<byte>();
-            dataEnumerable = tlvData.Aggregate(dataEnumerable, (current, tlv) => current.Concat(tlv.ToByteArray()));
-
-            var signedStaticApplicationData = new SignedStaticApplicationData
-            {
-                HashAlgorithmIndicator = 0x01,
-                DataAuthenticationCode = _data.UnmanagedAttributes["9F45"]
-                    .ToObject<string>()
-                    .FromHexa(),
-                StaticDataToBeAuthenticated = dataEnumerable.ToArray()
-            };
-
-            var issuerPrivateKey = new PublicKey(_issuerContext.IssuerPrivateKey.Modulus, _issuerContext.IssuerPrivateKey.PrivateExponent);
-
-            // 93   Signed Static Application Data (Nca)
-            return new TlvData { Tag = 0x93, Value = signedStaticApplicationData.GenerateCertificate(issuerPrivateKey) };
+            return languagePreferenceModel
+                .Aggregate(String.Empty, (c, l) => c + l)
+                .FromString();
         }
+
+        private byte[] GetLogEntry(TagModel tagModel)
+        {
+            var logModel = _data.UnmanagedAttributes[tagModel.Tag]
+                .ToObject<LogModel>();
+            EMVApplicationException.ThrowIfNull(logModel, "Log Entry (tag 9F4D) can't be null");
+
+            return [logModel.Sfi, logModel.Size];
+        }
+
+        private byte[] GetTagValuesSequence(TagModel tagModel)
+        {
+            var model = _data.UnmanagedAttributes[tagModel.Tag]
+                .ToObject<TagLengthModel[]>();
+            EMVApplicationException.ThrowIfNull(model, $"Tag {tagModel.Tag} value can't be null");
+
+            return model
+                .Aggregate(String.Empty, (c, tl) => $"{c}{tl.Tag}{tl.Length:X2}")
+                .FromHexa();
+        }
+
+        private byte[] GetTrack2EquivalentData(TagModel tagModel)
+        {
+            var track2EquivalentDataModel = _data.UnmanagedAttributes[tagModel.Tag]
+                .ToObject<Track2EquivalentDataModel>();
+            EMVApplicationException.ThrowIfNull(track2EquivalentDataModel, "Track 2 Equivalent Data (tag 57) can't be null");
+
+            return track2EquivalentDataModel
+                .Track2EqDataFormat
+                .FromHexa();
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using WSCT.EMV.Exceptions;
 
 namespace WSCT.EMV.Security
 {
@@ -11,8 +12,8 @@ namespace WSCT.EMV.Security
     {
         #region >> Fields
 
-        private string _exponent;
-        private string _modulus;
+        private string? _exponent;
+        private string? _modulus;
 
         #endregion
 
@@ -22,33 +23,33 @@ namespace WSCT.EMV.Security
         /// Accessor to the modulus of the public key.
         /// </summary>
         [XmlText]
-        public string Modulus
+        public string? Modulus
         {
             get { return _modulus; }
-            set { _modulus = value.Replace("\n", "").Replace("\r", "").Replace("\t", "").Replace(" ", ""); }
+            set { _modulus = value?.Replace("\n", "").Replace("\r", "").Replace("\t", "").Replace(" ", ""); }
         }
 
         /// <summary>
         /// Accessor to the exponent of the public key.
         /// </summary>
         [XmlAttribute("exponent")]
-        public string Exponent
+        public string? Exponent
         {
             get { return _exponent; }
-            set { _exponent = value.Replace(" ", ""); }
+            set { _exponent = value?.Replace(" ", ""); }
         }
 
         /// <summary>
         /// Accessor to the size of the public key.
         /// </summary>
         [XmlAttribute("size")]
-        public string SizeString { get; set; }
+        public string? SizeString { get; set; }
 
         /// <summary>
         /// Accessor to the expiration date of the public key.
         /// </summary>
         [XmlAttribute("expiration")]
-        public string DateString { get; set; }
+        public string? DateString { get; set; }
 
         #endregion
 
@@ -69,6 +70,9 @@ namespace WSCT.EMV.Security
         /// <param name="exponent">Exponent of the public key.</param>
         public PublicKey(string modulo, string exponent)
         {
+            EMVApplicationException.ThrowIfNull(modulo, "Modulo can't be null");
+            EMVApplicationException.ThrowIfNull(exponent, "Exponent can't be null");
+
             Modulus = modulo;
             Exponent = exponent;
         }

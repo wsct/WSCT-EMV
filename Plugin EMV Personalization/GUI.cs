@@ -10,6 +10,7 @@ using WSCT.EMV.Card;
 using WSCT.EMV.Commands;
 using WSCT.EMV.Personalization;
 using WSCT.Helpers;
+using WSCT.Helpers.BasicEncodingRules;
 using WSCT.Helpers.Json;
 using WSCT.ISO7816;
 using WSCT.Wrapper;
@@ -52,7 +53,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
 
         private async void guiDoRunEmvPersonalization_Click(object sender, EventArgs e)
         {
-              guiLogs.Clear();
+            guiLogs.Clear();
 
             var emvAidAsString = guiEMVAppletAID.Text;
             byte[] emvAid;
@@ -184,7 +185,32 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
                 LogException(exception);
             }
 
-            return new EmvCardDgis(fci, gpo, acid, records, pin);
+            LogActionStart($"Building DGI ICC Private Key: ");
+
+            string iccPrivateKey = String.Empty;
+            string iccModulus = String.Empty;
+            try
+            {
+                iccPrivateKey = $"8101{TlvDataHelper.ToBerEncodedL((uint)cardData.IccContext.IccPrivateKey.Modulus.Length / 2).ToHexa('\0')}{cardData.IccContext.IccPrivateKey.PrivateExponent}";
+
+                var iccModulusBytes = cardData.IccContext.IccPrivateKey.Modulus.FromHexa();
+                if (iccModulusBytes[0] == 0x00)
+                {
+                    iccModulus = $"8103{TlvDataHelper.ToBerEncodedL((uint)iccModulusBytes.Length - 1).ToHexa('\0')}{iccModulusBytes[1..].ToHexa('\0')}";
+                }
+                else
+                {
+                    iccModulus = $"8103{TlvDataHelper.ToBerEncodedL((uint)iccModulusBytes.Length).ToHexa('\0')}{iccModulusBytes.ToHexa('\0')}";
+                }
+
+                LogSuccess();
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+            }
+
+            return new EmvCardDgis(fci, gpo, acid, records, pin, iccPrivateKey, iccModulus);
         }
 
         private PseCardDgis BuildDgi(PseApplicationInformation cardData)
@@ -272,18 +298,18 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             foreach (var record in cardDgis.Records)
             {
                 dgiId++;
-                LogActionStart($"STORE DATA (Record {record.Substring(0, 4)}");
+                LogActionStart($"STORE DATA (Record {record[..4]}");
                 TransmitToCard(new EMVStoreDataCommand(dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, record));
             }
 
             LogActionStart($"STORE DATA (PIN)");
             TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, cardDgis.Pin));
 
-            LogActionStart($"STORE DATA (KEY1)"); // TODO: ICC Private Key (DDA/PIN Encipherment)
-            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, "810181808BB434771C693878FD0409DD620F9D6D79895449F056B08A88D3C22154973EDA9A991FCF34F1C3017A2F1E73D9D4083900E421260333F9EF467817C8757EC5B144C91D0C8B4C4171B2CF11BBB7194213928B6309BA0B980FFC465CD32A0D8B5A738A4753874C5197ACF55AACA18BC79E14FAC231E17DBDD9464DF398ABE88421"));
+            LogActionStart($"STORE DATA (KEY1)"); // ICC Private Key (DDA/PIN Encipherment)
+            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, cardDgis.IccPrivateKey));
 
-            LogActionStart($"STORE DATA (KEY2)"); // TODO: ICC Modulus (DDA/PIN Encipherment)
-            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, "81038180986965A7274E4165C127C6847AF8EA7ED5CBDAA10F46BF192C70BEB5B83B355A70E7FFB941BCE0440C7A7E552D4256F8B427C0F7395A9301D8841FBC6186CD087F44AD46BC322811ECD90A5FF1B9F93229BA8F85F9C1C5B791DC02073034853D1F89B9E3D9543C1803EAFF85C340AB6C0A352D626B56B961DC88A41FF6E1562D"));
+            LogActionStart($"STORE DATA (KEY2)"); // ICC Modulus (DDA/PIN Encipherment)
+            TransmitToCard(new EMVStoreDataCommand(++dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, cardDgis.IccModulus));
         }
 
         private void TransmitToPseApplet(PseCardDgis cardDgis, byte[] dfName)
@@ -299,7 +325,7 @@ namespace WSCT.GUI.Plugins.EMV.Personalization
             foreach (var record in cardDgis.Records)
             {
                 dgiId++;
-                LogActionStart($"STORE DATA (Record {record.Substring(0, 4)}");
+                LogActionStart($"STORE DATA (Record {record[..4]}");
                 TransmitToCard(new EMVStoreDataCommand(dgiId, false, EMVStoreDataCommand.Encryption.NoDGIEncrypted, record));
             }
         }

@@ -1,30 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WSCT.EMV.Exceptions;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
 
 namespace WSCT.EMV.Personalization
 {
-    public class PseDgiBuilder
+    /// <summary>
+    /// Initializes a new instance.
+    /// </summary>
+    /// <param name="model">PSE DGI model.</param>
+    /// <param name="data">PSE data.</param>
+    public class PseDgiBuilder(PsePersonalizationModel model, PsePersonalizationData data)
     {
-        private readonly PsePersonalizationData _data;
-        private readonly PsePersonalizationModel _model;
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Initializes a new instance.
-        /// </summary>
-        /// <param name="model">PSE DGI model.</param>
-        /// <param name="data">PSE data.</param>
-        public PseDgiBuilder(PsePersonalizationModel model, PsePersonalizationData data)
-        {
-            _data = data;
-            _model = model;
-        }
-
-        #endregion
+        private readonly PsePersonalizationData _data = data;
+        private readonly PsePersonalizationModel _model = model;
 
         /// <summary>
         /// Builds DGI to be used with STORE DATA command for given records having the same index.
@@ -35,14 +26,15 @@ namespace WSCT.EMV.Personalization
         /// <returns></returns>
         public string BuildDgi(byte sfi, byte index, IEnumerable<PseRecord> records)
         {
-            var tlv70 = new TlvData(0x70, new List<TlvData>());
+            var tlv70 = new TlvData(0x70, []);
 
             foreach (var record in records)
             {
-                var tlvs = new List<TlvData> {
-                new TlvData { Tag = 0x4F, Value = record.AdfName.FromHexa() },
-                new TlvData { Tag = 0x50, Value = record.ApplicationLabel.FromString() }
-            };
+                var tlvs = new List<TlvData>
+                {
+                    new() { Tag = 0x4F, Value = record.AdfName.FromHexa() },
+                    new() { Tag = 0x50, Value = record.ApplicationLabel.FromString() }
+                };
 
                 if (!String.IsNullOrWhiteSpace(record.PreferredName))
                 {
@@ -104,15 +96,12 @@ namespace WSCT.EMV.Personalization
         {
             var tlv = new TlvData { Tag = Convert.ToUInt32(tagModel.Tag, 16) };
 
-            if (tagModel.Fields == null)
+            if (tagModel.Fields is null)
             {
                 tlv.Value = tagModel.Tag switch
                 {
                     // Language Preference
-                    "5F2D" => _data.UnmanagedAttributes[tagModel.Tag]
-                            .ToObject<string[]>()
-                            .Aggregate(String.Empty, (c, l) => c + l)
-                            .FromString(),
+                    "5F2D" => GetLanguagePreference(tagModel),
                     _ => _data.UnmanagedAttributes[tagModel.Tag]
                             .ToObject<string>()
                             .FromHexa()
@@ -120,10 +109,21 @@ namespace WSCT.EMV.Personalization
             }
             else
             {
-                tlv.InnerTlvs = tagModel.Fields.Select(BuildTlv).ToList();
+                tlv.InnerTlvs = [.. tagModel.Fields.Select(BuildTlv)];
             }
 
             return tlv;
+        }
+
+        private byte[] GetLanguagePreference(TagModel tagModel)
+        {
+            var languagePreferenceModel = _data.UnmanagedAttributes[tagModel.Tag]
+                .ToObject<string[]>();
+            EMVApplicationException.ThrowIfNull(languagePreferenceModel, "Language Preference (tag 5F2D) can't be null");
+
+            return languagePreferenceModel
+                .Aggregate(String.Empty, (c, l) => c + l)
+                .FromString();
         }
     }
 }

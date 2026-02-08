@@ -8,11 +8,14 @@ namespace WSCT.EMV.Security
     /// <summary>
     /// Represents a container for EMV data signatures (public key certificate, data authentication).
     /// </summary>
-    public abstract class AbstractSignatureContainer
+    /// <remarks>
+    /// Default constructor
+    /// </remarks>
+    public abstract class AbstractSignatureContainer(Int32 hashAlgorithmIndicatorOffset)
     {
         #region >> Fields
 
-        private readonly Int32 _hashAlgorithmIndicatorOffset;
+        private readonly Int32 _hashAlgorithmIndicatorOffset = hashAlgorithmIndicatorOffset;
 
         /// <summary>
         /// Length of the Key.
@@ -26,7 +29,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Accessor to raw recovered data from the EMV signature.
         /// </summary>
-        public byte[] Recovered { get; private set; }
+        public byte[]? Recovered { get; private set; }
 
         /// <summary>
         /// Recovered Data Header (1): Hex value '6A'.
@@ -46,24 +49,12 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Hash Result: Hash of the Public Key and its related information.
         /// </summary>
-        public byte[] HashResult { get; private set; }
+        public byte[]? HashResult { get; private set; }
 
         /// <summary>
         /// Recovered Data Trailer: Hex value 'BC'.
         /// </summary>
         public byte DataTrailer { get; private set; }
-
-        #endregion
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        protected AbstractSignatureContainer(Int32 hashAlgorithmIndicatorOffset)
-        {
-            _hashAlgorithmIndicatorOffset = hashAlgorithmIndicatorOffset;
-        }
 
         #endregion
 
@@ -88,7 +79,6 @@ namespace WSCT.EMV.Security
         /// <returns>Hash value.</returns>
         public byte[] ComputeHash(List<byte[]> data)
         {
-            var hashFactory = new HashAlgorithmFactory();
             var hashProvider = HashAlgorithmFactory.GetProvider(HashAlgorithmIndicator);
 
             return hashProvider.ComputeHash(data);
@@ -136,13 +126,13 @@ namespace WSCT.EMV.Security
             DataHeader = Recovered[0];
             if (DataHeader != 0x6A)
             {
-                throw new EMVBadRecoveredDataException(String.Format("RecoverFromCertificate: Recovered Data Header incorrect [{0:X2}]\n", DataHeader));
+                throw new EMVBadRecoveredDataException($"RecoverFromCertificate: Recovered Data Header incorrect [{DataHeader:X2}]\n");
             }
 
-            DataTrailer = Recovered[Recovered.Length - 1];
+            DataTrailer = Recovered[^1];
             if (DataTrailer != 0xBC)
             {
-                throw new EMVBadRecoveredDataException(String.Format("RecoverFromCertificate: Recovered Data Trailer incorrect [{0:X2}]\n", DataTrailer));
+                throw new EMVBadRecoveredDataException($"RecoverFromCertificate: Recovered Data Trailer incorrect [{DataTrailer:X2}]\n");
             }
 
             HashAlgorithmIndicator = Recovered[_hashAlgorithmIndicatorOffset];

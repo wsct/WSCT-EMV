@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
+using WSCT.EMV.Exceptions;
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
@@ -15,9 +15,9 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Issuer Identifier: Leftmost 3-8 digits from the PAN (padded to the right with Hex 'F's)
         /// </summary>
-        public byte[] IssuerIdentifier { get; set; }
+        public byte[]? IssuerIdentifier { get; set; }
 
-        public PublicKey IssuerPublicKey { private get; set; }
+        public PublicKey? IssuerPublicKey { get; set; }
 
         #endregion
 
@@ -38,6 +38,12 @@ namespace WSCT.EMV.Security
         /// <inheritdoc />
         protected override byte[] GetDataToSign(int privateKeyLength)
         {
+            EMVApplicationException.ThrowIfNull(IssuerPublicKey, "IssuerPublicKey can't be null");
+            EMVApplicationException.ThrowIfNull(IssuerPublicKey.Modulus, "IssuerPublicKey.Modulus can't be null");
+            EMVApplicationException.ThrowIfNull(IssuerIdentifier, "IssuerIdentifier can't be null");
+            EMVApplicationException.ThrowIfNull(CertificateExpirationDate, "CertificateExpirationDate can't be null");
+            EMVApplicationException.ThrowIfNull(CertificateSerialNumber, "CertificateSerialNumber can't be null");
+
             var issuerPublicKeyModulus = IssuerPublicKey.Modulus.FromHexa();
             var issuerPublicKeyExponent = IssuerPublicKey.Exponent.FromHexa();
 
@@ -59,7 +65,7 @@ namespace WSCT.EMV.Security
                 {
                     PublicKeyorLeftmostDigitsofthePublicKey[i] = 0xBB;
                 }
-                issuerPublicKeyRemainder = Array.Empty<byte>();
+                issuerPublicKeyRemainder = [];
             }
             else
             {
@@ -67,23 +73,27 @@ namespace WSCT.EMV.Security
                 issuerPublicKeyRemainder = issuerPublicKeyModulus[(privateKeyLength - 36)..];
             }
 
-            return DataFormat.ToByteArray()
-                .Concat(IssuerIdentifier)
-                .Concat(CertificateExpirationDate)
-                .Concat(CertificateSerialNumber)
-                .Concat(HashAlgorithmIndicator.ToByteArray())
-                .Concat(PublicKeyAlgorithmIndicator.ToByteArray())
-                .Concat(PublicKeyLength.ToByteArray())
-                .Concat(PublicKeyExponentLength.ToByteArray())
-                .Concat(PublicKeyorLeftmostDigitsofthePublicKey)
-                .Concat(issuerPublicKeyRemainder)
-                .Concat(issuerPublicKeyExponent)
-                .ToArray();
+            return
+            [
+                .. DataFormat.ToByteArray(),
+                .. IssuerIdentifier,
+                .. CertificateExpirationDate,
+                .. CertificateSerialNumber,
+                .. HashAlgorithmIndicator.ToByteArray(),
+                .. PublicKeyAlgorithmIndicator.ToByteArray(),
+                .. PublicKeyLength.ToByteArray(),
+                .. PublicKeyExponentLength.ToByteArray(),
+                .. PublicKeyorLeftmostDigitsofthePublicKey,
+                .. issuerPublicKeyRemainder,
+                .. issuerPublicKeyExponent,
+            ];
         }
 
         protected override void OnRecoverFromSignature()
         {
             base.OnRecoverFromSignature();
+
+            EMVApplicationException.ThrowIfNull(Recovered, "Recovered can't be null");
 
             IssuerIdentifier = new byte[4];
             Array.Copy(Recovered, 2, IssuerIdentifier, 0, 4);

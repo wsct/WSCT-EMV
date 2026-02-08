@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using WSCT.EMV.Exceptions;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
-using WSCT.ISO7816.Commands;
 
 namespace WSCT.EMV.Personalization
 {
@@ -15,25 +15,25 @@ namespace WSCT.EMV.Personalization
         /// Index of Certification Authority that signed the Issuer Public Key Certificate.
         /// </summary>
         [DataMember]
-        public string CaPublicKeyIndex { get; set; }
+        public string? CaPublicKeyIndex { get; set; }
 
         /// <summary>
         /// Issuer private key.
         /// </summary>
         [DataMember]
-        public PrivateKey IssuerPrivateKey { get; set; }
+        public PrivateKey? IssuerPrivateKey { get; set; }
 
         /// <summary>
         /// EMV certificate of Issuer Public Key.
         /// </summary>
         [DataMember]
-        public string IssuerPublicKeyCertificate { get; set; }
+        public string? IssuerPublicKeyCertificate { get; set; }
 
         /// <summary>
         /// Remainder of Issuer Public Key.
         /// </summary>
         [DataMember]
-        public string IssuerPublicKeyRemainder { get; set; }
+        public string? IssuerPublicKeyRemainder { get; set; }
 
         /// <summary>
         /// Builds the list of TlvData based on context data.
@@ -41,6 +41,10 @@ namespace WSCT.EMV.Personalization
         /// <returns></returns>
         public List<TlvData> BuildTlvData()
         {
+            EMVApplicationException.ThrowIfNull(CaPublicKeyIndex, "CaPublicKeyIndex can't be null");
+            EMVApplicationException.ThrowIfNull(IssuerPublicKeyCertificate, "IssuerPublicKeyCertificate can't be null");
+            EMVApplicationException.ThrowIfNull(IssuerPublicKeyRemainder, "IssuerPublicKeyRemainder can't be null");
+
             var dictionary = new Dictionary<uint, string>
             {
                 { 0x8F, CaPublicKeyIndex },
@@ -48,7 +52,7 @@ namespace WSCT.EMV.Personalization
                 { 0x92, IssuerPublicKeyRemainder }
             };
 
-            if (IssuerPrivateKey != null)
+            if (IssuerPrivateKey?.PublicExponent != null)
             {
                 dictionary.Add(0x9F32, IssuerPrivateKey.PublicExponent);
             }

@@ -10,27 +10,27 @@ namespace WSCT.EMV.Personalization
         /// Application PAN.
         /// </summary>
         [DataMember]
-        public string ApplicationPan { get; set; }
+        public string? ApplicationPan { get; set; }
 
         /// <summary>
         /// Issuer private key.
         /// </summary>
         [DataMember]
-        public PrivateKey IccPrivateKey { get; set; }
+        public PrivateKey? IccPrivateKey { get; set; }
 
         [DataMember]
-        public string HashAlgorithmIndicator { get; set; }
+        public string? HashAlgorithmIndicator { get; set; }
 
         [DataMember]
-        public string IssuerIdentifier { get; set; }
+        public string? IssuerIdentifier { get; set; }
 
         [DataMember]
-        public string ExpirationDate { get; set; }
+        public string? ExpirationDate { get; set; }
 
         [DataMember]
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         [DataMember]
-        public string PublicKeyAlgorithmIndicator { get; set; }
+        public string? PublicKeyAlgorithmIndicator { get; set; }
     }
 }

@@ -24,19 +24,23 @@ namespace WSCT.EMV.Card
     /// Console.WriteLine(df.tlvFCI);
     ///     </code>
     /// </example>
-    public class EmvDefinitionFile
+    /// <remarks>
+    /// Creates a new <see cref="EmvDefinitionFile"/> instance.
+    /// </remarks>
+    /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
+    public class EmvDefinitionFile(ICardChannel cardChannel)
     {
         #region >> Fields
 
         /// <summary>
         /// Name or AID of the DF.
         /// </summary>
-        internal byte[] _adfName;
+        internal byte[] _adfName = [];
 
         /// <summary>
         /// CardChannel used to access the smartcard.
         /// </summary>
-        internal ICardChannel _cardChannel;
+        internal ICardChannel _cardChannel = new CardChannelTerminalTransportLayer(cardChannel);
 
         /// <summary>
         /// Status word of the last "usefull" APDU.
@@ -82,7 +86,7 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Accessor to the FCI in <see cref="TlvData"/> format.
         /// </summary>
-        public TlvData TlvFci { get; internal set; }
+        public TlvData? TlvFci { get; internal set; }
 
         #endregion
 
@@ -91,26 +95,12 @@ namespace WSCT.EMV.Card
         /// <summary>
         /// Event sent before execution of <see cref="Select"/>.
         /// </summary>
-        public event EventHandler<EmvEventArgs> BeforeSelectEvent;
+        public event EventHandler<EmvEventArgs>? BeforeSelectEvent;
 
         /// <summary>
         /// Event sent after execution of <see cref="Select"/>.
         /// </summary>
-        public event EventHandler<EmvEventArgs> AfterSelectEvent;
-
-        #endregion
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Creates a new <see cref="EmvDefinitionFile"/> instance.
-        /// </summary>
-        /// <param name="cardChannel"><see cref="ICardChannel">ICardChannel</see> object to use</param>
-        public EmvDefinitionFile(ICardChannel cardChannel)
-        {
-            _cardChannel = new CardChannelTerminalTransportLayer(cardChannel);
-            TlvFci = null;
-        }
+        public event EventHandler<EmvEventArgs>? AfterSelectEvent;
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Org.BouncyCastle.Math;
+using WSCT.EMV.Exceptions;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
 
@@ -7,8 +8,8 @@ namespace WSCT.EMV.Personalization
 {
     public class IccCertificateBuilder
     {
-        private readonly IccCertificateData certificateData;
-        private readonly PrivateKey issuerPrivateKey;
+        private readonly IccCertificateData _certificateData;
+        private readonly PrivateKey _issuerPrivateKey;
 
         #region >> Properties
 
@@ -28,47 +29,52 @@ namespace WSCT.EMV.Personalization
         /// <param name="issuerPrivateKey"></param>
         public IccCertificateBuilder(IccCertificateData certificateData, PrivateKey issuerPrivateKey)
         {
-            this.certificateData = certificateData;
-            this.issuerPrivateKey = issuerPrivateKey;
+            _certificateData = certificateData;
+            _issuerPrivateKey = issuerPrivateKey;
 
-            ComputeIccContext();
+            IccContext = ComputeIccContext();
         }
 
         #endregion
 
-        void ComputeIccContext()
+        EmvIccContext ComputeIccContext()
         {
-            var issuerModulusLength = new BigInteger(issuerPrivateKey.Modulus, 16).BitLength / 8;
-            var iccPublicKey = certificateData.IccPrivateKey.GetPublicKey();
+            EMVApplicationException.ThrowIfNull(_certificateData, "certificateData can't be null");
+            EMVApplicationException.ThrowIfNull(_certificateData.IccPrivateKey, "IccPrivateKey can't be null");
+            EMVApplicationException.ThrowIfNull(_issuerPrivateKey, "issuerPrivateKey can't be null");
+
+            var issuerModulusLength = new BigInteger(_issuerPrivateKey.Modulus, 16).BitLength / 8;
+            var iccPublicKey = _certificateData.IccPrivateKey.GetPublicKey();
             var iccModulusLength = new BigInteger(iccPublicKey.Modulus, 16).BitLength / 8;
 
             var iccPublicKeyCertificate = new IccPublicKeyCertificate
             {
-                HashAlgorithmIndicator = certificateData.HashAlgorithmIndicator.FromHexa().First(),
-                ApplicationPan = certificateData.ApplicationPan.FromHexa(),
-                CertificateExpirationDate = certificateData.ExpirationDate.FromHexa(),
-                CertificateSerialNumber = certificateData.SerialNumber.FromHexa(),
-                PublicKeyAlgorithmIndicator = certificateData.PublicKeyAlgorithmIndicator.FromHexa().First(),
+                HashAlgorithmIndicator = _certificateData.HashAlgorithmIndicator.FromHexa().First(),
+                ApplicationPan = _certificateData.ApplicationPan.FromHexa(),
+                CertificateExpirationDate = _certificateData.ExpirationDate.FromHexa(),
+                CertificateSerialNumber = _certificateData.SerialNumber.FromHexa(),
+                PublicKeyAlgorithmIndicator = _certificateData.PublicKeyAlgorithmIndicator.FromHexa().First(),
                 IccPublicKey = iccPublicKey
             };
 
-            IccContext = new EmvIccContext()
+            var iccContext = new EmvIccContext
             {
-                ApplicationPan = certificateData.ApplicationPan,
-                IccPrivateKey = certificateData.IccPrivateKey
+                ApplicationPan = _certificateData.ApplicationPan,
+                IccPrivateKey = _certificateData.IccPrivateKey,
+                // 9F46 ICC Public Key Certificate (Nca)
+                IccPublicKeyCertificate = iccPublicKeyCertificate.GenerateCertificate(_issuerPrivateKey.GetPrivateKey()).ToHexa()
             };
-
-            // 9F46 ICC Public Key Certificate (Nca)
-            IccContext.IccPublicKeyCertificate = iccPublicKeyCertificate.GenerateCertificate(issuerPrivateKey.GetPrivateKey()).ToHexa();
 
             // 9F48 ICC Public Key Remainder (Ni-Nca+42)
             if (iccModulusLength > issuerModulusLength - 42)
             {
-                IccContext.IccPublicKeyRemainder = iccPublicKey.Modulus.FromHexa().Skip(issuerModulusLength - 42).ToArray().ToHexa();
+                iccContext.IccPublicKeyRemainder = iccPublicKey.Modulus.FromHexa().Skip(issuerModulusLength - 42).ToArray().ToHexa();
             }
 
             // 9F47 ICC Public Key Exponent (1 or 3)
-            IccContext.IccPrivateKey.PublicExponent = iccPublicKey.Exponent.FromHexa().ToHexa();
+            iccContext.IccPrivateKey.PublicExponent = iccPublicKey.Exponent.FromHexa().ToHexa();
+
+            return iccContext;
         }
     }
 }

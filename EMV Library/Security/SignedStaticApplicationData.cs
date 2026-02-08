@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
+using WSCT.EMV.Exceptions;
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
@@ -15,14 +15,14 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Data Authentication Code (2): Issuer-assigned code.
         /// </summary>
-        public byte[] DataAuthenticationCode { get; set; }
+        public byte[]? DataAuthenticationCode { get; set; }
 
         /// <summary>
         /// Pad Pattern (NI - 26): (NI - 26) padding bytes of value 'BB'.
         /// </summary>
-        public byte[] PadPattern { get; private set; }
+        public byte[]? PadPattern { get; private set; }
 
-        public byte[] StaticDataToBeAuthenticated { private get; set; }
+        public byte[]? StaticDataToBeAuthenticated { private get; set; }
 
         #endregion
 
@@ -31,6 +31,9 @@ namespace WSCT.EMV.Security
         /// <inheritdoc />
         protected override byte[] GetDataToSign(int privateKeyLength)
         {
+            EMVApplicationException.ThrowIfNull(DataAuthenticationCode, "DataAuthenticationCode can't be null");
+            EMVApplicationException.ThrowIfNull(StaticDataToBeAuthenticated, "StaticDataToBeAuthenticated can't be null");
+
             DataFormat = 0x03;
 
             PadPattern = new byte[privateKeyLength - 26];
@@ -39,17 +42,14 @@ namespace WSCT.EMV.Security
                 PadPattern[i] = 0xBB;
             }
 
-            return DataFormat.ToByteArray()
-                .Concat(HashAlgorithmIndicator.ToByteArray())
-                .Concat(DataAuthenticationCode)
-                .Concat(PadPattern)
-                .Concat(StaticDataToBeAuthenticated)
-                .ToArray();
+            return [.. DataFormat.ToByteArray(), .. HashAlgorithmIndicator.ToByteArray(), .. DataAuthenticationCode, .. PadPattern, .. StaticDataToBeAuthenticated];
         }
 
         /// <inheritdoc />
         protected override void OnRecoverFromSignature()
         {
+            EMVApplicationException.ThrowIfNull(Recovered, "Recovered ");
+
             DataAuthenticationCode = new byte[2];
             Array.Copy(Recovered, 3, DataAuthenticationCode, 0, 2);
 

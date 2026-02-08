@@ -36,7 +36,7 @@ namespace WSCT.EMV.Objects
         /// Default constructor
         /// </summary>
         public LogEntry()
-            : this(new TlvData(0x9F4D, 2, new byte[] { 0x00, 0x00 }))
+            : this(new TlvData(0x9F4D, 2, [0x00, 0x00]))
         {
         }
 

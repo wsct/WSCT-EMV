@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using WSCT.EMV.Card;
+using WSCT.EMV.Exceptions;
 using WSCT.EMV.Objects;
 using WSCT.EMV.Security;
 using WSCT.Helpers;
@@ -40,16 +41,18 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             _certificationAuthorityRepository = _pluginConfiguration.terminalConfiguration.CertificationAuthorityRepository;
 
-            _detailedLogs = new DetailedLogs(this);
-            _detailedLogs.TlvDictionary = _tlvDictionary;
+            _detailedLogs = new DetailedLogs(this)
+            {
+                TlvDictionary = _tlvDictionary
+            };
 
             guiPSEName.DataSource = _pluginConfiguration.terminalConfiguration.TerminalCapabilities.SupportedPses;
             guiPSEName.DisplayMember = "name";
 
-            guiAC1Type.DataSource = Enum.GetValues(typeof(CryptogramType));
+            guiAC1Type.DataSource = Enum.GetValues<CryptogramType>();
             guiAC1Type.SelectedItem = CryptogramType.TC;
 
-            _emvApplications = new List<EmvApplication>();
+            _emvApplications = [];
         }
 
         #endregion
@@ -59,15 +62,15 @@ namespace WSCT.GUI.Plugins.EMVExplorer
         private static TreeNode ConvertTlvDataToTreeNode(TlvData tlv, TlvDictionary tlvManager)
         {
             TreeNode tlvNode;
-            if (tlvManager != null && tlvManager.Get(String.Format("{0:T}", tlv)) != null)
+            if (tlvManager != null && tlvManager.Get($"{tlv:T}") != null)
             {
                 var tlvObject = tlvManager.CreateInstance(tlv);
                 tlvObject.Tlv = tlv;
-                tlvNode = new TreeNode(String.Format("{0:N}: {0}", tlvObject));
+                tlvNode = new TreeNode($"{tlvObject:N}: {tlvObject}");
             }
             else
             {
-                tlvNode = new TreeNode(String.Format("T:{0:T} L:{0:L} V:{0:Vh}", tlv));
+                tlvNode = new TreeNode($"T:{tlv:T} L:{tlv:L} V:{tlv:Vh}");
             }
             foreach (var subTLV in tlv.InnerTlvs)
             {
@@ -80,16 +83,17 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> guiDo * Click
 
-        private void guiDoSelectPSE_Click(object sender, EventArgs e)
+        private void GuiDoSelectPSE_Click(object sender, EventArgs e)
         {
             try
             {
                 // Create the PSE object
-                _pse = new PaymentSystemEnvironment(SharedData.CardChannel);
-                _pse.Name = guiPSEName.Text;
-
-                // Adjust AID listing location
-                _pse.SearchTagAidInFci = guiParamsTagAIDInFCI.Checked;
+                _pse = new PaymentSystemEnvironment(SharedData.CardChannel)
+                {
+                    Name = guiPSEName.Text,
+                    // Adjust AID listing location
+                    SearchTagAidInFci = guiParamsTagAIDInFCI.Checked
+                };
 
                 // Attach observers
                 _detailedLogs.ObservePse(_pse);
@@ -113,7 +117,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoSelectAID_Click(object sender, EventArgs e)
+        private void GuiDoSelectAID_Click(object sender, EventArgs e)
         {
             // Get the EMV ApplicationID instance
             _emv = (EmvApplication)guiApplicationAID.SelectedItem;
@@ -138,10 +142,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             ActivateEMVGetProcessingOptions();
         }
 
-        private void guiDoGetProcessingOptions_Click(object sender, EventArgs e)
+        private void GuiDoGetProcessingOptions_Click(object sender, EventArgs e)
         {
             // TODO: remove that patch ! (
-            _emv.TlvTerminalData.Add(new TlvData(0x9F66, 0x02, new byte[] { 0x80, 0x00 }));
+            _emv.TlvTerminalData.Add(new TlvData(0x9F66, 0x02, [0x80, 0x00]));
 
             // Do Get Processing Options on EMV ApplicationID
             _emv.GetProcessingOptions();
@@ -151,7 +155,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             ActivateEMVInternalAuthenticate();
         }
 
-        private void guiDoReadRecords_Click(object sender, EventArgs e)
+        private void GuiDoReadRecords_Click(object sender, EventArgs e)
         {
             // Read Records targetted by AFL
             _emv.ReadApplicationData();
@@ -161,16 +165,16 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             ActivateEMVGenerateAC1();
 
             // Update GUI
-            updateCVMList_Content();
+            UpdateCVMList_Content();
         }
 
-        private void guiDoGetData_Click(object sender, EventArgs e)
+        private void GuiDoGetData_Click(object sender, EventArgs e)
         {
             // Get Data of the EMV ApplicationID
             _emv.GetData();
         }
 
-        private void guiDoExplicitDiscoveryOfAID_Click(object sender, EventArgs e)
+        private void GuiDoExplicitDiscoveryOfAID_Click(object sender, EventArgs e)
         {
             try
             {
@@ -188,8 +192,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                     // If AID not discovered, try to select it
                     if (notFound)
                     {
-                        var emv = new EmvApplication(SharedData.CardChannel, new TlvData());
-                        emv.Aid = app.Aid;
+                        var emv = new EmvApplication(SharedData.CardChannel, new TlvData())
+                        {
+                            Aid = app.Aid
+                        };
                         _detailedLogs.ObserveEmv(emv);
                         ObserveEmv(emv);
                         // If success, add the EMV ApplicationID instance to the candidate list
@@ -212,18 +218,20 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoCardLogRead_Click(object sender, EventArgs e)
+        private void GuiDoCardLogRead_Click(object sender, EventArgs e)
         {
             // Read EMV transactions log file
             _emv.ReadLogFile();
         }
 
-        private void guiDoCardLogSave_Click(object sender, EventArgs e)
+        private void GuiDoCardLogSave_Click(object sender, EventArgs e)
         {
-            var dialog = new SaveFileDialog();
-            dialog.DefaultExt = "EMV Card Log";
-            dialog.AddExtension = true;
-            dialog.Filter = "Log files (*.log)|*.log";
+            var dialog = new SaveFileDialog
+            {
+                DefaultExt = "EMV Card Log",
+                AddExtension = true,
+                Filter = "Log files (*.log)|*.log"
+            };
             dialog.ShowDialog();
             var fileName = dialog.FileName;
             if (fileName != "")
@@ -246,12 +254,14 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoSaveDetailedLogs_Click(object sender, EventArgs e)
+        private void GuiDoSaveDetailedLogs_Click(object sender, EventArgs e)
         {
-            var dialog = new SaveFileDialog();
-            dialog.DefaultExt = "EMV Card Log";
-            dialog.AddExtension = true;
-            dialog.Filter = "Log files (*.log)|*.log";
+            var dialog = new SaveFileDialog
+            {
+                DefaultExt = "EMV Card Log",
+                AddExtension = true,
+                Filter = "Log files (*.log)|*.log"
+            };
             dialog.ShowDialog();
             var fileName = dialog.FileName;
             if (fileName != "")
@@ -262,7 +272,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoInternalAuthenticate_Click(object sender, EventArgs e)
+        private void GuiDoInternalAuthenticate_Click(object sender, EventArgs e)
         {
             byte[] unpredictableNumber;
             try
@@ -278,7 +288,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             _emv.InternalAuthenticate(unpredictableNumber);
         }
 
-        private void guiDoVerifyCardholder_Click(object sender, EventArgs e)
+        private void GuiDoVerifyCardholder_Click(object sender, EventArgs e)
         {
             var cvRule = (CardholderVerificationMethodList.CvRule)guiCVMList.SelectedItem;
             PINBlock pinBlock;
@@ -287,8 +297,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             {
                 if (guiPINEntry.Enabled)
                 {
-                    pinBlock = new PlaintextPINBlock();
-                    pinBlock.ClearPIN = guiPINEntry.Text.FromBcd((UInt32)guiPINEntry.Text.Length);
+                    pinBlock = new PlaintextPINBlock
+                    {
+                        ClearPIN = guiPINEntry.Text.FromBcd((uint)guiPINEntry.Text.Length)
+                    };
                     _emv.VerifyPin(pinBlock);
                 }
                 else
@@ -302,17 +314,17 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoGetChallenge_Click(object sender, EventArgs e)
+        private void GuiDoGetChallenge_Click(object sender, EventArgs e)
         {
             _emv.GetChallenge();
         }
 
-        private void guiDoGenerateAC1_Click(object sender, EventArgs e)
+        private void GuiDoGenerateAC1_Click(object sender, EventArgs e)
         {
             var cryptogramType = (CryptogramType)guiAC1Type.SelectedItem;
             if (cryptogramType == CryptogramType.Undefined)
             {
-                MessageBox.Show(String.Format("Cryptogram type [{0}] unsupported", cryptogramType), "Unsupported feature", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show($"Cryptogram type [{cryptogramType}] unsupported", "Unsupported feature", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             else
             {
@@ -331,12 +343,12 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void guiDoExternalAuthenticate_Click(object sender, EventArgs e)
+        private void GuiDoExternalAuthenticate_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature has not yet been implemented", "Not yet implemented", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
 
-        private void guiDoGenerateAC2_Click(object sender, EventArgs e)
+        private void GuiDoGenerateAC2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature has not yet been implemented", "Not yet implemented", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
@@ -345,7 +357,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> gui * CheckedChanged
 
-        private void guiPINEntryUsed_CheckedChanged(object sender, EventArgs e)
+        private void GuiPINEntryUsed_CheckedChanged(object sender, EventArgs e)
         {
             if (guiPINEntryUsed.Checked)
             {
@@ -362,19 +374,15 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> gui * IndexChanged
 
-        private void guiCVMList_SelectedIndexChanged(object sender, EventArgs e)
+        private void GuiCVMList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var cvRule = (CardholderVerificationMethodList.CvRule)guiCVMList.SelectedItem;
-            switch (cvRule.CvmCode)
+            guiDoGetChallenge.Enabled = cvRule.CvmCode switch
             {
-                case CardholderVerificationMethodList.CvmCode.EncipheredPinIcc:
-                case CardholderVerificationMethodList.CvmCode.EncipheredPinIccAndSign:
-                    guiDoGetChallenge.Enabled = true;
-                    break;
-                default:
-                    guiDoGetChallenge.Enabled = false;
-                    break;
-            }
+                CardholderVerificationMethodList.CvmCode.EncipheredPinIcc => true,
+                CardholderVerificationMethodList.CvmCode.EncipheredPinIccAndSign => true,
+                _ => false
+            };
         }
 
         #endregion
@@ -389,7 +397,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             guiApplicationAID.DisplayMember = "aid";
         }
 
-        private void updateAfterAIDSelect_Content(EmvDefinitionFile df)
+        private void UpdateAfterAIDSelect_Content(EmvDefinitionFile df)
         {
             var emv = (EmvApplication)df;
 
@@ -398,13 +406,13 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             var fciNode = new TreeNode("File Control Information");
             emvAppNode.Nodes.Add(fciNode);
 
-            if (emv.TlvFci != null)
+            if (emv.TlvFci is not null)
             {
                 fciNode.Nodes.Add(ConvertTlvDataToTreeNode(emv.TlvFci, _tlvDictionary));
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("EMV application [{0}] not found.", emv.Aid));
+                var errorNode = new TreeNode($"EMV application [{emv.Aid}] not found.");
                 fciNode.Nodes.Add(errorNode);
             }
 
@@ -417,36 +425,38 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("Processing Options not found."));
+                var errorNode = new TreeNode("Processing Options not found.");
                 optionsNode.Nodes.Add(errorNode);
             }
 
+            // >>> AIP
             var aipNode = new TreeNode("Application Interchange Profile");
             optionsNode.Nodes.Add(aipNode);
 
-            if (emv.Aip != null)
+            try
             {
-                aipNode.Nodes.Add(String.Format("{0}", emv.Aip));
+                aipNode.Nodes.Add($"{emv.Aip}");
             }
-            else
+            catch (EMVApplicationException)
             {
-                var errorNode = new TreeNode(String.Format("AIP not found."));
+                var errorNode = new TreeNode("AIP not found.");
                 aipNode.Nodes.Add(errorNode);
             }
 
+            // >>> AFL
             var aflNode = new TreeNode("Application File Locator");
             optionsNode.Nodes.Add(aflNode);
 
-            if (emv.Afl != null)
+            try
             {
                 foreach (var file in emv.Afl.Files)
                 {
-                    aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
+                    aflNode.Nodes.Add(new TreeNode($"{file}"));
                 }
             }
-            else
+            catch (EMVApplicationException)
             {
-                var errorNode = new TreeNode(String.Format("AFL not found."));
+                var errorNode = new TreeNode("AFL not found.");
                 aflNode.Nodes.Add(errorNode);
             }
 
@@ -459,14 +469,14 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 foreach (var tlv70 in emv.TlvRecords)
                 {
                     recordNumber++;
-                    var recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
+                    var recordNode = new TreeNode($"Record {recordNumber}");
                     recordNode.Nodes.Add(ConvertTlvDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("No records found."));
+                var errorNode = new TreeNode("No records found.");
                 recordsNode.Nodes.Add(errorNode);
             }
 
@@ -495,20 +505,20 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             guiEMVApplicationsContent.ExpandAll();
         }
 
-        private void updateAfterAIDSelect_Content(EmvApplication emv)
+        private void UpdateAfterAIDSelect_Content(EmvApplication emv)
         {
             var emvAppNode = new TreeNode(emv.Aid);
 
             var fciNode = new TreeNode("File Control Information");
             emvAppNode.Nodes.Add(fciNode);
 
-            if (emv.TlvFci != null)
+            if (emv.TlvFci is not null)
             {
                 fciNode.Nodes.Add(ConvertTlvDataToTreeNode(emv.TlvFci, _tlvDictionary));
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("EMV application [{0}] not found.", emv.Aid));
+                var errorNode = new TreeNode($"EMV application [{emv.Aid}] not found.");
                 fciNode.Nodes.Add(errorNode);
             }
 
@@ -521,7 +531,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("Processing Options not found."));
+                var errorNode = new TreeNode("Processing Options not found.");
                 optionsNode.Nodes.Add(errorNode);
             }
 
@@ -530,11 +540,11 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Aip != null)
             {
-                aipNode.Nodes.Add(String.Format("{0}", emv.Aip));
+                aipNode.Nodes.Add($"{emv.Aip}");
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("AIP not found."));
+                var errorNode = new TreeNode("AIP not found.");
                 aipNode.Nodes.Add(errorNode);
             }
 
@@ -545,12 +555,12 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             {
                 foreach (var file in emv.Afl.Files)
                 {
-                    aflNode.Nodes.Add(new TreeNode(String.Format("{0}", file)));
+                    aflNode.Nodes.Add(new TreeNode($"{file}"));
                 }
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("AFL not found."));
+                var errorNode = new TreeNode("AFL not found.");
                 aflNode.Nodes.Add(errorNode);
             }
 
@@ -563,14 +573,14 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 foreach (var tlv70 in emv.TlvRecords)
                 {
                     recordNumber++;
-                    var recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
+                    var recordNode = new TreeNode($"Record {recordNumber}");
                     recordNode.Nodes.Add(ConvertTlvDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("No records found."));
+                var errorNode = new TreeNode("No records found.");
                 recordsNode.Nodes.Add(errorNode);
             }
 
@@ -613,9 +623,9 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Sda != null)
             {
-                sdaNode.Nodes.Add(new TreeNode(String.Format("Hash Algorithm Indicator: {0:X2}", emv.Sda.HashAlgorithmIndicator)));
-                sdaNode.Nodes.Add(new TreeNode(String.Format("Hash Result: {0}", emv.Sda.HashResult.ToHexa())));
-                sdaNode.Nodes.Add(new TreeNode(String.Format("Data Authentication Code: {0}", emv.Sda.DataAuthenticationCode.ToHexa())));
+                sdaNode.Nodes.Add(new TreeNode($"Hash Algorithm Indicator: {emv.Sda.HashAlgorithmIndicator:X2}"));
+                sdaNode.Nodes.Add(new TreeNode($"Hash Result: {emv.Sda.HashResult.ToHexa()}"));
+                sdaNode.Nodes.Add(new TreeNode($"Data Authentication Code: {emv.Sda.DataAuthenticationCode.ToHexa()}"));
             }
             else
             {
@@ -627,10 +637,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.Dda != null)
             {
-                ddaNode.Nodes.Add(new TreeNode(String.Format("Hash Algorithm Indicator: {0:X2}", emv.Dda.HashAlgorithmIndicator)));
-                ddaNode.Nodes.Add(new TreeNode(String.Format("Hash Result: {0}", emv.Dda.HashResult.ToHexa())));
-                ddaNode.Nodes.Add(new TreeNode(String.Format("ICC Dynamic Data Length:{0:X2}", emv.Dda.IccDynamicDataLength)));
-                ddaNode.Nodes.Add(new TreeNode(String.Format("ICC Dynamic Data: {0}", emv.Dda.IccDynamicData.ToHexa())));
+                ddaNode.Nodes.Add(new TreeNode($"Hash Algorithm Indicator: {emv.Dda.HashAlgorithmIndicator:X2}"));
+                ddaNode.Nodes.Add(new TreeNode($"Hash Result: {emv.Dda.HashResult.ToHexa()}"));
+                ddaNode.Nodes.Add(new TreeNode($"ICC Dynamic Data Length:{emv.Dda.IccDynamicDataLength:X2}"));
+                ddaNode.Nodes.Add(new TreeNode($"ICC Dynamic Data: {emv.Dda.IccDynamicData.ToHexa()}"));
             }
             else
             {
@@ -639,22 +649,22 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             var pinNode = new TreeNode("Cardholder Verification");
             emvAppNode.Nodes.Add(pinNode);
-            pinNode.Nodes.Add(new TreeNode(String.Format("TVR :: Cardholder Verification: {0}", (emv.Tvr.CardholderVerificationFailed ? "failed" : "success"))));
+            pinNode.Nodes.Add(new TreeNode($"TVR :: Cardholder Verification: {(emv.Tvr.CardholderVerificationFailed ? "failed" : "success")}"));
             if (emv.VerifyPinStatusWord != 0x0000)
             {
-                pinNode.Nodes.Add(new TreeNode(String.Format("VERIFY PIN status: 0x{0:X4}", emv.VerifyPinStatusWord)));
+                pinNode.Nodes.Add(new TreeNode($"VERIFY PIN status: 0x{emv.VerifyPinStatusWord:X4}"));
             }
 
             var AC1Node = new TreeNode("Application Cryptogram 1");
             emvAppNode.Nodes.Add(AC1Node);
             if (emv.TlvGenerateAC1Response != null)
             {
-                AC1Node.Nodes.Add(new TreeNode(String.Format("Requested AC: {0}", emv.RequestedAC1Type)));
-                AC1Node.Nodes.Add(new TreeNode(String.Format("Unpredictable Number: {0}", emv.TlvGenerateAC1UnpredictableNumber.Value.ToHexa())));
-                var responseNode = new TreeNode(String.Format("Response: {0}", emv.TlvGenerateAC1Response));
+                AC1Node.Nodes.Add(new TreeNode($"Requested AC: {emv.RequestedAC1Type}"));
+                AC1Node.Nodes.Add(new TreeNode($"Unpredictable Number: {emv.TlvGenerateAC1UnpredictableNumber.Value.ToHexa()}"));
+                var responseNode = new TreeNode($"Response: {emv.TlvGenerateAC1Response}");
                 AC1Node.Nodes.Add(responseNode);
-                responseNode.Nodes.Add(new TreeNode(String.Format("Cryptogram Information Data: {0}", emv.Cid1)));
-                responseNode.Nodes.Add(new TreeNode(String.Format("Application Transaction Counter: {0}", emv.AtcFromAC1)));
+                responseNode.Nodes.Add(new TreeNode($"Cryptogram Information Data: {emv.Cid1}"));
+                responseNode.Nodes.Add(new TreeNode($"Application Transaction Counter: {emv.AtcFromAC1}"));
             }
 
             guiEMVApplicationsContent.Nodes.Clear();
@@ -662,7 +672,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             guiEMVApplicationsContent.ExpandAll();
         }
 
-        private void updateCVMList_Content()
+        private void UpdateCVMList_Content()
         {
             if (_emv.CvmList != null)
             {
@@ -677,13 +687,13 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
             if (emv.LogFormat != null)
             {
-                guiCardLogFormat.Text = String.Format("{0}", emv.LogFormat);
+                guiCardLogFormat.Text = $"{emv.LogFormat}";
             }
 
             if (emv.LogEntry != null)
             {
-                guiCardLogSFI.Text = String.Format("{0:X2}", emv.LogEntry.Sfi);
-                guiCardLogLength.Text = String.Format("{0:X2}", emv.LogEntry.CyclicFileSize);
+                guiCardLogSFI.Text = $"{emv.LogEntry.Sfi:X2}";
+                guiCardLogLength.Text = $"{emv.LogEntry.CyclicFileSize:X2}";
             }
 
             if (emv.LogEntry != null && emv.LogFormat != null)
@@ -713,7 +723,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             guiLogRecords.Columns.Add("Record");
             foreach (var dol in emv.LogFormat.GetDataObjectDefinitions())
             {
-                var tagStr = String.Format("{0:T}", dol);
+                var tagStr = $"{dol:T}";
                 if (_tlvDictionary.Get(tagStr) != null)
                 {
                     guiLogRecords.Columns.Add(_tlvDictionary.Get(tagStr).Name);
@@ -729,22 +739,24 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             foreach (var tlvDataList in emv.LogRecords)
             {
                 recordNumber++;
-                var item = new ListViewItem(String.Format("{0}", recordNumber));
+                var item = new ListViewItem($"{recordNumber}");
                 foreach (var tlvData in tlvDataList)
                 {
                     // if tag is known by tlvManager, use the corresponding AbstractTLVObject else use BinaryTlvObject.
-                    var tagStr = String.Format("{0:T}", tlvData);
+                    var tagStr = $"{tlvData:T}";
                     if (_tlvDictionary.Get(tagStr) != null)
                     {
                         var tlvObject = _tlvDictionary.CreateInstance(tagStr);
                         tlvObject.Tlv = tlvData;
-                        item.SubItems.Add(String.Format("{0}", tlvObject));
+                        item.SubItems.Add($"{tlvObject}");
                     }
                     else
                     {
-                        AbstractTlvObject tlvObject = new BinaryTlvObject();
-                        tlvObject.Tlv = tlvData;
-                        item.SubItems.Add(String.Format("{0}", tlvObject));
+                        AbstractTlvObject tlvObject = new BinaryTlvObject
+                        {
+                            Tlv = tlvData
+                        };
+                        item.SubItems.Add($"{tlvObject}");
                     }
                 }
                 guiLogRecords.Items.Add(item);
@@ -799,22 +811,22 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 foreach (var tlv in emv.TlvOfflineRecords)
                 {
                     index++;
-                    var item = new ListViewItem(String.Format("{0}", index));
+                    var item = new ListViewItem($"{index}");
                     // tag
-                    item.SubItems.Add(String.Format("{0:T}", tlv));
+                    item.SubItems.Add($"{tlv:T}");
                     // name
-                    if (_tlvDictionary != null && _tlvDictionary.Get(String.Format("{0:T}", tlv)) != null)
+                    if (_tlvDictionary != null && _tlvDictionary.Get($"{tlv:T}") != null)
                     {
                         var tlvObject = _tlvDictionary.CreateInstance(tlv);
                         tlvObject.Tlv = tlv;
-                        item.SubItems.Add(String.Format("{0:N}", tlvObject));
+                        item.SubItems.Add($"{tlvObject:N}");
                     }
                     else
                     {
-                        item.SubItems.Add(String.Format(""));
+                        item.SubItems.Add("");
                     }
                     // value
-                    item.SubItems.Add(String.Format("{0:V}", tlv));
+                    item.SubItems.Add($"{tlv:V}");
                     // insert item in SDA, DDA and/or CDA list
                     if (emv.Aip.Sda)
                     {
@@ -857,7 +869,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             }
         }
 
-        private void updateAfterPSESelect_Content(EmvDefinitionFile df)
+        private void UpdateAfterPSESelect_Content(EmvDefinitionFile df)
         {
             var pse = (PaymentSystemEnvironment)df;
 
@@ -875,13 +887,13 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             var fciNode = new TreeNode("File Control Information");
             pseNode.Nodes.Add(fciNode);
 
-            if (pse.TlvFci != null)
+            if (pse.TlvFci is not null)
             {
                 fciNode.Nodes.Add(ConvertTlvDataToTreeNode(pse.TlvFci, _tlvDictionary));
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("PSE named '{0}'/[{1}] not found.", pse.Name, pse.Aid));
+                var errorNode = new TreeNode($"PSE named '{pse.Name}'/[{pse.Aid}] not found.");
                 fciNode.Nodes.Add(errorNode);
             }
 
@@ -889,7 +901,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             guiPSEContent.ExpandAll();
         }
 
-        private void updateAfterPSEReadRecords_Content(EmvDefinitionFile df)
+        private void UpdateAfterPSEReadRecords_Content(EmvDefinitionFile df)
         {
             var pse = (PaymentSystemEnvironment)df;
 
@@ -914,14 +926,14 @@ namespace WSCT.GUI.Plugins.EMVExplorer
                 foreach (var tlv70 in pse.TlvRecords)
                 {
                     recordNumber++;
-                    var recordNode = new TreeNode(String.Format("Record {0}", recordNumber));
+                    var recordNode = new TreeNode($"Record {recordNumber}");
                     recordNode.Nodes.Add(ConvertTlvDataToTreeNode(tlv70, _tlvDictionary));
                     recordsNode.Nodes.Add(recordNode);
                 }
             }
             else
             {
-                var errorNode = new TreeNode(String.Format("No record found in PSE."));
+                var errorNode = new TreeNode("No record found in PSE.");
                 recordsNode.Nodes.Add(errorNode);
             }
 
@@ -983,7 +995,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void ActivateEMVGetProcessingOptions()
         {
-            if (_emv.TlvFci != null)
+            if (_emv.TlvFci is not null)
             {
                 guiDoGetProcessingOptions.Enabled = true;
                 guiDoGetData.Enabled = true;
@@ -1033,91 +1045,91 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         #region >> *EventHandler
 
-        private void afterPSESelectEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterPSESelectEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterPSESelectEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterPSESelectEventHandler(sender, eventArgs)));
                 return;
             }
 
             var df = sender as EmvDefinitionFile;
-            updateAfterPSESelect_Content(df);
+            UpdateAfterPSESelect_Content(df);
         }
 
-        private void afterPSEReadEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterPSEReadEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterPSEReadEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterPSEReadEventHandler(sender, eventArgs)));
                 return;
             }
 
             var pse = sender as PaymentSystemEnvironment;
-            updateAfterPSEReadRecords_Content(pse);
+            UpdateAfterPSEReadRecords_Content(pse);
         }
 
-        private void afterEMVSelectEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterEMVSelectEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterEMVSelectEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterEMVSelectEventHandler(sender, eventArgs)));
                 return;
             }
 
             var df = sender as EmvDefinitionFile;
-            updateAfterAIDSelect_Content(df);
+            UpdateAfterAIDSelect_Content(df);
             UpdateLogEntryAndFormat(df);
         }
 
-        private void afterGetProcessingOptionsEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterGetProcessingOptionsEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterGetProcessingOptionsEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterGetProcessingOptionsEventHandler(sender, eventArgs)));
                 return;
             }
 
             var emv = sender as EmvApplication;
-            updateAfterAIDSelect_Content(emv);
+            UpdateAfterAIDSelect_Content(emv);
             UpdateTvr(emv);
         }
 
-        private void afterReadApplicationDataEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterReadApplicationDataEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterReadApplicationDataEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterReadApplicationDataEventHandler(sender, eventArgs)));
                 return;
             }
 
             var emv = sender as EmvApplication;
-            updateAfterAIDSelect_Content(emv);
+            UpdateAfterAIDSelect_Content(emv);
             UpdatePublicKeysTab(emv);
             UpdateAuthenticationTabSdaDone(emv);
             UpdateAuthenticationTabSignedData(emv);
             UpdateTvr(emv);
         }
 
-        private void afterGetDataEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterGetDataEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterGetDataEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterGetDataEventHandler(sender, eventArgs)));
                 return;
             }
 
             var emv = sender as EmvApplication;
-            updateAfterAIDSelect_Content(emv);
+            UpdateAfterAIDSelect_Content(emv);
             UpdateLogEntryAndFormat(emv);
             UpdateTvr(emv);
         }
 
-        private void afterReadLogFileEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterReadLogFileEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterReadLogFileEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterReadLogFileEventHandler(sender, eventArgs)));
                 return;
             }
 
@@ -1126,41 +1138,41 @@ namespace WSCT.GUI.Plugins.EMVExplorer
             UpdateTvr(emv);
         }
 
-        private void afterInternalAuthenticateEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterInternalAuthenticateEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterInternalAuthenticateEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterInternalAuthenticateEventHandler(sender, eventArgs)));
                 return;
             }
 
             var emv = sender as EmvApplication;
-            updateAfterAIDSelect_Content(emv);
+            UpdateAfterAIDSelect_Content(emv);
             UpdateAuthenticationTabDdaDone(emv);
             UpdateTvr(emv);
         }
 
-        private void afterVerifyPinEventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterVerifyPinEventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterVerifyPinEventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterVerifyPinEventHandler(sender, eventArgs)));
                 return;
             }
 
-            updateAfterAIDSelect_Content(sender as EmvApplication);
+            UpdateAfterAIDSelect_Content(sender as EmvApplication);
         }
 
-        private void afterGenerateAC1EventHandler(Object sender, EmvEventArgs eventArgs)
+        private void AfterGenerateAC1EventHandler(Object sender, EmvEventArgs eventArgs)
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => afterGenerateAC1EventHandler(sender, eventArgs)));
+                Invoke(new MethodInvoker(() => AfterGenerateAC1EventHandler(sender, eventArgs)));
                 return;
             }
 
             var emv = sender as EmvApplication;
-            updateAfterAIDSelect_Content(emv);
+            UpdateAfterAIDSelect_Content(emv);
             UpdateTvr(emv);
         }
 
@@ -1170,20 +1182,20 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         private void ObservePse(PaymentSystemEnvironment pse)
         {
-            pse.AfterSelectEvent += afterPSESelectEventHandler;
-            pse.AfterReadEvent += afterPSEReadEventHandler;
+            pse.AfterSelectEvent += AfterPSESelectEventHandler;
+            pse.AfterReadEvent += AfterPSEReadEventHandler;
         }
 
         private void ObserveEmv(EmvApplication emv)
         {
-            emv.AfterSelectEvent += afterEMVSelectEventHandler;
-            emv.AfterGetProcessingOptionsEvent += afterGetProcessingOptionsEventHandler;
-            emv.AfterReadApplicationDataEvent += afterReadApplicationDataEventHandler;
-            emv.AfterGetDataEvent += afterGetDataEventHandler;
-            emv.AfterReadLogFileEvent += afterReadLogFileEventHandler;
-            emv.AfterInternalAuthenticateEvent += afterInternalAuthenticateEventHandler;
-            emv.AfterVerifyPinEvent += afterVerifyPinEventHandler;
-            emv.AfterGenerateAC1Event += afterGenerateAC1EventHandler;
+            emv.AfterSelectEvent += AfterEMVSelectEventHandler;
+            emv.AfterGetProcessingOptionsEvent += AfterGetProcessingOptionsEventHandler;
+            emv.AfterReadApplicationDataEvent += AfterReadApplicationDataEventHandler;
+            emv.AfterGetDataEvent += AfterGetDataEventHandler;
+            emv.AfterReadLogFileEvent += AfterReadLogFileEventHandler;
+            emv.AfterInternalAuthenticateEvent += AfterInternalAuthenticateEventHandler;
+            emv.AfterVerifyPinEvent += AfterVerifyPinEventHandler;
+            emv.AfterGenerateAC1Event += AfterGenerateAC1EventHandler;
         }
 
         #endregion

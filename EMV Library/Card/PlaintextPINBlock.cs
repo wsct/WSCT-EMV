@@ -32,7 +32,7 @@ namespace WSCT.EMV.Card
             {
                 if (value < 4 || value > 12)
                 {
-                    throw new Exception(String.Format("PlainTextPINBlock: PIN length must be in range [4-12] (found {0})", value));
+                    throw new Exception($"PlainTextPINBlock: PIN length must be in range [4-12] (found {value})");
                 }
                 _pinBlock[0] = (byte)((_pinBlock[0] & 0xF0) + value);
             }

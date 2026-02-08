@@ -195,7 +195,7 @@ namespace WSCT.EMV.Objects
 
         #region >> Fields
 
-        private List<CvRule> _cvRules;
+        private List<CvRule>? _cvRules;
 
         #endregion
 
@@ -224,9 +224,9 @@ namespace WSCT.EMV.Objects
         {
             get
             {
-                if (_cvRules == null)
+                if (_cvRules is null)
                 {
-                    _cvRules = new List<CvRule>();
+                    _cvRules = [];
                     // CVRules starts at byte 8 in CVMList
                     byte offset = 8;
                     while (offset < Tlv.Value.Length)

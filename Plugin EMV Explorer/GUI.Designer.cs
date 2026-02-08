@@ -311,7 +311,7 @@
             // 
             // groupBox9
             // 
-            groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             groupBox9.Controls.Add(label3);
             groupBox9.ForeColor = System.Drawing.SystemColors.MenuHighlight;
@@ -375,7 +375,7 @@
             this.guiDoExplicitDiscoveryOfAID.TabIndex = 2;
             this.guiDoExplicitDiscoveryOfAID.Text = "Explicit Discovery of AIDs";
             this.guiDoExplicitDiscoveryOfAID.UseVisualStyleBackColor = true;
-            this.guiDoExplicitDiscoveryOfAID.Click += new System.EventHandler(this.guiDoExplicitDiscoveryOfAID_Click);
+            this.guiDoExplicitDiscoveryOfAID.Click += new System.EventHandler(this.GuiDoExplicitDiscoveryOfAID_Click);
             // 
             // guiPSEName
             // 
@@ -394,7 +394,7 @@
             this.guiDoSelectPSE.TabIndex = 1;
             this.guiDoSelectPSE.Text = "Select PSE";
             this.guiDoSelectPSE.UseVisualStyleBackColor = true;
-            this.guiDoSelectPSE.Click += new System.EventHandler(this.guiDoSelectPSE_Click);
+            this.guiDoSelectPSE.Click += new System.EventHandler(this.GuiDoSelectPSE_Click);
             // 
             // groupActionsInitiateApplicationProcessing
             // 
@@ -428,7 +428,7 @@
             this.guiDoSelectAID.TabIndex = 1;
             this.guiDoSelectAID.Text = "Select AID";
             this.guiDoSelectAID.UseVisualStyleBackColor = true;
-            this.guiDoSelectAID.Click += new System.EventHandler(this.guiDoSelectAID_Click);
+            this.guiDoSelectAID.Click += new System.EventHandler(this.GuiDoSelectAID_Click);
             // 
             // guiDoGetProcessingOptions
             // 
@@ -439,7 +439,7 @@
             this.guiDoGetProcessingOptions.TabIndex = 2;
             this.guiDoGetProcessingOptions.Text = "Get Processing Options";
             this.guiDoGetProcessingOptions.UseVisualStyleBackColor = true;
-            this.guiDoGetProcessingOptions.Click += new System.EventHandler(this.guiDoGetProcessingOptions_Click);
+            this.guiDoGetProcessingOptions.Click += new System.EventHandler(this.GuiDoGetProcessingOptions_Click);
             // 
             // groupActionsReadApplicationData
             // 
@@ -462,7 +462,7 @@
             this.guiDoGetData.TabIndex = 1;
             this.guiDoGetData.Text = "Get Data";
             this.guiDoGetData.UseVisualStyleBackColor = true;
-            this.guiDoGetData.Click += new System.EventHandler(this.guiDoGetData_Click);
+            this.guiDoGetData.Click += new System.EventHandler(this.GuiDoGetData_Click);
             // 
             // guiDoReadRecords
             // 
@@ -473,7 +473,7 @@
             this.guiDoReadRecords.TabIndex = 0;
             this.guiDoReadRecords.Text = "Read Application Data";
             this.guiDoReadRecords.UseVisualStyleBackColor = true;
-            this.guiDoReadRecords.Click += new System.EventHandler(this.guiDoReadRecords_Click);
+            this.guiDoReadRecords.Click += new System.EventHandler(this.GuiDoReadRecords_Click);
             // 
             // groupActionsCardholderVerification
             // 
@@ -499,7 +499,7 @@
             this.guiDoGetChallenge.TabIndex = 0;
             this.guiDoGetChallenge.Text = "Get Challenge";
             this.guiDoGetChallenge.UseVisualStyleBackColor = true;
-            this.guiDoGetChallenge.Click += new System.EventHandler(this.guiDoGetChallenge_Click);
+            this.guiDoGetChallenge.Click += new System.EventHandler(this.GuiDoGetChallenge_Click);
             // 
             // guiPINEntryUsed
             // 
@@ -511,7 +511,7 @@
             this.guiPINEntryUsed.TabIndex = 1;
             this.guiPINEntryUsed.Text = "Plain text PIN:";
             this.guiPINEntryUsed.UseVisualStyleBackColor = true;
-            this.guiPINEntryUsed.CheckedChanged += new System.EventHandler(this.guiPINEntryUsed_CheckedChanged);
+            this.guiPINEntryUsed.CheckedChanged += new System.EventHandler(this.GuiPINEntryUsed_CheckedChanged);
             // 
             // guiPINEntry
             // 
@@ -532,7 +532,7 @@
             this.guiCVMList.Name = "guiCVMList";
             this.guiCVMList.Size = new System.Drawing.Size(147, 21);
             this.guiCVMList.TabIndex = 3;
-            this.guiCVMList.SelectedIndexChanged += new System.EventHandler(this.guiCVMList_SelectedIndexChanged);
+            this.guiCVMList.SelectedIndexChanged += new System.EventHandler(this.GuiCVMList_SelectedIndexChanged);
             // 
             // guiDoVerifyCardholder
             // 
@@ -543,7 +543,7 @@
             this.guiDoVerifyCardholder.TabIndex = 4;
             this.guiDoVerifyCardholder.Text = "Verify";
             this.guiDoVerifyCardholder.UseVisualStyleBackColor = true;
-            this.guiDoVerifyCardholder.Click += new System.EventHandler(this.guiDoVerifyCardholder_Click);
+            this.guiDoVerifyCardholder.Click += new System.EventHandler(this.GuiDoVerifyCardholder_Click);
             // 
             // groupActionsOfflineDataAuthentication
             // 
@@ -586,7 +586,7 @@
             this.guiDoInternalAuthenticate.TabIndex = 2;
             this.guiDoInternalAuthenticate.Text = "Internal Authenticate";
             this.guiDoInternalAuthenticate.UseVisualStyleBackColor = true;
-            this.guiDoInternalAuthenticate.Click += new System.EventHandler(this.guiDoInternalAuthenticate_Click);
+            this.guiDoInternalAuthenticate.Click += new System.EventHandler(this.GuiDoInternalAuthenticate_Click);
             // 
             // groupActionsCardActionAnalysis
             // 
@@ -640,7 +640,7 @@
             this.guiDoGenerateAC1.TabIndex = 1;
             this.guiDoGenerateAC1.Text = "Generate AC";
             this.guiDoGenerateAC1.UseVisualStyleBackColor = true;
-            this.guiDoGenerateAC1.Click += new System.EventHandler(this.guiDoGenerateAC1_Click);
+            this.guiDoGenerateAC1.Click += new System.EventHandler(this.GuiDoGenerateAC1_Click);
             // 
             // groupActionsIssuerAuthentication
             // 
@@ -662,7 +662,7 @@
             this.guiDoExternalAuthenticate.TabIndex = 0;
             this.guiDoExternalAuthenticate.Text = "External Authenticate";
             this.guiDoExternalAuthenticate.UseVisualStyleBackColor = true;
-            this.guiDoExternalAuthenticate.Click += new System.EventHandler(this.guiDoExternalAuthenticate_Click);
+            this.guiDoExternalAuthenticate.Click += new System.EventHandler(this.GuiDoExternalAuthenticate_Click);
             // 
             // groupBox13
             // 
@@ -685,7 +685,7 @@
             this.guiDoGenerateAC2.TabIndex = 1;
             this.guiDoGenerateAC2.Text = "Generate AC";
             this.guiDoGenerateAC2.UseVisualStyleBackColor = true;
-            this.guiDoGenerateAC2.Click += new System.EventHandler(this.guiDoGenerateAC2_Click);
+            this.guiDoGenerateAC2.Click += new System.EventHandler(this.GuiDoGenerateAC2_Click);
             // 
             // guiAC2Type
             // 
@@ -718,12 +718,12 @@
             this.guiDoSaveDetailedLogs.TabIndex = 1;
             this.guiDoSaveDetailedLogs.Text = "Save Detailed Logs";
             this.guiDoSaveDetailedLogs.UseVisualStyleBackColor = true;
-            this.guiDoSaveDetailedLogs.Click += new System.EventHandler(this.guiDoSaveDetailedLogs_Click);
+            this.guiDoSaveDetailedLogs.Click += new System.EventHandler(this.GuiDoSaveDetailedLogs_Click);
             // 
             // guiDetailedLogs
             // 
-            this.guiDetailedLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiDetailedLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDetailedLogs.Location = new System.Drawing.Point(6, 6);
             this.guiDetailedLogs.Name = "guiDetailedLogs";
@@ -746,8 +746,8 @@
             // 
             // guiPSEContent
             // 
-            this.guiPSEContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPSEContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPSEContent.Location = new System.Drawing.Point(6, 6);
             this.guiPSEContent.Name = "guiPSEContent";
@@ -767,8 +767,8 @@
             // 
             // guiEMVApplicationsContent
             // 
-            this.guiEMVApplicationsContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiEMVApplicationsContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiEMVApplicationsContent.Location = new System.Drawing.Point(6, 6);
             this.guiEMVApplicationsContent.Name = "guiEMVApplicationsContent";
@@ -789,8 +789,8 @@
             // 
             // guiLogRecords
             // 
-            this.guiLogRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiLogRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiLogRecords.FullRowSelect = true;
             this.guiLogRecords.Location = new System.Drawing.Point(6, 217);
@@ -802,7 +802,7 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.guiDoCardLogSave);
             this.groupBox5.Controls.Add(this.guiDoCardLogRead);
@@ -825,7 +825,7 @@
             this.guiDoCardLogSave.TabIndex = 3;
             this.guiDoCardLogSave.Text = "Save EMV Card Log";
             this.guiDoCardLogSave.UseVisualStyleBackColor = true;
-            this.guiDoCardLogSave.Click += new System.EventHandler(this.guiDoCardLogSave_Click);
+            this.guiDoCardLogSave.Click += new System.EventHandler(this.GuiDoCardLogSave_Click);
             // 
             // guiDoCardLogRead
             // 
@@ -836,7 +836,7 @@
             this.guiDoCardLogRead.TabIndex = 2;
             this.guiDoCardLogRead.Text = "Read Records";
             this.guiDoCardLogRead.UseVisualStyleBackColor = true;
-            this.guiDoCardLogRead.Click += new System.EventHandler(this.guiDoCardLogRead_Click);
+            this.guiDoCardLogRead.Click += new System.EventHandler(this.GuiDoCardLogRead_Click);
             // 
             // groupBox7
             // 
@@ -931,7 +931,7 @@
             // 
             // groupBox18
             // 
-            groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             groupBox18.Controls.Add(label15);
             groupBox18.Controls.Add(this.guiPublicKeysICCPKModulus);
@@ -959,7 +959,7 @@
             // 
             // guiPublicKeysICCPKModulus
             // 
-            this.guiPublicKeysICCPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPublicKeysICCPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysICCPKModulus.Location = new System.Drawing.Point(67, 156);
             this.guiPublicKeysICCPKModulus.Multiline = true;
@@ -1013,7 +1013,7 @@
             // 
             // guiPublicKeysICCPKRecoveredData
             // 
-            this.guiPublicKeysICCPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPublicKeysICCPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysICCPKRecoveredData.Location = new System.Drawing.Point(6, 38);
             this.guiPublicKeysICCPKRecoveredData.Multiline = true;
@@ -1024,7 +1024,7 @@
             // 
             // groupBox16
             // 
-            groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             groupBox16.Controls.Add(label11);
             groupBox16.Controls.Add(this.guiPublicKeysIssuerPKModulus);
@@ -1052,7 +1052,7 @@
             // 
             // guiPublicKeysIssuerPKModulus
             // 
-            this.guiPublicKeysIssuerPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPublicKeysIssuerPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysIssuerPKModulus.Location = new System.Drawing.Point(67, 156);
             this.guiPublicKeysIssuerPKModulus.Multiline = true;
@@ -1106,7 +1106,7 @@
             // 
             // guiPublicKeysIssuerPKRecoveredData
             // 
-            this.guiPublicKeysIssuerPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPublicKeysIssuerPKRecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysIssuerPKRecoveredData.Location = new System.Drawing.Point(6, 38);
             this.guiPublicKeysIssuerPKRecoveredData.Multiline = true;
@@ -1117,7 +1117,7 @@
             // 
             // groupBox14
             // 
-            groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             groupBox14.Controls.Add(label9);
             groupBox14.Controls.Add(this.guiPublicKeysCertificationAuthorityPKModulus);
@@ -1147,7 +1147,7 @@
             // 
             // guiPublicKeysCertificationAuthorityPKModulus
             // 
-            this.guiPublicKeysCertificationAuthorityPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiPublicKeysCertificationAuthorityPKModulus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiPublicKeysCertificationAuthorityPKModulus.Location = new System.Drawing.Point(67, 71);
             this.guiPublicKeysCertificationAuthorityPKModulus.Multiline = true;
@@ -1261,8 +1261,8 @@
             // 
             // guiSDAAuthenticationData
             // 
-            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiSDAAuthenticationData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDAAuthenticationData.Controls.Add(this.guiSDADataAuthenticationCode);
             this.guiSDAAuthenticationData.Controls.Add(label23);
@@ -1322,7 +1322,7 @@
             // 
             // guiSDARecoveredData
             // 
-            this.guiSDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiSDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDARecoveredData.Location = new System.Drawing.Point(6, 32);
             this.guiSDARecoveredData.Multiline = true;
@@ -1333,8 +1333,8 @@
             // 
             // guiSDASignedData
             // 
-            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiSDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiSDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.guiSDASignedDataColumnId,
@@ -1394,8 +1394,8 @@
             // 
             // guiDDASignedData
             // 
-            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiDDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -1433,8 +1433,8 @@
             // 
             // groupBox15
             // 
-            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox15.Controls.Add(this.guiDDAICCDynamicData);
             this.groupBox15.Controls.Add(guiDDALabel_ICCDynamicNumber);
@@ -1494,7 +1494,7 @@
             // 
             // guiDDARecoveredData
             // 
-            this.guiDDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiDDARecoveredData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiDDARecoveredData.Location = new System.Drawing.Point(6, 32);
             this.guiDDARecoveredData.Multiline = true;
@@ -1525,7 +1525,7 @@
             // 
             // guiCDASignedData
             // 
-            this.guiCDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guiCDASignedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guiCDASignedData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5,
@@ -2062,8 +2062,8 @@
             // 
             // tabControlMain
             // 
-            tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             tabControlMain.Controls.Add(guiTabEMVApplications);
             tabControlMain.Controls.Add(guiTabPSE);

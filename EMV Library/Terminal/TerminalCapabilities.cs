@@ -21,13 +21,13 @@ namespace WSCT.EMV.Terminal
             /// AID of the application (text).
             /// </summary>
             [XmlAttribute("aid")]
-            public string Aid { get; set; }
+            public string? Aid { get; set; }
 
             /// <summary>
             /// Label of the application.
             /// </summary>
             [XmlAttribute("label")]
-            public string Label { get; set; }
+            public string? Label { get; set; }
         }
 
         /// <summary>
@@ -40,13 +40,13 @@ namespace WSCT.EMV.Terminal
             /// DF Name of the PSE.
             /// </summary>
             [XmlAttribute("name")]
-            public string Name { get; set; }
+            public string? Name { get; set; }
 
             /// <summary>
             /// Label of the PSE.
             /// </summary>
             [XmlAttribute("label")]
-            public string Label { get; set; }
+            public string? Label { get; set; }
         }
 
         #endregion
@@ -58,14 +58,14 @@ namespace WSCT.EMV.Terminal
         /// </summary>
         [XmlArray("supportedApplications")]
         [XmlArrayItem("application")]
-        public List<SupportedApplication> SupportedApplications { get; set; }
+        public List<SupportedApplication>? SupportedApplications { get; set; }
 
         /// <summary>
         /// List of supporterd PSE.
         /// </summary>
         [XmlArray("supportedPSEs")]
         [XmlArrayItem("pse")]
-        public List<SupportedPSE> SupportedPses { get; set; }
+        public List<SupportedPSE>? SupportedPses { get; set; }
 
         #endregion
     }

@@ -15,19 +15,7 @@ namespace WSCT.EMV.Security
     {
         #region >> Properties
 
-        public List<CertificationAuthority> CertificationAuthorities;
-
-        #endregion
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Initializes a new <see cref="CertificationAuthorityRepository"/> instance.
-        /// </summary>
-        public CertificationAuthorityRepository()
-        {
-            CertificationAuthorities = new List<CertificationAuthority>();
-        }
+        public List<CertificationAuthority> CertificationAuthorities = [];
 
         #endregion
 
@@ -41,7 +29,7 @@ namespace WSCT.EMV.Security
         /// <param name="publicKey">The Public Key of the Certificate Authority.</param>
         public void Add(string rid, string index, PublicKey publicKey)
         {
-            CertificationAuthorities.Add(new CertificationAuthority() { Rid = rid, Index = index, PublicKey = publicKey });
+            CertificationAuthorities.Add(new CertificationAuthority { Rid = rid, Index = index, PublicKey = publicKey });
         }
 
         /// <summary>
@@ -51,7 +39,7 @@ namespace WSCT.EMV.Security
         /// <param name="index">Index of the Certificate Authority.</param>
         /// <returns>The Public Key of the Certificate Authority.</returns>
         /// <exception cref="Exception">If no public key found.</exception>
-        public PublicKey Get(string rid, string index)
+        public PublicKey? Get(string rid, string index)
         {
             var caFound = CertificationAuthorities.FirstOrDefault(ca => (ca.Rid == rid) && (ca.Index == index));
             if (caFound != null)
@@ -67,7 +55,7 @@ namespace WSCT.EMV.Security
         #region >> IXmlSerializable Members
 
         /// <inheritdoc />
-        public XmlSchema GetSchema()
+        public XmlSchema? GetSchema()
         {
             return null;
         }
@@ -83,8 +71,11 @@ namespace WSCT.EMV.Security
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        var ca = (CertificationAuthority)serializer.Deserialize(reader);
-                        CertificationAuthorities.Add(ca);
+                        var ca = (CertificationAuthority?)serializer.Deserialize(reader);
+                        if (ca is not null)
+                        {
+                            CertificationAuthorities.Add(ca);
+                        }
                         break;
                     case XmlNodeType.Comment:
                         reader.Read();

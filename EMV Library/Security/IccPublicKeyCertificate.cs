@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
+using WSCT.EMV.Exceptions;
 using WSCT.Helpers;
 
 namespace WSCT.EMV.Security
@@ -15,9 +15,9 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Application PAN (10): PAN (padded to the right with Hex 'F's).
         /// </summary>
-        public byte[] ApplicationPan { get; set; }
+        public byte[]? ApplicationPan { get; set; }
 
-        public PublicKey IccPublicKey { private get; set; }
+        public PublicKey? IccPublicKey { private get; set; }
 
         #endregion
 
@@ -38,6 +38,13 @@ namespace WSCT.EMV.Security
         /// <inheritdoc />
         protected override byte[] GetDataToSign(int privateKeyLength)
         {
+            EMVApplicationException.ThrowIfNull(IccPublicKey, "IccPublicKey can't be null");
+            EMVApplicationException.ThrowIfNull(IccPublicKey.Modulus, "IccPublicKey.Modulus can't be null");
+            EMVApplicationException.ThrowIfNull(ApplicationPan, "ApplicationPan can't be null");
+            EMVApplicationException.ThrowIfNull(CertificateExpirationDate, "CertificateExpirationDate can't be null");
+            EMVApplicationException.ThrowIfNull(CertificateSerialNumber, "CertificateSerialNumber can't be null");
+
+
             var iccPublicKeyModulus = IccPublicKey.Modulus.FromHexa();
             var iccPublicKeyExponent = IccPublicKey.Exponent.FromHexa();
 
@@ -59,7 +66,7 @@ namespace WSCT.EMV.Security
                 {
                     PublicKeyorLeftmostDigitsofthePublicKey[i] = 0xBB;
                 }
-                iccPublicKeyRemainder = Array.Empty<byte>();
+                iccPublicKeyRemainder = [];
             }
             else
             {
@@ -72,19 +79,20 @@ namespace WSCT.EMV.Security
                 .PadRight(20, 'F')
                 .FromHexa();
 
-            return DataFormat.ToByteArray()
-                .Concat(applicationPan)
-                .Concat(CertificateExpirationDate)
-                .Concat(CertificateSerialNumber)
-                .Concat(HashAlgorithmIndicator.ToByteArray())
-                .Concat(PublicKeyAlgorithmIndicator.ToByteArray())
-                .Concat(PublicKeyLength.ToByteArray())
-                .Concat(PublicKeyExponentLength.ToByteArray())
-                .Concat(PublicKeyorLeftmostDigitsofthePublicKey)
-                .Concat(iccPublicKeyRemainder)
-                .Concat(iccPublicKeyExponent)
-                // TODO Add Static Data to be authenticated
-                .ToArray();
+            return
+            [
+                .. DataFormat.ToByteArray(),
+                .. applicationPan,
+                .. CertificateExpirationDate,
+                .. CertificateSerialNumber,
+                .. HashAlgorithmIndicator.ToByteArray(),
+                .. PublicKeyAlgorithmIndicator.ToByteArray(),
+                .. PublicKeyLength.ToByteArray(),
+                .. PublicKeyExponentLength.ToByteArray(),
+                .. PublicKeyorLeftmostDigitsofthePublicKey,
+                .. iccPublicKeyRemainder,
+                .. iccPublicKeyExponent,
+            ];
         }
 
         #endregion

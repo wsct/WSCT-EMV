@@ -6,9 +6,9 @@ namespace WSCT.EMV.Personalization
     public class TagValuesSequenceModel
     {
         [DataMember]
-        public string Dgi { get; set; }
+        public string? Dgi { get; set; }
 
         [DataMember]
-        public string[] Fields { get; set; }
+        public string[]? Fields { get; set; }
     }
 }

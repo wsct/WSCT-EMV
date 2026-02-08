@@ -6,9 +6,9 @@ namespace WSCT.EMV.Personalization
     public class TagLengthModel
     {
         [DataMember]
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
 
         [DataMember]
-        public byte Length { get; set; }
+        public byte? Length { get; set; }
     }
 }

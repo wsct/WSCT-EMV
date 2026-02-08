@@ -38,7 +38,7 @@ namespace WSCT.EMV.Objects
             #region IFormattable Membres
 
             /// <inheritdoc />
-            public string ToString(string format, IFormatProvider formatProvider)
+            public string ToString(string? format, IFormatProvider? formatProvider)
             {
                 if (!String.IsNullOrEmpty(format))
                 {

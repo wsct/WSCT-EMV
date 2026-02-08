@@ -169,13 +169,12 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterPseSelection(Object sender, EmvEventArgs eventArgs)
         {
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
 
-            if (df.TlvFci != null)
+            if (df.TlvFci is not null)
             {
                 gui.guiDetailedLogs.AppendText("  >> TLV: " + df.TlvFci + "\n");
                 foreach (TlvData tlv in df.TlvFci.GetTags())
@@ -198,8 +197,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterPseRead(Object sender, EmvEventArgs eventArgs)
         {
-            var pse = sender as PaymentSystemEnvironment;
-            if (pse == null)
+            if (sender is not PaymentSystemEnvironment pse)
             {
                 throw new ArgumentException("sender is not a PaymentSystemEnvironment");
             }
@@ -223,8 +221,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
@@ -236,13 +233,12 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
 
-            if (df.TlvFci != null)
+            if (df.TlvFci is not null)
             {
                 gui.guiDetailedLogs.AppendText(String.Format("  >> TLV: {0}\n", df.TlvFci));
                 foreach (TlvData tlv in df.TlvFci.GetTags())
@@ -258,8 +254,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -271,8 +266,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -295,8 +289,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -308,8 +301,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -336,8 +328,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeGetData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -349,8 +340,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterGetData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -375,8 +365,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeReadLogFile(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -392,8 +381,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeVerifyPin(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -409,8 +397,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeInternalAuthenticate(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -422,8 +409,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterInternalAuthenticate(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -446,8 +432,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeGetChallenge(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -459,8 +444,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterGetChallenge(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -473,8 +457,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void BeforeGenerateAc1(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -489,8 +472,7 @@ namespace WSCT.GUI.Plugins.EMVExplorer
 
         public void AfterGenerateAc1(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }

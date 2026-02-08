@@ -16,6 +16,6 @@ namespace WSCT.EMV.Personalization
         public bool Signed { get; set; }
 
         [DataMember]
-        public IEnumerable<string> Fields { get; set; }
+        public IEnumerable<string>? Fields { get; set; }
     }
 }

@@ -1,15 +1,19 @@
 ﻿using System;
+using WSCT.EMV.Exceptions;
 
 namespace WSCT.EMV.Security
 {
     /// <summary>
     /// Represents an EMV certificate for a Public Key.
     /// </summary>
-    public abstract class AbstractPublicKeyCertificate : AbstractSignatureContainer
+    /// <remarks>
+    /// Initializes a new <see cref="AbstractPublicKeyCertificate"/> instance.
+    /// </remarks>
+    public abstract class AbstractPublicKeyCertificate(Int32 identifierLength) : AbstractSignatureContainer(7 + identifierLength)
     {
         #region >> Fields
 
-        private readonly Int32 _identifierLength;
+        private readonly Int32 _identifierLength = identifierLength;
 
         #endregion
 
@@ -18,12 +22,12 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// Certificate Expiration Date (2): MMYY after which this certificate is invalid.
         /// </summary>
-        public byte[] CertificateExpirationDate { get; set; }
+        public byte[]? CertificateExpirationDate { get; set; }
 
         /// <summary>
         /// Certificate Serial Number (3): Binary number unique to this certificate assigned by the certification authority.
         /// </summary>
-        public byte[] CertificateSerialNumber { get; set; }
+        public byte[]? CertificateSerialNumber { get; set; }
 
         /// <summary>
         /// Public Key (1): Identifies the digital signature algorithm to be used with the Public KeyAlgorithm Indicator.
@@ -43,20 +47,7 @@ namespace WSCT.EMV.Security
         /// <summary>
         /// 
         /// </summary>
-        public byte[] PublicKeyorLeftmostDigitsofthePublicKey { get; set; }
-
-        #endregion
-
-        #region >> Constructors
-
-        /// <summary>
-        /// Initializes a new <see cref="AbstractPublicKeyCertificate"/> instance.
-        /// </summary>
-        protected AbstractPublicKeyCertificate(Int32 identifierLength)
-            : base(7 + identifierLength)
-        {
-            _identifierLength = identifierLength;
-        }
+        public byte[]? PublicKeyorLeftmostDigitsofthePublicKey { get; set; }
 
         #endregion
 
@@ -65,6 +56,8 @@ namespace WSCT.EMV.Security
         /// <inheritdoc />
         protected override void OnRecoverFromSignature()
         {
+            EMVApplicationException.ThrowIfNull(Recovered, "Recovered can't be null");
+
             CertificateExpirationDate = new byte[2];
             Array.Copy(Recovered, 2 + _identifierLength, CertificateExpirationDate, 0, 2);
 

@@ -7,7 +7,6 @@ using WSCT.Core;
 using WSCT.EMV.Card;
 using WSCT.Helpers;
 using WSCT.Helpers.BasicEncodingRules;
-using WSCT.ISO7816;
 using WSCT.Wrapper;
 using WSCT.Wrapper.Desktop.Core;
 
@@ -20,7 +19,7 @@ namespace WSCT.EMV.ConsoleTests
         private XDocument xmlDoc;
         private XElement xmlRoot;
 
-        private static void Main(string[] args)
+        private static void Main(/*string[] args*/)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
 
@@ -36,9 +35,11 @@ namespace WSCT.EMV.ConsoleTests
             Console.WriteLine("88 01 02".ToTlvData());
             var tlv1 = "88 01 02".ToTlvData();
             var tlv2 = "5F 2D 03 01 02 03".ToTlvData();
-            var ltlv = new List<TlvData>();
-            ltlv.Add(tlv1);
-            ltlv.Add(tlv2);
+            var ltlv = new List<TlvData>
+            {
+                tlv1,
+                tlv2
+            };
             Console.WriteLine(ltlv.ToTlvData(0x20));
             Console.WriteLine(ltlv.ToTlvData(0x20).GetTag(0x88));
             Console.WriteLine(ltlv.ToTlvData(0x20).GetTag(0x5F2D));
@@ -60,6 +61,7 @@ namespace WSCT.EMV.ConsoleTests
             #region >> CardContext
 
             ICardContext context = new CardContext();
+
             logger.ObserveContext((CardContextObservable)context);
 
             if (context.Establish() != ErrorCode.Success)
@@ -113,6 +115,7 @@ namespace WSCT.EMV.ConsoleTests
             #region >> CardChannel
 
             ICardChannel cardChannel = new CardChannel(context, readerState.ReaderName);
+
             logger.ObserveChannel((CardChannelObservable)cardChannel);
 
             if (cardChannel.Connect(ShareMode.Shared, Protocol.Any) != ErrorCode.Success)
@@ -159,11 +162,7 @@ namespace WSCT.EMV.ConsoleTests
 
             #endregion
 
-            emvApplications = new List<EmvApplication>();
-            foreach (var emvFound in pse.GetApplications())
-            {
-                emvApplications.Add(emvFound);
-            }
+            emvApplications = [.. pse.GetApplications()];
 
             #region >> AID selection
 
@@ -184,6 +183,7 @@ namespace WSCT.EMV.ConsoleTests
                     {
                         emv.ReadApplicationData();
                         emv.GetData();
+                        emv.InternalAuthenticate([0, 0, 0, 0, 0, 0, 0, 0]);
                     }
                 }
             }
@@ -252,13 +252,12 @@ namespace WSCT.EMV.ConsoleTests
             Console.WriteLine("= = = = = = P S E   S e l e c t i o n");
             Console.WriteLine();
 
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
 
-            if (df.TlvFci != null)
+            if (df.TlvFci is not null)
             {
                 xmlRoot.Elements().Last().Add(df.TlvFci.ToXmlNode(xmlDoc));
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
@@ -280,8 +279,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void AfterPseRead(Object sender, EmvEventArgs eventArgs)
         {
-            var pse = sender as PaymentSystemEnvironment;
-            if (pse == null)
+            if (sender is not PaymentSystemEnvironment pse)
             {
                 throw new ArgumentException("sender is not a PaymentSystemEnvironment");
             }
@@ -311,8 +309,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void BeforeApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
@@ -326,8 +323,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void AfterApplicationSelection(Object sender, EmvEventArgs eventArgs)
         {
-            var df = sender as EmvDefinitionFile;
-            if (df == null)
+            if (sender is not EmvDefinitionFile df)
             {
                 throw new ArgumentException("sender is not an EmvDefinitionFile");
             }
@@ -336,7 +332,7 @@ namespace WSCT.EMV.ConsoleTests
             Console.WriteLine("= = = = = = E M V   A I D   S e l e c t i o n   {0}", df.Aid);
             Console.WriteLine();
 
-            if (df.TlvFci != null)
+            if (df.TlvFci is not null)
             {
                 Console.WriteLine("  >> TLV: " + df.TlvFci);
                 foreach (TlvData tlv in df.TlvFci.GetTags())
@@ -349,8 +345,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void BeforeGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -364,8 +359,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void AfterGetProcessingOptions(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -389,8 +383,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void BeforeReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -404,8 +397,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void AfterReadApplicationData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -426,8 +418,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void BeforeGetData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
@@ -441,8 +432,7 @@ namespace WSCT.EMV.ConsoleTests
 
         private void AfterGetData(Object sender, EmvEventArgs eventArgs)
         {
-            var emv = sender as EmvApplication;
-            if (emv == null)
+            if (sender is not EmvApplication emv)
             {
                 throw new ArgumentException("sender is not an EMVApplication");
             }
