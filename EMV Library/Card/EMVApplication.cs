@@ -1054,6 +1054,7 @@ namespace WSCT.EMV.Card
                     _lastStatusWord = r.StatusWord;
                     _verifyPinStatusWord = _lastStatusWord;
                 })
+                .OnStatusWord(sw => sw == 0x9000, (_, _) => Tvr.CardholderVerificationFailed = false)
                 .OnStatusWord(sw => sw != 0x9000, (_, _) => Tvr.CardholderVerificationFailed = true);
 
             AfterVerifyPinEvent.Raise(this, new EmvEventArgs());

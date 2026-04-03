@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <Version>6.4.1</Version>
 
