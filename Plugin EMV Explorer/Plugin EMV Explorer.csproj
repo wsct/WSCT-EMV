@@ -1,58 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
-    <OutputType>Library</OutputType>
-    <Version>3.3.2</Version>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<Version>3.3.2</Version>
+	</PropertyGroup>
 
-    <UseWindowsForms>true</UseWindowsForms>
+	<PropertyGroup>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
 
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>WSCT.GUI.Plugins.EMVExplorer</PackageId>
+	<PropertyGroup>
+		<PackageId>WSCT.GUI.Plugins.EMVExplorer</PackageId>
+		<Description>EMV Explorer Plugin for WinSCard GUI.</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-    <AssemblyName>Plugins.EMVExplorer</AssemblyName>
-    <RootNamespace>WSCT.GUI.Plugins.EMVExplorer</RootNamespace>
+	<PropertyGroup>
+		<AssemblyName>Plugins.EMVExplorer</AssemblyName>
+		<RootNamespace>WSCT.GUI.Plugins.EMVExplorer</RootNamespace>
+	</PropertyGroup>
 
-    <Copyright>Copyright © Sylvain Vernois 2010-2026</Copyright>
-    <Product>WSCT</Product>
-    <Company>ENSICAEN</Company>
-    <Authors>Sylvain Vernois</Authors>
-    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
-    <Description>EMV Explorer Plugin for WinSCard GUI.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>wsct, emv, plugin</PackageTags>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="WSCT.GUI" Version="6.2.1" />
-    <PackageReference Include="WSCT.GUI.Resources" Version="1.2.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Config.EMVExplorer.xml">
-      <Visible>True</Visible>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Pack>True</Pack>
-      <PackageCopyToOutput>True</PackageCopyToOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Gui.cs" />
-    <Compile Update="Gui.Designer.cs" SubType="Form" DependentUpon="Gui.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Resources\Lang.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Lang.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Lang.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="WSCT.GUI" />
+		<PackageReference Include="WSCT.GUI.Resources" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\EMV Library\EMV Library.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Content Include="Config.EMVExplorer.xml">
+			<Visible>True</Visible>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Gui.cs" />
+		<Compile Update="Gui.Designer.cs" SubType="Form" DependentUpon="Gui.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Resources\Lang.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Lang.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Lang.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Lang.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>

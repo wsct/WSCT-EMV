@@ -1,42 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Product>EMV Card Personalization Console</Product>
-    <Description>EMV Card Personalization Console for WSCT.</Description>
-    <Copyright>Copyright © ENSICAEN / GREYC 2014-2026</Copyright>
-    <Authors>Sylvain Vernois</Authors>
-    <Company>ENSICAEN</Company>
-    <PackageProjectUrl>https://github.com/wsct/WSCT-EMV</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/wsct/WSCT-EMV</RepositoryUrl>
-    <PackageTags>wsct, emv</PackageTags>
-    <Version>1.2.0</Version>
-    <AssemblyName>wsct-emvcp</AssemblyName>
-    <RootNamespace>WSCT.EMV.CardPersonalizationConsole</RootNamespace>
-    <OutputType>Exe</OutputType>
-    <OutputPath>..\binaries</OutputPath>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EMV Library\EMV Library.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="emv-card-data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="emv-card-model.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="emv-icc-context.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="emv-issuer-context.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="icc-certificate-data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="issuer-certificate-data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<Version>1.2.0</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AssemblyName>wsct-emvcp</AssemblyName>
+		<RootNamespace>WSCT.EMV.CardPersonalizationConsole</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputPath>..\binaries</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\EMV Library\EMV Library.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="emv-card-data.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="emv-card-model.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="emv-icc-context.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="emv-issuer-context.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="icc-certificate-data.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="issuer-certificate-data.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

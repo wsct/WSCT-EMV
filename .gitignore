@@ -15,3 +15,5 @@ obj
 *.user
 .vs/
 NuGet.Config
+/nuget
+/.vscode

@@ -1,43 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
-    <OutputType>WinExe</OutputType>
-    <Version>6.4.1</Version>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<Version>6.4.1</Version>
+	</PropertyGroup>
 
-    <UseWindowsForms>true</UseWindowsForms>
+	<PropertyGroup>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
 
-    <PackageId>WSCT.GUI.EMVLauncher</PackageId>
-
-    <AssemblyName>WSCT.GUI.EMVLauncher</AssemblyName>
-    <RootNamespace>WSCT.GUI.EMVLauncher</RootNamespace>
-
-    <LangVersion>latest</LangVersion>
-
-    <Authors>Sylvain Vernois</Authors>
-    <Company>ENSICAEN</Company>
-    <Product>WSCT</Product>
-    <Copyright>Copyright © Sylvain Vernois / ENSICAEN 2007-2020</Copyright>
-    <Description>Launcher of WSCT GUI configured with EMV plugins.</Description>
-    <ApplicationIcon></ApplicationIcon>
-    <Win32Resource />
-    <StartupObject />
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Resources.Extensions" Version="10.0.5" />
-    <PackageReference Include="WSCT.GUI" Version="6.2.1" />
-    <PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.2.1" />
-    <PackageReference Include="WSCT.Plugin.ISO7816Tools" Version="5.2.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
-    <ProjectReference Include="..\Plugin EMV Personalization\Plugin EMV Personalization.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Stack.Channel.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Stack.Context.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>WSCT.GUI.EMVLauncher</PackageId>
+		<Description>Launcher of WSCT GUI configured with EMV plugins.</Description>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="System.Resources.Extensions" />
+		<PackageReference Include="WSCT.GUI" />
+		<PackageReference Include="WSCT.GUI.Plugins.LayerInteractive" />
+		<PackageReference Include="WSCT.Plugin.ISO7816Tools" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\Plugin EMV Explorer\Plugin EMV Explorer.csproj" />
+		<ProjectReference Include="..\Plugin EMV Personalization\Plugin EMV Personalization.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Update="Stack.Channel.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Stack.Context.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

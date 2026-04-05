@@ -1,0 +1,50 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Console EMV Tests/Console EMV Tests.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV Card Personalisation/EMV Card Personalisation.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV ICC Certificate Generation/EMV ICC Certificate Generation.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV Issuer Certificate Generation/EMV Issuer Certificate Generation.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV Library Unit Tests/EMV Library Unit Tests.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV Library/EMV Library.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="EMV RSA Key Generation/EMV RSA Key Generation.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="Plugin EMV Explorer/Plugin EMV Explorer.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="Plugin EMV Personalization/Plugin EMV Personalization.csproj" />
+  <Project Path="WSCT.GUI.EMVLauncher/WSCT.GUI.EMVLauncher.csproj">
+    <Build Solution="*|x64" Project="false" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Properties Name="MonoDevelopProperties">
+    <Property Name="StartupItem" Value="WSCT.Core.ConsoleTests\WSCT.Core.ConsoleTests.csproj" />
+  </Properties>
+</Solution>
