@@ -15,14 +15,6 @@
     <Build Solution="*|x64" Project="false" />
     <Build Solution="*|x86" Project="false" />
   </Project>
-  <Project Path="EMV ICC Certificate Generation/EMV ICC Certificate Generation.csproj">
-    <Build Solution="*|x64" Project="false" />
-    <Build Solution="*|x86" Project="false" />
-  </Project>
-  <Project Path="EMV Issuer Certificate Generation/EMV Issuer Certificate Generation.csproj">
-    <Build Solution="*|x64" Project="false" />
-    <Build Solution="*|x86" Project="false" />
-  </Project>
   <Project Path="EMV Library Unit Tests/EMV Library Unit Tests.csproj">
     <Build Solution="*|x64" Project="false" />
     <Build Solution="*|x86" Project="false" />
@@ -31,15 +23,12 @@
     <Build Solution="*|x64" Project="false" />
     <Build Solution="*|x86" Project="false" />
   </Project>
-  <Project Path="EMV RSA Key Generation/EMV RSA Key Generation.csproj">
-    <Build Solution="*|x64" Project="false" />
-    <Build Solution="*|x86" Project="false" />
-  </Project>
   <Project Path="Plugin EMV Explorer/Plugin EMV Explorer.csproj">
     <Build Solution="*|x64" Project="false" />
     <Build Solution="*|x86" Project="false" />
   </Project>
   <Project Path="Plugin EMV Personalization/Plugin EMV Personalization.csproj" />
+  <Project Path="WSCT.EMV.CommandLine/WSCT.EMV.CommandLine.csproj" Id="f1330698-d88d-433c-a386-8adaa22f3559" />
   <Project Path="WSCT.GUI.EMVLauncher/WSCT.GUI.EMVLauncher.csproj">
     <Build Solution="*|x64" Project="false" />
     <Build Solution="*|x86" Project="false" />

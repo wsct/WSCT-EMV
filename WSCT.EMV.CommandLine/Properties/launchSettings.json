@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WSCT.EMV.CommandLine": {
+      "commandName": "Project",
+      "commandLineArgs": "icc create-cert"
+    }
+  }
+}

@@ -24,44 +24,95 @@ The plugin "EMV Explorer" allows visual interactions (commands and responses int
 
 **Disclaimer**: these tools aren't professional tools but allow easy personalization of our home made test EMV cards.
 
-These tools use predefined input and output files (name and format). No implicit parameters are supported.
+These tools may use predefined input and output files (name and format).
 
-## RSA key generation : 
+## Create a new RSA key
+
+```text
+USAGE:
+    wsct-emv create-key rsa [OPTIONS]
+
+OPTIONS:
+                              DEFAULT
+    -h, --help                           Prints help information
+        --out                            The output file name (default: emv-private-key.json)
+        --overwrite [BOOL]    True       Whether to overwrite the output file if it already exists
+        --size                           The key size. Required
 ```
-wsct-emvrsa.exe
+
+## EMV Issuer Public Key Certificate generation
+
+### Set data for the issuer
+
+```text
+USAGE:
+    wsct-emv issuer set-data [OPTIONS]
+
+OPTIONS:
+                              DEFAULT
+    -h, --help                           Prints help information
+        --out                            The output file name (default: issuer-certificate-data.json)
+        --overwrite [BOOL]    True       Whether to overwrite the output file if it already exists
+        --ca-index                       The Certificate Authority Index. Required
+        --hash-algo                      The Hash Algorithm Indicator ('01' for SHA-1). Required
+        --id                             The Issuer Identifier (Leftmost 3-8 digits from the PAN, padded to the right with 'F's). Required
+        --expire                         The Certificate Expiration Date (MMYY after which this certificate is invalid). Required
+        --serial                         The Certificate Serial Number (3 bytes). Required
+        --key-algo                       The Issuer Public Key Algorithm Indicator ('01' for RSA). Required
+        --key                            Path to the Issuer Key file. Required
 ```
-> Generates a new RSA key (size: 1024).
 
-*Input*: none
+### Create the Issuer Public Key Certificate
 
-*Output*:
-* `emv-rsa.json`: contains the generated key (private & public).
+```text
+USAGE:
+    wsct-emv issuer create-cert [OPTIONS]
 
-## EMV Issuer key generation
+OPTIONS:
+                              DEFAULT
+    -h, --help                           Prints help information
+        --out                            The output file name (default: emv-issuer-context.json)
+        --overwrite [BOOL]    True       Whether to overwrite the output file if it already exists
+        --key-ca                         Path to the Certificate Authority's private key file (default: ca-private-key.json)
+        --data                           Path to the Issuer Public Key file (default: issuer-certificate-data.json
 ```
-wsct-emvissuer.exe
-```
-> Generates the issuer public key certificate.
-
-*Input*:
-* `certificate-authority.json`: public key of the certification authority.
-* `issuer-certificate-data.json`: issuer's data and key.
-
-*Output*:
-* `emv-issuer-context.json`: issuer's public key certificate and its private key.
 
 ## EMV ICC key generation
-```
-wsct-emvicc
-```
-> Generates the ICC public key certificate.
 
-*Input*: 
-* `issuer-certificate-data.json`
-* `icc-certificate-data.json`: ICC's data and key.
+## Set data for the issuer
 
-*Output*:
-* `emv-icc-context.json`: ICC's public key certificate and its private key.
+```
+USAGE:
+    wsct-emv icc set-data [OPTIONS]
+
+OPTIONS:
+                              DEFAULT
+    -h, --help                           Prints help information
+        --out                            The output file name (default: icc-certificate-data.json)
+        --overwrite [BOOL]    True       Whether to overwrite the output file if it already exists
+        --pan                            The Application Primary Account Number. Required
+        --hash-algo                      The Hash Algorithm Indicator ('01' for SHA-1). Required
+        --issuer-id                      The Issuer Identifier (Leftmost 3-8 digits from the PAN, padded to the right with 'F's). Required
+        --expire                         The Certificate Expiration Date (MMYY after which this certificate is invalid). Required
+        --serial                         The Certificate Serial Number (3 bytes). Required
+        --key-algo                       The Icc Public Key Algorithm Indicator ('01' for RSA). Required
+        --key                            Path to the Icc Key file. Required
+```
+
+## Create the ICC Public Key Certificate
+
+```
+USAGE:
+    wsct-emv icc create-cert [OPTIONS]
+
+OPTIONS:
+                              DEFAULT
+    -h, --help                           Prints help information
+        --out                            The output file name (default: emv-icc-context.json)
+        --overwrite [BOOL]    True       Whether to overwrite the output file if it already exists
+        --key-issuer                     Path to the Issuer's private key file (default: issuer-private-key.json)
+        --data                           Path to the ICC Public Key file (default: icc-certificate-data.json
+```
 
 ## EMV DGI creation
 ```
