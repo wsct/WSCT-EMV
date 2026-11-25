@@ -12,16 +12,14 @@
     <PackageVersion Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageVersion Include="Spectre.Console" Version="0.55.0" />
     <PackageVersion Include="Spectre.Console.Cli" Version="0.55.0" />
-    <PackageVersion Include="System.Resources.Extensions" Version="10.0.5" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="WSCT.Core" Version="6.7.1" />
     <PackageVersion Include="WSCT.Helpers" Version="5.2.0" />
-    <PackageVersion Include="WSCT.GUI" Version="6.2.1" />
+    <PackageVersion Include="WSCT.GUI" Version="7.0.0-alpha" />
     <PackageVersion Include="WSCT.GUI.Plugins" Version="5.2.1" />
-    <PackageVersion Include="WSCT.GUI.Plugins.LayerInteractive" Version="3.2.1" />
-    <PackageVersion Include="WSCT.GUI.Resources" Version="1.2.1" />
-    <PackageVersion Include="WSCT.Plugin.ISO7816Tools" Version="5.2.3" />
+    <PackageVersion Include="WSCT.GUI.Plugins.LayerInteractive" Version="4.0.0-alpha" />
+    <PackageVersion Include="WSCT.Plugin.ISO7816Tools" Version="6.0.0-alpha" />
     <PackageVersion Include="WSCT.Wrapper.Desktop" Version="1.5.0" />
   </ItemGroup>
 </Project>

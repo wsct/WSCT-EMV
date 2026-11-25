@@ -1,0 +1,205 @@
+<div class="container-fluid px-0">
+    @if (!SharedData.IsValidChannel)
+    {
+        <div class="alert alert-warning d-flex align-items-center py-2 px-3 small mb-3" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span>No active smart card channel. Connect to a card in WSCT GUI to run personalization commands.</span>
+        </div>
+    }
+
+    <div class="row g-3 mb-3">
+        <!-- EMV Applet Personalization -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-light h-100">
+                <div class="card-header bg-white fw-bold small py-2">
+                    <i class="bi bi-cpu me-1 text-primary"></i>EMV Applet Personalization
+                </div>
+                <div class="card-body bg-light d-flex flex-column gap-2">
+                    <div>
+                        <label class="form-label small fw-semibold mb-1">EMV Personalization Folder</label>
+                        <input type="text"
+                               class="form-control form-control-sm font-monospace"
+                               @bind="Session.EmvPersonalizationFolder"
+                               @bind:event="oninput"
+                               disabled="@Session.IsBusy" />
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-1">
+                        @foreach (var file in EmvPersonalizationSessionService.RequiredEmvFiles)
+                        {
+                            var available = Session.IsEmvFileAvailable(file);
+                            var uploaded = Session.HasUploadedEmvFile(file);
+                            <span class="badge @(available ? (uploaded ? "bg-info text-dark" : "bg-success") : "bg-danger") font-monospace">
+                                <i class="bi @(available ? "bi-check-circle" : "bi-x-circle") me-1"></i>@file@(uploaded ? " (uploaded)" : "")
+                            </span>
+                        }
+                    </div>
+
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="form-label small mb-0 text-muted">Optional: Upload JSON file overrides</label>
+                            @if (EmvPersonalizationSessionService.RequiredEmvFiles.Any(Session.HasUploadedEmvFile))
+                            {
+                                <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none small" @onclick="Session.ClearUploadedEmvFiles" disabled="@Session.IsBusy">
+                                    Clear uploads
+                                </button>
+                            }
+                        </div>
+                        <InputFile OnChange="UploadEmvFilesAsync" multiple accept=".json" class="form-control form-control-sm" disabled="@Session.IsBusy" />
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-md-8">
+                            <label class="form-label small fw-semibold mb-1">AID</label>
+                            <input type="text"
+                                   class="form-control form-control-sm font-monospace @(IsValidHex(Session.EmvAppletAid) ? "" : "is-invalid")"
+                                   @bind="Session.EmvAppletAid"
+                                   @bind:event="oninput"
+                                   disabled="@Session.IsBusy" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-semibold mb-1">PIN</label>
+                            <input type="text"
+                                   class="form-control form-control-sm font-monospace"
+                                   @bind="Session.AppletPin"
+                                   disabled="@Session.IsBusy" />
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-2">
+                        <button type="button"
+                                class="btn btn-primary btn-sm w-100"
+                                @onclick="Session.RunEmvPersonalizationAsync"
+                                disabled="@(!SharedData.IsValidChannel || Session.IsBusy)">
+                            @if (Session.IsBusy)
+                            {
+                                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-play-fill me-1"></i>
+                            }
+                            Run EMV Personalization
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PSE Applet Personalization -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-light h-100">
+                <div class="card-header bg-white fw-bold small py-2">
+                    <i class="bi bi-folder2-open me-1 text-primary"></i>PSE Applet Personalization
+                </div>
+                <div class="card-body bg-light d-flex flex-column gap-2">
+                    <div>
+                        <label class="form-label small fw-semibold mb-1">PSE Personalization Folder</label>
+                        <input type="text"
+                               class="form-control form-control-sm font-monospace"
+                               @bind="Session.PsePersonalizationFolder"
+                               @bind:event="oninput"
+                               disabled="@Session.IsBusy" />
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-1">
+                        @foreach (var file in EmvPersonalizationSessionService.RequiredPseFiles)
+                        {
+                            var available = Session.IsPseFileAvailable(file);
+                            var uploaded = Session.HasUploadedPseFile(file);
+                            <span class="badge @(available ? (uploaded ? "bg-info text-dark" : "bg-success") : "bg-danger") font-monospace">
+                                <i class="bi @(available ? "bi-check-circle" : "bi-x-circle") me-1"></i>@file@(uploaded ? " (uploaded)" : "")
+                            </span>
+                        }
+                    </div>
+
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="form-label small mb-0 text-muted">Optional: Upload JSON file overrides</label>
+                            @if (EmvPersonalizationSessionService.RequiredPseFiles.Any(Session.HasUploadedPseFile))
+                            {
+                                <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none small" @onclick="Session.ClearUploadedPseFiles" disabled="@Session.IsBusy">
+                                    Clear uploads
+                                </button>
+                            }
+                        </div>
+                        <InputFile OnChange="UploadPseFilesAsync" multiple accept=".json" class="form-control form-control-sm" disabled="@Session.IsBusy" />
+                    </div>
+
+                    <div>
+                        <label class="form-label small fw-semibold mb-1">PSE Name</label>
+                        <input type="text"
+                               class="form-control form-control-sm font-monospace"
+                               @bind="Session.PseAppletName"
+                               disabled="@Session.IsBusy" />
+                    </div>
+
+                    <div class="mt-auto pt-2">
+                        <button type="button"
+                                class="btn btn-primary btn-sm w-100"
+                                @onclick="Session.RunPsePersonalizationAsync"
+                                disabled="@(!SharedData.IsValidChannel || Session.IsBusy)">
+                            @if (Session.IsBusy)
+                            {
+                                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-play-fill me-1"></i>
+                            }
+                            Run PSE Personalization
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Execution Logs -->
+    <div class="card shadow-sm border-light">
+        <div class="card-header bg-white fw-bold small d-flex justify-content-between align-items-center py-2">
+            <span><i class="bi bi-terminal me-1 text-primary"></i>Personalization Logs</span>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm py-0 px-2" @onclick="Session.ClearLogs" disabled="@(Session.Logs.Count == 0 || Session.IsBusy)">
+                    <i class="bi bi-trash me-1"></i>Clear
+                </button>
+                <button type="button" class="btn btn-success btn-sm py-0 px-2" @onclick="DownloadLogsAsync" disabled="@(Session.Logs.Count == 0)">
+                    <i class="bi bi-download me-1"></i>Save Logs
+                </button>
+            </div>
+        </div>
+        <div class="card-body bg-light p-2">
+            <div class="border rounded bg-white p-2 font-monospace small overflow-auto" style="height: 420px;">
+                @if (Session.Logs.Count == 0)
+                {
+                    <span class="text-muted">Personalization steps and card responses will appear here.</span>
+                }
+                else
+                {
+                    @foreach (var entry in Session.Logs)
+                    {
+                        <div class="mb-1">
+                            <span>@entry.Action: </span>
+                            @if (entry.Status == PersonalizationLogStatus.Success)
+                            {
+                                <span class="badge bg-success">Success</span>
+                            }
+                            else if (entry.Status == PersonalizationLogStatus.Failure)
+                            {
+                                <span class="badge bg-danger">Failure</span>
+                                @if (!string.IsNullOrWhiteSpace(entry.Detail))
+                                {
+                                    <div class="text-danger ps-3">@entry.Detail</div>
+                                }
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Running...</span>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

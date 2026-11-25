@@ -1,0 +1,4 @@
+<div class="d-flex align-items-center gap-2 @(IsRfu ? "text-muted opacity-50" : (IsSet ? "text-danger fw-semibold" : ""))">
+    <input class="form-check-input mt-0" type="checkbox" checked="@IsSet" disabled />
+    <span>@Label</span>
+</div>

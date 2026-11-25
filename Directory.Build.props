@@ -16,10 +16,6 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
-	<PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Plugin')) or $(MSBuildProjectName.Contains('GUI'))">
-    	<TargetFrameworks>net10.0-windows</TargetFrameworks>
-  	</PropertyGroup>
-
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>

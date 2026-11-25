@@ -7,29 +7,10 @@ namespace WSCT.GUI.Plugins.EMVExplorer
     [XmlRoot("pluginConfiguration")]
     public class PluginConfiguration
     {
-        #region >> Fields
-
-        private TerminalConfiguration _terminalConfiguration;
-        private TransactionContext _transactionContext;
-
-        #endregion
-
-        #region >> Properties
-
         [XmlElement("terminalConfiguration")]
-        public TerminalConfiguration terminalConfiguration
-        {
-            get { return _terminalConfiguration; }
-            set { _terminalConfiguration = value; }
-        }
+        public TerminalConfiguration terminalConfiguration { get; set; } = new();
 
         [XmlElement("transactionContext")]
-        public TransactionContext transactionContext
-        {
-            get { return _transactionContext; }
-            set { _transactionContext = value; }
-        }
-
-        #endregion
+        public TransactionContext transactionContext { get; set; } = new();
     }
 }

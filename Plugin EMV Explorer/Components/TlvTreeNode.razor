@@ -1,0 +1,40 @@
+<li class="mb-1">
+    <div class="d-flex align-items-start gap-1">
+        @if (Node.Children.Count > 0)
+        {
+            <button type="button"
+                    class="btn btn-link btn-sm p-0 text-decoration-none text-secondary"
+                    style="line-height: 1.2;"
+                    @onclick="Toggle">
+                <i class="bi @(Node.IsExpanded ? "bi-caret-down-fill" : "bi-caret-right-fill")"></i>
+            </button>
+        }
+        else
+        {
+            <span class="text-muted small" style="width: 1rem; display: inline-block; text-align: center;">&bull;</span>
+        }
+
+        <div class="small @(Node.IsError ? "text-danger" : "")">
+            @if (!string.IsNullOrEmpty(Node.TagHex))
+            {
+                <span class="badge bg-secondary font-monospace me-1">@Node.TagHex</span>
+            }
+            <span class="@(Node.Children.Count > 0 && string.IsNullOrEmpty(Node.Value) ? "fw-semibold" : "")">@Node.Label</span>
+            @if (!string.IsNullOrEmpty(Node.Value))
+            {
+                <span class="text-muted">: </span>
+                <span class="font-monospace text-primary text-break">@Node.Value</span>
+            }
+        </div>
+    </div>
+
+    @if (Node.Children.Count > 0 && Node.IsExpanded)
+    {
+        <ul class="list-unstyled ps-3 ms-2 border-start border-light-subtle mt-1">
+            @foreach (var child in Node.Children)
+            {
+                <TlvTreeNode Node="child" />
+            }
+        </ul>
+    }
+</li>

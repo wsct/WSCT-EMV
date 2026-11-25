@@ -1,11 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<Version>3.3.2</Version>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<UseWindowsForms>true</UseWindowsForms>
+		<VersionPrefix>4.0.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -20,14 +17,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="WSCT.GUI" />
-		<PackageReference Include="WSCT.GUI.Resources" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="WSCT.Core" />
+		<PackageReference Include="WSCT.GUI.Plugins" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<ProjectReference Include="..\EMV Library\EMV Library.csproj" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<Content Include="Config.EMVExplorer.xml">
 			<Visible>True</Visible>
@@ -36,10 +34,7 @@
 			<PackageCopyToOutput>True</PackageCopyToOutput>
 		</Content>
 	</ItemGroup>
-	<ItemGroup>
-		<Compile Update="Gui.cs" />
-		<Compile Update="Gui.Designer.cs" SubType="Form" DependentUpon="Gui.cs" />
-	</ItemGroup>
+
 	<ItemGroup>
 		<Compile Update="Resources\Lang.Designer.cs">
 			<DesignTime>True</DesignTime>
@@ -47,6 +42,7 @@
 			<DependentUpon>Lang.resx</DependentUpon>
 		</Compile>
 	</ItemGroup>
+
 	<ItemGroup>
 		<EmbeddedResource Update="Resources\Lang.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>

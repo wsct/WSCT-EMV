@@ -1,0 +1,32 @@
+<div class="table-responsive border rounded" style="max-height: 360px;">
+    <table class="table table-hover table-sm font-monospace small mb-0">
+        <thead class="table-light">
+            <tr>
+                <th style="width: 40px;">#</th>
+                <th style="width: 70px;">Tag</th>
+                <th style="width: 220px;">Data Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Items.Count == 0)
+            {
+                <tr>
+                    <td colspan="4" class="text-muted text-center py-3">No signed data records.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Items)
+                {
+                    <tr>
+                        <td>@item.Index</td>
+                        <td><span class="badge bg-secondary">@item.Tag</span></td>
+                        <td>@item.DataName</td>
+                        <td class="text-break">@item.Value</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

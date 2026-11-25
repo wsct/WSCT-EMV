@@ -1,11 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<Version>0.10.1</Version>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<UseWindowsForms>true</UseWindowsForms>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -20,60 +17,54 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="pse-personalization\pse-card-data.json" />
-		<None Remove="pse-personalization\pse-card-model.json" />
+		<Content Update="emv-personalization\emv-card-data.json">
+			<Visible>True</Visible>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+		</Content>
+		<Content Update="emv-personalization\emv-card-model.json">
+			<Visible>True</Visible>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+		</Content>
+		<Content Update="emv-personalization\emv-icc-context.json">
+			<Visible>True</Visible>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+		</Content>
+		<Content Update="emv-personalization\emv-issuer-context.json">
+			<Visible>True</Visible>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+		</Content>
+		<Content Update="pse-personalization\pse-card-data.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>True</Visible>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+			<Pack>True</Pack>
+		</Content>
+		<Content Update="pse-personalization\pse-card-model.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>True</Visible>
+			<PackageCopyToOutput>True</PackageCopyToOutput>
+			<Pack>True</Pack>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="emv-personalization\emv-card-data.json">
-			<Visible>True</Visible>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Pack>True</Pack>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-		</Content>
-		<Content Include="emv-personalization\emv-card-model.json">
-			<Visible>True</Visible>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Pack>True</Pack>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-		</Content>
-		<Content Include="emv-personalization\emv-icc-context.json">
-			<Visible>True</Visible>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Pack>True</Pack>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-		</Content>
-		<Content Include="emv-personalization\emv-issuer-context.json">
-			<Visible>True</Visible>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Pack>True</Pack>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-		</Content>
-		<Content Include="pse-personalization\pse-card-data.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Visible>True</Visible>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-			<Pack>True</Pack>
-		</Content>
-		<Content Include="pse-personalization\pse-card-model.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Visible>True</Visible>
-			<PackageCopyToOutput>True</PackageCopyToOutput>
-			<Pack>True</Pack>
-		</Content>
-	</ItemGroup>
-	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="WSCT.Core" />
 		<PackageReference Include="WSCT.GUI.Plugins" />
-		<PackageReference Include="WSCT.GUI.Resources" />
 	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\EMV Library\EMV Library.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-		<Compile Update="Gui.cs" SubType="Form" />
-		<Compile Update="Gui.designer.cs" SubType="Form" DependentUpon="Gui.cs" />
-	</ItemGroup>
+
 	<ItemGroup>
 		<Compile Update="Resources\Lang.Designer.cs">
 			<DesignTime>True</DesignTime>
@@ -81,6 +72,7 @@
 			<DependentUpon>Lang.resx</DependentUpon>
 		</Compile>
 	</ItemGroup>
+
 	<ItemGroup>
 		<EmbeddedResource Update="Resources\Lang.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
